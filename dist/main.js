@@ -286,7 +286,7 @@
     const file = "src/Button.svelte";
 
     function create_fragment(ctx) {
-    	var button, t0, t1, t2, t3_value = ctx.clicks === 1 ? 'time' : 'times', t3, dispose;
+    	var button, t0, t1, t2, t3_value = ctx.clicks === 1 ? 'time' : 'times', t3, t4, p, dispose;
 
     	return {
     		c: function create() {
@@ -295,8 +295,12 @@
     			t1 = text(ctx.clicks);
     			t2 = space();
     			t3 = text(t3_value);
+    			t4 = space();
+    			p = element("p");
+    			p.textContent = "hi";
     			button.className = "color space border-none bg-blue-700 hover:bg-blue-400  rounded svelte-folwfl";
     			add_location(button, file, 6, 0, 140);
+    			add_location(p, file, 11, 0, 310);
     			dispose = listen(button, "click", ctx.handleClick);
     		},
 
@@ -310,6 +314,8 @@
     			append(button, t1);
     			append(button, t2);
     			append(button, t3);
+    			insert(target, t4, anchor);
+    			insert(target, p, anchor);
     		},
 
     		p: function update(changed, ctx) {
@@ -328,6 +334,8 @@
     		d: function destroy(detaching) {
     			if (detaching) {
     				detach(button);
+    				detach(t4);
+    				detach(p);
     			}
 
     			dispose();
