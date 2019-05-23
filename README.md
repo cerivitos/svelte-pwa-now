@@ -1,9 +1,8 @@
-# svelte-starter-postcss
+# tailwindcss-svelte-starter
 
 A starter for building Svelte web apps with tailwindcss.
 
 ## Getting Started
-
 
 ```bash
 git clone https://github.com/marcograhl/tailwindcss-svelte-starter
@@ -29,13 +28,14 @@ npm run build
 
 Development mode will:
 
-- build on file change
-- serve locally at <code>localhost:5000</code>
-- live reload
+-  build on file change
+-  serve locally at <code>localhost:5000</code>
+-  live reload
 
 ```bash
 npm run dev
 ```
+
 ## Credits
 
 Inspired by [sveltejs/template](https://github.com/sveltejs/template)
