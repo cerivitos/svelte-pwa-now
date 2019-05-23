@@ -16,4 +16,3 @@
   on:click={handleClick}>
   Clicked {clicks} {clicks === 1 ? 'time' : 'times'}
 </button>
-<p> hi</p>

@@ -47,5 +47,8 @@
     "svelte-preprocess": "^2.9.0",
     "svelte-preprocess-postcss": "^1.0.0",
     "tailwindcss": "^1.0.1"
+  },
+  "dependencies": {
+    "overmind": "^17.1.0"
   }
 }

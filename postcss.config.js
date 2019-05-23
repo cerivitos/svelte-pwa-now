@@ -3,7 +3,9 @@ const postcss_color_mod = require('postcss-color-mod-function');
 const postcss_preset_env = require('postcss-preset-env');
 const postcss_Import = require('postcss-import');
 const postcss_Url = require('postcss-url');
+const purgecss = require('@fullhuman/postcss-purgecss');
 
+const production = !process.env.ROLLUP_WATCH;
 
 module.exports = {
    plugins: [
@@ -21,5 +23,11 @@ module.exports = {
          autoprefixer: false,
          preset: ['default'],
       }),
+      production &&
+         purgecss({
+            content: ['./**/*.html', './**/*.svelte'],
+            defaultExtractor: content =>
+               content.match(/[A-Za-z0-9-_:/]+/g) || [],
+         }),
    ],
 };

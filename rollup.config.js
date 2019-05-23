@@ -12,7 +12,7 @@ export default {
    input: 'src/main.js',
    output: {
       format: 'iife',
-      // sourcemap: true,
+      sourcemap: true,
       name: 'app',
       file: 'dist/main.js',
    },

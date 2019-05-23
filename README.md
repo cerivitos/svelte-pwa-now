@@ -6,7 +6,7 @@ A starter for building Svelte web apps with tailwindcss.
 
 
 ```bash
-git clone marcograhl/tailwindcss-svelte-starter
+git clone https://github.com/marcograhl/tailwindcss-svelte-starter
 ```
 
 Then, install the dependencies:
