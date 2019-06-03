@@ -1,2 +1,422 @@
-!function(){"use strict";function e(){}function t(e){return e()}function n(){return Object.create(null)}function r(e){e.forEach(t)}function a(e){return"function"==typeof e}function i(e,t){return e!=e?t==t:e!==t||e&&"object"==typeof e||"function"==typeof e}function o(e,t){e.appendChild(t)}function s(e,t,n){e.insertBefore(t,n||null)}function l(e){e.parentNode.removeChild(e)}function u(e){return document.createElement(e)}function c(e){return document.createTextNode(e)}function m(){return c(" ")}function d(e,t,n,r){return e.addEventListener(t,n,r),()=>e.removeEventListener(t,n,r)}function p(e,t,n){null==n?e.removeAttribute(t):e.setAttribute(t,n)}function f(e,t){t=""+t,e.data!==t&&(e.data=t)}function g(e,t,n){e.classList[n?"add":"remove"](t)}let h;function v(e){h=e}const $=[],b=Promise.resolve();let N=!1;const y=[],_=[],x=[];function j(e){_.push(e)}function I(){const e=new Set;do{for(;$.length;){const e=$.shift();v(e),T(e.$$)}for(;y.length;)y.shift()();for(;_.length;){const t=_.pop();e.has(t)||(t(),e.add(t))}}while($.length);for(;x.length;)x.pop()();N=!1}function T(e){e.fragment&&(e.update(e.dirty),r(e.before_render),e.fragment.p(e.dirty,e.ctx),e.dirty=null,e.after_render.forEach(j))}let k;function C(e,n,i){const{fragment:o,on_mount:s,on_destroy:l,after_render:u}=e.$$;o.m(n,i),j(()=>{const n=s.map(t).filter(a);l?l.push(...n):r(n),e.$$.on_mount=[]}),u.forEach(j)}function w(e,t){e.$$.dirty||($.push(e),N||(N=!0,b.then(I)),e.$$.dirty=n()),e.$$.dirty[t]=!0}function E(t,a,i,o,s,l){const u=h;v(t);const c=a.props||{},m=t.$$={fragment:null,ctx:null,props:l,update:e,not_equal:s,bound:n(),on_mount:[],on_destroy:[],before_render:[],after_render:[],context:new Map(u?u.$$.context:[]),callbacks:n(),dirty:null};let d=!1;var p;m.ctx=i?i(t,c,(e,n)=>{m.ctx&&s(m.ctx[e],m.ctx[e]=n)&&(m.bound[e]&&m.bound[e](n),d&&w(t,e))}):c,m.update(),d=!0,r(m.before_render),m.fragment=o(m.ctx),a.target&&(a.hydrate?m.fragment.l((p=a.target,Array.from(p.childNodes))):m.fragment.c(),a.intro&&t.$$.fragment.i&&t.$$.fragment.i(),C(t,a.target,a.anchor),I()),v(u)}class A{$destroy(){var t,n;n=!0,(t=this).$$&&(r(t.$$.on_destroy),t.$$.fragment.d(n),t.$$.on_destroy=t.$$.fragment=null,t.$$.ctx={}),this.$destroy=e}$on(e,t){const n=this.$$.callbacks[e]||(this.$$.callbacks[e]=[]);return n.push(t),()=>{const e=n.indexOf(t);-1!==e&&n.splice(e,1)}}$set(){}}function F(t){var n,r,a,i,d,p,h,v,$,b,N,y,_,x,j;return{c(){n=u("div"),r=u("header"),a=u("div"),i=u("img"),d=m(),p=u("div"),h=u("h1"),v=c(t.userName),$=m(),b=u("h2"),N=c(t.jobTitle),y=m(),_=u("div"),x=u("p"),j=c(t.description),i.src=t.userImage,i.alt=t.userName,i.className="svelte-juroly",a.className="thumb svelte-juroly",g(a,"thumb-placeholder",!t.userImage),h.className="svelte-juroly",b.className="svelte-juroly",p.className="user-data svelte-juroly",r.className="svelte-juroly",_.className="description svelte-juroly",n.className="contact-card svelte-juroly"},m(e,t){s(e,n,t),o(n,r),o(r,a),o(a,i),o(r,d),o(r,p),o(p,h),o(h,v),o(p,$),o(p,b),o(b,N),o(n,y),o(n,_),o(_,x),o(x,j)},p(e,t){e.userImage&&(i.src=t.userImage),e.userName&&(i.alt=t.userName),e.userImage&&g(a,"thumb-placeholder",!t.userImage),e.userName&&f(v,t.userName),e.jobTitle&&f(N,t.jobTitle),e.description&&f(j,t.description)},i:e,o:e,d(e){e&&l(n)}}}function L(e,t,n){let{userName:r,jobTitle:a,description:i,userImage:o}=t;return e.$set=(e=>{"userName"in e&&n("userName",r=e.userName),"jobTitle"in e&&n("jobTitle",a=e.jobTitle),"description"in e&&n("description",i=e.description),"userImage"in e&&n("userImage",o=e.userImage)}),{userName:r,jobTitle:a,description:i,userImage:o}}class M extends A{constructor(e){super(),E(this,e,L,F,i,["userName","jobTitle","description","userImage"])}}function O(e){var t,n=new M({props:{userName:e.name,jobTitle:e.title,description:e.description,userImage:e.image}});return{c(){n.$$.fragment.c()},m(e,r){C(n,e,r),t=!0},p(e,t){var r={};e.name&&(r.userName=t.name),e.title&&(r.jobTitle=t.title),e.description&&(r.description=t.description),e.image&&(r.userImage=t.image),n.$set(r)},i(e){t||(n.$$.fragment.i(e),t=!0)},o(e){n.$$.fragment.o(e),t=!1},d(e){n.$destroy(e)}}}function S(e){var t,n,a,i,f,g,h,v,$,b,N,y,_,x,j,I,T,C,w,E,A,F,L,M,S,U,q=toggle&&O(e);return{c(){t=u("div"),n=u("div"),(a=u("label")).textContent="User Name",i=m(),f=u("input"),g=m(),h=u("div"),(v=u("label")).textContent="Job Title",$=m(),b=u("input"),N=m(),y=u("div"),(_=u("label")).textContent="Image URL",x=m(),j=u("input"),I=m(),T=u("div"),(C=u("label")).textContent="Description",w=m(),E=u("textarea"),A=m(),(F=u("button")).textContent="Add Contact Card",L=m(),q&&q.c(),M=c(""),a.htmlFor="userName",p(f,"type","text"),f.id="userName",f.className="svelte-1kgh5y2",n.className="form-control",v.htmlFor="jobTitle",p(b,"type","text"),b.id="jobTitle",b.className="svelte-1kgh5y2",h.className="form-control",_.htmlFor="image",p(j,"type","text"),j.id="image",j.className="svelte-1kgh5y2",y.className="form-control",C.htmlFor="desc",E.className="border mt-2",E.rows="3",E.id="desc",T.className="form-control",t.id="form",t.className="svelte-1kgh5y2",F.className=" mt-2 border-gray-500 border px-4 py-2 bg-blue-600 hover:bg-blue-400\n  text-white",U=[d(f,"input",e.input0_input_handler),d(b,"input",e.input1_input_handler),d(j,"input",e.input2_input_handler),d(E,"input",e.textarea_input_handler),d(F,"click",e.addContact)]},m(r,l){s(r,t,l),o(t,n),o(n,a),o(n,i),o(n,f),f.value=e.name,o(t,g),o(t,h),o(h,v),o(h,$),o(h,b),b.value=e.title,o(t,N),o(t,y),o(y,_),o(y,x),o(y,j),j.value=e.image,o(t,I),o(t,T),o(T,C),o(T,w),o(T,E),E.value=e.description,s(r,A,l),s(r,F,l),s(r,L,l),q&&q.m(r,l),s(r,M,l),S=!0},p(e,t){var n;e.name&&f.value!==t.name&&(f.value=t.name),e.title&&b.value!==t.title&&(b.value=t.title),e.image&&j.value!==t.image&&(j.value=t.image),e.description&&(E.value=t.description),toggle?q?(q.p(e,t),q.i(1)):((q=O(t)).c(),q.i(1),q.m(M.parentNode,M)):q&&(n=(()=>{q.d(1),q=null}),(k={remaining:0,callbacks:[]}).callbacks.push(n),q.o(1),k.remaining||r(k.callbacks))},i(e){S||(q&&q.i(),S=!0)},o(e){q&&q.o(),S=!1},d(e){e&&(l(t),l(A),l(F),l(L)),q&&q.d(e),e&&l(M),r(U)}}}function U(e,t,n){let r="Max",a="",i="",o="",s="empty";return{name:r,title:a,image:i,description:o,addContact:function(){n("formState",s="done")},input0_input_handler:function(){r=this.value,n("name",r)},input1_input_handler:function(){a=this.value,n("title",a)},input2_input_handler:function(){i=this.value,n("image",i)},textarea_input_handler:function(){o=this.value,n("description",o)}}}new class extends A{constructor(e){super(),E(this,e,U,S,i,[])}}({target:document.body})}();
+
+(function(l, i, v, e) { v = l.createElement(i); v.async = 1; v.src = '//' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; e = l.getElementsByTagName(i)[0]; e.parentNode.insertBefore(v, e)})(document, 'script');
+(function () {
+    'use strict';
+
+    function noop() {}
+
+    function add_location(element, file, line, column, char) {
+    	element.__svelte_meta = {
+    		loc: { file, line, column, char }
+    	};
+    }
+
+    function run(fn) {
+    	return fn();
+    }
+
+    function blank_object() {
+    	return Object.create(null);
+    }
+
+    function run_all(fns) {
+    	fns.forEach(run);
+    }
+
+    function is_function(thing) {
+    	return typeof thing === 'function';
+    }
+
+    function safe_not_equal(a, b) {
+    	return a != a ? b == b : a !== b || ((a && typeof a === 'object') || typeof a === 'function');
+    }
+
+    function append(target, node) {
+    	target.appendChild(node);
+    }
+
+    function insert(target, node, anchor) {
+    	target.insertBefore(node, anchor || null);
+    }
+
+    function detach(node) {
+    	node.parentNode.removeChild(node);
+    }
+
+    function element(name) {
+    	return document.createElement(name);
+    }
+
+    function text(data) {
+    	return document.createTextNode(data);
+    }
+
+    function space() {
+    	return text(' ');
+    }
+
+    function listen(node, event, handler, options) {
+    	node.addEventListener(event, handler, options);
+    	return () => node.removeEventListener(event, handler, options);
+    }
+
+    function children(element) {
+    	return Array.from(element.childNodes);
+    }
+
+    function set_data(text, data) {
+    	data = '' + data;
+    	if (text.data !== data) text.data = data;
+    }
+
+    let current_component;
+
+    function set_current_component(component) {
+    	current_component = component;
+    }
+
+    const dirty_components = [];
+
+    const resolved_promise = Promise.resolve();
+    let update_scheduled = false;
+    const binding_callbacks = [];
+    const render_callbacks = [];
+    const flush_callbacks = [];
+
+    function schedule_update() {
+    	if (!update_scheduled) {
+    		update_scheduled = true;
+    		resolved_promise.then(flush);
+    	}
+    }
+
+    function add_render_callback(fn) {
+    	render_callbacks.push(fn);
+    }
+
+    function flush() {
+    	const seen_callbacks = new Set();
+
+    	do {
+    		// first, call beforeUpdate functions
+    		// and update components
+    		while (dirty_components.length) {
+    			const component = dirty_components.shift();
+    			set_current_component(component);
+    			update(component.$$);
+    		}
+
+    		while (binding_callbacks.length) binding_callbacks.shift()();
+
+    		// then, once components are updated, call
+    		// afterUpdate functions. This may cause
+    		// subsequent updates...
+    		while (render_callbacks.length) {
+    			const callback = render_callbacks.pop();
+    			if (!seen_callbacks.has(callback)) {
+    				callback();
+
+    				// ...so guard against infinite loops
+    				seen_callbacks.add(callback);
+    			}
+    		}
+    	} while (dirty_components.length);
+
+    	while (flush_callbacks.length) {
+    		flush_callbacks.pop()();
+    	}
+
+    	update_scheduled = false;
+    }
+
+    function update($$) {
+    	if ($$.fragment) {
+    		$$.update($$.dirty);
+    		run_all($$.before_render);
+    		$$.fragment.p($$.dirty, $$.ctx);
+    		$$.dirty = null;
+
+    		$$.after_render.forEach(add_render_callback);
+    	}
+    }
+
+    function mount_component(component, target, anchor) {
+    	const { fragment, on_mount, on_destroy, after_render } = component.$$;
+
+    	fragment.m(target, anchor);
+
+    	// onMount happens after the initial afterUpdate. Because
+    	// afterUpdate callbacks happen in reverse order (inner first)
+    	// we schedule onMount callbacks before afterUpdate callbacks
+    	add_render_callback(() => {
+    		const new_on_destroy = on_mount.map(run).filter(is_function);
+    		if (on_destroy) {
+    			on_destroy.push(...new_on_destroy);
+    		} else {
+    			// Edge case - component was destroyed immediately,
+    			// most likely as a result of a binding initialising
+    			run_all(new_on_destroy);
+    		}
+    		component.$$.on_mount = [];
+    	});
+
+    	after_render.forEach(add_render_callback);
+    }
+
+    function destroy(component, detaching) {
+    	if (component.$$) {
+    		run_all(component.$$.on_destroy);
+    		component.$$.fragment.d(detaching);
+
+    		// TODO null out other refs, including component.$$ (but need to
+    		// preserve final state?)
+    		component.$$.on_destroy = component.$$.fragment = null;
+    		component.$$.ctx = {};
+    	}
+    }
+
+    function make_dirty(component, key) {
+    	if (!component.$$.dirty) {
+    		dirty_components.push(component);
+    		schedule_update();
+    		component.$$.dirty = blank_object();
+    	}
+    	component.$$.dirty[key] = true;
+    }
+
+    function init(component, options, instance, create_fragment, not_equal$$1, prop_names) {
+    	const parent_component = current_component;
+    	set_current_component(component);
+
+    	const props = options.props || {};
+
+    	const $$ = component.$$ = {
+    		fragment: null,
+    		ctx: null,
+
+    		// state
+    		props: prop_names,
+    		update: noop,
+    		not_equal: not_equal$$1,
+    		bound: blank_object(),
+
+    		// lifecycle
+    		on_mount: [],
+    		on_destroy: [],
+    		before_render: [],
+    		after_render: [],
+    		context: new Map(parent_component ? parent_component.$$.context : []),
+
+    		// everything else
+    		callbacks: blank_object(),
+    		dirty: null
+    	};
+
+    	let ready = false;
+
+    	$$.ctx = instance
+    		? instance(component, props, (key, value) => {
+    			if ($$.ctx && not_equal$$1($$.ctx[key], $$.ctx[key] = value)) {
+    				if ($$.bound[key]) $$.bound[key](value);
+    				if (ready) make_dirty(component, key);
+    			}
+    		})
+    		: props;
+
+    	$$.update();
+    	ready = true;
+    	run_all($$.before_render);
+    	$$.fragment = create_fragment($$.ctx);
+
+    	if (options.target) {
+    		if (options.hydrate) {
+    			$$.fragment.l(children(options.target));
+    		} else {
+    			$$.fragment.c();
+    		}
+
+    		if (options.intro && component.$$.fragment.i) component.$$.fragment.i();
+    		mount_component(component, options.target, options.anchor);
+    		flush();
+    	}
+
+    	set_current_component(parent_component);
+    }
+
+    class SvelteComponent {
+    	$destroy() {
+    		destroy(this, true);
+    		this.$destroy = noop;
+    	}
+
+    	$on(type, callback) {
+    		const callbacks = (this.$$.callbacks[type] || (this.$$.callbacks[type] = []));
+    		callbacks.push(callback);
+
+    		return () => {
+    			const index = callbacks.indexOf(callback);
+    			if (index !== -1) callbacks.splice(index, 1);
+    		};
+    	}
+
+    	$set() {
+    		// overridden by instance, if it has props
+    	}
+    }
+
+    class SvelteComponentDev extends SvelteComponent {
+    	constructor(options) {
+    		if (!options || (!options.target && !options.$$inline)) {
+    			throw new Error(`'target' is a required option`);
+    		}
+
+    		super();
+    	}
+
+    	$destroy() {
+    		super.$destroy();
+    		this.$destroy = () => {
+    			console.warn(`Component was already destroyed`); // eslint-disable-line no-console
+    		};
+    	}
+    }
+
+    /* src\Button.svelte generated by Svelte v3.4.0 */
+
+    const file = "src\\Button.svelte";
+
+    function create_fragment(ctx) {
+    	var button, t0, t1, t2, t3_value = ctx.clicks === 1 ? 'time' : 'times', t3, dispose;
+
+    	return {
+    		c: function create() {
+    			button = element("button");
+    			t0 = text("Clicked ");
+    			t1 = text(ctx.clicks);
+    			t2 = space();
+    			t3 = text(t3_value);
+    			button.className = "color space border-none bg-purple-700 hover:bg-blue-400  rounded";
+    			add_location(button, file, 6, 0, 88);
+    			dispose = listen(button, "click", ctx.handleClick);
+    		},
+
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+
+    		m: function mount(target, anchor) {
+    			insert(target, button, anchor);
+    			append(button, t0);
+    			append(button, t1);
+    			append(button, t2);
+    			append(button, t3);
+    		},
+
+    		p: function update(changed, ctx) {
+    			if (changed.clicks) {
+    				set_data(t1, ctx.clicks);
+    			}
+
+    			if ((changed.clicks) && t3_value !== (t3_value = ctx.clicks === 1 ? 'time' : 'times')) {
+    				set_data(t3, t3_value);
+    			}
+    		},
+
+    		i: noop,
+    		o: noop,
+
+    		d: function destroy(detaching) {
+    			if (detaching) {
+    				detach(button);
+    			}
+
+    			dispose();
+    		}
+    	};
+    }
+
+    function instance($$self, $$props, $$invalidate) {
+    	let clicks = 0;
+
+      const handleClick = () => { const $$result = (clicks += 1); $$invalidate('clicks', clicks); return $$result; };
+
+    	return { clicks, handleClick };
+    }
+
+    class Button extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance, create_fragment, safe_not_equal, []);
+    	}
+    }
+
+    /* src\App.svelte generated by Svelte v3.4.0 */
+
+    const file$1 = "src\\App.svelte";
+
+    function create_fragment$1(ctx) {
+    	var main, h1, t_1, current;
+
+    	var button = new Button({ $$inline: true });
+
+    	return {
+    		c: function create() {
+    			main = element("main");
+    			h1 = element("h1");
+    			h1.textContent = "Hello !";
+    			t_1 = space();
+    			button.$$.fragment.c();
+    			h1.className = "text-3xl text-red-600";
+    			add_location(h1, file$1, 8, 2, 109);
+    			add_location(main, file$1, 7, 0, 99);
+    		},
+
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+
+    		m: function mount(target, anchor) {
+    			insert(target, main, anchor);
+    			append(main, h1);
+    			append(main, t_1);
+    			mount_component(button, main, null);
+    			current = true;
+    		},
+
+    		p: noop,
+
+    		i: function intro(local) {
+    			if (current) return;
+    			button.$$.fragment.i(local);
+
+    			current = true;
+    		},
+
+    		o: function outro(local) {
+    			button.$$.fragment.o(local);
+    			current = false;
+    		},
+
+    		d: function destroy(detaching) {
+    			if (detaching) {
+    				detach(main);
+    			}
+
+    			button.$destroy();
+    		}
+    	};
+    }
+
+    class App extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, null, create_fragment$1, safe_not_equal, []);
+    	}
+    }
+
+    const app = new App({
+        target: document.body
+    });
+
+}());
 //# sourceMappingURL=main.js.map
