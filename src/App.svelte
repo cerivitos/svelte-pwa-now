@@ -1,13 +1,11 @@
 <script>
-  import Button from './Button.svelte'
-
+  import Searchbar from "./components/Searchbar.svelte";
 </script>
 
 <style lang="postcss">
 
 </style>
 
-<main>
-  <h1 class="text-3xl text-red-600">Hello !</h1>
-  <Button />
+<main class="p-4">
+  <Searchbar/>
 </main>

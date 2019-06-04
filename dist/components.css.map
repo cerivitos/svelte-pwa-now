@@ -1,12 +1,8 @@
 {
   "version": 3,
   "file": "components.css",
-  "sources": [
-    "..\\src\\Button.svelte"
-  ],
-  "sourcesContent": [
-    "<script>\r\n  let clicks = 0;\r\n\r\n  const handleClick = () => (clicks += 1);\r\n</script>\r\n<style>.space{padding:.5rem 1rem}.color{color:#fff}</style>\r\n<button\r\n  class=\"color space border-none bg-purple-700 hover:bg-blue-400  rounded\"\r\n  on:click=\"{handleClick}\"\r\n>\r\n  Clicked {clicks} {clicks === 1 ? 'time' : 'times'}\r\n</button>\r\n"
-  ],
+  "sources": [],
+  "sourcesContent": [],
   "names": [],
-  "mappings": "AAKO,oBAAM,CAAC,QAAQ,KAAK,CAAC,IAAI,CAAC,oBAAM,CAAC,MAAM,IAAI,CAAC"
+  "mappings": ""
 }
