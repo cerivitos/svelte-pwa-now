@@ -1,22 +1,18 @@
 <script>
+  import { currentLat, currentLong, searchLocation } from "../store/store.js";
   import { onDestroy } from "svelte";
-
-  let searchString = "";
-  let currentLat = "";
-  let currentLong = "";
 
   function getLocation() {
     if (navigator.geolocation) {
-      navigator.geolocation.watchPosition(showPosition, handleError);
+      navigator.geolocation.watchPosition(handlePosition, handleError);
     } else {
       console.log("geolocation not supported");
     }
   }
 
-  function showPosition(currentPosition) {
-    currentLat = currentPosition.coords.latitude;
-    currentLong = currentPosition.coords.longitude;
-    console.log(`Current position is ${currentLat}, ${currentLong}`);
+  function handlePosition(currentPosition) {
+    currentLat.set(currentPosition.coords.latitude);
+    currentLong.set(currentPosition.coords.longitude);
   }
 
   function handleError(error) {
@@ -26,6 +22,8 @@
   onDestroy(() => {
     if (navigator.geolocation) {
       navigator.geolocation.clearWatch();
+      currentLat.set("");
+      currentLong.set("");
     }
   });
 </script>
@@ -34,7 +32,7 @@
   class="relative shadow bg-gray-200 appearance-none border h-auto mt-2 pr-12 rounded-full w-full sm:w-1/2"
 >
   <input
-    bind:value="{searchString}"
+    on:input="{input => searchLocation.set(input.srcElement.value)}"
     placeholder="Where are you?"
     class="inline bg-transparent p-4 w-full outline-none"
     type="text"
