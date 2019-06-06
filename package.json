@@ -49,6 +49,7 @@
     "tailwindcss": "^1.0.1"
   },
   "dependencies": {
+    "leaflet": "^1.5.1",
     "overmind": "^17.1.0"
   }
 }
