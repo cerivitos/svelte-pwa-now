@@ -1,5 +1,5 @@
 <script>
-  import { currentLat, currentLong } from "../store/store.js";
+  import { currentLat, currentLong, placeJson } from "../store/store.js";
   import { onDestroy } from "svelte";
   import { debounce } from "../util.js";
 
@@ -30,12 +30,14 @@
         " singapore?format=json&addressdetails=1&limit=1"
     );
 
-    let response = await fetch(encodedURI);
-    let json = await response.json();
-    console.log(JSON.stringify(json));
-
-    currentLat.set(json[0].lat);
-    currentLong.set(json[0].lon);
+    fetch(encodedURI)
+      .then(response => {
+        response.json().then(json => {
+          placeJson.set(json);
+          console.log(JSON.stringify(json));
+        });
+      })
+      .catch(error => console.log(error));
   }
 
   onDestroy(() => {
