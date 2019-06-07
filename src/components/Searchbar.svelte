@@ -41,7 +41,7 @@
     type="text"
   />
   <button
-    class="absolute right-0 top-0 p-1 m-1 rounded-full items-center bg-transparent focus: outline-none hover:bg-gray-300"
+    class="absolute right-0 top-0 p-1 m-1 rounded-full items-center bg-transparent focus: outline-none hover:text-teal-600 text-gray-500"
     on:click="{getLocation}"
   >
     <svg
@@ -51,7 +51,7 @@
       stroke-width="2"
       stroke-linecap="round"
       stroke-linejoin="round"
-      class="stroke-current text-gray-500 inline-block w-10 h-10"
+      class="stroke-current inline-block w-10 h-10"
     >
       <circle cx="12" cy="12" r="10" />
       <line x1="22" y1="12" x2="18" y2="12" />
