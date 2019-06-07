@@ -10,7 +10,7 @@
 
 <main>
   <!--For global margin-->
-  <div class="absolute p-4 w-full z-10">
+  <div class="absolute p-4 w-full" style="z-index:1000" >
     <Searchbar/>  
     <PlaceList/>
   </div>
