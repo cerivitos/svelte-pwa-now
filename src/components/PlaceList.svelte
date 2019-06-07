@@ -20,7 +20,7 @@
   
   <ul>
       {#each filtered as place}
-    <PlaceListItem name={place.name} address={place.address} rating={place.rating}/>
+    <PlaceListItem name={place.name} address={place.address} rating={place.rating} lat={place.lat} long={place.long}/>
     {/each}
   </ul>
   
