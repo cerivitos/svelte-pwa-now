@@ -24,11 +24,9 @@
       const long = toilet.long;
       let toiletMarker = L.icon({
         iconUrl: "../assets/toilet_marker.png",
-        iconSize: [24, 24], // size of the icon
-        shadowSize: [24, 24], // size of the shadow
-        iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
-        shadowAnchor: [4, 62], // the same for the shadow
-        popupAnchor: [-3, -76]
+        iconSize: [24, 24],
+        iconAnchor: [12, 12],
+        popupAnchor: [0, -12]
       });
       let marker = L.marker([lat, long], { icon: toiletMarker });
       marker

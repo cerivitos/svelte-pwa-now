@@ -16751,7 +16751,7 @@
     			div = element("div");
     			div.id = "map";
     			div.className = "w-screen h-screen";
-    			add_location(div, file$1, 45, 0, 1412);
+    			add_location(div, file$1, 43, 0, 1215);
     		},
 
     		l: function claim(nodes) {
@@ -16803,11 +16803,9 @@
           const long = toilet.long;
           let toiletMarker = leafletSrc.icon({
             iconUrl: "../assets/toilet_marker.png",
-            iconSize: [24, 24], // size of the icon
-            shadowSize: [24, 24], // size of the shadow
-            iconAnchor: [22, 94], // point of the icon which will correspond to marker's location
-            shadowAnchor: [4, 62], // the same for the shadow
-            popupAnchor: [-3, -76]
+            iconSize: [24, 24],
+            iconAnchor: [12, 12],
+            popupAnchor: [0, -12]
           });
           let marker = leafletSrc.marker([lat, long], { icon: toiletMarker });
           marker
