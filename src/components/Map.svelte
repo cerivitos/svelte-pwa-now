@@ -37,7 +37,7 @@
   });
 
   $: if (map !== undefined) {
-    map.flyTo(L.latLng($currentLat, $currentLong), 14);
+    map.flyTo(L.latLng($currentLat, $currentLong), 18);
   }
 </script>
 

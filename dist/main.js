@@ -16817,7 +16817,7 @@
 
     	$$self.$$.update = ($$dirty = { map: 1, $currentLat: 1, $currentLong: 1 }) => {
     		if ($$dirty.map || $$dirty.$currentLat || $$dirty.$currentLong) { if (map !== undefined) {
-            map.flyTo(leafletSrc.latLng($currentLat, $currentLong), 14);
+            map.flyTo(leafletSrc.latLng($currentLat, $currentLong), 18);
           } }
     	};
 
