@@ -13,12 +13,15 @@
   }
 </script>
 
-<li class="flex p-4 list-inside" on:click="{selectToilet}">
+<button
+  class="flex p-4 text-left start w-full bg-transparent text-gray-800 hover:bg-teal-600 hover:text-white"
+  on:click="{selectToilet}"
+>
   <div class="w-11/12">
-    <p class="font-medium text-lg text-gray-800 truncate">{name}</p>
-    <p class="font-light text-gray-800 leading-tight truncate">{address}</p>
+    <p class="font-medium text-lg truncate">{name}</p>
+    <p class="font-light leading-tight truncate">{address}</p>
   </div>
   <div class="w-1/12 text-center content-center">
     <p>{rating}⭐</p>
   </div>
-</li>
+</button>

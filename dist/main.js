@@ -16855,11 +16855,11 @@
     const file$2 = "src\\components\\PlaceListItem.svelte";
 
     function create_fragment$2(ctx) {
-    	var li, div0, p0, t0, t1, p1, t2, t3, div1, p2, t4, t5, dispose;
+    	var button, div0, p0, t0, t1, p1, t2, t3, div1, p2, t4, t5, dispose;
 
     	return {
     		c: function create() {
-    			li = element("li");
+    			button = element("button");
     			div0 = element("div");
     			p0 = element("p");
     			t0 = text(ctx.name);
@@ -16871,18 +16871,18 @@
     			p2 = element("p");
     			t4 = text(ctx.rating);
     			t5 = text("⭐");
-    			p0.className = "font-medium text-lg text-gray-800 truncate";
-    			add_location(p0, file$2, 17, 4, 437);
-    			p1.className = "font-light text-gray-800 leading-tight truncate";
-    			add_location(p1, file$2, 18, 4, 507);
+    			p0.className = "font-medium text-lg truncate";
+    			add_location(p0, file$2, 20, 4, 524);
+    			p1.className = "font-light leading-tight truncate";
+    			add_location(p1, file$2, 21, 4, 580);
     			div0.className = "w-11/12";
-    			add_location(div0, file$2, 16, 2, 410);
-    			add_location(p2, file$2, 21, 4, 646);
+    			add_location(div0, file$2, 19, 2, 497);
+    			add_location(p2, file$2, 24, 4, 705);
     			div1.className = "w-1/12 text-center content-center";
-    			add_location(div1, file$2, 20, 2, 593);
-    			li.className = "flex p-4 list-inside";
-    			add_location(li, file$2, 15, 0, 347);
-    			dispose = listen(li, "click", ctx.selectToilet);
+    			add_location(div1, file$2, 23, 2, 652);
+    			button.className = "flex p-4 text-left start w-full bg-transparent text-gray-800 hover:bg-teal-600 hover:text-white";
+    			add_location(button, file$2, 15, 0, 347);
+    			dispose = listen(button, "click", ctx.selectToilet);
     		},
 
     		l: function claim(nodes) {
@@ -16890,15 +16890,15 @@
     		},
 
     		m: function mount(target, anchor) {
-    			insert(target, li, anchor);
-    			append(li, div0);
+    			insert(target, button, anchor);
+    			append(button, div0);
     			append(div0, p0);
     			append(p0, t0);
     			append(div0, t1);
     			append(div0, p1);
     			append(p1, t2);
-    			append(li, t3);
-    			append(li, div1);
+    			append(button, t3);
+    			append(button, div1);
     			append(div1, p2);
     			append(p2, t4);
     			append(p2, t5);
@@ -16923,7 +16923,7 @@
 
     		d: function destroy(detaching) {
     			if (detaching) {
-    				detach(li);
+    				detach(button);
     			}
 
     			dispose();
@@ -17015,7 +17015,7 @@
     	return child_ctx;
     }
 
-    // (22:6) {#each filtered as place}
+    // (20:2) {#each filtered as place}
     function create_each_block(ctx) {
     	var current;
 
@@ -17069,7 +17069,7 @@
     }
 
     function create_fragment$3(ctx) {
-    	var div, ul, current;
+    	var div, current;
 
     	var each_value = ctx.filtered;
 
@@ -17095,12 +17095,10 @@
     	return {
     		c: function create() {
     			div = element("div");
-    			ul = element("ul");
 
     			for (var i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
-    			add_location(ul, file$3, 20, 2, 595);
     			div.className = "w-full sm:w-1/2 overflow-auto mt-1 rounded-lg bg-gray-200 shadow";
     			set_style(div, "max-height", "16rem");
     			add_location(div, file$3, 18, 0, 484);
@@ -17112,10 +17110,9 @@
 
     		m: function mount(target, anchor) {
     			insert(target, div, anchor);
-    			append(div, ul);
 
     			for (var i = 0; i < each_blocks.length; i += 1) {
-    				each_blocks[i].m(ul, null);
+    				each_blocks[i].m(div, null);
     			}
 
     			current = true;
@@ -17135,7 +17132,7 @@
     						each_blocks[i] = create_each_block(child_ctx);
     						each_blocks[i].c();
     						each_blocks[i].i(1);
-    						each_blocks[i].m(ul, null);
+    						each_blocks[i].m(div, null);
     					}
     				}
 
@@ -17225,7 +17222,7 @@
     			map.$$.fragment.c();
     			div.className = "absolute p-4 w-full";
     			set_style(div, "z-index", "1000");
-    			add_location(div, file$4, 10, 2, 257);
+    			add_location(div, file$4, 10, 2, 258);
     			add_location(main, file$4, 8, 0, 219);
     		},
 

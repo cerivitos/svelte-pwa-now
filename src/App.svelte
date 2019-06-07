@@ -8,7 +8,7 @@
 
 </style>
 
-<main>
+<main >
   <!--For global margin-->
   <div class="absolute p-4 w-full" style="z-index:1000" >
     <Searchbar/>  
