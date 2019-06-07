@@ -6,7 +6,11 @@
   let map;
 
   onMount(async () => {
-    map = L.map("map").setView([1.29027, 103.851959], 12);
+    map = L.map("map", {
+      zoomControl: false,
+      center: L.latLng(1.29027, 103.851959),
+      zoom: 12
+    });
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -14,8 +18,8 @@
   });
 
   $: if (map !== undefined) {
-    map.flyTo(new L.LatLng($currentLat, $currentLong), 14);
+    map.flyTo(L.latLng($currentLat, $currentLong), 14);
   }
 </script>
 
-<div id="map" class="w-screen h-screen" style="z-index: -1;"></div>
+<div id="map" class="w-screen h-screen"></div>
