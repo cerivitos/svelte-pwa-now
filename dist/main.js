@@ -16751,7 +16751,7 @@
     			div = element("div");
     			div.id = "map";
     			div.className = "w-screen h-screen";
-    			add_location(div, file$1, 64, 0, 1724);
+    			add_location(div, file$1, 62, 0, 1618);
     		},
 
     		l: function claim(nodes) {
@@ -16810,9 +16810,7 @@
             popupAnchor: [0, -12]
           }));
           let marker = leafletSrc.marker([lat, long], { icon: toiletMarker });
-          marker
-            .bindPopup("<b>" + toilet.name + "</b><br>" + toilet.address)
-            .openPopup();
+
           marker.addTo(map);
           markers.push(marker);
         });

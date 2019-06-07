@@ -31,9 +31,7 @@
         popupAnchor: [0, -12]
       });
       let marker = L.marker([lat, long], { icon: toiletMarker });
-      marker
-        .bindPopup("<b>" + toilet.name + "</b><br>" + toilet.address)
-        .openPopup();
+
       marker.addTo(map);
       markers.push(marker);
     });
