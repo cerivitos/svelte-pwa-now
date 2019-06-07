@@ -2,6 +2,9 @@
   import { currentLat, currentLong, searchString } from "../store/store.js";
   import { onDestroy } from "svelte";
   import { debounce } from "../util.js";
+  import {createEventDispatcher} from 'svelte';
+
+  const dispatch = createEventDispatcher();
 
   function getLocation() {
     if (navigator.geolocation) {
@@ -15,17 +18,20 @@
   function handlePosition(currentPosition) {
     currentLat.set(currentPosition.coords.latitude);
     currentLong.set(currentPosition.coords.longitude);
-    console.log(
-      currentPosition.coords.latitude + " " + currentPosition.coords.longitude
-    );
   }
 
   function handleError(error) {
     console.log(`Error: ${error.code}`);
   }
 
+  function dispatchKey(key) {
+    dispatch('keyboard', {
+      key: key
+    });
+  }
+
   $: if ($currentLat !== 1.29027 && $currentLong !== 103.851959) {
-    //default lat long
+    //check that it is not the default lat long
     document.getElementById("input").value = "";
   }
 
@@ -38,6 +44,7 @@
 
 <div
   class="relative shadow bg-gray-200 appearance-none border h-auto mt-2 pr-12 rounded-full w-full sm:w-1/2"
+  on:keydown={e => dispatchKey(e.key)}
 >
   <input
     on:input="{input => searchString.set(input.srcElement.value)}"
