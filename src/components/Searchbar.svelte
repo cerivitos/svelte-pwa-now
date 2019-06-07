@@ -1,5 +1,5 @@
 <script>
-  import { currentLat, currentLong, placeJson } from "../store/store.js";
+  import { currentLat, currentLong, searchString } from "../store/store.js";
   import { onDestroy } from "svelte";
   import { debounce } from "../util.js";
 
@@ -23,23 +23,6 @@
     console.log(`Error: ${error.code}`);
   }
 
-  async function getGeocode(searchLocation) {
-    const encodedURI = encodeURI(
-      "https://nominatim.openstreetmap.org/search/" +
-        searchLocation +
-        " singapore?format=json&addressdetails=1&limit=1"
-    );
-
-    fetch(encodedURI)
-      .then(response => {
-        response.json().then(json => {
-          placeJson.set(json);
-          console.log(JSON.stringify(json));
-        });
-      })
-      .catch(error => console.log(error));
-  }
-
   onDestroy(() => {
     if (navigator.geolocation) {
       navigator.geolocation.clearWatch();
@@ -51,7 +34,7 @@
   class="relative shadow bg-gray-200 appearance-none border h-auto mt-2 pr-12 rounded-full w-full sm:w-1/2"
 >
   <input
-    on:input="{input => debounce(2000, getGeocode(input.srcElement.value))}"
+    on:input="{input => searchString.set(input.srcElement.value)}"
     placeholder="Where are you?"
     class="inline bg-transparent p-4 w-full outline-none"
     type="text"

@@ -38,6 +38,8 @@
     "rollup": "^1.12.1",
     "rollup-plugin-commonjs": "^10.0.0",
     "rollup-plugin-livereload": "^1.0.0",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-globals": "^1.4.0",
     "rollup-plugin-node-resolve": "^5.0.0",
     "rollup-plugin-postcss": "^2.0.3",
     "rollup-plugin-svelte": "^5.0.3",
@@ -50,6 +52,8 @@
   },
   "dependencies": {
     "leaflet": "^1.5.1",
-    "overmind": "^17.1.0"
+    "leaflet-gesture-handling": "^1.1.8",
+    "overmind": "^17.1.0",
+    "papaparse": "^5.0.0"
   }
 }
