@@ -1,6 +1,7 @@
 <script>
   import { searchString } from "../store/store.js";
   import { toilets } from "../data/toilets.js";
+  import PlaceListItem from './PlaceListItem.svelte';
 
   let filtered = [];
 
@@ -15,13 +16,14 @@
   }
 </script>
 
-<ul class="h-64 w-full sm:w-1/2 overflow-auto m-1 rounded-lg">
-  {#each filtered as place}
-  <ul class="py-2 px-4 bg-gray-500">
-    <h4>
-      {place.name}
-    </h4>
-    <p>{place.address}</p>
+<div class="w-full sm:w-1/2 overflow-auto mt-1 rounded-lg bg-gray-200 shadow" style="max-height:16rem">
+  
+  <ul>
+      {#each filtered as place}
+    <PlaceListItem name={place.name} address={place.address} rating={place.rating}/>
+    {/each}
   </ul>
-  {/each}
-</ul>
+  
+</div>
+  
+
