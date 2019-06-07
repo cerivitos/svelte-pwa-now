@@ -5,6 +5,7 @@
 
   function getLocation() {
     if (navigator.geolocation) {
+      searchString.set("");
       navigator.geolocation.watchPosition(handlePosition, handleError);
     } else {
       console.log("geolocation not supported");

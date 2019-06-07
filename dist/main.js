@@ -413,31 +413,31 @@
     			input.placeholder = "Where are you?";
     			input.className = "inline bg-transparent p-4 w-full outline-none";
     			attr(input, "type", "text");
-    			add_location(input, file, 35, 2, 979);
+    			add_location(input, file, 36, 2, 1008);
     			attr(circle, "cx", "12");
     			attr(circle, "cy", "12");
     			attr(circle, "r", "10");
-    			add_location(circle, file, 54, 6, 1603);
+    			add_location(circle, file, 55, 6, 1632);
     			attr(line0, "x1", "22");
     			attr(line0, "y1", "12");
     			attr(line0, "x2", "18");
     			attr(line0, "y2", "12");
-    			add_location(line0, file, 55, 6, 1644);
+    			add_location(line0, file, 56, 6, 1673);
     			attr(line1, "x1", "6");
     			attr(line1, "y1", "12");
     			attr(line1, "x2", "2");
     			attr(line1, "y2", "12");
-    			add_location(line1, file, 56, 6, 1692);
+    			add_location(line1, file, 57, 6, 1721);
     			attr(line2, "x1", "12");
     			attr(line2, "y1", "6");
     			attr(line2, "x2", "12");
     			attr(line2, "y2", "2");
-    			add_location(line2, file, 57, 6, 1738);
+    			add_location(line2, file, 58, 6, 1767);
     			attr(line3, "x1", "12");
     			attr(line3, "y1", "22");
     			attr(line3, "x2", "12");
     			attr(line3, "y2", "18");
-    			add_location(line3, file, 58, 6, 1784);
+    			add_location(line3, file, 59, 6, 1813);
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "viewBox", "0 0 24 24");
     			attr(svg, "fill", "none");
@@ -445,11 +445,11 @@
     			attr(svg, "stroke-linecap", "round");
     			attr(svg, "stroke-linejoin", "round");
     			attr(svg, "class", "stroke-current text-gray-500 inline-block w-10 h-10");
-    			add_location(svg, file, 45, 4, 1344);
+    			add_location(svg, file, 46, 4, 1373);
     			button.className = "absolute right-0 top-0 p-1 m-1 rounded-full items-center bg-transparent focus: outline-none hover:bg-gray-300";
-    			add_location(button, file, 41, 2, 1173);
+    			add_location(button, file, 42, 2, 1202);
     			div.className = "relative shadow bg-gray-200 appearance-none border h-auto mt-2 pr-12 rounded-full w-full sm:w-1/2";
-    			add_location(div, file, 32, 0, 859);
+    			add_location(div, file, 33, 0, 888);
 
     			dispose = [
     				listen(input, "input", ctx.input_handler),
@@ -490,6 +490,7 @@
 
     function getLocation() {
       if (navigator.geolocation) {
+        searchString.set("");
         navigator.geolocation.watchPosition(handlePosition, handleError);
       } else {
         console.log("geolocation not supported");
