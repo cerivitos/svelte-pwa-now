@@ -6,6 +6,8 @@
   import { toilets } from "../data/toilets.js";
 
   let map;
+  let toiletMarker;
+  let markers = [];
 
   onMount(async () => {
     map = L.map("map", {
@@ -22,7 +24,7 @@
     toilets.forEach(toilet => {
       const lat = toilet.lat;
       const long = toilet.long;
-      let toiletMarker = L.icon({
+      toiletMarker = L.icon({
         iconUrl: "../assets/toilet_marker.png",
         iconSize: [24, 24],
         iconAnchor: [12, 12],
@@ -33,11 +35,30 @@
         .bindPopup("<b>" + toilet.name + "</b><br>" + toilet.address)
         .openPopup();
       marker.addTo(map);
+      markers.push(marker);
     });
   });
 
   $: if (map !== undefined) {
     map.flyTo(L.latLng($currentLat, $currentLong), 18);
+
+    const newMarker = L.icon({
+      iconUrl: "../assets/toilet_marker.png",
+      iconSize: [48, 48],
+      iconAnchor: [12, 12],
+      popupAnchor: [0, -12]
+    });
+
+    markers.forEach(marker => {
+      if (
+        marker.getLatLng().lat === $currentLat &&
+        marker.getLatLng().lng === $currentLong
+      ) {
+        marker.setIcon(newMarker);
+      } else {
+        marker.setIcon(toiletMarker);
+      }
+    });
   }
 </script>
 

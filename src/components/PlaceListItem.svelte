@@ -1,5 +1,5 @@
 <script>
-  import { currentLat, currentLong } from "../store/store.js";
+  import { currentLat, currentLong, searchString } from "../store/store.js";
   export let name = "";
   export let address = "";
   export let rating = "";
@@ -9,6 +9,7 @@
   function selectToilet() {
     currentLat.set(lat);
     currentLong.set(long);
+    searchString.set("");
   }
 </script>
 
@@ -17,7 +18,7 @@
     <p class="font-medium text-lg text-gray-800 truncate">{name}</p>
     <p class="font-light text-gray-800 leading-tight truncate">{address}</p>
   </div>
-  <div class="w-1/12 content-center">
+  <div class="w-1/12 text-center content-center">
     <p>{rating}⭐</p>
   </div>
 </li>

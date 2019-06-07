@@ -16751,7 +16751,7 @@
     			div = element("div");
     			div.id = "map";
     			div.className = "w-screen h-screen";
-    			add_location(div, file$1, 43, 0, 1215);
+    			add_location(div, file$1, 64, 0, 1724);
     		},
 
     		l: function claim(nodes) {
@@ -16785,6 +16785,8 @@
     	
 
       let map;
+      let toiletMarker;
+      let markers = [];
 
       onMount(async () => {
         $$invalidate('map', map = leafletSrc.map("map", {
@@ -16801,23 +16803,42 @@
         toilets.forEach(toilet => {
           const lat = toilet.lat;
           const long = toilet.long;
-          let toiletMarker = leafletSrc.icon({
+          $$invalidate('toiletMarker', toiletMarker = leafletSrc.icon({
             iconUrl: "../assets/toilet_marker.png",
             iconSize: [24, 24],
             iconAnchor: [12, 12],
             popupAnchor: [0, -12]
-          });
+          }));
           let marker = leafletSrc.marker([lat, long], { icon: toiletMarker });
           marker
             .bindPopup("<b>" + toilet.name + "</b><br>" + toilet.address)
             .openPopup();
           marker.addTo(map);
+          markers.push(marker);
         });
       });
 
-    	$$self.$$.update = ($$dirty = { map: 1, $currentLat: 1, $currentLong: 1 }) => {
-    		if ($$dirty.map || $$dirty.$currentLat || $$dirty.$currentLong) { if (map !== undefined) {
+    	$$self.$$.update = ($$dirty = { map: 1, $currentLat: 1, $currentLong: 1, markers: 1, toiletMarker: 1 }) => {
+    		if ($$dirty.map || $$dirty.$currentLat || $$dirty.$currentLong || $$dirty.markers || $$dirty.toiletMarker) { if (map !== undefined) {
             map.flyTo(leafletSrc.latLng($currentLat, $currentLong), 18);
+        
+            const newMarker = leafletSrc.icon({
+              iconUrl: "../assets/toilet_marker.png",
+              iconSize: [48, 48],
+              iconAnchor: [12, 12],
+              popupAnchor: [0, -12]
+            });
+        
+            markers.forEach(marker => {
+              if (
+                marker.getLatLng().lat === $currentLat &&
+                marker.getLatLng().lng === $currentLong
+              ) {
+                marker.setIcon(newMarker);
+              } else {
+                marker.setIcon(toiletMarker);
+              }
+            });
           } }
     	};
 
@@ -16853,16 +16874,16 @@
     			t4 = text(ctx.rating);
     			t5 = text("⭐");
     			p0.className = "font-medium text-lg text-gray-800 truncate";
-    			add_location(p0, file$2, 16, 4, 396);
+    			add_location(p0, file$2, 17, 4, 437);
     			p1.className = "font-light text-gray-800 leading-tight truncate";
-    			add_location(p1, file$2, 17, 4, 466);
+    			add_location(p1, file$2, 18, 4, 507);
     			div0.className = "w-11/12";
-    			add_location(div0, file$2, 15, 2, 369);
-    			add_location(p2, file$2, 20, 4, 593);
-    			div1.className = "w-1/12 content-center";
-    			add_location(div1, file$2, 19, 2, 552);
+    			add_location(div0, file$2, 16, 2, 410);
+    			add_location(p2, file$2, 21, 4, 646);
+    			div1.className = "w-1/12 text-center content-center";
+    			add_location(div1, file$2, 20, 2, 593);
     			li.className = "flex p-4 list-inside";
-    			add_location(li, file$2, 14, 0, 306);
+    			add_location(li, file$2, 15, 0, 347);
     			dispose = listen(li, "click", ctx.selectToilet);
     		},
 
@@ -16918,6 +16939,7 @@
       function selectToilet() {
         currentLat.set(lat);
         currentLong.set(long);
+        searchString.set("");
       }
 
     	$$self.$set = $$props => {
