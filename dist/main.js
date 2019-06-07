@@ -412,32 +412,33 @@
     			line3 = svg_element("line");
     			input.placeholder = "Where are you?";
     			input.className = "inline bg-transparent p-4 w-full outline-none";
-    			attr(input, "type", "text");
-    			add_location(input, file, 36, 2, 1008);
+    			attr(input, "type", "search");
+    			input.id = "input";
+    			add_location(input, file, 41, 2, 1157);
     			attr(circle, "cx", "12");
     			attr(circle, "cy", "12");
     			attr(circle, "r", "10");
-    			add_location(circle, file, 55, 6, 1634);
+    			add_location(circle, file, 61, 6, 1801);
     			attr(line0, "x1", "22");
     			attr(line0, "y1", "12");
     			attr(line0, "x2", "18");
     			attr(line0, "y2", "12");
-    			add_location(line0, file, 56, 6, 1675);
+    			add_location(line0, file, 62, 6, 1842);
     			attr(line1, "x1", "6");
     			attr(line1, "y1", "12");
     			attr(line1, "x2", "2");
     			attr(line1, "y2", "12");
-    			add_location(line1, file, 57, 6, 1723);
+    			add_location(line1, file, 63, 6, 1890);
     			attr(line2, "x1", "12");
     			attr(line2, "y1", "6");
     			attr(line2, "x2", "12");
     			attr(line2, "y2", "2");
-    			add_location(line2, file, 58, 6, 1769);
+    			add_location(line2, file, 64, 6, 1936);
     			attr(line3, "x1", "12");
     			attr(line3, "y1", "22");
     			attr(line3, "x2", "12");
     			attr(line3, "y2", "18");
-    			add_location(line3, file, 59, 6, 1815);
+    			add_location(line3, file, 65, 6, 1982);
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "viewBox", "0 0 24 24");
     			attr(svg, "fill", "none");
@@ -445,11 +446,11 @@
     			attr(svg, "stroke-linecap", "round");
     			attr(svg, "stroke-linejoin", "round");
     			attr(svg, "class", "stroke-current inline-block w-10 h-10");
-    			add_location(svg, file, 46, 4, 1389);
+    			add_location(svg, file, 52, 4, 1556);
     			button.className = "absolute right-0 top-0 p-1 m-1 rounded-full items-center bg-transparent focus: outline-none hover:text-teal-600 text-gray-500";
-    			add_location(button, file, 42, 2, 1202);
+    			add_location(button, file, 48, 2, 1369);
     			div.className = "relative shadow bg-gray-200 appearance-none border h-auto mt-2 pr-12 rounded-full w-full sm:w-1/2";
-    			add_location(div, file, 33, 0, 888);
+    			add_location(div, file, 38, 0, 1037);
 
     			dispose = [
     				listen(input, "input", ctx.input_handler),
@@ -509,7 +510,14 @@
       console.log(`Error: ${error.code}`);
     }
 
-    function instance($$self) {
+    function instance($$self, $$props, $$invalidate) {
+    	let $currentLat, $currentLong;
+
+    	validate_store(currentLat, 'currentLat');
+    	subscribe($$self, currentLat, $$value => { $currentLat = $$value; $$invalidate('$currentLat', $currentLat); });
+    	validate_store(currentLong, 'currentLong');
+    	subscribe($$self, currentLong, $$value => { $currentLong = $$value; $$invalidate('$currentLong', $currentLong); });
+
     	
 
       onDestroy(() => {
@@ -521,6 +529,13 @@
     	function input_handler(input) {
     		return searchString.set(input.srcElement.value);
     	}
+
+    	$$self.$$.update = ($$dirty = { $currentLat: 1, $currentLong: 1 }) => {
+    		if ($$dirty.$currentLat || $$dirty.$currentLong) { if ($currentLat !== 1.29027 && $currentLong !== 103.851959) {
+            //default lat long
+            document.getElementById("input").value = "";
+          } }
+    	};
 
     	return { input_handler };
     }

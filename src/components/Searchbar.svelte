@@ -24,6 +24,11 @@
     console.log(`Error: ${error.code}`);
   }
 
+  $: if ($currentLat !== 1.29027 && $currentLong !== 103.851959) {
+    //default lat long
+    document.getElementById("input").value = "";
+  }
+
   onDestroy(() => {
     if (navigator.geolocation) {
       navigator.geolocation.clearWatch();
@@ -38,7 +43,8 @@
     on:input="{input => searchString.set(input.srcElement.value)}"
     placeholder="Where are you?"
     class="inline bg-transparent p-4 w-full outline-none"
-    type="text"
+    type="search"
+    id="input"
   />
   <button
     class="absolute right-0 top-0 p-1 m-1 rounded-full items-center bg-transparent focus: outline-none hover:text-teal-600 text-gray-500"
