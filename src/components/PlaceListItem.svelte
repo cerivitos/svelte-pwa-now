@@ -6,13 +6,8 @@
     selectedIndex
   } from "../store/store.js";
 
-  export let name = "";
-  export let address = "";
-  export let rating = "";
-  export let lat = "";
-  export let long = "";
+  export let placeObj;
   export let key = "";
-  export let distance = 0;
   export let selected = false;
 
   let listItem;
@@ -31,8 +26,8 @@
   }
 
   function selectToilet() {
-    currentLat.set(lat);
-    currentLong.set(long);
+    currentLat.set(placeObj.lat);
+    currentLong.set(placeObj.long);
     searchString.set("");
   }
 
@@ -79,19 +74,19 @@
   on:mouseenter="{hovering}"
   bind:this="{listItem}"
 >
-  <div class="w-11/12 text-gray-800">
+  <div class="w-11/12 text-gray-800 pr-1">
     <p class="font-medium text-lg truncate">
-      {@html highlightSearchString($searchString, name)}
+      {@html highlightSearchString($searchString, placeObj.name)}
     </p>
     <p class="font-light leading-tight truncate">
-      {@html highlightSearchString($searchString, address)}
+      {@html highlightSearchString($searchString, placeObj.address)}
     </p>
   </div>
   <div class="w-1/12 text-center">
-    <span class="{createRatingClass(rating)}">{rating}★</span>
+    <span class="{createRatingClass(placeObj.rating)}">{placeObj.rating}★</span>
     <span class="text-xs"
-      >{distance > 1000 ? Math.round(distance/1000) :
-      (distance/1000).toFixed(1)}km</span
+      >{placeObj.distance > 1000 ? Math.round(placeObj.distance/1000) :
+      (placeObj.distance/1000).toFixed(1)}km</span
     >
   </div>
 </button>

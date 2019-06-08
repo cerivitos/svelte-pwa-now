@@ -16952,8 +16952,8 @@
     const file$2 = "src\\components\\PlaceListItem.svelte";
 
     function create_fragment$2(ctx) {
-    	var button, div0, p0, raw0_value = highlightSearchString(ctx.$searchString, ctx.name), t0, p1, raw1_value = highlightSearchString(ctx.$searchString, ctx.address), t1, div1, span0, t2, t3, span0_class_value, t4, span1, t5_value = ctx.distance > 1000 ? Math.round(ctx.distance/1000) :
-          (ctx.distance/1000).toFixed(1), t5, t6, button_class_value, dispose;
+    	var button, div0, p0, raw0_value = highlightSearchString(ctx.$searchString, ctx.placeObj.name), t0, p1, raw1_value = highlightSearchString(ctx.$searchString, ctx.placeObj.address), t1, div1, span0, t2_value = ctx.placeObj.rating, t2, t3, span0_class_value, t4, span1, t5_value = ctx.placeObj.distance > 1000 ? Math.round(ctx.placeObj.distance/1000) :
+          (ctx.placeObj.distance/1000).toFixed(1), t5, t6, button_class_value, dispose;
 
     	return {
     		c: function create() {
@@ -16965,26 +16965,26 @@
     			t1 = space();
     			div1 = element("div");
     			span0 = element("span");
-    			t2 = text(ctx.rating);
+    			t2 = text(t2_value);
     			t3 = text("★");
     			t4 = space();
     			span1 = element("span");
     			t5 = text(t5_value);
     			t6 = text("km");
     			p0.className = "font-medium text-lg truncate";
-    			add_location(p0, file$2, 82, 4, 2028);
+    			add_location(p0, file$2, 77, 4, 1918);
     			p1.className = "font-light leading-tight truncate";
-    			add_location(p1, file$2, 85, 4, 2142);
-    			div0.className = "w-11/12 text-gray-800";
-    			add_location(div0, file$2, 81, 2, 1987);
-    			span0.className = span0_class_value = ctx.createRatingClass(ctx.rating);
-    			add_location(span0, file$2, 90, 4, 2310);
+    			add_location(p1, file$2, 80, 4, 2041);
+    			div0.className = "w-11/12 text-gray-800 pr-1";
+    			add_location(div0, file$2, 76, 2, 1872);
+    			span0.className = span0_class_value = ctx.createRatingClass(ctx.placeObj.rating);
+    			add_location(span0, file$2, 85, 4, 2218);
     			span1.className = "text-xs";
-    			add_location(span1, file$2, 91, 4, 2374);
+    			add_location(span1, file$2, 86, 4, 2300);
     			div1.className = "w-1/12 text-center";
-    			add_location(div1, file$2, 89, 2, 2272);
+    			add_location(div1, file$2, 84, 2, 2180);
     			button.className = button_class_value = ctx.selected ? 'flex p-4 text-left start w-full bg-gray-400 text-gray-800' : 'flex p-4 text-left start w-full bg-transparent text-gray-800';
-    			add_location(button, file$2, 75, 0, 1739);
+    			add_location(button, file$2, 70, 0, 1624);
 
     			dispose = [
     				listen(button, "click", ctx.selectToilet),
@@ -17017,24 +17017,24 @@
     		},
 
     		p: function update(changed, ctx) {
-    			if ((changed.$searchString || changed.name) && raw0_value !== (raw0_value = highlightSearchString(ctx.$searchString, ctx.name))) {
+    			if ((changed.$searchString || changed.placeObj) && raw0_value !== (raw0_value = highlightSearchString(ctx.$searchString, ctx.placeObj.name))) {
     				p0.innerHTML = raw0_value;
     			}
 
-    			if ((changed.$searchString || changed.address) && raw1_value !== (raw1_value = highlightSearchString(ctx.$searchString, ctx.address))) {
+    			if ((changed.$searchString || changed.placeObj) && raw1_value !== (raw1_value = highlightSearchString(ctx.$searchString, ctx.placeObj.address))) {
     				p1.innerHTML = raw1_value;
     			}
 
-    			if (changed.rating) {
-    				set_data(t2, ctx.rating);
+    			if ((changed.placeObj) && t2_value !== (t2_value = ctx.placeObj.rating)) {
+    				set_data(t2, t2_value);
     			}
 
-    			if ((changed.rating) && span0_class_value !== (span0_class_value = ctx.createRatingClass(ctx.rating))) {
+    			if ((changed.placeObj) && span0_class_value !== (span0_class_value = ctx.createRatingClass(ctx.placeObj.rating))) {
     				span0.className = span0_class_value;
     			}
 
-    			if ((changed.distance) && t5_value !== (t5_value = ctx.distance > 1000 ? Math.round(ctx.distance/1000) :
-          (ctx.distance/1000).toFixed(1))) {
+    			if ((changed.placeObj) && t5_value !== (t5_value = ctx.placeObj.distance > 1000 ? Math.round(ctx.placeObj.distance/1000) :
+          (ctx.placeObj.distance/1000).toFixed(1))) {
     				set_data(t5, t5_value);
     			}
 
@@ -17095,7 +17095,7 @@
     	validate_store(searchString, 'searchString');
     	subscribe($$self, searchString, $$value => { $searchString = $$value; $$invalidate('$searchString', $searchString); });
 
-    	let { name = "", address = "", rating = "", lat = "", long = "", key = "", distance = 0, selected = false } = $$props;
+    	let { placeObj, key = "", selected = false } = $$props;
 
       let listItem;
       const ratingColors = [
@@ -17108,8 +17108,8 @@
       ];
 
       function selectToilet() {
-        currentLat.set(lat);
-        currentLong.set(long);
+        currentLat.set(placeObj.lat);
+        currentLong.set(placeObj.long);
         searchString.set("");
       }
 
@@ -17128,13 +17128,8 @@
     	}
 
     	$$self.$set = $$props => {
-    		if ('name' in $$props) $$invalidate('name', name = $$props.name);
-    		if ('address' in $$props) $$invalidate('address', address = $$props.address);
-    		if ('rating' in $$props) $$invalidate('rating', rating = $$props.rating);
-    		if ('lat' in $$props) $$invalidate('lat', lat = $$props.lat);
-    		if ('long' in $$props) $$invalidate('long', long = $$props.long);
+    		if ('placeObj' in $$props) $$invalidate('placeObj', placeObj = $$props.placeObj);
     		if ('key' in $$props) $$invalidate('key', key = $$props.key);
-    		if ('distance' in $$props) $$invalidate('distance', distance = $$props.distance);
     		if ('selected' in $$props) $$invalidate('selected', selected = $$props.selected);
     	};
 
@@ -17145,13 +17140,8 @@
     	};
 
     	return {
-    		name,
-    		address,
-    		rating,
-    		lat,
-    		long,
+    		placeObj,
     		key,
-    		distance,
     		selected,
     		listItem,
     		selectToilet,
@@ -17165,46 +17155,20 @@
     class PlaceListItem extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$2, create_fragment$2, safe_not_equal, ["name", "address", "rating", "lat", "long", "key", "distance", "selected"]);
+    		init(this, options, instance$2, create_fragment$2, safe_not_equal, ["placeObj", "key", "selected"]);
+
+    		const { ctx } = this.$$;
+    		const props = options.props || {};
+    		if (ctx.placeObj === undefined && !('placeObj' in props)) {
+    			console.warn("<PlaceListItem> was created without expected prop 'placeObj'");
+    		}
     	}
 
-    	get name() {
+    	get placeObj() {
     		throw new Error("<PlaceListItem>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
-    	set name(value) {
-    		throw new Error("<PlaceListItem>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	get address() {
-    		throw new Error("<PlaceListItem>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	set address(value) {
-    		throw new Error("<PlaceListItem>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	get rating() {
-    		throw new Error("<PlaceListItem>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	set rating(value) {
-    		throw new Error("<PlaceListItem>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	get lat() {
-    		throw new Error("<PlaceListItem>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	set lat(value) {
-    		throw new Error("<PlaceListItem>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	get long() {
-    		throw new Error("<PlaceListItem>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	set long(value) {
+    	set placeObj(value) {
     		throw new Error("<PlaceListItem>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
@@ -17213,14 +17177,6 @@
     	}
 
     	set key(value) {
-    		throw new Error("<PlaceListItem>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	get distance() {
-    		throw new Error("<PlaceListItem>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	set distance(value) {
     		throw new Error("<PlaceListItem>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
 
@@ -17250,15 +17206,9 @@
 
     	var placelistitem = new PlaceListItem({
     		props: {
-    		name: ctx.place.name,
-    		address: ctx.place.address,
-    		rating: ctx.place.rating,
-    		lat: ctx.place.lat,
-    		long: ctx.place.long,
+    		placeObj: ctx.place,
     		key: ctx.i,
-    		distance: ctx.place.distance,
-    		selected: ctx.$selectedIndex
-        === ctx.i ? true : false
+    		selected: ctx.$selectedIndex === ctx.i ? true : false
     	},
     		$$inline: true
     	});
@@ -17275,14 +17225,8 @@
 
     		p: function update(changed, ctx) {
     			var placelistitem_changes = {};
-    			if (changed.filtered) placelistitem_changes.name = ctx.place.name;
-    			if (changed.filtered) placelistitem_changes.address = ctx.place.address;
-    			if (changed.filtered) placelistitem_changes.rating = ctx.place.rating;
-    			if (changed.filtered) placelistitem_changes.lat = ctx.place.lat;
-    			if (changed.filtered) placelistitem_changes.long = ctx.place.long;
-    			if (changed.filtered) placelistitem_changes.distance = ctx.place.distance;
-    			if (changed.$selectedIndex) placelistitem_changes.selected = ctx.$selectedIndex
-        === ctx.i ? true : false;
+    			if (changed.filtered) placelistitem_changes.placeObj = ctx.place;
+    			if (changed.$selectedIndex) placelistitem_changes.selected = ctx.$selectedIndex === ctx.i ? true : false;
     			placelistitem.$set(placelistitem_changes);
     		},
 

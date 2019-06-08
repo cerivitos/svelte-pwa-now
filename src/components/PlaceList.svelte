@@ -86,9 +86,7 @@
   <div
     class="searchList w-full sm:w-1/2 overflow-auto mt-1 rounded-lg bg-gray-200 shadow"
   >
-    {#each filtered as place, i} <PlaceListItem name={place.name}
-    address={place.address} rating={place.rating} lat={place.lat}
-    long={place.long} key={i} distance={place.distance} selected={$selectedIndex
-    === i ? true : false}/> {/each}
+    {#each filtered as place, i} <PlaceListItem placeObj={place} key={i}
+    selected={$selectedIndex === i ? true : false}/> {/each}
   </div>
 </div>
