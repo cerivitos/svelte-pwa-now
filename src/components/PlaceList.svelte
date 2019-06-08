@@ -41,11 +41,22 @@
   }
 </script>
 
+<style>
+  .searchList {
+    max-height: 16rem;
+  }
+
+  @media screen and (min-width: 768px) {
+    .searchList {
+      max-height: 32rem;
+    }
+  }
+</style>
+
 <div>
   <Searchbar on:keyboard={e => receiveKeyPress(e)}/>
   <div
-    class="w-full sm:w-1/2 overflow-auto mt-1 rounded-lg bg-gray-200 shadow"
-    style="max-height:16rem"
+    class="searchList w-full sm:w-1/2 overflow-auto mt-1 rounded-lg bg-gray-200 shadow"
   >
     {#each filtered as place, i} <PlaceListItem name={place.name}
     address={place.address} rating={place.rating} lat={place.lat}

@@ -17133,7 +17133,7 @@
     	return child_ctx;
     }
 
-    // (50:4) {#each filtered as place, i}
+    // (51:4) {#each filtered as place, i}
     function create_each_block(ctx) {
     	var current;
 
@@ -17226,10 +17226,9 @@
     			for (var i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
-    			div0.className = "w-full sm:w-1/2 overflow-auto mt-1 rounded-lg bg-gray-200 shadow";
-    			set_style(div0, "max-height", "16rem");
-    			add_location(div0, file$3, 45, 2, 1293);
-    			add_location(div1, file$3, 43, 0, 1230);
+    			div0.className = "searchList w-full sm:w-1/2 overflow-auto mt-1 rounded-lg bg-gray-200 shadow svelte-125p4xn";
+    			add_location(div0, file$3, 47, 2, 1407);
+    			add_location(div1, file$3, 45, 0, 1344);
     		},
 
     		l: function claim(nodes) {
