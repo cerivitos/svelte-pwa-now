@@ -15,9 +15,14 @@
   onMount(async () => {
     const { getMap } = getContext("mapContextKey");
     const map = getMap();
+    currentMapCenter = map.getCenter();
+    map.on("dragend", e => {
+      currentMapCenter = map.getCenter();
+    });
   });
 
   let filtered = [];
+  let currentMapCenter;
 
   function receiveKeyPress(event) {
     const key = event.detail.key;
@@ -44,10 +49,10 @@
 
     let referenceCenter;
     let distance;
-    if (geoPermissionGranted) {
+    if ($geoPermissionGranted) {
       referenceCenter = L.latLng($currentLat, $currentLong);
     } else {
-      referenceCenter = map.getCenter();
+      referenceCenter = currentMapCenter;
     }
 
     filtered.forEach(filteredItem => {

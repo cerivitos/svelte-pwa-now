@@ -17222,7 +17222,7 @@
     	return child_ctx;
     }
 
-    // (74:4) {#each filtered as place, i}
+    // (79:4) {#each filtered as place, i}
     function create_each_block(ctx) {
     	var current;
 
@@ -17320,8 +17320,8 @@
     				each_blocks[i].c();
     			}
     			div0.className = "searchList w-full sm:w-1/2 overflow-auto mt-1 rounded-lg bg-gray-200 shadow svelte-125p4xn";
-    			add_location(div0, file$3, 70, 2, 2072);
-    			add_location(div1, file$3, 68, 0, 2009);
+    			add_location(div0, file$3, 75, 2, 2222);
+    			add_location(div1, file$3, 73, 0, 2159);
     		},
 
     		l: function claim(nodes) {
@@ -17396,12 +17396,14 @@
     }
 
     function instance$3($$self, $$props, $$invalidate) {
-    	let $selectedIndex, $searchString, $currentLat, $currentLong;
+    	let $selectedIndex, $searchString, $geoPermissionGranted, $currentLat, $currentLong;
 
     	validate_store(selectedIndex, 'selectedIndex');
     	subscribe($$self, selectedIndex, $$value => { $selectedIndex = $$value; $$invalidate('$selectedIndex', $selectedIndex); });
     	validate_store(searchString, 'searchString');
     	subscribe($$self, searchString, $$value => { $searchString = $$value; $$invalidate('$searchString', $searchString); });
+    	validate_store(geoPermissionGranted, 'geoPermissionGranted');
+    	subscribe($$self, geoPermissionGranted, $$value => { $geoPermissionGranted = $$value; $$invalidate('$geoPermissionGranted', $geoPermissionGranted); });
     	validate_store(currentLat, 'currentLat');
     	subscribe($$self, currentLat, $$value => { $currentLat = $$value; $$invalidate('$currentLat', $currentLat); });
     	validate_store(currentLong, 'currentLong');
@@ -17412,9 +17414,14 @@
       onMount(async () => {
         const { getMap } = getContext("mapContextKey");
         const map = getMap();
+        $$invalidate('currentMapCenter', currentMapCenter = map.getCenter());
+        map.on("dragend", e => {
+          $$invalidate('currentMapCenter', currentMapCenter = map.getCenter());
+        });
       });
 
       let filtered = [];
+      let currentMapCenter;
 
       function receiveKeyPress(event) {
         const key = event.detail.key;
@@ -17434,8 +17441,8 @@
     		return receiveKeyPress(e);
     	}
 
-    	$$self.$$.update = ($$dirty = { $searchString: 1, $currentLat: 1, $currentLong: 1, filtered: 1 }) => {
-    		if ($$dirty.$searchString || $$dirty.$currentLat || $$dirty.$currentLong || $$dirty.filtered) { if ($searchString.length > 0) {
+    	$$self.$$.update = ($$dirty = { $searchString: 1, $geoPermissionGranted: 1, $currentLat: 1, $currentLong: 1, currentMapCenter: 1, filtered: 1 }) => {
+    		if ($$dirty.$searchString || $$dirty.$geoPermissionGranted || $$dirty.$currentLat || $$dirty.$currentLong || $$dirty.currentMapCenter || $$dirty.filtered) { if ($searchString.length > 0) {
             selectedIndex.set(0);
         
             $$invalidate('filtered', filtered = toilets.filter(
@@ -17446,10 +17453,10 @@
         
             let referenceCenter;
             let distance;
-            if (geoPermissionGranted) {
+            if ($geoPermissionGranted) {
               referenceCenter = leafletSrc.latLng($currentLat, $currentLong);
             } else {
-              referenceCenter = map.getCenter();
+              referenceCenter = currentMapCenter;
             }
         
             filtered.forEach(filteredItem => {
