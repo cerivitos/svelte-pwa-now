@@ -12,7 +12,7 @@
   onMount(async () => {
     map = L.map("map", {
       zoomControl: false,
-      center: L.latLng(1.29027, 103.851959),
+      center: L.latLng(1.2834, 103.8607),
       zoom: 12
     });
 
@@ -38,7 +38,7 @@
   });
 
   $: if (map !== undefined) {
-    map.flyTo(L.latLng($currentLat, $currentLong), 18);
+    map.flyTo(L.latLng($currentLat, $currentLong), 15);
 
     const newMarker = L.icon({
       iconUrl: "../assets/toilet_marker.png",
