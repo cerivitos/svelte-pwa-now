@@ -30,7 +30,13 @@
         iconAnchor: [12, 12],
         popupAnchor: [0, -12]
       });
-      let marker = L.marker([lat, long], { icon: toiletMarker });
+      let marker = L.marker([lat, long], { icon: toiletMarker }).on(
+        "click",
+        e => {
+          currentLat.set(e.latlng.lat);
+          currentLong.set(e.latlng.lng);
+        }
+      );
 
       marker.addTo(map);
       markers.push(marker);
