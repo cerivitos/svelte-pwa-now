@@ -2,12 +2,26 @@
   import { currentLat, currentLong, searchString } from "../store/store.js";
   import { onDestroy } from "svelte";
   import { debounce } from "../util.js";
-  import {createEventDispatcher} from 'svelte';
+  import {createEventDispatcher, onMount} from 'svelte';
 
   const dispatch = createEventDispatcher();
+  let locationPermissionGranted = false;
+  let style = "color: #cbd5e0";
+
+  onMount(() => {
+    navigator.permissions && navigator.permissions.query({name: 'geolocation'}).then(function(PermissionStatus) {
+    if (PermissionStatus.state == 'granted'){
+      locationPermissionGranted = true;
+      getLocation();
+      style = "color: #319795";
+    }
+})
+  })
 
   function getLocation() {
     if (navigator.geolocation) {
+      locationPermissionGranted = true;
+      style = "color: #319795";
       searchString.set("");
       navigator.geolocation.watchPosition(handlePosition, handleError);
     } else {
@@ -54,7 +68,8 @@
     id="input"
   />
   <button
-    class="absolute right-0 top-0 p-1 m-1 rounded-full items-center bg-transparent focus: outline-none hover:text-teal-600 text-gray-500"
+    class="absolute right-0 top-0 p-1 m-1 rounded-full items-center bg-transparent focus: outline-none hover:text-teal-600"
+    {style}
     on:click="{getLocation}"
   >
     <svg

@@ -442,31 +442,31 @@
     			input.className = "inline bg-transparent p-4 w-full outline-none";
     			attr(input, "type", "search");
     			input.id = "input";
-    			add_location(input, file, 48, 2, 1303);
+    			add_location(input, file, 62, 2, 1757);
     			attr(circle, "cx", "12");
     			attr(circle, "cy", "12");
     			attr(circle, "r", "10");
-    			add_location(circle, file, 68, 6, 1947);
+    			add_location(circle, file, 83, 6, 2400);
     			attr(line0, "x1", "22");
     			attr(line0, "y1", "12");
     			attr(line0, "x2", "18");
     			attr(line0, "y2", "12");
-    			add_location(line0, file, 69, 6, 1988);
+    			add_location(line0, file, 84, 6, 2441);
     			attr(line1, "x1", "6");
     			attr(line1, "y1", "12");
     			attr(line1, "x2", "2");
     			attr(line1, "y2", "12");
-    			add_location(line1, file, 70, 6, 2036);
+    			add_location(line1, file, 85, 6, 2489);
     			attr(line2, "x1", "12");
     			attr(line2, "y1", "6");
     			attr(line2, "x2", "12");
     			attr(line2, "y2", "2");
-    			add_location(line2, file, 71, 6, 2082);
+    			add_location(line2, file, 86, 6, 2535);
     			attr(line3, "x1", "12");
     			attr(line3, "y1", "22");
     			attr(line3, "x2", "12");
     			attr(line3, "y2", "18");
-    			add_location(line3, file, 72, 6, 2128);
+    			add_location(line3, file, 87, 6, 2581);
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "viewBox", "0 0 24 24");
     			attr(svg, "fill", "none");
@@ -474,15 +474,16 @@
     			attr(svg, "stroke-linecap", "round");
     			attr(svg, "stroke-linejoin", "round");
     			attr(svg, "class", "stroke-current inline-block w-10 h-10");
-    			add_location(svg, file, 59, 4, 1702);
-    			button.className = "absolute right-0 top-0 p-1 m-1 rounded-full items-center bg-transparent focus: outline-none hover:text-teal-600 text-gray-500";
-    			add_location(button, file, 55, 2, 1515);
+    			add_location(svg, file, 74, 4, 2155);
+    			button.className = "absolute right-0 top-0 p-1 m-1 rounded-full items-center bg-transparent focus: outline-none hover:text-teal-600";
+    			button.style.cssText = ctx.style;
+    			add_location(button, file, 69, 2, 1969);
     			div.className = "relative shadow bg-gray-200 appearance-none border h-auto mt-2 pr-12 rounded-full w-full sm:w-1/2";
-    			add_location(div, file, 44, 0, 1143);
+    			add_location(div, file, 58, 0, 1597);
 
     			dispose = [
     				listen(input, "input", ctx.input_handler),
-    				listen(button, "click", getLocation),
+    				listen(button, "click", ctx.getLocation),
     				listen(div, "keydown", ctx.keydown_handler)
     			];
     		},
@@ -504,7 +505,12 @@
     			append(svg, line3);
     		},
 
-    		p: noop,
+    		p: function update(changed, ctx) {
+    			if (changed.style) {
+    				button.style.cssText = ctx.style;
+    			}
+    		},
+
     		i: noop,
     		o: noop,
 
@@ -516,15 +522,6 @@
     			run_all(dispose);
     		}
     	};
-    }
-
-    function getLocation() {
-      if (navigator.geolocation) {
-        searchString.set("");
-        navigator.geolocation.watchPosition(handlePosition, handleError);
-      } else {
-        console.log("geolocation not supported");
-      }
     }
 
     function handlePosition(currentPosition) {
@@ -547,6 +544,29 @@
     	
 
       const dispatch = createEventDispatcher();
+      let locationPermissionGranted = false;
+      let style = "color: #cbd5e0";
+
+      onMount(() => {
+        navigator.permissions && navigator.permissions.query({name: 'geolocation'}).then(function(PermissionStatus) {
+        if (PermissionStatus.state == 'granted'){
+          $$invalidate('locationPermissionGranted', locationPermissionGranted = true);
+          getLocation();
+          $$invalidate('style', style = "color: #319795");
+        }
+    });
+      });
+
+      function getLocation() {
+        if (navigator.geolocation) {
+          $$invalidate('locationPermissionGranted', locationPermissionGranted = true);
+          $$invalidate('style', style = "color: #319795");
+          searchString.set("");
+          navigator.geolocation.watchPosition(handlePosition, handleError);
+        } else {
+          console.log("geolocation not supported");
+        }
+      }
 
       function dispatchKey(key) {
         dispatch('keyboard', {
@@ -576,6 +596,8 @@
     	};
 
     	return {
+    		style,
+    		getLocation,
     		dispatchKey,
     		input_handler,
     		keydown_handler
