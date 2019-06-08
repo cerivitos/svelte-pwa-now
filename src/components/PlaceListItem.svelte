@@ -16,6 +16,15 @@
   export let selected = false;
 
   let listItem;
+  const ratingColors = [
+    "bg-red-400",
+    "bg-orange-400",
+    "bg-orange-400",
+    "bg-green-400",
+    "bg-green-500",
+    "bg-teal-400"
+  ];
+  let ratingClass;
 
   $: if (listItem !== undefined && selected) {
     listItem.scrollIntoView({ block: "nearest" });
@@ -29,6 +38,11 @@
 
   function hovering() {
     selectedIndex.set(key);
+  }
+
+  function createRatingClass(rating) {
+    const baseClass = "rounded-full px-1 text-white text-xs";
+    return baseClass + " " + ratingColors[rating - 1];
   }
 
   function highlightSearchString(searchString, textToHighlight) {
@@ -65,7 +79,7 @@
   on:mouseenter="{hovering}"
   bind:this="{listItem}"
 >
-  <div class="w-11/12">
+  <div class="w-11/12 text-gray-800">
     <p class="font-medium text-lg truncate">
       {@html highlightSearchString($searchString, name)}
     </p>
@@ -73,8 +87,11 @@
       {@html highlightSearchString($searchString, address)}
     </p>
   </div>
-  <div class="w-1/12 text-center content-center">
-    <p>{rating}⭐</p>
-    <p>{(distance/1000).toFixed(1)}km</p>
+  <div class="w-1/12 text-center">
+    <span class="{createRatingClass(rating)}">{rating}★</span>
+    <span class="text-xs"
+      >{distance > 1000 ? Math.round(distance/1000) :
+      (distance/1000).toFixed(1)}km</span
+    >
   </div>
 </button>

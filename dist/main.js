@@ -16952,7 +16952,8 @@
     const file$2 = "src\\components\\PlaceListItem.svelte";
 
     function create_fragment$2(ctx) {
-    	var button, div0, p0, raw0_value = highlightSearchString(ctx.$searchString, ctx.name), t0, p1, raw1_value = highlightSearchString(ctx.$searchString, ctx.address), t1, div1, p2, t2, t3, t4, p3, t5_value = (ctx.distance/1000).toFixed(1), t5, t6, button_class_value, dispose;
+    	var button, div0, p0, raw0_value = highlightSearchString(ctx.$searchString, ctx.name), t0, p1, raw1_value = highlightSearchString(ctx.$searchString, ctx.address), t1, div1, span0, t2, t3, span0_class_value, t4, span1, t5_value = ctx.distance > 1000 ? Math.round(ctx.distance/1000) :
+          (ctx.distance/1000).toFixed(1), t5, t6, button_class_value, dispose;
 
     	return {
     		c: function create() {
@@ -16963,25 +16964,27 @@
     			p1 = element("p");
     			t1 = space();
     			div1 = element("div");
-    			p2 = element("p");
+    			span0 = element("span");
     			t2 = text(ctx.rating);
-    			t3 = text("⭐");
+    			t3 = text("★");
     			t4 = space();
-    			p3 = element("p");
+    			span1 = element("span");
     			t5 = text(t5_value);
     			t6 = text("km");
     			p0.className = "font-medium text-lg truncate";
-    			add_location(p0, file$2, 68, 4, 1672);
+    			add_location(p0, file$2, 82, 4, 2028);
     			p1.className = "font-light leading-tight truncate";
-    			add_location(p1, file$2, 71, 4, 1786);
-    			div0.className = "w-11/12";
-    			add_location(div0, file$2, 67, 2, 1645);
-    			add_location(p2, file$2, 76, 4, 1969);
-    			add_location(p3, file$2, 77, 4, 1991);
-    			div1.className = "w-1/12 text-center content-center";
-    			add_location(div1, file$2, 75, 2, 1916);
+    			add_location(p1, file$2, 85, 4, 2142);
+    			div0.className = "w-11/12 text-gray-800";
+    			add_location(div0, file$2, 81, 2, 1987);
+    			span0.className = span0_class_value = ctx.createRatingClass(ctx.rating);
+    			add_location(span0, file$2, 90, 4, 2310);
+    			span1.className = "text-xs";
+    			add_location(span1, file$2, 91, 4, 2374);
+    			div1.className = "w-1/12 text-center";
+    			add_location(div1, file$2, 89, 2, 2272);
     			button.className = button_class_value = ctx.selected ? 'flex p-4 text-left start w-full bg-gray-400 text-gray-800' : 'flex p-4 text-left start w-full bg-transparent text-gray-800';
-    			add_location(button, file$2, 61, 0, 1397);
+    			add_location(button, file$2, 75, 0, 1739);
 
     			dispose = [
     				listen(button, "click", ctx.selectToilet),
@@ -17003,13 +17006,13 @@
     			p1.innerHTML = raw1_value;
     			append(button, t1);
     			append(button, div1);
-    			append(div1, p2);
-    			append(p2, t2);
-    			append(p2, t3);
+    			append(div1, span0);
+    			append(span0, t2);
+    			append(span0, t3);
     			append(div1, t4);
-    			append(div1, p3);
-    			append(p3, t5);
-    			append(p3, t6);
+    			append(div1, span1);
+    			append(span1, t5);
+    			append(span1, t6);
     			add_binding_callback(() => ctx.button_binding(button, null));
     		},
 
@@ -17026,7 +17029,12 @@
     				set_data(t2, ctx.rating);
     			}
 
-    			if ((changed.distance) && t5_value !== (t5_value = (ctx.distance/1000).toFixed(1))) {
+    			if ((changed.rating) && span0_class_value !== (span0_class_value = ctx.createRatingClass(ctx.rating))) {
+    				span0.className = span0_class_value;
+    			}
+
+    			if ((changed.distance) && t5_value !== (t5_value = ctx.distance > 1000 ? Math.round(ctx.distance/1000) :
+          (ctx.distance/1000).toFixed(1))) {
     				set_data(t5, t5_value);
     			}
 
@@ -17090,6 +17098,14 @@
     	let { name = "", address = "", rating = "", lat = "", long = "", key = "", distance = 0, selected = false } = $$props;
 
       let listItem;
+      const ratingColors = [
+        "bg-red-400",
+        "bg-orange-400",
+        "bg-orange-400",
+        "bg-green-400",
+        "bg-green-500",
+        "bg-teal-400"
+      ];
 
       function selectToilet() {
         currentLat.set(lat);
@@ -17099,6 +17115,11 @@
 
       function hovering() {
         selectedIndex.set(key);
+      }
+
+      function createRatingClass(rating) {
+        const baseClass = "rounded-full px-1 text-white text-xs";
+        return baseClass + " " + ratingColors[rating - 1];
       }
 
     	function button_binding($$node, check) {
@@ -17135,6 +17156,7 @@
     		listItem,
     		selectToilet,
     		hovering,
+    		createRatingClass,
     		$searchString,
     		button_binding
     	};
