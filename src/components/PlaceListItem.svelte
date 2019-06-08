@@ -22,16 +22,60 @@
   function hovering() {
     selectedIndex.set(key);
   }
+
+  function highlightSearchString(searchString, textToHighlight) {
+    const startIndex = textToHighlight
+      .toLowerCase()
+      .indexOf(searchString.toLowerCase());
+
+    if (startIndex > -1) {
+      const preString = textToHighlight.substring(0, startIndex);
+      const highlightedString = textToHighlight.substring(
+        startIndex,
+        startIndex + searchString.length
+      );
+      const postString = textToHighlight.substring(
+        startIndex + searchString.length
+      );
+
+      console.log(
+        "START INDEX: " +
+          startIndex +
+          " ORIGINAL: " +
+          textToHighlight +
+          " PRE: " +
+          preString +
+          " HIGHLIGHTED: " +
+          highlightedString +
+          " POST: " +
+          postString
+      );
+
+      return (
+        preString +
+        "<span class='text-teal-600 font-bold'>" +
+        highlightedString +
+        "</span>" +
+        postString
+      );
+    } else {
+      return textToHighlight;
+    }
+  }
 </script>
 
 <button
-  class="{selected ? 'flex p-4 text-left start w-full bg-teal-600 text-white' : 'flex p-4 text-left start w-full bg-transparent text-gray-800'}"
+  class="{selected ? 'flex p-4 text-left start w-full bg-gray-400 text-gray-800' : 'flex p-4 text-left start w-full bg-transparent text-gray-800'}"
   on:click="{selectToilet}"
   on:mouseenter="{hovering}"
 >
   <div class="w-11/12">
-    <p class="font-medium text-lg truncate">{name}</p>
-    <p class="font-light leading-tight truncate">{address}</p>
+    <p class="font-medium text-lg truncate">
+      {@html highlightSearchString($searchString, name)}
+    </p>
+    <p class="font-light leading-tight truncate">
+      {@html highlightSearchString($searchString, address)}
+    </p>
   </div>
   <div class="w-1/12 text-center content-center">
     <p>{rating}⭐</p>

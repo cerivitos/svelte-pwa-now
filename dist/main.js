@@ -16908,33 +16908,31 @@
     const file$2 = "src\\components\\PlaceListItem.svelte";
 
     function create_fragment$2(ctx) {
-    	var button, div0, p0, t0, t1, p1, t2, t3, div1, p2, t4, t5, button_class_value, dispose;
+    	var button, div0, p0, raw0_value = highlightSearchString(ctx.$searchString, ctx.name), t0, p1, raw1_value = highlightSearchString(ctx.$searchString, ctx.address), t1, div1, p2, t2, t3, button_class_value, dispose;
 
     	return {
     		c: function create() {
     			button = element("button");
     			div0 = element("div");
     			p0 = element("p");
-    			t0 = text(ctx.name);
-    			t1 = space();
+    			t0 = space();
     			p1 = element("p");
-    			t2 = text(ctx.address);
-    			t3 = space();
+    			t1 = space();
     			div1 = element("div");
     			p2 = element("p");
-    			t4 = text(ctx.rating);
-    			t5 = text("⭐");
+    			t2 = text(ctx.rating);
+    			t3 = text("⭐");
     			p0.className = "font-medium text-lg truncate";
-    			add_location(p0, file$2, 32, 4, 748);
+    			add_location(p0, file$2, 72, 4, 1780);
     			p1.className = "font-light leading-tight truncate";
-    			add_location(p1, file$2, 33, 4, 804);
+    			add_location(p1, file$2, 75, 4, 1894);
     			div0.className = "w-11/12";
-    			add_location(div0, file$2, 31, 2, 721);
-    			add_location(p2, file$2, 36, 4, 929);
+    			add_location(div0, file$2, 71, 2, 1753);
+    			add_location(p2, file$2, 80, 4, 2077);
     			div1.className = "w-1/12 text-center content-center";
-    			add_location(div1, file$2, 35, 2, 876);
-    			button.className = button_class_value = ctx.selected ? 'flex p-4 text-left start w-full bg-teal-600 text-white' : 'flex p-4 text-left start w-full bg-transparent text-gray-800';
-    			add_location(button, file$2, 26, 0, 502);
+    			add_location(div1, file$2, 79, 2, 2024);
+    			button.className = button_class_value = ctx.selected ? 'flex p-4 text-left start w-full bg-gray-400 text-gray-800' : 'flex p-4 text-left start w-full bg-transparent text-gray-800';
+    			add_location(button, file$2, 66, 0, 1531);
 
     			dispose = [
     				listen(button, "click", ctx.selectToilet),
@@ -16950,31 +16948,31 @@
     			insert(target, button, anchor);
     			append(button, div0);
     			append(div0, p0);
-    			append(p0, t0);
-    			append(div0, t1);
+    			p0.innerHTML = raw0_value;
+    			append(div0, t0);
     			append(div0, p1);
-    			append(p1, t2);
-    			append(button, t3);
+    			p1.innerHTML = raw1_value;
+    			append(button, t1);
     			append(button, div1);
     			append(div1, p2);
-    			append(p2, t4);
-    			append(p2, t5);
+    			append(p2, t2);
+    			append(p2, t3);
     		},
 
     		p: function update(changed, ctx) {
-    			if (changed.name) {
-    				set_data(t0, ctx.name);
+    			if ((changed.$searchString || changed.name) && raw0_value !== (raw0_value = highlightSearchString(ctx.$searchString, ctx.name))) {
+    				p0.innerHTML = raw0_value;
     			}
 
-    			if (changed.address) {
-    				set_data(t2, ctx.address);
+    			if ((changed.$searchString || changed.address) && raw1_value !== (raw1_value = highlightSearchString(ctx.$searchString, ctx.address))) {
+    				p1.innerHTML = raw1_value;
     			}
 
     			if (changed.rating) {
-    				set_data(t4, ctx.rating);
+    				set_data(t2, ctx.rating);
     			}
 
-    			if ((changed.selected) && button_class_value !== (button_class_value = ctx.selected ? 'flex p-4 text-left start w-full bg-teal-600 text-white' : 'flex p-4 text-left start w-full bg-transparent text-gray-800')) {
+    			if ((changed.selected) && button_class_value !== (button_class_value = ctx.selected ? 'flex p-4 text-left start w-full bg-gray-400 text-gray-800' : 'flex p-4 text-left start w-full bg-transparent text-gray-800')) {
     				button.className = button_class_value;
     			}
     		},
@@ -16992,7 +16990,52 @@
     	};
     }
 
+    function highlightSearchString(searchString, textToHighlight) {
+      const startIndex = textToHighlight
+        .toLowerCase()
+        .indexOf(searchString.toLowerCase());
+
+      if (startIndex > -1) {
+        const preString = textToHighlight.substring(0, startIndex);
+        const highlightedString = textToHighlight.substring(
+          startIndex,
+          startIndex + searchString.length
+        );
+        const postString = textToHighlight.substring(
+          startIndex + searchString.length
+        );
+
+        console.log(
+          "START INDEX: " +
+            startIndex +
+            " ORIGINAL: " +
+            textToHighlight +
+            " PRE: " +
+            preString +
+            " HIGHLIGHTED: " +
+            highlightedString +
+            " POST: " +
+            postString
+        );
+
+        return (
+          preString +
+          "<span class='text-teal-600 font-bold'>" +
+          highlightedString +
+          "</span>" +
+          postString
+        );
+      } else {
+        return textToHighlight;
+      }
+    }
+
     function instance$2($$self, $$props, $$invalidate) {
+    	let $searchString;
+
+    	validate_store(searchString, 'searchString');
+    	subscribe($$self, searchString, $$value => { $searchString = $$value; $$invalidate('$searchString', $searchString); });
+
     	let { name = "", address = "", rating = "", lat = "", long = "", key = "", selected = false } = $$props;
 
       function selectToilet() {
@@ -17024,7 +17067,8 @@
     		key,
     		selected,
     		selectToilet,
-    		hovering
+    		hovering,
+    		$searchString
     	};
     }
 
