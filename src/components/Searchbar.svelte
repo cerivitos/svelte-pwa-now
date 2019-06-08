@@ -1,17 +1,16 @@
 <script>
-  import { currentLat, currentLong, searchString } from "../store/store.js";
+  import { currentLat, currentLong, searchString, geoPermissionGranted } from "../store/store.js";
   import { onDestroy } from "svelte";
   import { debounce } from "../util.js";
   import {createEventDispatcher, onMount} from 'svelte';
 
   const dispatch = createEventDispatcher();
-  let locationPermissionGranted = false;
   let style = "color: #cbd5e0";
 
   onMount(() => {
     navigator.permissions && navigator.permissions.query({name: 'geolocation'}).then(function(PermissionStatus) {
     if (PermissionStatus.state == 'granted'){
-      locationPermissionGranted = true;
+      geoPermissionGranted.set(true);
       getLocation();
       style = "color: #319795";
     }
@@ -20,7 +19,7 @@
 
   function getLocation() {
     if (navigator.geolocation) {
-      locationPermissionGranted = true;
+      geoPermissionGranted.set(true);
       style = "color: #319795";
       searchString.set("");
       navigator.geolocation.watchPosition(handlePosition, handleError);

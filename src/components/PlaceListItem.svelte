@@ -12,6 +12,7 @@
   export let lat = "";
   export let long = "";
   export let key = "";
+  export let distance = 0;
   export let selected = false;
 
   let listItem;
@@ -74,5 +75,6 @@
   </div>
   <div class="w-1/12 text-center content-center">
     <p>{rating}⭐</p>
+    <p>{(distance/1000).toFixed(1)}km</p>
   </div>
 </button>

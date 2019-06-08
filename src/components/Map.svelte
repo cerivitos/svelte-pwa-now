@@ -1,6 +1,6 @@
 <script>
   import { currentLat, currentLong } from "../store/store.js";
-  import { onMount } from "svelte";
+  import { onMount, setContext } from "svelte";
   import L from "leaflet";
   import "leaflet/dist/leaflet.css";
   import { toilets } from "../data/toilets.js";
@@ -40,6 +40,10 @@
 
       marker.addTo(map);
       markers.push(marker);
+    });
+
+    setContext("mapContextKey", {
+      getMap: () => map
     });
   });
 

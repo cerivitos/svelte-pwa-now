@@ -3,11 +3,19 @@
     currentLat,
     currentLong,
     searchString,
-    selectedIndex
+    selectedIndex,
+    geoPermissionGranted
   } from "../store/store.js";
   import { toilets } from "../data/toilets.js";
   import PlaceListItem from "./PlaceListItem.svelte";
   import Searchbar from "./Searchbar.svelte";
+  import L from "leaflet";
+  import { onMount, getContext } from "svelte";
+
+  onMount(async () => {
+    const { getMap } = getContext("mapContextKey");
+    const map = getMap();
+  });
 
   let filtered = [];
 
@@ -34,7 +42,22 @@
         item.address.toLowerCase().includes($searchString.toLowerCase())
     );
 
-    filtered.sort((first, second) => second.rating - first.rating);
+    let referenceCenter;
+    let distance;
+    if (geoPermissionGranted) {
+      referenceCenter = L.latLng($currentLat, $currentLong);
+    } else {
+      referenceCenter = map.getCenter();
+    }
+
+    filtered.forEach(filteredItem => {
+      distance = referenceCenter.distanceTo(
+        L.latLng(filteredItem.lat, filteredItem.long)
+      );
+      filteredItem.distance = distance;
+    });
+
+    filtered.sort((first, second) => first.distance - second.distance);
   } else {
     selectedIndex.set(0);
     filtered = [];
@@ -60,7 +83,7 @@
   >
     {#each filtered as place, i} <PlaceListItem name={place.name}
     address={place.address} rating={place.rating} lat={place.lat}
-    long={place.long} key={i} selected={$selectedIndex === i ? true : false}/>
-    {/each}
+    long={place.long} key={i} distance={place.distance} selected={$selectedIndex
+    === i ? true : false}/> {/each}
   </div>
 </div>
