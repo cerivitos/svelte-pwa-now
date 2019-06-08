@@ -23,8 +23,6 @@
       currentLong.set(filtered[$selectedIndex].long);
       searchString.set("");
     }
-
-    console.log($selectedIndex);
   }
 
   $: if ($searchString.length > 0) {
@@ -35,6 +33,8 @@
         item.name.toLowerCase().includes($searchString.toLowerCase()) ||
         item.address.toLowerCase().includes($searchString.toLowerCase())
     );
+
+    filtered.sort((first, second) => second.rating - first.rating);
   } else {
     selectedIndex.set(0);
     filtered = [];

@@ -17253,8 +17253,8 @@
     				each_blocks[i].c();
     			}
     			div0.className = "searchList w-full sm:w-1/2 overflow-auto mt-1 rounded-lg bg-gray-200 shadow svelte-125p4xn";
-    			add_location(div0, file$3, 47, 2, 1407);
-    			add_location(div1, file$3, 45, 0, 1344);
+    			add_location(div0, file$3, 47, 2, 1442);
+    			add_location(div1, file$3, 45, 0, 1379);
     		},
 
     		l: function claim(nodes) {
@@ -17352,16 +17352,14 @@
           currentLong.set(filtered[$selectedIndex].long);
           searchString.set("");
         }
-
-        console.log($selectedIndex);
       }
 
     	function keyboard_handler(e) {
     		return receiveKeyPress(e);
     	}
 
-    	$$self.$$.update = ($$dirty = { $searchString: 1 }) => {
-    		if ($$dirty.$searchString) { if ($searchString.length > 0) {
+    	$$self.$$.update = ($$dirty = { $searchString: 1, filtered: 1 }) => {
+    		if ($$dirty.$searchString || $$dirty.filtered) { if ($searchString.length > 0) {
             selectedIndex.set(0);
         
             $$invalidate('filtered', filtered = toilets.filter(
@@ -17369,6 +17367,8 @@
                 item.name.toLowerCase().includes($searchString.toLowerCase()) ||
                 item.address.toLowerCase().includes($searchString.toLowerCase())
             ));
+        
+            filtered.sort((first, second) => second.rating - first.rating);
           } else {
             selectedIndex.set(0);
             $$invalidate('filtered', filtered = []);
