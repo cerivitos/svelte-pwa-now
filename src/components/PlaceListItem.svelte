@@ -38,19 +38,6 @@
         startIndex + searchString.length
       );
 
-      console.log(
-        "START INDEX: " +
-          startIndex +
-          " ORIGINAL: " +
-          textToHighlight +
-          " PRE: " +
-          preString +
-          " HIGHLIGHTED: " +
-          highlightedString +
-          " POST: " +
-          postString
-      );
-
       return (
         preString +
         "<span class='text-teal-600 font-bold'>" +

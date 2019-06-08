@@ -16923,16 +16923,16 @@
     			t2 = text(ctx.rating);
     			t3 = text("⭐");
     			p0.className = "font-medium text-lg truncate";
-    			add_location(p0, file$2, 72, 4, 1780);
+    			add_location(p0, file$2, 59, 4, 1490);
     			p1.className = "font-light leading-tight truncate";
-    			add_location(p1, file$2, 75, 4, 1894);
+    			add_location(p1, file$2, 62, 4, 1604);
     			div0.className = "w-11/12";
-    			add_location(div0, file$2, 71, 2, 1753);
-    			add_location(p2, file$2, 80, 4, 2077);
+    			add_location(div0, file$2, 58, 2, 1463);
+    			add_location(p2, file$2, 67, 4, 1787);
     			div1.className = "w-1/12 text-center content-center";
-    			add_location(div1, file$2, 79, 2, 2024);
+    			add_location(div1, file$2, 66, 2, 1734);
     			button.className = button_class_value = ctx.selected ? 'flex p-4 text-left start w-full bg-gray-400 text-gray-800' : 'flex p-4 text-left start w-full bg-transparent text-gray-800';
-    			add_location(button, file$2, 66, 0, 1531);
+    			add_location(button, file$2, 53, 0, 1241);
 
     			dispose = [
     				listen(button, "click", ctx.selectToilet),
@@ -17003,19 +17003,6 @@
         );
         const postString = textToHighlight.substring(
           startIndex + searchString.length
-        );
-
-        console.log(
-          "START INDEX: " +
-            startIndex +
-            " ORIGINAL: " +
-            textToHighlight +
-            " PRE: " +
-            preString +
-            " HIGHLIGHTED: " +
-            highlightedString +
-            " POST: " +
-            postString
         );
 
         return (
