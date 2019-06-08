@@ -16885,7 +16885,7 @@
           $$invalidate('toiletMarker', toiletMarker = leafletSrc.icon({
             iconUrl: "../assets/toilet_marker.png",
             iconSize: [24, 24],
-            iconAnchor: [12, 12],
+            iconAnchor: [12, 24],
             popupAnchor: [0, -12]
           }));
           let marker = leafletSrc.marker([lat, long], { icon: toiletMarker }).on(
@@ -16908,7 +16908,7 @@
             const newMarker = leafletSrc.icon({
               iconUrl: "../assets/toilet_marker.png",
               iconSize: [48, 48],
-              iconAnchor: [12, 12],
+              iconAnchor: [24, 48],
               popupAnchor: [0, -12]
             });
         
