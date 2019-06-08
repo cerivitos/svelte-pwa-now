@@ -16927,16 +16927,16 @@
     			t2 = text(ctx.rating);
     			t3 = text("⭐");
     			p0.className = "font-medium text-lg truncate";
-    			add_location(p0, file$2, 71, 4, 1733);
+    			add_location(p0, file$2, 67, 4, 1644);
     			p1.className = "font-light leading-tight truncate";
-    			add_location(p1, file$2, 74, 4, 1847);
+    			add_location(p1, file$2, 70, 4, 1758);
     			div0.className = "w-11/12";
-    			add_location(div0, file$2, 70, 2, 1706);
-    			add_location(p2, file$2, 79, 4, 2030);
+    			add_location(div0, file$2, 66, 2, 1617);
+    			add_location(p2, file$2, 75, 4, 1941);
     			div1.className = "w-1/12 text-center content-center";
-    			add_location(div1, file$2, 78, 2, 1977);
+    			add_location(div1, file$2, 74, 2, 1888);
     			button.className = button_class_value = ctx.selected ? 'flex p-4 text-left start w-full bg-gray-400 text-gray-800' : 'flex p-4 text-left start w-full bg-transparent text-gray-800';
-    			add_location(button, file$2, 64, 0, 1458);
+    			add_location(button, file$2, 60, 0, 1369);
 
     			dispose = [
     				listen(button, "click", ctx.selectToilet),
@@ -17034,13 +17034,9 @@
     	validate_store(searchString, 'searchString');
     	subscribe($$self, searchString, $$value => { $searchString = $$value; $$invalidate('$searchString', $searchString); });
 
-    	
-
-      let { name = "", address = "", rating = "", lat = "", long = "", key = "", selected = false } = $$props;
+    	let { name = "", address = "", rating = "", lat = "", long = "", key = "", selected = false } = $$props;
 
       let listItem;
-
-      onMount(() => {});
 
       function selectToilet() {
         currentLat.set(lat);
@@ -17069,7 +17065,6 @@
 
     	$$self.$$.update = ($$dirty = { listItem: 1, selected: 1 }) => {
     		if ($$dirty.listItem || $$dirty.selected) { if (listItem !== undefined && selected) {
-            console.log("scroll");
             listItem.scrollIntoView({ block: "nearest" });
           } }
     	};

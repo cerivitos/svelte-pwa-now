@@ -5,7 +5,6 @@
     searchString,
     selectedIndex
   } from "../store/store.js";
-  import { onMount } from "svelte";
 
   export let name = "";
   export let address = "";
@@ -17,10 +16,7 @@
 
   let listItem;
 
-  onMount(() => {});
-
   $: if (listItem !== undefined && selected) {
-    console.log("scroll");
     listItem.scrollIntoView({ block: "nearest" });
   }
 
