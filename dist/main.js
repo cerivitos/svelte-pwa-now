@@ -159,6 +159,10 @@
     	}
     }
 
+    function add_binding_callback(fn) {
+    	binding_callbacks.push(fn);
+    }
+
     function add_render_callback(fn) {
     	render_callbacks.push(fn);
     }
@@ -16923,16 +16927,16 @@
     			t2 = text(ctx.rating);
     			t3 = text("⭐");
     			p0.className = "font-medium text-lg truncate";
-    			add_location(p0, file$2, 59, 4, 1490);
+    			add_location(p0, file$2, 71, 4, 1733);
     			p1.className = "font-light leading-tight truncate";
-    			add_location(p1, file$2, 62, 4, 1604);
+    			add_location(p1, file$2, 74, 4, 1847);
     			div0.className = "w-11/12";
-    			add_location(div0, file$2, 58, 2, 1463);
-    			add_location(p2, file$2, 67, 4, 1787);
+    			add_location(div0, file$2, 70, 2, 1706);
+    			add_location(p2, file$2, 79, 4, 2030);
     			div1.className = "w-1/12 text-center content-center";
-    			add_location(div1, file$2, 66, 2, 1734);
+    			add_location(div1, file$2, 78, 2, 1977);
     			button.className = button_class_value = ctx.selected ? 'flex p-4 text-left start w-full bg-gray-400 text-gray-800' : 'flex p-4 text-left start w-full bg-transparent text-gray-800';
-    			add_location(button, file$2, 53, 0, 1241);
+    			add_location(button, file$2, 64, 0, 1458);
 
     			dispose = [
     				listen(button, "click", ctx.selectToilet),
@@ -16957,6 +16961,7 @@
     			append(div1, p2);
     			append(p2, t2);
     			append(p2, t3);
+    			add_binding_callback(() => ctx.button_binding(button, null));
     		},
 
     		p: function update(changed, ctx) {
@@ -16972,6 +16977,11 @@
     				set_data(t2, ctx.rating);
     			}
 
+    			if (changed.items) {
+    				ctx.button_binding(null, button);
+    				ctx.button_binding(button, null);
+    			}
+
     			if ((changed.selected) && button_class_value !== (button_class_value = ctx.selected ? 'flex p-4 text-left start w-full bg-gray-400 text-gray-800' : 'flex p-4 text-left start w-full bg-transparent text-gray-800')) {
     				button.className = button_class_value;
     			}
@@ -16985,6 +16995,7 @@
     				detach(button);
     			}
 
+    			ctx.button_binding(null, button);
     			run_all(dispose);
     		}
     	};
@@ -17023,7 +17034,13 @@
     	validate_store(searchString, 'searchString');
     	subscribe($$self, searchString, $$value => { $searchString = $$value; $$invalidate('$searchString', $searchString); });
 
-    	let { name = "", address = "", rating = "", lat = "", long = "", key = "", selected = false } = $$props;
+    	
+
+      let { name = "", address = "", rating = "", lat = "", long = "", key = "", selected = false } = $$props;
+
+      let listItem;
+
+      onMount(() => {});
 
       function selectToilet() {
         currentLat.set(lat);
@@ -17035,6 +17052,11 @@
         selectedIndex.set(key);
       }
 
+    	function button_binding($$node, check) {
+    		listItem = $$node;
+    		$$invalidate('listItem', listItem);
+    	}
+
     	$$self.$set = $$props => {
     		if ('name' in $$props) $$invalidate('name', name = $$props.name);
     		if ('address' in $$props) $$invalidate('address', address = $$props.address);
@@ -17045,6 +17067,13 @@
     		if ('selected' in $$props) $$invalidate('selected', selected = $$props.selected);
     	};
 
+    	$$self.$$.update = ($$dirty = { listItem: 1, selected: 1 }) => {
+    		if ($$dirty.listItem || $$dirty.selected) { if (listItem !== undefined && selected) {
+            console.log("scroll");
+            listItem.scrollIntoView({ block: "nearest" });
+          } }
+    	};
+
     	return {
     		name,
     		address,
@@ -17053,9 +17082,11 @@
     		long,
     		key,
     		selected,
+    		listItem,
     		selectToilet,
     		hovering,
-    		$searchString
+    		$searchString,
+    		button_binding
     	};
     }
 

@@ -5,6 +5,8 @@
     searchString,
     selectedIndex
   } from "../store/store.js";
+  import { onMount } from "svelte";
+
   export let name = "";
   export let address = "";
   export let rating = "";
@@ -12,6 +14,15 @@
   export let long = "";
   export let key = "";
   export let selected = false;
+
+  let listItem;
+
+  onMount(() => {});
+
+  $: if (listItem !== undefined && selected) {
+    console.log("scroll");
+    listItem.scrollIntoView({ block: "nearest" });
+  }
 
   function selectToilet() {
     currentLat.set(lat);
@@ -55,6 +66,7 @@
   class="{selected ? 'flex p-4 text-left start w-full bg-gray-400 text-gray-800' : 'flex p-4 text-left start w-full bg-transparent text-gray-800'}"
   on:click="{selectToilet}"
   on:mouseenter="{hovering}"
+  bind:this="{listItem}"
 >
   <div class="w-11/12">
     <p class="font-medium text-lg truncate">
