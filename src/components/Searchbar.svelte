@@ -56,7 +56,7 @@
 </script>
 
 <div
-  class="relative shadow bg-gray-200 appearance-none border h-auto mt-2 pr-12 rounded-full w-full sm:w-1/2"
+  class="relative shadow bg-gray-200 appearance-none border h-auto mt-2 pr-12 rounded-full w-full sm:w-1/3"
   on:keydown={e => dispatchKey(e.key)}
 >
   <input
