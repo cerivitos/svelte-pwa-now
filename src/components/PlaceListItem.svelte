@@ -5,20 +5,13 @@
     searchString,
     selectedIndex
   } from "../store/store.js";
+  import { ratingColors } from "../util.js";
 
   export let placeObj;
   export let key = "";
   export let selected = false;
 
   let listItem;
-  const ratingColors = [
-    "bg-red-400",
-    "bg-orange-400",
-    "bg-orange-400",
-    "bg-green-400",
-    "bg-green-500",
-    "bg-teal-400"
-  ];
   let ratingClass;
 
   $: if (listItem !== undefined && selected) {
@@ -37,7 +30,7 @@
 
   function createRatingClass(rating) {
     const baseClass = "rounded-full px-1 text-white text-xs";
-    return baseClass + " " + ratingColors[rating - 1];
+    return baseClass + " bg" + ratingColors[rating - 1];
   }
 
   function highlightSearchString(searchString, textToHighlight) {

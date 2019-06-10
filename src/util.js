@@ -10,3 +10,12 @@ export function debounce(delay, fn) {
     }, delay);
   };
 }
+
+export const ratingColors = [
+  "-red-400",
+  "-orange-400",
+  "-orange-400",
+  "-green-400",
+  "-green-500",
+  "-teal-400"
+];
