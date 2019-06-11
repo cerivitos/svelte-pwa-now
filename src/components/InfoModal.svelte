@@ -50,7 +50,7 @@
 <svelte:window bind:innerWidth="{innerWidth}" />
 
 <div
-  class="bg-gray-200 h-48 lg:h-112 absolute bottom-0 overflow-hidden rounded-lg shadow-lg m-2 lg:w-1/3"
+  class="bg-gray-200 h-64 lg:h-104 absolute bottom-0 overflow-hidden rounded-lg shadow-lg m-2 lg:w-1/3"
   style="z-index:1000"
 >
   {#if innerWidth < 1024}
@@ -67,15 +67,15 @@
       style="width: { innerWidth/3 }px"
     />
     <div
-      class="absolute bottom-0 right-0 m-2 w-full flex flex-row justify-end items-center"
+      class="absolute rounded-full bg-gray-800 opacity-50 bottom-0 right-0 m-2 px-2 py-1 flex flex-row justify-end items-center"
     >
-      <p class="text-gray-500 opacity-75 font-bold">
+      <p class="text-white font-bold">
         {pics.length}
       </p>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
-        class="h-8 w-8 fill-current text-gray-500 opacity-75"
+        class="h-8 w-8 fill-current text-white"
       >
         <path d="M0 0h24v24H0z" fill="none"></path>
         <path
@@ -87,8 +87,7 @@
   {/if}
   <div class="px-4 py-2">
     <p class="font-bold text-lg">{placeObj.name}</p>
-    <p class="font-light">{placeObj.address}</p>
-    <div class="flex flex-row items-baseline mt-2 mb-4">
+    <div class="flex flex-row items-baseline mt-2">
       <p class="{createRatingClass(placeObj.rating)}">
         {createRating(placeObj.rating)}
       </p>
@@ -96,28 +95,37 @@
         <p class="text-sm">{placeObj.type}</p>
       </div>
     </div>
-    <flex class="flex h-full justify-around align-center">
-    <button
-      class="rounded bg-blue-600 hover:bg-blue-500 hover:shadow text-white font-medium mt-2 pl-4 pr-5 py-2 inline-flex items-center"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="fill-current w-6 h-6 mr-2"
-        viewBox="0 0 24 24"
+    <div class="flex h-full justify-around align-center mt-4">
+      <button
+        class="rounded bg-blue-600 hover:bg-blue-500 hover:shadow text-white font-medium pl-4 pr-5 py-2 inline-flex items-center"
       >
-        <path
-          d="M21.71 11.29l-9-9c-.39-.39-1.02-.39-1.41 0l-9 9c-.39.39-.39 1.02 0 1.41l9 9c.39.39 1.02.39 1.41 0l9-9c.39-.38.39-1.01 0-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z"
-        />
-        <path d="M0 0h24v24H0z" fill="none" />
-      </svg>
-      <span>Directions</span>
-    </button>
-    <button
-      class="rounded border border-blue-600 bg-gray-200 hover:bg-gray-300 hover:shadow text-blue-600 font-medium mt-2 pl-4 pr-5 py-2 inline-flex items-center"
-    >
-    <svg xmlns="http://www.w3.org/2000/svg" class="fill-current w-6 h6 mr-2" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
-      <span>Share</span>
-    </button>
-  </flex>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="fill-current w-6 h-6 mr-2"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M21.71 11.29l-9-9c-.39-.39-1.02-.39-1.41 0l-9 9c-.39.39-.39 1.02 0 1.41l9 9c.39.39 1.02.39 1.41 0l9-9c.39-.38.39-1.01 0-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z"
+          />
+          <path d="M0 0h24v24H0z" fill="none" />
+        </svg>
+        <span>Directions</span>
+      </button>
+      <button
+        class="rounded border border-blue-600 bg-gray-200 hover:bg-gray-300 hover:shadow text-blue-600 font-medium pl-4 pr-5 py-2 inline-flex items-center"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="fill-current w-6 h6 mr-2"
+          viewBox="0 0 24 24"
+        >
+          <path d="M0 0h24v24H0z" fill="none" />
+          <path
+            d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"
+          />
+        </svg>
+        <span>Share</span>
+      </button>
+    </div>
   </div>
 </div>

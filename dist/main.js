@@ -32630,18 +32630,18 @@
     			img.className = "object-cover h-64";
     			set_style(img, "width", "" + ctx.innerWidth/3 + "px");
     			add_location(img, file$4, 63, 4, 1558);
-    			p.className = "text-gray-500 opacity-75 font-bold";
-    			add_location(p, file$4, 71, 6, 1783);
+    			p.className = "text-white font-bold";
+    			add_location(p, file$4, 71, 6, 1822);
     			attr(path0, "d", "M0 0h24v24H0z");
     			attr(path0, "fill", "none");
-    			add_location(path0, file$4, 79, 8, 2031);
+    			add_location(path0, file$4, 79, 8, 2042);
     			attr(path1, "d", "M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z");
-    			add_location(path1, file$4, 80, 8, 2084);
+    			add_location(path1, file$4, 80, 8, 2095);
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "viewBox", "0 0 24 24");
-    			attr(svg, "class", "h-8 w-8 fill-current text-gray-500 opacity-75");
-    			add_location(svg, file$4, 74, 6, 1872);
-    			div0.className = "absolute bottom-0 right-0 m-2 w-full flex flex-row justify-end items-center";
+    			attr(svg, "class", "h-8 w-8 fill-current text-white");
+    			add_location(svg, file$4, 74, 6, 1897);
+    			div0.className = "absolute rounded-full bg-gray-800 opacity-50 bottom-0 right-0 m-2 px-2 py-1 flex flex-row justify-end items-center";
     			add_location(div0, file$4, 68, 4, 1673);
     			div1.className = "w-full overflow-hidden relative";
     			add_location(div1, file$4, 62, 2, 1507);
@@ -32777,7 +32777,7 @@
     }
 
     function create_fragment$4(ctx) {
-    	var div3, t0, div2, p0, t1_value = ctx.placeObj.name, t1, t2, p1, t3_value = ctx.placeObj.address, t3, t4, div1, p2, t5_value = createRating(ctx.placeObj.rating), t5, p2_class_value, t6, div0, p3, t7_value = ctx.placeObj.type, t7, t8, flex, button0, svg0, path0, path1, t9, span0, t11, button1, svg1, path2, path3, t12, span1, dispose;
+    	var div4, t0, div3, p0, t1_value = ctx.placeObj.name, t1, t2, div1, p1, t3_value = createRating(ctx.placeObj.rating), t3, p1_class_value, t4, div0, p2, t5_value = ctx.placeObj.type, t5, t6, div2, button0, svg0, path0, path1, t7, span0, t9, button1, svg1, path2, path3, t10, span1, dispose;
 
     	add_render_callback(ctx.onwindowresize);
 
@@ -32791,83 +32791,78 @@
 
     	return {
     		c: function create() {
-    			div3 = element("div");
+    			div4 = element("div");
     			if_block.c();
     			t0 = space();
-    			div2 = element("div");
+    			div3 = element("div");
     			p0 = element("p");
     			t1 = text(t1_value);
     			t2 = space();
+    			div1 = element("div");
     			p1 = element("p");
     			t3 = text(t3_value);
     			t4 = space();
-    			div1 = element("div");
+    			div0 = element("div");
     			p2 = element("p");
     			t5 = text(t5_value);
     			t6 = space();
-    			div0 = element("div");
-    			p3 = element("p");
-    			t7 = text(t7_value);
-    			t8 = space();
-    			flex = element("flex");
+    			div2 = element("div");
     			button0 = element("button");
     			svg0 = svg_element("svg");
     			path0 = svg_element("path");
     			path1 = svg_element("path");
-    			t9 = space();
+    			t7 = space();
     			span0 = element("span");
     			span0.textContent = "Directions";
-    			t11 = space();
+    			t9 = space();
     			button1 = element("button");
     			svg1 = svg_element("svg");
     			path2 = svg_element("path");
     			path3 = svg_element("path");
-    			t12 = space();
+    			t10 = space();
     			span1 = element("span");
     			span1.textContent = "Share";
     			p0.className = "font-bold text-lg";
-    			add_location(p0, file$4, 88, 4, 2321);
-    			p1.className = "font-light";
-    			add_location(p1, file$4, 89, 4, 2375);
-    			p2.className = p2_class_value = createRatingClass$1(ctx.placeObj.rating);
-    			add_location(p2, file$4, 91, 6, 2485);
-    			p3.className = "text-sm";
-    			add_location(p3, file$4, 95, 8, 2663);
+    			add_location(p0, file$4, 88, 4, 2332);
+    			p1.className = p1_class_value = createRatingClass$1(ctx.placeObj.rating);
+    			add_location(p1, file$4, 90, 6, 2441);
+    			p2.className = "text-sm";
+    			add_location(p2, file$4, 94, 8, 2619);
     			div0.className = "bg-gray-500 text-white rounded-full px-2 ml-1";
-    			add_location(div0, file$4, 94, 6, 2594);
-    			div1.className = "flex flex-row items-baseline mt-2 mb-4";
-    			add_location(div1, file$4, 90, 4, 2425);
+    			add_location(div0, file$4, 93, 6, 2550);
+    			div1.className = "flex flex-row items-baseline mt-2";
+    			add_location(div1, file$4, 89, 4, 2386);
     			attr(path0, "d", "M21.71 11.29l-9-9c-.39-.39-1.02-.39-1.41 0l-9 9c-.39.39-.39 1.02 0 1.41l9 9c.39.39 1.02.39 1.41 0l9-9c.39-.38.39-1.01 0-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z");
-    			add_location(path0, file$4, 107, 8, 3088);
+    			add_location(path0, file$4, 106, 10, 3061);
     			attr(path1, "d", "M0 0h24v24H0z");
     			attr(path1, "fill", "none");
-    			add_location(path1, file$4, 110, 8, 3315);
+    			add_location(path1, file$4, 109, 10, 3294);
     			attr(svg0, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg0, "class", "fill-current w-6 h-6 mr-2");
     			attr(svg0, "viewBox", "0 0 24 24");
-    			add_location(svg0, file$4, 102, 6, 2949);
-    			add_location(span0, file$4, 112, 6, 3375);
-    			button0.className = "rounded bg-blue-600 hover:bg-blue-500 hover:shadow text-white font-medium mt-2 pl-4 pr-5 py-2 inline-flex items-center";
-    			add_location(button0, file$4, 99, 4, 2793);
+    			add_location(svg0, file$4, 101, 8, 2912);
+    			add_location(span0, file$4, 111, 8, 3358);
+    			button0.className = "rounded bg-blue-600 hover:bg-blue-500 hover:shadow text-white font-medium pl-4 pr-5 py-2 inline-flex items-center";
+    			add_location(button0, file$4, 98, 6, 2755);
     			attr(path2, "d", "M0 0h24v24H0z");
     			attr(path2, "fill", "none");
-    			add_location(path2, file$4, 117, 97, 3692);
+    			add_location(path2, file$4, 121, 10, 3737);
     			attr(path3, "d", "M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z");
-    			add_location(path3, file$4, 117, 134, 3729);
+    			add_location(path3, file$4, 122, 10, 3787);
     			attr(svg1, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg1, "class", "fill-current w-6 h6 mr-2");
     			attr(svg1, "viewBox", "0 0 24 24");
-    			add_location(svg1, file$4, 117, 4, 3599);
-    			add_location(span1, file$4, 118, 6, 4114);
-    			button1.className = "rounded border border-blue-600 bg-gray-200 hover:bg-gray-300 hover:shadow text-blue-600 font-medium mt-2 pl-4 pr-5 py-2 inline-flex items-center";
-    			add_location(button1, file$4, 114, 4, 3419);
-    			flex.className = "flex h-full justify-around align-center";
-    			add_location(flex, file$4, 98, 4, 2733);
-    			div2.className = "px-4 py-2";
-    			add_location(div2, file$4, 87, 2, 2292);
-    			div3.className = "bg-gray-200 h-48 lg:h-112 absolute bottom-0 overflow-hidden rounded-lg shadow-lg m-2 lg:w-1/3";
-    			set_style(div3, "z-index", "1000");
-    			add_location(div3, file$4, 51, 0, 1186);
+    			add_location(svg1, file$4, 116, 8, 3589);
+    			add_location(span1, file$4, 126, 8, 4209);
+    			button1.className = "rounded border border-blue-600 bg-gray-200 hover:bg-gray-300 hover:shadow text-blue-600 font-medium pl-4 pr-5 py-2 inline-flex items-center";
+    			add_location(button1, file$4, 113, 6, 3406);
+    			div2.className = "flex h-full justify-around align-center mt-4";
+    			add_location(div2, file$4, 97, 4, 2689);
+    			div3.className = "px-4 py-2";
+    			add_location(div3, file$4, 87, 2, 2303);
+    			div4.className = "bg-gray-200 h-64 lg:h-104 absolute bottom-0 overflow-hidden rounded-lg shadow-lg m-2 lg:w-1/3";
+    			set_style(div4, "z-index", "1000");
+    			add_location(div4, file$4, 51, 0, 1186);
     			dispose = listen(window, "resize", ctx.onwindowresize);
     		},
 
@@ -32876,37 +32871,34 @@
     		},
 
     		m: function mount(target, anchor) {
-    			insert(target, div3, anchor);
-    			if_block.m(div3, null);
-    			append(div3, t0);
-    			append(div3, div2);
-    			append(div2, p0);
+    			insert(target, div4, anchor);
+    			if_block.m(div4, null);
+    			append(div4, t0);
+    			append(div4, div3);
+    			append(div3, p0);
     			append(p0, t1);
-    			append(div2, t2);
-    			append(div2, p1);
+    			append(div3, t2);
+    			append(div3, div1);
+    			append(div1, p1);
     			append(p1, t3);
-    			append(div2, t4);
-    			append(div2, div1);
-    			append(div1, p2);
-    			append(p2, t5);
-    			append(div1, t6);
+    			append(div1, t4);
     			append(div1, div0);
-    			append(div0, p3);
-    			append(p3, t7);
-    			append(div2, t8);
-    			append(div2, flex);
-    			append(flex, button0);
+    			append(div0, p2);
+    			append(p2, t5);
+    			append(div3, t6);
+    			append(div3, div2);
+    			append(div2, button0);
     			append(button0, svg0);
     			append(svg0, path0);
     			append(svg0, path1);
-    			append(button0, t9);
+    			append(button0, t7);
     			append(button0, span0);
-    			append(flex, t11);
-    			append(flex, button1);
+    			append(div2, t9);
+    			append(div2, button1);
     			append(button1, svg1);
     			append(svg1, path2);
     			append(svg1, path3);
-    			append(button1, t12);
+    			append(button1, t10);
     			append(button1, span1);
     		},
 
@@ -32918,7 +32910,7 @@
     				if_block = current_block_type(ctx);
     				if (if_block) {
     					if_block.c();
-    					if_block.m(div3, t0);
+    					if_block.m(div4, t0);
     				}
     			}
     		},
@@ -32928,7 +32920,7 @@
 
     		d: function destroy(detaching) {
     			if (detaching) {
-    				detach(div3);
+    				detach(div4);
     			}
 
     			if_block.d();
