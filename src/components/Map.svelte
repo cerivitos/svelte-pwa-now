@@ -1,5 +1,10 @@
 <script>
-  import { currentLat, currentLong } from "../store/store.js";
+  import {
+    currentLat,
+    currentLong,
+    searchString,
+    showModal
+  } from "../store/store.js";
   import { onMount, setContext } from "svelte";
   import L from "leaflet";
   import "leaflet/dist/leaflet.css";
@@ -35,6 +40,8 @@
         e => {
           currentLat.set(e.latlng.lat);
           currentLong.set(e.latlng.lng);
+          searchString.set("");
+          showModal.set(true);
         }
       );
 

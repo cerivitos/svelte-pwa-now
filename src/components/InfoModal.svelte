@@ -2,31 +2,39 @@
   import { toiletPics } from "../data/toilet_pics.js";
   import { onMount } from "svelte";
   import { ratingColors } from "../util.js";
+  import { toilets } from "../data/toilets.js";
 
+  export let lat, long;
   let innerWidth;
   let pics = [];
-
-  const placeObj = {
-    type: "MRT Station",
-    name: "Ang Mo Kio MRT station",
-    address: "2450 Ang Mo Kio Avenue 8, Singapore, Singapore",
-    lat: 1.369933,
-    long: 103.849558,
-    rating: 4
-  };
+  let placeObj = {};
 
   onMount(() => {
-    pics = getPics(placeObj.name);
+    pics = toilets.forEach(toilet => {
+      if (lat === toilet.lat && long === toilet.long) {
+        placeObj = toilet;
+        return getPics(placeObj.name);
+      }
+    });
+  });
+
+  $: toilets.forEach(toilet => {
+    if (lat === toilet.lat && long === toilet.long) {
+      placeObj = toilet;
+      pics = getPics(placeObj.name);
+    }
   });
 
   function getPics(name) {
+    let requiredPics = [];
+
     toiletPics.forEach(object => {
-      if (object.gallery_link === placeObj.name) {
-        pics.push("https://www.toilet.org.sg/" + object.pics);
+      if (object.gallery_link === name) {
+        requiredPics.push("https://www.toilet.org.sg/" + object.pics);
       }
     });
 
-    return pics;
+    return requiredPics;
   }
 
   function createRating(rating) {
@@ -55,9 +63,7 @@
 >
   {#if innerWidth < 1024}
   <div class="flex flex-row w-full overflow-auto">
-    {#each pics as pic}
-    <img src="{pic}" class="h-24 mr-1" />
-    {/each}
+    {#each pics as pic} <img src="{pic}" class="h-24 mr-1" /> {/each}
   </div>
   {:else}
   <div class="w-full overflow-hidden relative">

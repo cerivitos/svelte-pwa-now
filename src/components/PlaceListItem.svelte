@@ -3,7 +3,8 @@
     currentLat,
     currentLong,
     searchString,
-    selectedIndex
+    selectedIndex,
+    showModal
   } from "../store/store.js";
   import { ratingColors } from "../util.js";
 
@@ -22,6 +23,7 @@
     currentLat.set(placeObj.lat);
     currentLong.set(placeObj.long);
     searchString.set("");
+    showModal.set(true);
   }
 
   function hovering() {

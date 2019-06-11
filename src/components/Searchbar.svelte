@@ -1,5 +1,5 @@
 <script>
-  import { currentLat, currentLong, searchString, geoPermissionGranted } from "../store/store.js";
+  import { currentLat, currentLong, searchString, geoPermissionGranted, showModal } from "../store/store.js";
   import { onDestroy } from "svelte";
   import { debounce } from "../util.js";
   import {createEventDispatcher, onMount} from 'svelte';
@@ -22,7 +22,8 @@
       geoPermissionGranted.set(true);
       style = "color: #319795";
       searchString.set("");
-      navigator.geolocation.watchPosition(handlePosition, handleError);
+      showModal.set(false);
+      navigator.geolocation.getCurrentPosition(handlePosition, handleError);
     } else {
       console.log("geolocation not supported");
     }
@@ -60,7 +61,10 @@
   on:keydown={e => dispatchKey(e.key)}
 >
   <input
-    on:input="{input => searchString.set(input.srcElement.value)}"
+    on:input="{(input) => {
+      searchString.set(input.srcElement.value); 
+      showModal.set(false);
+    }}"
     placeholder="Where are you?"
     class="flex-grow bg-transparent p-4 outline-none"
     type="search"

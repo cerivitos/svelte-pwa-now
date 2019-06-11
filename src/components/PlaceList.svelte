@@ -4,7 +4,8 @@
     currentLong,
     searchString,
     selectedIndex,
-    geoPermissionGranted
+    geoPermissionGranted,
+    showModal
   } from "../store/store.js";
   import { toilets } from "../data/toilets.js";
   import PlaceListItem from "./PlaceListItem.svelte";
@@ -35,6 +36,7 @@
       currentLat.set(filtered[$selectedIndex].lat);
       currentLong.set(filtered[$selectedIndex].long);
       searchString.set("");
+      showModal.set(true);
     }
   }
 

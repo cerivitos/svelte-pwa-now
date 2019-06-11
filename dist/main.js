@@ -427,6 +427,7 @@
     const searchString = writable("");
     const selectedIndex = writable(0);
     const geoPermissionGranted = writable(false);
+    const showModal = writable(false);
 
     const ratingColors = [
       "-red-400",
@@ -460,31 +461,31 @@
     			input.className = "flex-grow bg-transparent p-4 outline-none";
     			attr(input, "type", "search");
     			input.id = "input";
-    			add_location(input, file, 61, 2, 1726);
+    			add_location(input, file, 62, 2, 1771);
     			attr(circle, "cx", "12");
     			attr(circle, "cy", "12");
     			attr(circle, "r", "10");
-    			add_location(circle, file, 82, 6, 2354);
+    			add_location(circle, file, 86, 6, 2448);
     			attr(line0, "x1", "22");
     			attr(line0, "y1", "12");
     			attr(line0, "x2", "18");
     			attr(line0, "y2", "12");
-    			add_location(line0, file, 83, 6, 2395);
+    			add_location(line0, file, 87, 6, 2489);
     			attr(line1, "x1", "6");
     			attr(line1, "y1", "12");
     			attr(line1, "x2", "2");
     			attr(line1, "y2", "12");
-    			add_location(line1, file, 84, 6, 2443);
+    			add_location(line1, file, 88, 6, 2537);
     			attr(line2, "x1", "12");
     			attr(line2, "y1", "6");
     			attr(line2, "x2", "12");
     			attr(line2, "y2", "2");
-    			add_location(line2, file, 85, 6, 2489);
+    			add_location(line2, file, 89, 6, 2583);
     			attr(line3, "x1", "12");
     			attr(line3, "y1", "22");
     			attr(line3, "x2", "12");
     			attr(line3, "y2", "18");
-    			add_location(line3, file, 86, 6, 2535);
+    			add_location(line3, file, 90, 6, 2629);
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "viewBox", "0 0 24 24");
     			attr(svg, "fill", "none");
@@ -492,12 +493,12 @@
     			attr(svg, "stroke-linecap", "round");
     			attr(svg, "stroke-linejoin", "round");
     			attr(svg, "class", "stroke-current inline-block w-8 h-8");
-    			add_location(svg, file, 73, 4, 2111);
+    			add_location(svg, file, 77, 4, 2205);
     			button.className = "my-2 mr-4 flex-grow-0 rounded-full items-center bg-transparent focus: outline-none hover:text-teal-600";
     			button.style.cssText = ctx.style;
-    			add_location(button, file, 68, 2, 1934);
+    			add_location(button, file, 72, 2, 2028);
     			div.className = "flex justify-end shadow bg-gray-200 appearance-none border mt-2 rounded-lg w-full sm:w-1/3";
-    			add_location(div, file, 57, 0, 1573);
+    			add_location(div, file, 58, 0, 1618);
 
     			dispose = [
     				listen(input, "input", ctx.input_handler),
@@ -579,7 +580,8 @@
           geoPermissionGranted.set(true);
           $$invalidate('style', style = "color: #319795");
           searchString.set("");
-          navigator.geolocation.watchPosition(handlePosition, handleError);
+          showModal.set(false);
+          navigator.geolocation.getCurrentPosition(handlePosition, handleError);
         } else {
           console.log("geolocation not supported");
         }
@@ -598,8 +600,9 @@
       });
 
     	function input_handler(input) {
-    		return searchString.set(input.srcElement.value);
-    	}
+    	      searchString.set(input.srcElement.value); 
+    	      showModal.set(false);
+    	    }
 
     	function keydown_handler(e) {
     		return dispatchKey(e.key);
@@ -16847,7 +16850,7 @@
     			div = element("div");
     			div.id = "map";
     			div.className = "w-screen h-screen";
-    			add_location(div, file$1, 72, 0, 1839);
+    			add_location(div, file$1, 79, 0, 1952);
     		},
 
     		l: function claim(nodes) {
@@ -16910,6 +16913,8 @@
             e => {
               currentLat.set(e.latlng.lat);
               currentLong.set(e.latlng.lng);
+              searchString.set("");
+              showModal.set(true);
             }
           );
 
@@ -16981,19 +16986,19 @@
     			t5 = text(t5_value);
     			t6 = text("km");
     			p0.className = "font-medium text-lg truncate";
-    			add_location(p0, file$2, 70, 4, 1810);
+    			add_location(p0, file$2, 72, 4, 1852);
     			p1.className = "font-light leading-tight truncate";
-    			add_location(p1, file$2, 73, 4, 1933);
+    			add_location(p1, file$2, 75, 4, 1975);
     			div0.className = "w-11/12 text-gray-800 pr-1";
-    			add_location(div0, file$2, 69, 2, 1764);
+    			add_location(div0, file$2, 71, 2, 1806);
     			span0.className = span0_class_value = createRatingClass(ctx.placeObj.rating);
-    			add_location(span0, file$2, 78, 4, 2110);
+    			add_location(span0, file$2, 80, 4, 2152);
     			span1.className = "text-xs";
-    			add_location(span1, file$2, 79, 4, 2192);
+    			add_location(span1, file$2, 81, 4, 2234);
     			div1.className = "w-1/12 text-center";
-    			add_location(div1, file$2, 77, 2, 2072);
+    			add_location(div1, file$2, 79, 2, 2114);
     			button.className = button_class_value = ctx.selected ? 'flex p-4 text-left start w-full bg-gray-400 text-gray-800' : 'flex p-4 text-left start w-full bg-transparent text-gray-800';
-    			add_location(button, file$2, 63, 0, 1516);
+    			add_location(button, file$2, 65, 0, 1558);
 
     			dispose = [
     				listen(button, "click", ctx.selectToilet),
@@ -17119,6 +17124,7 @@
         currentLat.set(placeObj.lat);
         currentLong.set(placeObj.long);
         searchString.set("");
+        showModal.set(true);
       }
 
       function hovering() {
@@ -17202,7 +17208,7 @@
     	return child_ctx;
     }
 
-    // (79:4) {#each filtered as place, i}
+    // (81:4) {#each filtered as place, i}
     function create_each_block(ctx) {
     	var current;
 
@@ -17288,9 +17294,9 @@
     				each_blocks[i].c();
     			}
     			div0.className = "searchList w-full sm:w-1/3 overflow-auto mt-1 rounded-lg bg-gray-200 shadow svelte-125p4xn";
-    			add_location(div0, file$3, 75, 2, 2237);
+    			add_location(div0, file$3, 77, 2, 2281);
     			div1.className = "h-full";
-    			add_location(div1, file$3, 73, 0, 2159);
+    			add_location(div1, file$3, 75, 0, 2203);
     		},
 
     		l: function claim(nodes) {
@@ -17403,6 +17409,7 @@
           currentLat.set(filtered[$selectedIndex].lat);
           currentLong.set(filtered[$selectedIndex].long);
           searchString.set("");
+          showModal.set(true);
         }
       }
 
@@ -32610,7 +32617,7 @@
     	return child_ctx;
     }
 
-    // (62:2) {:else}
+    // (68:2) {:else}
     function create_else_block(ctx) {
     	var div1, img, img_src_value, t0, div0, p, t1_value = ctx.pics.length, t1, t2, svg, path0, path1;
 
@@ -32629,22 +32636,22 @@
     			img.src = img_src_value = ctx.pics[0];
     			img.className = "object-cover h-64";
     			set_style(img, "width", "" + ctx.innerWidth/3 + "px");
-    			add_location(img, file$4, 63, 4, 1558);
+    			add_location(img, file$4, 69, 4, 1782);
     			p.className = "text-white font-bold";
-    			add_location(p, file$4, 71, 6, 1822);
+    			add_location(p, file$4, 77, 6, 2046);
     			attr(path0, "d", "M0 0h24v24H0z");
     			attr(path0, "fill", "none");
-    			add_location(path0, file$4, 79, 8, 2042);
+    			add_location(path0, file$4, 85, 8, 2266);
     			attr(path1, "d", "M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z");
-    			add_location(path1, file$4, 80, 8, 2095);
+    			add_location(path1, file$4, 86, 8, 2319);
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "viewBox", "0 0 24 24");
     			attr(svg, "class", "h-8 w-8 fill-current text-white");
-    			add_location(svg, file$4, 74, 6, 1897);
+    			add_location(svg, file$4, 80, 6, 2121);
     			div0.className = "absolute rounded-full bg-gray-800 opacity-50 bottom-0 right-0 m-2 px-2 py-1 flex flex-row justify-end items-center";
-    			add_location(div0, file$4, 68, 4, 1673);
+    			add_location(div0, file$4, 74, 4, 1897);
     			div1.className = "w-full overflow-hidden relative";
-    			add_location(div1, file$4, 62, 2, 1507);
+    			add_location(div1, file$4, 68, 2, 1731);
     		},
 
     		m: function mount(target, anchor) {
@@ -32682,7 +32689,7 @@
     	};
     }
 
-    // (56:2) {#if innerWidth < 1024}
+    // (64:2) {#if innerWidth < 1024}
     function create_if_block(ctx) {
     	var div;
 
@@ -32702,7 +32709,7 @@
     				each_blocks[i].c();
     			}
     			div.className = "flex flex-row w-full overflow-auto";
-    			add_location(div, file$4, 56, 2, 1353);
+    			add_location(div, file$4, 64, 2, 1587);
     		},
 
     		m: function mount(target, anchor) {
@@ -32746,7 +32753,7 @@
     	};
     }
 
-    // (58:4) {#each pics as pic}
+    // (66:4) {#each pics as pic}
     function create_each_block$1(ctx) {
     	var img, img_src_value;
 
@@ -32755,7 +32762,7 @@
     			img = element("img");
     			img.src = img_src_value = ctx.pic;
     			img.className = "h-24 mr-1";
-    			add_location(img, file$4, 58, 4, 1432);
+    			add_location(img, file$4, 65, 24, 1661);
     		},
 
     		m: function mount(target, anchor) {
@@ -32823,46 +32830,46 @@
     			span1 = element("span");
     			span1.textContent = "Share";
     			p0.className = "font-bold text-lg";
-    			add_location(p0, file$4, 88, 4, 2332);
+    			add_location(p0, file$4, 94, 4, 2556);
     			p1.className = p1_class_value = createRatingClass$1(ctx.placeObj.rating);
-    			add_location(p1, file$4, 90, 6, 2441);
+    			add_location(p1, file$4, 96, 6, 2665);
     			p2.className = "text-sm";
-    			add_location(p2, file$4, 94, 8, 2619);
+    			add_location(p2, file$4, 100, 8, 2843);
     			div0.className = "bg-gray-500 text-white rounded-full px-2 ml-1";
-    			add_location(div0, file$4, 93, 6, 2550);
+    			add_location(div0, file$4, 99, 6, 2774);
     			div1.className = "flex flex-row items-baseline mt-2";
-    			add_location(div1, file$4, 89, 4, 2386);
+    			add_location(div1, file$4, 95, 4, 2610);
     			attr(path0, "d", "M21.71 11.29l-9-9c-.39-.39-1.02-.39-1.41 0l-9 9c-.39.39-.39 1.02 0 1.41l9 9c.39.39 1.02.39 1.41 0l9-9c.39-.38.39-1.01 0-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z");
-    			add_location(path0, file$4, 106, 10, 3061);
+    			add_location(path0, file$4, 112, 10, 3285);
     			attr(path1, "d", "M0 0h24v24H0z");
     			attr(path1, "fill", "none");
-    			add_location(path1, file$4, 109, 10, 3294);
+    			add_location(path1, file$4, 115, 10, 3518);
     			attr(svg0, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg0, "class", "fill-current w-6 h-6 mr-2");
     			attr(svg0, "viewBox", "0 0 24 24");
-    			add_location(svg0, file$4, 101, 8, 2912);
-    			add_location(span0, file$4, 111, 8, 3358);
+    			add_location(svg0, file$4, 107, 8, 3136);
+    			add_location(span0, file$4, 117, 8, 3582);
     			button0.className = "rounded bg-blue-600 hover:bg-blue-500 hover:shadow text-white font-medium pl-4 pr-5 py-2 inline-flex items-center";
-    			add_location(button0, file$4, 98, 6, 2755);
+    			add_location(button0, file$4, 104, 6, 2979);
     			attr(path2, "d", "M0 0h24v24H0z");
     			attr(path2, "fill", "none");
-    			add_location(path2, file$4, 121, 10, 3737);
+    			add_location(path2, file$4, 127, 10, 3961);
     			attr(path3, "d", "M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z");
-    			add_location(path3, file$4, 122, 10, 3787);
+    			add_location(path3, file$4, 128, 10, 4011);
     			attr(svg1, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg1, "class", "fill-current w-6 h6 mr-2");
     			attr(svg1, "viewBox", "0 0 24 24");
-    			add_location(svg1, file$4, 116, 8, 3589);
-    			add_location(span1, file$4, 126, 8, 4209);
+    			add_location(svg1, file$4, 122, 8, 3813);
+    			add_location(span1, file$4, 132, 8, 4433);
     			button1.className = "rounded border border-blue-600 bg-gray-200 hover:bg-gray-300 hover:shadow text-blue-600 font-medium pl-4 pr-5 py-2 inline-flex items-center";
-    			add_location(button1, file$4, 113, 6, 3406);
+    			add_location(button1, file$4, 119, 6, 3630);
     			div2.className = "flex h-full justify-around align-center mt-4";
-    			add_location(div2, file$4, 97, 4, 2689);
+    			add_location(div2, file$4, 103, 4, 2913);
     			div3.className = "px-4 py-2";
-    			add_location(div3, file$4, 87, 2, 2303);
+    			add_location(div3, file$4, 93, 2, 2527);
     			div4.className = "bg-gray-200 h-64 lg:h-104 absolute bottom-0 overflow-hidden rounded-lg shadow-lg m-2 lg:w-1/3";
     			set_style(div4, "z-index", "1000");
-    			add_location(div4, file$4, 51, 0, 1186);
+    			add_location(div4, file$4, 59, 0, 1420);
     			dispose = listen(window, "resize", ctx.onwindowresize);
     		},
 
@@ -32913,6 +32920,22 @@
     					if_block.m(div4, t0);
     				}
     			}
+
+    			if ((changed.placeObj) && t1_value !== (t1_value = ctx.placeObj.name)) {
+    				set_data(t1, t1_value);
+    			}
+
+    			if ((changed.placeObj) && t3_value !== (t3_value = createRating(ctx.placeObj.rating))) {
+    				set_data(t3, t3_value);
+    			}
+
+    			if ((changed.placeObj) && p1_class_value !== (p1_class_value = createRatingClass$1(ctx.placeObj.rating))) {
+    				p1.className = p1_class_value;
+    			}
+
+    			if ((changed.placeObj) && t5_value !== (t5_value = ctx.placeObj.type)) {
+    				set_data(t5, t5_value);
+    			}
     		},
 
     		i: noop,
@@ -32927,6 +32950,18 @@
     			dispose();
     		}
     	};
+    }
+
+    function getPics(name) {
+      let requiredPics = [];
+
+      toiletPics.forEach(object => {
+        if (object.gallery_link === name) {
+          requiredPics.push("https://www.toilet.org.sg/" + object.pics);
+        }
+      });
+
+      return requiredPics;
     }
 
     function createRating(rating) {
@@ -32949,37 +32984,41 @@
     function instance$4($$self, $$props, $$invalidate) {
     	
 
+      let { lat, long } = $$props;
       let innerWidth;
       let pics = [];
-
-      const placeObj = {
-        type: "MRT Station",
-        name: "Ang Mo Kio MRT station",
-        address: "2450 Ang Mo Kio Avenue 8, Singapore, Singapore",
-        lat: 1.369933,
-        long: 103.849558,
-        rating: 4
-      };
+      let placeObj = {};
 
       onMount(() => {
-        $$invalidate('pics', pics = getPics(placeObj.name));
-      });
-
-      function getPics(name) {
-        toiletPics.forEach(object => {
-          if (object.gallery_link === placeObj.name) {
-            pics.push("https://www.toilet.org.sg/" + object.pics);
+        $$invalidate('pics', pics = toilets.forEach(toilet => {
+          if (lat === toilet.lat && long === toilet.long) {
+            $$invalidate('placeObj', placeObj = toilet);
+            return getPics(placeObj.name);
           }
-        });
-
-        return pics;
-      }
+        }));
+      });
 
     	function onwindowresize() {
     		innerWidth = window.innerWidth; $$invalidate('innerWidth', innerWidth);
     	}
 
+    	$$self.$set = $$props => {
+    		if ('lat' in $$props) $$invalidate('lat', lat = $$props.lat);
+    		if ('long' in $$props) $$invalidate('long', long = $$props.long);
+    	};
+
+    	$$self.$$.update = ($$dirty = { lat: 1, long: 1, placeObj: 1 }) => {
+    		if ($$dirty.lat || $$dirty.long || $$dirty.placeObj) { toilets.forEach(toilet => {
+            if (lat === toilet.lat && long === toilet.long) {
+              $$invalidate('placeObj', placeObj = toilet);
+              $$invalidate('pics', pics = getPics(placeObj.name));
+            }
+          }); }
+    	};
+
     	return {
+    		lat,
+    		long,
     		innerWidth,
     		pics,
     		placeObj,
@@ -32990,13 +33029,84 @@
     class InfoModal extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$4, create_fragment$4, safe_not_equal, []);
+    		init(this, options, instance$4, create_fragment$4, safe_not_equal, ["lat", "long"]);
+
+    		const { ctx } = this.$$;
+    		const props = options.props || {};
+    		if (ctx.lat === undefined && !('lat' in props)) {
+    			console.warn("<InfoModal> was created without expected prop 'lat'");
+    		}
+    		if (ctx.long === undefined && !('long' in props)) {
+    			console.warn("<InfoModal> was created without expected prop 'long'");
+    		}
+    	}
+
+    	get lat() {
+    		throw new Error("<InfoModal>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set lat(value) {
+    		throw new Error("<InfoModal>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get long() {
+    		throw new Error("<InfoModal>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set long(value) {
+    		throw new Error("<InfoModal>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
     }
+
+    /* src\components\Carousel.svelte generated by Svelte v3.4.0 */
 
     /* src\App.svelte generated by Svelte v3.4.0 */
 
     const file$5 = "src\\App.svelte";
+
+    // (18:2) {#if $showModal}
+    function create_if_block$1(ctx) {
+    	var current;
+
+    	var infomodal = new InfoModal({
+    		props: { lat: ctx.$currentLat, long: ctx.$currentLong },
+    		$$inline: true
+    	});
+
+    	return {
+    		c: function create() {
+    			infomodal.$$.fragment.c();
+    		},
+
+    		m: function mount(target, anchor) {
+    			mount_component(infomodal, target, anchor);
+    			current = true;
+    		},
+
+    		p: function update(changed, ctx) {
+    			var infomodal_changes = {};
+    			if (changed.$currentLat) infomodal_changes.lat = ctx.$currentLat;
+    			if (changed.$currentLong) infomodal_changes.long = ctx.$currentLong;
+    			infomodal.$set(infomodal_changes);
+    		},
+
+    		i: function intro(local) {
+    			if (current) return;
+    			infomodal.$$.fragment.i(local);
+
+    			current = true;
+    		},
+
+    		o: function outro(local) {
+    			infomodal.$$.fragment.o(local);
+    			current = false;
+    		},
+
+    		d: function destroy(detaching) {
+    			infomodal.$destroy(detaching);
+    		}
+    	};
+    }
 
     function create_fragment$5(ctx) {
     	var main, div, t0, t1, current;
@@ -33005,7 +33115,7 @@
 
     	var map = new Map$1({ $$inline: true });
 
-    	var infomodal = new InfoModal({ $$inline: true });
+    	var if_block = (ctx.$showModal) && create_if_block$1(ctx);
 
     	return {
     		c: function create() {
@@ -33015,12 +33125,12 @@
     			t0 = space();
     			map.$$.fragment.c();
     			t1 = space();
-    			infomodal.$$.fragment.c();
+    			if (if_block) if_block.c();
     			div.className = "absolute p-4 w-full";
     			set_style(div, "z-index", "1000");
-    			add_location(div, file$5, 11, 2, 339);
+    			add_location(div, file$5, 13, 2, 467);
     			main.className = "overflow-hidden";
-    			add_location(main, file$5, 9, 0, 277);
+    			add_location(main, file$5, 11, 0, 405);
     		},
 
     		l: function claim(nodes) {
@@ -33034,11 +33144,32 @@
     			append(main, t0);
     			mount_component(map, main, null);
     			append(main, t1);
-    			mount_component(infomodal, main, null);
+    			if (if_block) if_block.m(main, null);
     			current = true;
     		},
 
-    		p: noop,
+    		p: function update(changed, ctx) {
+    			if (ctx.$showModal) {
+    				if (if_block) {
+    					if_block.p(changed, ctx);
+    					if_block.i(1);
+    				} else {
+    					if_block = create_if_block$1(ctx);
+    					if_block.c();
+    					if_block.i(1);
+    					if_block.m(main, null);
+    				}
+    			} else if (if_block) {
+    				group_outros();
+    				on_outro(() => {
+    					if_block.d(1);
+    					if_block = null;
+    				});
+
+    				if_block.o(1);
+    				check_outros();
+    			}
+    		},
 
     		i: function intro(local) {
     			if (current) return;
@@ -33046,15 +33177,14 @@
 
     			map.$$.fragment.i(local);
 
-    			infomodal.$$.fragment.i(local);
-
+    			if (if_block) if_block.i();
     			current = true;
     		},
 
     		o: function outro(local) {
     			placelist.$$.fragment.o(local);
     			map.$$.fragment.o(local);
-    			infomodal.$$.fragment.o(local);
+    			if (if_block) if_block.o();
     			current = false;
     		},
 
@@ -33067,15 +33197,28 @@
 
     			map.$destroy();
 
-    			infomodal.$destroy();
+    			if (if_block) if_block.d();
     		}
     	};
+    }
+
+    function instance$5($$self, $$props, $$invalidate) {
+    	let $showModal, $currentLat, $currentLong;
+
+    	validate_store(showModal, 'showModal');
+    	subscribe($$self, showModal, $$value => { $showModal = $$value; $$invalidate('$showModal', $showModal); });
+    	validate_store(currentLat, 'currentLat');
+    	subscribe($$self, currentLat, $$value => { $currentLat = $$value; $$invalidate('$currentLat', $currentLat); });
+    	validate_store(currentLong, 'currentLong');
+    	subscribe($$self, currentLong, $$value => { $currentLong = $$value; $$invalidate('$currentLong', $currentLong); });
+
+    	return { $showModal, $currentLat, $currentLong };
     }
 
     class App extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, null, create_fragment$5, safe_not_equal, []);
+    		init(this, options, instance$5, create_fragment$5, safe_not_equal, []);
     	}
     }
 
