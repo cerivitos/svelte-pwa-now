@@ -56,18 +56,18 @@
 </script>
 
 <div
-  class="relative shadow bg-gray-200 appearance-none border h-auto mt-2 pr-12 rounded-full w-full sm:w-1/3"
+  class="flex justify-end shadow bg-gray-200 appearance-none border mt-2 rounded-lg w-full sm:w-1/3"
   on:keydown={e => dispatchKey(e.key)}
 >
   <input
     on:input="{input => searchString.set(input.srcElement.value)}"
     placeholder="Where are you?"
-    class="inline bg-transparent p-4 w-full outline-none"
+    class="flex-grow bg-transparent p-4 outline-none"
     type="search"
     id="input"
   />
   <button
-    class="absolute right-0 top-0 p-1 m-1 rounded-full items-center bg-transparent focus: outline-none hover:text-teal-600"
+    class="my-2 mr-4 flex-grow-0 rounded-full items-center bg-transparent focus: outline-none hover:text-teal-600"
     {style}
     on:click="{getLocation}"
   >
@@ -78,7 +78,7 @@
       stroke-width="2"
       stroke-linecap="round"
       stroke-linejoin="round"
-      class="stroke-current inline-block w-10 h-10"
+      class="stroke-current inline-block w-8 h-8"
     >
       <circle cx="12" cy="12" r="10" />
       <line x1="22" y1="12" x2="18" y2="12" />
