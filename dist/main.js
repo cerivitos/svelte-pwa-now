@@ -32676,7 +32676,7 @@
     	return child_ctx;
     }
 
-    // (67:12) {#if pics && pics.length > 0}
+    // (66:12) {#if pics && pics.length > 0}
     function create_if_block_1(ctx) {
     	var div1, img, img_src_value, t0, div0, p, t1_value = ctx.pics.length, t1, t2, svg, path0, path1;
 
@@ -32695,22 +32695,22 @@
     			img.src = img_src_value = ctx.pics[0];
     			img.className = "object-cover h-64 w-full";
     			set_style(img, "width", "" + ctx.innerWidth/3 + "px");
-    			add_location(img, file$4, 68, 6, 1873);
-    			p.className = "text-white font-bold";
-    			add_location(p, file$4, 76, 8, 2160);
+    			add_location(img, file$4, 67, 6, 1849);
+    			p.className = "text-white text-xs mr-1";
+    			add_location(p, file$4, 75, 8, 2136);
     			attr(path0, "d", "M0 0h24v24H0z");
     			attr(path0, "fill", "none");
-    			add_location(path0, file$4, 84, 10, 2396);
+    			add_location(path0, file$4, 83, 10, 2375);
     			attr(path1, "d", "M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z");
-    			add_location(path1, file$4, 85, 10, 2451);
+    			add_location(path1, file$4, 84, 10, 2430);
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "viewBox", "0 0 24 24");
-    			attr(svg, "class", "h-8 w-8 fill-current text-white");
-    			add_location(svg, file$4, 79, 8, 2241);
+    			attr(svg, "class", "h-4 w-4 fill-current text-white");
+    			add_location(svg, file$4, 78, 8, 2220);
     			div0.className = "absolute rounded-full bg-gray-800 opacity-50 bottom-0 right-0 m-2 px-2 py-1 flex flex-row justify-end items-center";
-    			add_location(div0, file$4, 73, 6, 2005);
+    			add_location(div0, file$4, 72, 6, 1981);
     			div1.className = "w-full overflow-hidden relative";
-    			add_location(div1, file$4, 67, 4, 1820);
+    			add_location(div1, file$4, 66, 4, 1796);
     		},
 
     		m: function mount(target, anchor) {
@@ -32748,7 +32748,7 @@
     	};
     }
 
-    // (63:4) {#if innerWidth < 1024 && pics}
+    // (62:4) {#if innerWidth < 1024 && pics}
     function create_if_block(ctx) {
     	var div;
 
@@ -32768,7 +32768,7 @@
     				each_blocks[i].c();
     			}
     			div.className = "flex flex-row w-full overflow-auto";
-    			add_location(div, file$4, 63, 4, 1633);
+    			add_location(div, file$4, 62, 4, 1609);
     		},
 
     		m: function mount(target, anchor) {
@@ -32812,7 +32812,7 @@
     	};
     }
 
-    // (65:6) {#each pics as pic}
+    // (64:6) {#each pics as pic}
     function create_each_block$1(ctx) {
     	var img, img_src_value;
 
@@ -32821,7 +32821,7 @@
     			img = element("img");
     			img.src = img_src_value = ctx.pic;
     			img.className = "h-24 w-24 mr-1";
-    			add_location(img, file$4, 64, 26, 1709);
+    			add_location(img, file$4, 63, 26, 1685);
     		},
 
     		m: function mount(target, anchor) {
@@ -32890,48 +32890,48 @@
     			span1 = element("span");
     			span1.textContent = "Share";
     			p0.className = "font-bold text-lg";
-    			add_location(p0, file$4, 93, 6, 2710);
+    			add_location(p0, file$4, 92, 6, 2689);
     			p1.className = p1_class_value = createRatingClass$1(ctx.placeObj.rating);
-    			add_location(p1, file$4, 95, 8, 2823);
+    			add_location(p1, file$4, 94, 8, 2802);
     			p2.className = "text-sm";
-    			add_location(p2, file$4, 99, 10, 3009);
-    			div0.className = "bg-gray-500 text-white rounded-full px-2 ml-1";
-    			add_location(div0, file$4, 98, 8, 2938);
+    			add_location(p2, file$4, 98, 10, 2958);
+    			div0.className = "ml-1 font-light";
+    			add_location(div0, file$4, 97, 8, 2917);
     			div1.className = "flex flex-row items-baseline mt-2";
-    			add_location(div1, file$4, 94, 6, 2766);
+    			add_location(div1, file$4, 93, 6, 2745);
     			attr(path0, "d", "M21.71 11.29l-9-9c-.39-.39-1.02-.39-1.41 0l-9 9c-.39.39-.39 1.02 0 1.41l9 9c.39.39 1.02.39 1.41 0l9-9c.39-.38.39-1.01 0-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z");
-    			add_location(path0, file$4, 111, 12, 3475);
+    			add_location(path0, file$4, 110, 12, 3424);
     			attr(path1, "d", "M0 0h24v24H0z");
     			attr(path1, "fill", "none");
-    			add_location(path1, file$4, 114, 12, 3714);
+    			add_location(path1, file$4, 113, 12, 3663);
     			attr(svg0, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg0, "class", "fill-current w-6 h-6 mr-2");
     			attr(svg0, "viewBox", "0 0 24 24");
-    			add_location(svg0, file$4, 106, 10, 3316);
-    			add_location(span0, file$4, 116, 10, 3782);
-    			button0.className = "rounded bg-blue-600 hover:bg-blue-500 hover:shadow text-white font-medium pl-4 pr-5 py-2 inline-flex items-center";
-    			add_location(button0, file$4, 103, 8, 3153);
+    			add_location(svg0, file$4, 105, 10, 3265);
+    			add_location(span0, file$4, 115, 10, 3731);
+    			button0.className = "w-32 rounded bg-blue-600 hover:bg-blue-500 hover:shadow text-white font-medium px-3 py-2 inline-flex items-center";
+    			add_location(button0, file$4, 102, 8, 3102);
     			attr(path2, "d", "M0 0h24v24H0z");
     			attr(path2, "fill", "none");
-    			add_location(path2, file$4, 126, 12, 4181);
+    			add_location(path2, file$4, 125, 12, 4130);
     			attr(path3, "d", "M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z");
-    			add_location(path3, file$4, 127, 12, 4233);
+    			add_location(path3, file$4, 126, 12, 4182);
     			attr(svg1, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg1, "class", "fill-current w-6 h6 mr-2");
     			attr(svg1, "viewBox", "0 0 24 24");
-    			add_location(svg1, file$4, 121, 10, 4023);
-    			add_location(span1, file$4, 131, 10, 4663);
-    			button1.className = "rounded border border-blue-600 bg-gray-200 hover:bg-gray-300 hover:shadow text-blue-600 font-medium pl-4 pr-5 py-2 inline-flex items-center";
-    			add_location(button1, file$4, 118, 8, 3834);
+    			add_location(svg1, file$4, 120, 10, 3972);
+    			add_location(span1, file$4, 130, 10, 4612);
+    			button1.className = "w-32 rounded border border-blue-600 bg-gray-200 hover:bg-gray-300 hover:shadow text-blue-600 font-medium px-5 py-2 inline-flex items-center";
+    			add_location(button1, file$4, 117, 8, 3783);
     			div2.className = "flex h-full justify-around align-center my-4";
-    			add_location(div2, file$4, 102, 6, 3085);
+    			add_location(div2, file$4, 101, 6, 3034);
     			div3.className = "px-4 py-2";
-    			add_location(div3, file$4, 92, 4, 2679);
+    			add_location(div3, file$4, 91, 4, 2658);
     			div4.className = "bg-gray-200 overflow-hidden rounded-lg shadow-lg w-full lg:w-1/3";
-    			add_location(div4, file$4, 61, 2, 1512);
+    			add_location(div4, file$4, 60, 2, 1488);
     			div5.className = "p-2 w-full absolute bottom-0 ";
     			set_style(div5, "z-index", "1000");
-    			add_location(div5, file$4, 60, 0, 1444);
+    			add_location(div5, file$4, 59, 0, 1420);
     			dispose = listen(window, "resize", ctx.onwindowresize);
     		},
 
@@ -33053,7 +33053,6 @@
       let placeObj = {};
 
       onMount(() => {
-        console.log(pics);
         $$invalidate('pics', pics = toilets.forEach(toilet => {
           if (lat === toilet.lat && long === toilet.long) {
             $$invalidate('placeObj', placeObj = toilet);

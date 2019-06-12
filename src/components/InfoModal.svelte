@@ -10,7 +10,6 @@
   let placeObj = {};
 
   onMount(() => {
-    console.log(pics);
     pics = toilets.forEach(toilet => {
       if (lat === toilet.lat && long === toilet.long) {
         placeObj = toilet;
@@ -74,13 +73,13 @@
       <div
         class="absolute rounded-full bg-gray-800 opacity-50 bottom-0 right-0 m-2 px-2 py-1 flex flex-row justify-end items-center"
       >
-        <p class="text-white font-bold">
+        <p class="text-white text-xs mr-1">
           {pics.length}
         </p>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
-          class="h-8 w-8 fill-current text-white"
+          class="h-4 w-4 fill-current text-white"
         >
           <path d="M0 0h24v24H0z" fill="none"></path>
           <path
@@ -96,13 +95,13 @@
         <p class="{createRatingClass(placeObj.rating)}">
           {createRating(placeObj.rating)}
         </p>
-        <div class="bg-gray-500 text-white rounded-full px-2 ml-1">
+        <div class="ml-1 font-light">
           <p class="text-sm">{placeObj.type}</p>
         </div>
       </div>
       <div class="flex h-full justify-around align-center my-4">
         <button
-          class="rounded bg-blue-600 hover:bg-blue-500 hover:shadow text-white font-medium pl-4 pr-5 py-2 inline-flex items-center"
+          class="w-32 rounded bg-blue-600 hover:bg-blue-500 hover:shadow text-white font-medium px-3 py-2 inline-flex items-center"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -117,7 +116,7 @@
           <span>Directions</span>
         </button>
         <button
-          class="rounded border border-blue-600 bg-gray-200 hover:bg-gray-300 hover:shadow text-blue-600 font-medium pl-4 pr-5 py-2 inline-flex items-center"
+          class="w-32 rounded border border-blue-600 bg-gray-200 hover:bg-gray-300 hover:shadow text-blue-600 font-medium px-5 py-2 inline-flex items-center"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
