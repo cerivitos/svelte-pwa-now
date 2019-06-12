@@ -29,7 +29,7 @@
 
 <main class="overflow-hidden">
   <!--For global margin-->
-  <div class="absolute p-4 w-full" style="z-index:1000" >
+  <div class="absolute px-2 py-4 w-full lg:w-1/3" style="z-index:1000" >
     <PlaceList/>
   </div>
   <ModalWrapper transitionTrigger={$showModal}>

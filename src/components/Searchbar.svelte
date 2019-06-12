@@ -57,7 +57,7 @@
 </script>
 
 <div
-  class="flex justify-end shadow bg-gray-200 appearance-none border mt-2 rounded-lg w-full sm:w-1/3"
+  class="flex justify-end shadow bg-gray-200 appearance-none border mt-2 rounded-lg"
   on:keydown={e => dispatchKey(e.key)}
 >
   <input
