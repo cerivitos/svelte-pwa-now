@@ -10,6 +10,7 @@
   let placeObj = {};
 
   onMount(() => {
+    console.log(pics);
     pics = toilets.forEach(toilet => {
       if (lat === toilet.lat && long === toilet.long) {
         placeObj = toilet;
@@ -59,11 +60,11 @@
 
 <div class="p-2 w-full absolute bottom-0 " style="z-index:1000">
   <div class="bg-gray-200 overflow-hidden rounded-lg shadow-lg w-full lg:w-1/3">
-    {#if innerWidth < 1024}
+    {#if innerWidth < 1024 && pics}
     <div class="flex flex-row w-full overflow-auto">
       {#each pics as pic} <img src="{pic}" class="h-24 mr-1" /> {/each}
     </div>
-    {:else} {#if pics.length>0}
+    {:else} {#if pics && pics.length > 0}
     <div class="w-full overflow-hidden relative">
       <img
         src="{pics[0]}"

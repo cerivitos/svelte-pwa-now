@@ -52,6 +52,25 @@
     		: unsub);
     }
 
+    function create_slot(definition, ctx, fn) {
+    	if (definition) {
+    		const slot_ctx = get_slot_context(definition, ctx, fn);
+    		return definition[0](slot_ctx);
+    	}
+    }
+
+    function get_slot_context(definition, ctx, fn) {
+    	return definition[1]
+    		? assign({}, assign(ctx.$$scope.ctx, definition[1](fn ? fn(ctx) : {})))
+    		: ctx.$$scope.ctx;
+    }
+
+    function get_slot_changes(definition, ctx, changed, fn) {
+    	return definition[1]
+    		? assign({}, assign(ctx.$$scope.changed || {}, definition[1](fn ? fn(changed) : {})))
+    		: ctx.$$scope.changed || {};
+    }
+
     const tasks = new Set();
     let running = false;
 
@@ -32657,7 +32676,7 @@
     	return child_ctx;
     }
 
-    // (66:12) {#if pics.length>0}
+    // (67:12) {#if pics && pics.length > 0}
     function create_if_block_1(ctx) {
     	var div1, img, img_src_value, t0, div0, p, t1_value = ctx.pics.length, t1, t2, svg, path0, path1;
 
@@ -32676,22 +32695,22 @@
     			img.src = img_src_value = ctx.pics[0];
     			img.className = "object-cover h-64";
     			set_style(img, "width", "" + ctx.innerWidth/3 + "px");
-    			add_location(img, file$4, 67, 6, 1826);
+    			add_location(img, file$4, 68, 6, 1868);
     			p.className = "text-white font-bold";
-    			add_location(p, file$4, 75, 8, 2106);
+    			add_location(p, file$4, 76, 8, 2148);
     			attr(path0, "d", "M0 0h24v24H0z");
     			attr(path0, "fill", "none");
-    			add_location(path0, file$4, 83, 10, 2342);
+    			add_location(path0, file$4, 84, 10, 2384);
     			attr(path1, "d", "M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z");
-    			add_location(path1, file$4, 84, 10, 2397);
+    			add_location(path1, file$4, 85, 10, 2439);
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "viewBox", "0 0 24 24");
     			attr(svg, "class", "h-8 w-8 fill-current text-white");
-    			add_location(svg, file$4, 78, 8, 2187);
+    			add_location(svg, file$4, 79, 8, 2229);
     			div0.className = "absolute rounded-full bg-gray-800 opacity-50 bottom-0 right-0 m-2 px-2 py-1 flex flex-row justify-end items-center";
-    			add_location(div0, file$4, 72, 6, 1951);
+    			add_location(div0, file$4, 73, 6, 1993);
     			div1.className = "w-full overflow-hidden relative";
-    			add_location(div1, file$4, 66, 4, 1773);
+    			add_location(div1, file$4, 67, 4, 1815);
     		},
 
     		m: function mount(target, anchor) {
@@ -32729,7 +32748,7 @@
     	};
     }
 
-    // (62:4) {#if innerWidth < 1024}
+    // (63:4) {#if innerWidth < 1024 && pics}
     function create_if_block(ctx) {
     	var div;
 
@@ -32749,7 +32768,7 @@
     				each_blocks[i].c();
     			}
     			div.className = "flex flex-row w-full overflow-auto";
-    			add_location(div, file$4, 62, 4, 1601);
+    			add_location(div, file$4, 63, 4, 1633);
     		},
 
     		m: function mount(target, anchor) {
@@ -32793,7 +32812,7 @@
     	};
     }
 
-    // (64:6) {#each pics as pic}
+    // (65:6) {#each pics as pic}
     function create_each_block$1(ctx) {
     	var img, img_src_value;
 
@@ -32802,7 +32821,7 @@
     			img = element("img");
     			img.src = img_src_value = ctx.pic;
     			img.className = "h-24 mr-1";
-    			add_location(img, file$4, 63, 26, 1677);
+    			add_location(img, file$4, 64, 26, 1709);
     		},
 
     		m: function mount(target, anchor) {
@@ -32829,8 +32848,8 @@
     	add_render_callback(ctx.onwindowresize);
 
     	function select_block_type(ctx) {
-    		if (ctx.innerWidth < 1024) return create_if_block;
-    		if (ctx.pics.length>0) return create_if_block_1;
+    		if (ctx.innerWidth < 1024 && ctx.pics) return create_if_block;
+    		if (ctx.pics && ctx.pics.length > 0) return create_if_block_1;
     	}
 
     	var current_block_type = select_block_type(ctx);
@@ -32871,48 +32890,48 @@
     			span1 = element("span");
     			span1.textContent = "Share";
     			p0.className = "font-bold text-lg";
-    			add_location(p0, file$4, 92, 6, 2656);
+    			add_location(p0, file$4, 93, 6, 2698);
     			p1.className = p1_class_value = createRatingClass$1(ctx.placeObj.rating);
-    			add_location(p1, file$4, 94, 8, 2769);
+    			add_location(p1, file$4, 95, 8, 2811);
     			p2.className = "text-sm";
-    			add_location(p2, file$4, 98, 10, 2955);
+    			add_location(p2, file$4, 99, 10, 2997);
     			div0.className = "bg-gray-500 text-white rounded-full px-2 ml-1";
-    			add_location(div0, file$4, 97, 8, 2884);
+    			add_location(div0, file$4, 98, 8, 2926);
     			div1.className = "flex flex-row items-baseline mt-2";
-    			add_location(div1, file$4, 93, 6, 2712);
+    			add_location(div1, file$4, 94, 6, 2754);
     			attr(path0, "d", "M21.71 11.29l-9-9c-.39-.39-1.02-.39-1.41 0l-9 9c-.39.39-.39 1.02 0 1.41l9 9c.39.39 1.02.39 1.41 0l9-9c.39-.38.39-1.01 0-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z");
-    			add_location(path0, file$4, 110, 12, 3421);
+    			add_location(path0, file$4, 111, 12, 3463);
     			attr(path1, "d", "M0 0h24v24H0z");
     			attr(path1, "fill", "none");
-    			add_location(path1, file$4, 113, 12, 3660);
+    			add_location(path1, file$4, 114, 12, 3702);
     			attr(svg0, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg0, "class", "fill-current w-6 h-6 mr-2");
     			attr(svg0, "viewBox", "0 0 24 24");
-    			add_location(svg0, file$4, 105, 10, 3262);
-    			add_location(span0, file$4, 115, 10, 3728);
+    			add_location(svg0, file$4, 106, 10, 3304);
+    			add_location(span0, file$4, 116, 10, 3770);
     			button0.className = "rounded bg-blue-600 hover:bg-blue-500 hover:shadow text-white font-medium pl-4 pr-5 py-2 inline-flex items-center";
-    			add_location(button0, file$4, 102, 8, 3099);
+    			add_location(button0, file$4, 103, 8, 3141);
     			attr(path2, "d", "M0 0h24v24H0z");
     			attr(path2, "fill", "none");
-    			add_location(path2, file$4, 125, 12, 4127);
+    			add_location(path2, file$4, 126, 12, 4169);
     			attr(path3, "d", "M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z");
-    			add_location(path3, file$4, 126, 12, 4179);
+    			add_location(path3, file$4, 127, 12, 4221);
     			attr(svg1, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg1, "class", "fill-current w-6 h6 mr-2");
     			attr(svg1, "viewBox", "0 0 24 24");
-    			add_location(svg1, file$4, 120, 10, 3969);
-    			add_location(span1, file$4, 130, 10, 4609);
+    			add_location(svg1, file$4, 121, 10, 4011);
+    			add_location(span1, file$4, 131, 10, 4651);
     			button1.className = "rounded border border-blue-600 bg-gray-200 hover:bg-gray-300 hover:shadow text-blue-600 font-medium pl-4 pr-5 py-2 inline-flex items-center";
-    			add_location(button1, file$4, 117, 8, 3780);
+    			add_location(button1, file$4, 118, 8, 3822);
     			div2.className = "flex h-full justify-around align-center my-4";
-    			add_location(div2, file$4, 101, 6, 3031);
+    			add_location(div2, file$4, 102, 6, 3073);
     			div3.className = "px-4 py-2";
-    			add_location(div3, file$4, 91, 4, 2625);
+    			add_location(div3, file$4, 92, 4, 2667);
     			div4.className = "bg-gray-200 overflow-hidden rounded-lg shadow-lg w-full lg:w-1/3";
-    			add_location(div4, file$4, 60, 2, 1488);
+    			add_location(div4, file$4, 61, 2, 1512);
     			div5.className = "p-2 w-full absolute bottom-0 ";
     			set_style(div5, "z-index", "1000");
-    			add_location(div5, file$4, 59, 0, 1420);
+    			add_location(div5, file$4, 60, 0, 1444);
     			dispose = listen(window, "resize", ctx.onwindowresize);
     		},
 
@@ -33034,6 +33053,7 @@
       let placeObj = {};
 
       onMount(() => {
+        console.log(pics);
         $$invalidate('pics', pics = toilets.forEach(toilet => {
           if (lat === toilet.lat && long === toilet.long) {
             $$invalidate('placeObj', placeObj = toilet);
@@ -33226,13 +33246,260 @@
     	};
     }
 
+    /* src\components\ModalWrapper.svelte generated by Svelte v3.4.0 */
+
+    const file$5 = "src\\components\\ModalWrapper.svelte";
+
+    const get_modal_slot_changes = ({}) => ({});
+    const get_modal_slot_context = ({}) => ({});
+
+    const get_background_slot_changes = ({}) => ({});
+    const get_background_slot_context = ({}) => ({});
+
+    function create_fragment$5(ctx) {
+    	var div1, div0, t, div1_class_value, current;
+
+    	const background_slot_1 = ctx.$$slots.background;
+    	const background_slot = create_slot(background_slot_1, ctx, get_background_slot_context);
+
+    	const modal_slot_1 = ctx.$$slots.modal;
+    	const modal_slot = create_slot(modal_slot_1, ctx, get_modal_slot_context);
+
+    	return {
+    		c: function create() {
+    			div1 = element("div");
+    			div0 = element("div");
+
+    			if (background_slot) background_slot.c();
+    			t = space();
+
+    			if (modal_slot) modal_slot.c();
+
+    			set_style(div0, "transform", "translateY(" + ctx.$yPos * -1 + "px)");
+    			add_location(div0, file$5, 43, 2, 1035);
+
+    			set_style(div1, "transform", "translateY(" + ctx.$yPos + "px)");
+    			div1.className = div1_class_value = ctx.setBackground(ctx.dimBackground);
+    			add_location(div1, file$5, 38, 0, 865);
+    		},
+
+    		l: function claim(nodes) {
+    			if (background_slot) background_slot.l(div0_nodes);
+
+    			if (modal_slot) modal_slot.l(div1_nodes);
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+
+    		m: function mount(target, anchor) {
+    			insert(target, div1, anchor);
+    			append(div1, div0);
+
+    			if (background_slot) {
+    				background_slot.m(div0, null);
+    			}
+
+    			append(div1, t);
+
+    			if (modal_slot) {
+    				modal_slot.m(div1, null);
+    			}
+
+    			current = true;
+    		},
+
+    		p: function update(changed, ctx) {
+    			if (background_slot && background_slot.p && changed.$$scope) {
+    				background_slot.p(get_slot_changes(background_slot_1, ctx, changed, get_background_slot_changes), get_slot_context(background_slot_1, ctx, get_background_slot_context));
+    			}
+
+    			if (!current || changed.$yPos) {
+    				set_style(div0, "transform", "translateY(" + ctx.$yPos * -1 + "px)");
+    			}
+
+    			if (modal_slot && modal_slot.p && changed.$$scope) {
+    				modal_slot.p(get_slot_changes(modal_slot_1, ctx, changed, get_modal_slot_changes), get_slot_context(modal_slot_1, ctx, get_modal_slot_context));
+    			}
+
+    			if (!current || changed.$yPos) {
+    				set_style(div1, "transform", "translateY(" + ctx.$yPos + "px)");
+    			}
+
+    			if ((!current || changed.dimBackground) && div1_class_value !== (div1_class_value = ctx.setBackground(ctx.dimBackground))) {
+    				div1.className = div1_class_value;
+    			}
+    		},
+
+    		i: function intro(local) {
+    			if (current) return;
+    			if (background_slot && background_slot.i) background_slot.i(local);
+    			if (modal_slot && modal_slot.i) modal_slot.i(local);
+    			current = true;
+    		},
+
+    		o: function outro(local) {
+    			if (background_slot && background_slot.o) background_slot.o(local);
+    			if (modal_slot && modal_slot.o) modal_slot.o(local);
+    			current = false;
+    		},
+
+    		d: function destroy(detaching) {
+    			if (detaching) {
+    				detach(div1);
+    			}
+
+    			if (background_slot) background_slot.d(detaching);
+
+    			if (modal_slot) modal_slot.d(detaching);
+    		}
+    	};
+    }
+
+    function instance$5($$self, $$props, $$invalidate) {
+    	let $yPos, $$unsubscribe_yPos = noop, $$subscribe_yPos = () => { $$unsubscribe_yPos(); $$unsubscribe_yPos = yPos.subscribe($$value => { $yPos = $$value; $$invalidate('$yPos', $yPos); }); };
+
+    	$$self.$$.on_destroy.push(() => $$unsubscribe_yPos());
+
+    	
+
+      let { transitionTrigger = false, duration = 500, distance = 800, dimBackground = false } = $$props;
+
+      let yPos = writable(200); $$subscribe_yPos();
+      yPos = tweened(0, {
+        duration: duration,
+        easing: cubicOut
+      }); $$subscribe_yPos(), $$invalidate('yPos', yPos);
+
+      let bgClass;
+
+      function setBackground(dimBackground) {
+        if (dimBackground) {
+          $$invalidate('bgClass', bgClass = "bg-black opacity-50");
+        } else {
+          $$invalidate('bgClass', bgClass = "");
+        }
+
+        return bgClass;
+      }
+
+    	let { $$slots = {}, $$scope } = $$props;
+
+    	$$self.$set = $$props => {
+    		if ('transitionTrigger' in $$props) $$invalidate('transitionTrigger', transitionTrigger = $$props.transitionTrigger);
+    		if ('duration' in $$props) $$invalidate('duration', duration = $$props.duration);
+    		if ('distance' in $$props) $$invalidate('distance', distance = $$props.distance);
+    		if ('dimBackground' in $$props) $$invalidate('dimBackground', dimBackground = $$props.dimBackground);
+    		if ('$$scope' in $$props) $$invalidate('$$scope', $$scope = $$props.$$scope);
+    	};
+
+    	$$self.$$.update = ($$dirty = { transitionTrigger: 1, yPos: 1, distance: 1 }) => {
+    		if ($$dirty.transitionTrigger || $$dirty.yPos || $$dirty.distance) { if (transitionTrigger) {
+            yPos.set(0);
+          } else {
+            yPos.set(distance);
+          } }
+    	};
+
+    	return {
+    		transitionTrigger,
+    		duration,
+    		distance,
+    		dimBackground,
+    		yPos,
+    		setBackground,
+    		$yPos,
+    		$$slots,
+    		$$scope
+    	};
+    }
+
+    class ModalWrapper extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$5, create_fragment$5, safe_not_equal, ["transitionTrigger", "duration", "distance", "dimBackground"]);
+    	}
+
+    	get transitionTrigger() {
+    		throw new Error("<ModalWrapper>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set transitionTrigger(value) {
+    		throw new Error("<ModalWrapper>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get duration() {
+    		throw new Error("<ModalWrapper>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set duration(value) {
+    		throw new Error("<ModalWrapper>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get distance() {
+    		throw new Error("<ModalWrapper>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set distance(value) {
+    		throw new Error("<ModalWrapper>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	get dimBackground() {
+    		throw new Error("<ModalWrapper>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set dimBackground(value) {
+    		throw new Error("<ModalWrapper>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+    }
+
     /* src\App.svelte generated by Svelte v3.4.0 */
 
-    const file$5 = "src\\App.svelte";
+    const file$6 = "src\\App.svelte";
 
-    // (38:4) {#if $showModal}
-    function create_if_block$1(ctx) {
-    	var current;
+    // (34:4) <div slot="background">
+    function create_background_slot(ctx) {
+    	var div, current;
+
+    	var map = new Map$1({ $$inline: true });
+
+    	return {
+    		c: function create() {
+    			div = element("div");
+    			map.$$.fragment.c();
+    			attr(div, "slot", "background");
+    			add_location(div, file$6, 33, 4, 1026);
+    		},
+
+    		m: function mount(target, anchor) {
+    			insert(target, div, anchor);
+    			mount_component(map, div, null);
+    			current = true;
+    		},
+
+    		i: function intro(local) {
+    			if (current) return;
+    			map.$$.fragment.i(local);
+
+    			current = true;
+    		},
+
+    		o: function outro(local) {
+    			map.$$.fragment.o(local);
+    			current = false;
+    		},
+
+    		d: function destroy(detaching) {
+    			if (detaching) {
+    				detach(div);
+    			}
+
+    			map.$destroy();
+    		}
+    	};
+    }
+
+    // (35:4) <div slot="modal">
+    function create_modal_slot(ctx) {
+    	var div, current;
 
     	var infomodal = new InfoModal({
     		props: { lat: ctx.$currentLat, long: ctx.$currentLong },
@@ -33241,11 +33508,15 @@
 
     	return {
     		c: function create() {
+    			div = element("div");
     			infomodal.$$.fragment.c();
+    			attr(div, "slot", "modal");
+    			add_location(div, file$6, 34, 4, 1067);
     		},
 
     		m: function mount(target, anchor) {
-    			mount_component(infomodal, target, anchor);
+    			insert(target, div, anchor);
+    			mount_component(infomodal, div, null);
     			current = true;
     		},
 
@@ -33269,40 +33540,70 @@
     		},
 
     		d: function destroy(detaching) {
-    			infomodal.$destroy(detaching);
+    			if (detaching) {
+    				detach(div);
+    			}
+
+    			infomodal.$destroy();
     		}
     	};
     }
 
-    function create_fragment$5(ctx) {
-    	var main, div0, t0, div2, div1, t1, current;
+    // (33:2) <ModalWrapper transitionTrigger={$showModal}>
+    function create_default_slot(ctx) {
+    	var t;
+
+    	return {
+    		c: function create() {
+    			t = space();
+    		},
+
+    		m: function mount(target, anchor) {
+    			insert(target, t, anchor);
+    		},
+
+    		p: noop,
+    		i: noop,
+    		o: noop,
+
+    		d: function destroy(detaching) {
+    			if (detaching) {
+    				detach(t);
+    			}
+    		}
+    	};
+    }
+
+    function create_fragment$6(ctx) {
+    	var main, div, t, current;
 
     	var placelist = new PlaceList({ $$inline: true });
 
-    	var map = new Map$1({ $$inline: true });
-
-    	var if_block = (ctx.$showModal) && create_if_block$1(ctx);
+    	var modalwrapper = new ModalWrapper({
+    		props: {
+    		transitionTrigger: ctx.$showModal,
+    		$$slots: {
+    		default: [create_default_slot],
+    		modal: [create_modal_slot],
+    		background: [create_background_slot]
+    	},
+    		$$scope: { ctx }
+    	},
+    		$$inline: true
+    	});
 
     	return {
     		c: function create() {
     			main = element("main");
-    			div0 = element("div");
+    			div = element("div");
     			placelist.$$.fragment.c();
-    			t0 = space();
-    			div2 = element("div");
-    			div1 = element("div");
-    			map.$$.fragment.c();
-    			t1 = space();
-    			if (if_block) if_block.c();
-    			div0.className = "absolute p-4 w-full";
-    			set_style(div0, "z-index", "1000");
-    			add_location(div0, file$5, 28, 2, 785);
-    			set_style(div1, "transform", "translateY(" + ctx.$yPos * -1 + "px)");
-    			add_location(div1, file$5, 34, 4, 1066);
-    			set_style(div2, "transform", "translateY(" + ctx.$yPos + "px)");
-    			add_location(div2, file$5, 32, 2, 946);
+    			t = space();
+    			modalwrapper.$$.fragment.c();
+    			div.className = "absolute p-4 w-full";
+    			set_style(div, "z-index", "1000");
+    			add_location(div, file$6, 29, 2, 888);
     			main.className = "overflow-hidden";
-    			add_location(main, file$5, 26, 0, 723);
+    			add_location(main, file$6, 27, 0, 826);
     		},
 
     		l: function claim(nodes) {
@@ -33311,62 +33612,32 @@
 
     		m: function mount(target, anchor) {
     			insert(target, main, anchor);
-    			append(main, div0);
-    			mount_component(placelist, div0, null);
-    			append(main, t0);
-    			append(main, div2);
-    			append(div2, div1);
-    			mount_component(map, div1, null);
-    			append(div2, t1);
-    			if (if_block) if_block.m(div2, null);
+    			append(main, div);
+    			mount_component(placelist, div, null);
+    			append(main, t);
+    			mount_component(modalwrapper, main, null);
     			current = true;
     		},
 
     		p: function update(changed, ctx) {
-    			if (!current || changed.$yPos) {
-    				set_style(div1, "transform", "translateY(" + ctx.$yPos * -1 + "px)");
-    			}
-
-    			if (ctx.$showModal) {
-    				if (if_block) {
-    					if_block.p(changed, ctx);
-    					if_block.i(1);
-    				} else {
-    					if_block = create_if_block$1(ctx);
-    					if_block.c();
-    					if_block.i(1);
-    					if_block.m(div2, null);
-    				}
-    			} else if (if_block) {
-    				group_outros();
-    				on_outro(() => {
-    					if_block.d(1);
-    					if_block = null;
-    				});
-
-    				if_block.o(1);
-    				check_outros();
-    			}
-
-    			if (!current || changed.$yPos) {
-    				set_style(div2, "transform", "translateY(" + ctx.$yPos + "px)");
-    			}
+    			var modalwrapper_changes = {};
+    			if (changed.$showModal) modalwrapper_changes.transitionTrigger = ctx.$showModal;
+    			if (changed.$$scope || changed.$currentLat || changed.$currentLong) modalwrapper_changes.$$scope = { changed, ctx };
+    			modalwrapper.$set(modalwrapper_changes);
     		},
 
     		i: function intro(local) {
     			if (current) return;
     			placelist.$$.fragment.i(local);
 
-    			map.$$.fragment.i(local);
+    			modalwrapper.$$.fragment.i(local);
 
-    			if (if_block) if_block.i();
     			current = true;
     		},
 
     		o: function outro(local) {
     			placelist.$$.fragment.o(local);
-    			map.$$.fragment.o(local);
-    			if (if_block) if_block.o();
+    			modalwrapper.$$.fragment.o(local);
     			current = false;
     		},
 
@@ -33377,15 +33648,13 @@
 
     			placelist.$destroy();
 
-    			map.$destroy();
-
-    			if (if_block) if_block.d();
+    			modalwrapper.$destroy();
     		}
     	};
     }
 
-    function instance$5($$self, $$props, $$invalidate) {
-    	let $showModal, $yPos, $$unsubscribe_yPos = noop, $$subscribe_yPos = () => { $$unsubscribe_yPos(); $$unsubscribe_yPos = yPos.subscribe($$value => { $yPos = $$value; $$invalidate('$yPos', $yPos); }); }, $currentLat, $currentLong;
+    function instance$6($$self, $$props, $$invalidate) {
+    	let $showModal, $currentLat, $currentLong;
 
     	validate_store(showModal, 'showModal');
     	subscribe($$self, showModal, $$value => { $showModal = $$value; $$invalidate('$showModal', $showModal); });
@@ -33394,37 +33663,13 @@
     	validate_store(currentLong, 'currentLong');
     	subscribe($$self, currentLong, $$value => { $currentLong = $$value; $$invalidate('$currentLong', $currentLong); });
 
-    	$$self.$$.on_destroy.push(() => $$unsubscribe_yPos());
-
-    	
-      
-      let yPos = writable(200); $$subscribe_yPos();
-      yPos = tweened(0, {
-        duration: 500,
-        easing: cubicOut
-      }); $$subscribe_yPos(), $$invalidate('yPos', yPos);
-
-    	$$self.$$.update = ($$dirty = { $showModal: 1, yPos: 1 }) => {
-    		if ($$dirty.$showModal || $$dirty.yPos) { if ($showModal) {
-            yPos.set(0);
-          } else {
-            yPos.set(200);
-          } }
-    	};
-
-    	return {
-    		yPos,
-    		$showModal,
-    		$yPos,
-    		$currentLat,
-    		$currentLong
-    	};
+    	return { $showModal, $currentLat, $currentLong };
     }
 
     class App extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$5, create_fragment$5, safe_not_equal, []);
+    		init(this, options, instance$6, create_fragment$6, safe_not_equal, []);
     	}
     }
 
