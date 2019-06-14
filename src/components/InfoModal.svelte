@@ -21,7 +21,7 @@
   $: toilets.forEach(toilet => {
     if (lat === toilet.lat && long === toilet.long) {
       placeObj = toilet;
-      pics = getPics(placeObj.name);
+      pics = getPics(placeObj.gallery_link);
     }
   });
 
@@ -95,7 +95,7 @@
         <p class="{createRatingClass(placeObj.rating)}">
           {createRating(placeObj.rating)}
         </p>
-        <div class="ml-1 font-light">
+        <div class="ml-1 font-light text-gray-600">
           <p class="text-sm">{placeObj.type}</p>
         </div>
       </div>

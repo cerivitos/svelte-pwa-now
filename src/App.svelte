@@ -6,21 +6,6 @@
   import Carousel from './components/Carousel.svelte';
   import ModalWrapper from './components/ModalWrapper.svelte';
   import {currentLat, currentLong, showModal} from './store/store.js';
-  // import { tweened } from 'svelte/motion';
-  // import { cubicOut } from 'svelte/easing';
-  // import { writable } from 'svelte/store';
-  
-  // let yPos = writable(200);
-  // yPos = tweened(0, {
-  //   duration: 500,
-  //   easing: cubicOut
-  // })
-
-  // $: if ($showModal) {
-  //   yPos.set(0);
-  // } else {
-  //   yPos.set(200);
-  // }
 </script>
 
 <style lang="postcss">
