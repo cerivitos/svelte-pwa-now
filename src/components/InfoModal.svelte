@@ -65,7 +65,7 @@
 
   function getDirections(lat, long) {
     let link = "http://maps.google.com/maps?f=d&";
-    if (geoPermissionGranted) {
+    if ($geoPermissionGranted) {
       return (
         link +
         "saddr=" +
@@ -85,7 +85,7 @@
 
 <svelte:window bind:innerWidth="{innerWidth}" />
 
-<div class="p-2 absolute bottom-0 lg:w-1/3" style="z-index:1000">
+<div class="p-2 absolute bottom-0 lg:w-1/3 left-0 right-0" style="z-index:1000">
   <div class="bg-gray-200 overflow-hidden rounded-lg shadow-lg">
     {#if innerWidth < 1024 && pics}
     <div class="flex flex-row w-full overflow-auto">
