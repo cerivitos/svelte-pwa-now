@@ -135,7 +135,7 @@
         <a
           href="{getDirections(placeObj.lat, placeObj.long)}"
           target="_blank"
-          class="w-32 rounded bg-blue-600 hover:bg-blue-500 hover:shadow no-underline text-white font-medium px-3 py-2 inline-flex items-center"
+          class="w-32 rounded bg-blue-600 hover:bg-blue-500 hover:shadow no-underline text-white font-medium px-3 py-2 inline-flex items-center ml-2"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
