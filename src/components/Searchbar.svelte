@@ -1,6 +1,5 @@
 <script>
   import { currentLat, currentLong, homeLat, homeLong, searchString, geoPermissionGranted, showModal } from "../store/store.js";
-  import { debounce } from "../util.js";
   import {createEventDispatcher, onMount} from 'svelte';
 
   const dispatch = createEventDispatcher();
@@ -10,7 +9,7 @@
     navigator.permissions && navigator.permissions.query({name: 'geolocation'}).then(function(PermissionStatus) {
     if (PermissionStatus.state == 'granted'){
       geoPermissionGranted.set(true);
-      getLocation();
+      getLocation(true);
       style = "color: #319795";
     }
 })
