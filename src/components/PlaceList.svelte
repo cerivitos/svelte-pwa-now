@@ -86,7 +86,7 @@
 <div class="h-full">
   <Searchbar on:keyboard={e => receiveKeyPress(e)}/>
   <div
-    class="searchList w-full sm:w-1/3 overflow-auto mt-1 rounded-lg bg-gray-200 shadow"
+    class="searchList w-full overflow-auto mt-1 rounded-lg bg-gray-200 shadow"
   >
     {#each filtered as place, i} <PlaceListItem placeObj={place} key={i}
     selected={$selectedIndex === i ? true : false}/> {/each}

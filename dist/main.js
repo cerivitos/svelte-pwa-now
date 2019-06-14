@@ -17635,7 +17635,7 @@
     			for (var i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
-    			div0.className = "searchList w-full sm:w-1/3 overflow-auto mt-1 rounded-lg bg-gray-200 shadow svelte-125p4xn";
+    			div0.className = "searchList w-full overflow-auto mt-1 rounded-lg bg-gray-200 shadow svelte-125p4xn";
     			add_location(div0, file$3, 77, 2, 2281);
     			div1.className = "h-full";
     			add_location(div1, file$3, 75, 0, 2203);
