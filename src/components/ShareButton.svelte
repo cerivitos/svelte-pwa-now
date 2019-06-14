@@ -83,9 +83,9 @@
   <span>Share</span>
 </button>
 {:else}
-<div class="flex justify-around align-middle">
+<div class="flex justify-around align-middle mr-2">
   <a
-    class="flex bg-gray-200 hover:bg-gray-300 px-2 mr-2 rounded-full items-center"
+    class="flex bg-gray-200 hover:bg-gray-300 px-2 rounded-full items-center"
     href="{createShareText(name, rating, 0)}"
     target="_blank"
   >
@@ -107,7 +107,7 @@
     </svg>
   </a>
   <a
-    class="flex bg-gray-200 hover:bg-gray-300 px-2 mr-2 rounded-full items-center"
+    class="flex bg-gray-200 hover:bg-gray-300 px-2 rounded-full items-center"
     href="{createShareText(name, rating, 1)}"
     target="_blank"
   >
@@ -125,7 +125,7 @@
   <a
     href="{createShareText(name, rating, 2)}"
     target="_blank"
-    class="flex bg-gray-200 hover:bg-gray-300 px-2 mr-2 rounded-full items-center"
+    class="flex bg-gray-200 hover:bg-gray-300 px-2 rounded-full items-center"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -140,7 +140,7 @@
     </svg>
   </a>
   <button
-    class="bg-gray-200 hover:bg-gray-300 px-2 mr-2 rounded-full"
+    class="bg-gray-200 hover:bg-gray-300 px-2 rounded-full"
     on:click="{copyUrl()}"
   >
     <svg
