@@ -4,6 +4,13 @@
   import { ratingColors } from "../util.js";
   import { toilets } from "../data/toilets.js";
   import ShareButton from "./ShareButton.svelte";
+  import {
+    currentLat,
+    currentLong,
+    homeLat,
+    homeLong,
+    geoPermissionGranted
+  } from "../store/store.js";
 
   export let lat, long;
   let innerWidth;
@@ -54,6 +61,25 @@
   function createRatingClass(rating) {
     const baseClass = "mb-2 mr-1 font-semibold text-lg";
     return baseClass + " text" + ratingColors[rating - 1];
+  }
+
+  function getDirections(lat, long) {
+    let link = "http://maps.google.com/maps?f=d&";
+    if (geoPermissionGranted) {
+      return (
+        link +
+        "saddr=" +
+        $homeLat +
+        "," +
+        $homeLong +
+        "&daddr=" +
+        lat +
+        "," +
+        long
+      );
+    } else {
+      return link + "daddr=" + lat + "," + long;
+    }
   }
 </script>
 
@@ -106,8 +132,10 @@
           name="{placeObj.name}"
           rating="{placeObj.rating}"
         ></ShareButton>
-        <button
-          class="w-32 rounded bg-blue-600 hover:bg-blue-500 hover:shadow text-white font-medium px-3 py-2 inline-flex items-center"
+        <a
+          href="{getDirections(placeObj.lat, placeObj.long)}"
+          target="_blank"
+          class="w-32 rounded bg-blue-600 hover:bg-blue-500 hover:shadow no-underline text-white font-medium px-3 py-2 inline-flex items-center"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -120,7 +148,7 @@
             <path d="M0 0h24v24H0z" fill="none" />
           </svg>
           <span>Directions</span>
-        </button>
+        </a>
       </div>
     </div>
   </div>

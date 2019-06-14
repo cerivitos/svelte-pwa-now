@@ -186,10 +186,6 @@
     	get_current_component().$$.on_mount.push(fn);
     }
 
-    function onDestroy(fn) {
-    	get_current_component().$$.on_destroy.push(fn);
-    }
-
     function createEventDispatcher() {
     	const component = current_component;
 
@@ -487,6 +483,8 @@
 
     const currentLat = writable(1.29027);
     const currentLong = writable(103.851959);
+    const homeLat = writable(1.29027);
+    const homeLong = writable(103.851959);
     const searchString = writable("");
     const selectedIndex = writable(0);
     const geoPermissionGranted = writable(false);
@@ -524,31 +522,31 @@
     			input.className = "flex-grow bg-transparent p-4 outline-none";
     			attr(input, "type", "search");
     			input.id = "input";
-    			add_location(input, file, 62, 2, 1755);
+    			add_location(input, file, 66, 2, 2029);
     			attr(circle, "cx", "12");
     			attr(circle, "cy", "12");
     			attr(circle, "r", "10");
-    			add_location(circle, file, 86, 6, 2432);
+    			add_location(circle, file, 90, 6, 2706);
     			attr(line0, "x1", "22");
     			attr(line0, "y1", "12");
     			attr(line0, "x2", "18");
     			attr(line0, "y2", "12");
-    			add_location(line0, file, 87, 6, 2473);
+    			add_location(line0, file, 91, 6, 2747);
     			attr(line1, "x1", "6");
     			attr(line1, "y1", "12");
     			attr(line1, "x2", "2");
     			attr(line1, "y2", "12");
-    			add_location(line1, file, 88, 6, 2521);
+    			add_location(line1, file, 92, 6, 2795);
     			attr(line2, "x1", "12");
     			attr(line2, "y1", "6");
     			attr(line2, "x2", "12");
     			attr(line2, "y2", "2");
-    			add_location(line2, file, 89, 6, 2567);
+    			add_location(line2, file, 93, 6, 2841);
     			attr(line3, "x1", "12");
     			attr(line3, "y1", "22");
     			attr(line3, "x2", "12");
     			attr(line3, "y2", "18");
-    			add_location(line3, file, 90, 6, 2613);
+    			add_location(line3, file, 94, 6, 2887);
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "viewBox", "0 0 24 24");
     			attr(svg, "fill", "none");
@@ -556,12 +554,12 @@
     			attr(svg, "stroke-linecap", "round");
     			attr(svg, "stroke-linejoin", "round");
     			attr(svg, "class", "stroke-current inline-block w-8 h-8");
-    			add_location(svg, file, 77, 4, 2189);
+    			add_location(svg, file, 81, 4, 2463);
     			button.className = "my-2 mr-4 flex-grow-0 rounded-full items-center bg-transparent focus: outline-none hover:text-teal-600";
     			button.style.cssText = ctx.style;
-    			add_location(button, file, 72, 2, 2012);
+    			add_location(button, file, 76, 2, 2286);
     			div.className = "flex justify-end shadow bg-gray-200 appearance-none border mt-2 rounded-lg";
-    			add_location(div, file, 58, 0, 1618);
+    			add_location(div, file, 62, 0, 1892);
 
     			dispose = [
     				listen(input, "input", ctx.input_handler),
@@ -609,6 +607,8 @@
     function handlePosition(currentPosition) {
       currentLat.set(currentPosition.coords.latitude);
       currentLong.set(currentPosition.coords.longitude);
+      homeLat.set(currentPosition.coords.latitude);
+      homeLong.set(currentPosition.coords.longitude);
     }
 
     function handleError(error) {
@@ -616,8 +616,10 @@
     }
 
     function instance($$self, $$props, $$invalidate) {
-    	let $currentLat, $currentLong;
+    	let $geoPermissionGranted, $currentLat, $currentLong;
 
+    	validate_store(geoPermissionGranted, 'geoPermissionGranted');
+    	subscribe($$self, geoPermissionGranted, $$value => { $geoPermissionGranted = $$value; $$invalidate('$geoPermissionGranted', $geoPermissionGranted); });
     	validate_store(currentLat, 'currentLat');
     	subscribe($$self, currentLat, $$value => { $currentLat = $$value; $$invalidate('$currentLat', $currentLat); });
     	validate_store(currentLong, 'currentLong');
@@ -639,13 +641,20 @@
       });
 
       function getLocation() {
-        if (navigator.geolocation) {
+        if (navigator.geolocation && !$geoPermissionGranted) {
           geoPermissionGranted.set(true);
           $$invalidate('style', style = "color: #319795");
           searchString.set("");
           showModal.set(false);
           navigator.geolocation.getCurrentPosition(handlePosition, handleError);
+        } else if (navigator.geolocation && $geoPermissionGranted) {
+          geoPermissionGranted.set(false);
+          $$invalidate('style', style = "color: #cbd5e0");
+          homeLat.set(1.29027);
+          homeLong.set(103.851959);
         } else {
+          geoPermissionGranted.set(false);
+          $$invalidate('style', style = "color: #cbd5e0");
           console.log("geolocation not supported");
         }
       }
@@ -655,12 +664,6 @@
           key: key
         });
       }
-
-      onDestroy(() => {
-        if (navigator.geolocation) {
-          navigator.geolocation.clearWatch();
-        }
-      });
 
     	function input_handler(input) {
     	      searchString.set(input.srcElement.value); 
@@ -37065,7 +37068,7 @@
     	return child_ctx;
     }
 
-    // (68:12) {#if pics && pics.length > 0}
+    // (94:12) {#if pics && pics.length > 0}
     function create_if_block_1(ctx) {
     	var div1, img, img_src_value, t0, div0, p, t1_value = ctx.pics.length, t1, t2, svg, path0, path1;
 
@@ -37084,22 +37087,22 @@
     			img.src = img_src_value = ctx.pics[0];
     			img.className = "object-cover h-64 w-full";
     			set_style(img, "width", "" + ctx.innerWidth/3 + "px");
-    			add_location(img, file$5, 69, 6, 1922);
+    			add_location(img, file$5, 95, 6, 2440);
     			p.className = "text-white text-xs mr-1";
-    			add_location(p, file$5, 77, 8, 2209);
+    			add_location(p, file$5, 103, 8, 2727);
     			attr(path0, "d", "M0 0h24v24H0z");
     			attr(path0, "fill", "none");
-    			add_location(path0, file$5, 85, 10, 2448);
+    			add_location(path0, file$5, 111, 10, 2966);
     			attr(path1, "d", "M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z");
-    			add_location(path1, file$5, 86, 10, 2503);
+    			add_location(path1, file$5, 112, 10, 3021);
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "viewBox", "0 0 24 24");
     			attr(svg, "class", "h-4 w-4 fill-current text-white");
-    			add_location(svg, file$5, 80, 8, 2293);
+    			add_location(svg, file$5, 106, 8, 2811);
     			div0.className = "absolute rounded-full bg-gray-800 opacity-50 bottom-0 right-0 m-2 px-2 py-1 flex flex-row justify-end items-center";
-    			add_location(div0, file$5, 74, 6, 2054);
+    			add_location(div0, file$5, 100, 6, 2572);
     			div1.className = "w-full overflow-hidden relative";
-    			add_location(div1, file$5, 68, 4, 1869);
+    			add_location(div1, file$5, 94, 4, 2387);
     		},
 
     		m: function mount(target, anchor) {
@@ -37137,7 +37140,7 @@
     	};
     }
 
-    // (64:4) {#if innerWidth < 1024 && pics}
+    // (90:4) {#if innerWidth < 1024 && pics}
     function create_if_block$1(ctx) {
     	var div;
 
@@ -37157,7 +37160,7 @@
     				each_blocks[i].c();
     			}
     			div.className = "flex flex-row w-full overflow-auto";
-    			add_location(div, file$5, 64, 4, 1682);
+    			add_location(div, file$5, 90, 4, 2200);
     		},
 
     		m: function mount(target, anchor) {
@@ -37201,7 +37204,7 @@
     	};
     }
 
-    // (66:6) {#each pics as pic}
+    // (92:6) {#each pics as pic}
     function create_each_block$1(ctx) {
     	var img, img_src_value;
 
@@ -37210,7 +37213,7 @@
     			img = element("img");
     			img.src = img_src_value = ctx.pic;
     			img.className = "h-24 w-24 mr-1";
-    			add_location(img, file$5, 65, 26, 1758);
+    			add_location(img, file$5, 91, 26, 2276);
     		},
 
     		m: function mount(target, anchor) {
@@ -37232,7 +37235,7 @@
     }
 
     function create_fragment$5(ctx) {
-    	var div5, div4, t0, div3, p0, t1_value = ctx.placeObj.name, t1, t2, div1, p1, t3_value = createRating(ctx.placeObj.rating), t3, p1_class_value, t4, div0, p2, t5_value = ctx.placeObj.type, t5, t6, div2, t7, button, svg, path0, path1, t8, span, current, dispose;
+    	var div5, div4, t0, div3, p0, t1_value = ctx.placeObj.name, t1, t2, div1, p1, t3_value = createRating(ctx.placeObj.rating), t3, p1_class_value, t4, div0, p2, t5_value = ctx.placeObj.type, t5, t6, div2, t7, a, svg, path0, path1, t8, span, a_href_value, current, dispose;
 
     	add_render_callback(ctx.onwindowresize);
 
@@ -37273,7 +37276,7 @@
     			div2 = element("div");
     			sharebutton.$$.fragment.c();
     			t7 = space();
-    			button = element("button");
+    			a = element("a");
     			svg = svg_element("svg");
     			path0 = svg_element("path");
     			path1 = svg_element("path");
@@ -37281,36 +37284,38 @@
     			span = element("span");
     			span.textContent = "Directions";
     			p0.className = "font-bold text-lg";
-    			add_location(p0, file$5, 94, 6, 2762);
+    			add_location(p0, file$5, 120, 6, 3280);
     			p1.className = p1_class_value = createRatingClass$1(ctx.placeObj.rating);
-    			add_location(p1, file$5, 96, 8, 2875);
+    			add_location(p1, file$5, 122, 8, 3393);
     			p2.className = "text-sm";
-    			add_location(p2, file$5, 100, 10, 3045);
+    			add_location(p2, file$5, 126, 10, 3563);
     			div0.className = "ml-1 font-light text-gray-600";
-    			add_location(div0, file$5, 99, 8, 2990);
+    			add_location(div0, file$5, 125, 8, 3508);
     			div1.className = "flex flex-row items-baseline mt-2";
-    			add_location(div1, file$5, 95, 6, 2818);
+    			add_location(div1, file$5, 121, 6, 3336);
     			attr(path0, "d", "M21.71 11.29l-9-9c-.39-.39-1.02-.39-1.41 0l-9 9c-.39.39-.39 1.02 0 1.41l9 9c.39.39 1.02.39 1.41 0l9-9c.39-.38.39-1.01 0-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z");
-    			add_location(path0, file$5, 116, 12, 3614);
+    			add_location(path0, file$5, 144, 12, 4230);
     			attr(path1, "d", "M0 0h24v24H0z");
     			attr(path1, "fill", "none");
-    			add_location(path1, file$5, 119, 12, 3853);
+    			add_location(path1, file$5, 147, 12, 4469);
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "class", "fill-current w-6 h-6 mr-2");
     			attr(svg, "viewBox", "0 0 24 24");
-    			add_location(svg, file$5, 111, 10, 3455);
-    			add_location(span, file$5, 121, 10, 3921);
-    			button.className = "w-32 rounded bg-blue-600 hover:bg-blue-500 hover:shadow text-white font-medium px-3 py-2 inline-flex items-center";
-    			add_location(button, file$5, 108, 8, 3292);
+    			add_location(svg, file$5, 139, 10, 4071);
+    			add_location(span, file$5, 149, 10, 4537);
+    			a.href = a_href_value = ctx.getDirections(ctx.placeObj.lat, ctx.placeObj.long);
+    			a.target = "_blank";
+    			a.className = "w-32 rounded bg-blue-600 hover:bg-blue-500 hover:shadow no-underline text-white font-medium px-3 py-2 inline-flex items-center";
+    			add_location(a, file$5, 134, 8, 3810);
     			div2.className = "flex h-full justify-end my-4";
-    			add_location(div2, file$5, 103, 6, 3121);
+    			add_location(div2, file$5, 129, 6, 3639);
     			div3.className = "px-4 py-2";
-    			add_location(div3, file$5, 93, 4, 2731);
+    			add_location(div3, file$5, 119, 4, 3249);
     			div4.className = "bg-gray-200 overflow-hidden rounded-lg shadow-lg";
-    			add_location(div4, file$5, 62, 2, 1577);
+    			add_location(div4, file$5, 88, 2, 2095);
     			div5.className = "p-2 absolute bottom-0 lg:w-1/3";
     			set_style(div5, "z-index", "1000");
-    			add_location(div5, file$5, 61, 0, 1508);
+    			add_location(div5, file$5, 87, 0, 2026);
     			dispose = listen(window, "resize", ctx.onwindowresize);
     		},
 
@@ -37338,12 +37343,12 @@
     			append(div3, div2);
     			mount_component(sharebutton, div2, null);
     			append(div2, t7);
-    			append(div2, button);
-    			append(button, svg);
+    			append(div2, a);
+    			append(a, svg);
     			append(svg, path0);
     			append(svg, path1);
-    			append(button, t8);
-    			append(button, span);
+    			append(a, t8);
+    			append(a, span);
     			current = true;
     		},
 
@@ -37379,6 +37384,10 @@
     			if (changed.placeObj) sharebutton_changes.name = ctx.placeObj.name;
     			if (changed.placeObj) sharebutton_changes.rating = ctx.placeObj.rating;
     			sharebutton.$set(sharebutton_changes);
+
+    			if ((!current || changed.placeObj) && a_href_value !== (a_href_value = ctx.getDirections(ctx.placeObj.lat, ctx.placeObj.long))) {
+    				a.href = a_href_value;
+    			}
     		},
 
     		i: function intro(local) {
@@ -37437,6 +37446,13 @@
     }
 
     function instance$5($$self, $$props, $$invalidate) {
+    	let $homeLat, $homeLong;
+
+    	validate_store(homeLat, 'homeLat');
+    	subscribe($$self, homeLat, $$value => { $homeLat = $$value; $$invalidate('$homeLat', $homeLat); });
+    	validate_store(homeLong, 'homeLong');
+    	subscribe($$self, homeLong, $$value => { $homeLong = $$value; $$invalidate('$homeLong', $homeLong); });
+
     	
 
       let { lat, long } = $$props;
@@ -37452,6 +37468,25 @@
           }
         }));
       });
+
+      function getDirections(lat, long) {
+        let link = "http://maps.google.com/maps?f=d&";
+        if (geoPermissionGranted) {
+          return (
+            link +
+            "saddr=" +
+            $homeLat +
+            "," +
+            $homeLong +
+            "&daddr=" +
+            lat +
+            "," +
+            long
+          );
+        } else {
+          return link + "daddr=" + lat + "," + long;
+        }
+      }
 
     	function onwindowresize() {
     		innerWidth = window.innerWidth; $$invalidate('innerWidth', innerWidth);
@@ -37477,6 +37512,7 @@
     		innerWidth,
     		pics,
     		placeObj,
+    		getDirections,
     		onwindowresize
     	};
     }

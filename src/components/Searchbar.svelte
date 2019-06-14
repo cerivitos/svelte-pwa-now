@@ -1,6 +1,5 @@
 <script>
-  import { currentLat, currentLong, searchString, geoPermissionGranted, showModal } from "../store/store.js";
-  import { onDestroy } from "svelte";
+  import { currentLat, currentLong, homeLat, homeLong, searchString, geoPermissionGranted, showModal } from "../store/store.js";
   import { debounce } from "../util.js";
   import {createEventDispatcher, onMount} from 'svelte';
 
@@ -18,13 +17,20 @@
   })
 
   function getLocation() {
-    if (navigator.geolocation) {
+    if (navigator.geolocation && !$geoPermissionGranted) {
       geoPermissionGranted.set(true);
       style = "color: #319795";
       searchString.set("");
       showModal.set(false);
       navigator.geolocation.getCurrentPosition(handlePosition, handleError);
+    } else if (navigator.geolocation && $geoPermissionGranted) {
+      geoPermissionGranted.set(false);
+      style = "color: #cbd5e0";
+      homeLat.set(1.29027);
+      homeLong.set(103.851959);
     } else {
+      geoPermissionGranted.set(false);
+      style = "color: #cbd5e0";
       console.log("geolocation not supported");
     }
   }
@@ -32,6 +38,8 @@
   function handlePosition(currentPosition) {
     currentLat.set(currentPosition.coords.latitude);
     currentLong.set(currentPosition.coords.longitude);
+    homeLat.set(currentPosition.coords.latitude);
+    homeLong.set(currentPosition.coords.longitude);
   }
 
   function handleError(error) {
@@ -44,16 +52,12 @@
     });
   }
 
+
+
   $: if ($currentLat !== 1.29027 && $currentLong !== 103.851959) {
     //check that it is not the default lat long
     document.getElementById("input").value = "";
   }
-
-  onDestroy(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.clearWatch();
-    }
-  });
 </script>
 
 <div
