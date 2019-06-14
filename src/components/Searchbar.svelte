@@ -7,12 +7,12 @@
 
   onMount(() => {
     navigator.permissions && navigator.permissions.query({name: 'geolocation'}).then(function(PermissionStatus) {
-    if (PermissionStatus.state == 'granted'){
-      geoPermissionGranted.set(true);
-      getLocation(true);
-      style = "color: #319795";
-    }
-})
+      if (PermissionStatus.state == 'granted'){
+        geoPermissionGranted.set(true);
+        getLocation(true);
+        style = "color: #319795";
+      }
+    })
   })
 
   function getLocation() {
@@ -51,8 +51,6 @@
     });
   }
 
-
-
   $: if ($currentLat !== 1.29027 && $currentLong !== 103.851959) {
     //check that it is not the default lat long
     document.getElementById("input").value = "";
@@ -66,6 +64,9 @@
   <input
     on:input="{(input) => {
       searchString.set(input.srcElement.value); 
+      showModal.set(false);
+    }}"
+    on:focus="{(focus) => {
       showModal.set(false);
     }}"
     placeholder="Where are you?"

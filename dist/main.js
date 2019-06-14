@@ -513,31 +513,31 @@
     			input.className = "flex-grow bg-transparent p-4 outline-none";
     			attr(input, "type", "search");
     			input.id = "input";
-    			add_location(input, file, 65, 2, 1991);
+    			add_location(input, file, 63, 2, 2001);
     			attr(circle, "cx", "12");
     			attr(circle, "cy", "12");
     			attr(circle, "r", "10");
-    			add_location(circle, file, 89, 6, 2668);
+    			add_location(circle, file, 90, 6, 2745);
     			attr(line0, "x1", "22");
     			attr(line0, "y1", "12");
     			attr(line0, "x2", "18");
     			attr(line0, "y2", "12");
-    			add_location(line0, file, 90, 6, 2709);
+    			add_location(line0, file, 91, 6, 2786);
     			attr(line1, "x1", "6");
     			attr(line1, "y1", "12");
     			attr(line1, "x2", "2");
     			attr(line1, "y2", "12");
-    			add_location(line1, file, 91, 6, 2757);
+    			add_location(line1, file, 92, 6, 2834);
     			attr(line2, "x1", "12");
     			attr(line2, "y1", "6");
     			attr(line2, "x2", "12");
     			attr(line2, "y2", "2");
-    			add_location(line2, file, 92, 6, 2803);
+    			add_location(line2, file, 93, 6, 2880);
     			attr(line3, "x1", "12");
     			attr(line3, "y1", "22");
     			attr(line3, "x2", "12");
     			attr(line3, "y2", "18");
-    			add_location(line3, file, 93, 6, 2849);
+    			add_location(line3, file, 94, 6, 2926);
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "viewBox", "0 0 24 24");
     			attr(svg, "fill", "none");
@@ -545,15 +545,16 @@
     			attr(svg, "stroke-linecap", "round");
     			attr(svg, "stroke-linejoin", "round");
     			attr(svg, "class", "stroke-current inline-block w-8 h-8");
-    			add_location(svg, file, 80, 4, 2425);
+    			add_location(svg, file, 81, 4, 2502);
     			button.className = "my-2 mr-4 flex-grow-0 rounded-full items-center bg-transparent focus: outline-none hover:text-teal-600";
     			button.style.cssText = ctx.style;
-    			add_location(button, file, 75, 2, 2248);
+    			add_location(button, file, 76, 2, 2325);
     			div.className = "flex justify-end shadow bg-gray-200 appearance-none border mt-2 rounded-lg";
-    			add_location(div, file, 61, 0, 1854);
+    			add_location(div, file, 59, 0, 1864);
 
     			dispose = [
     				listen(input, "input", ctx.input_handler),
+    				listen(input, "focus", ctx.focus_handler),
     				listen(button, "click", ctx.getLocation),
     				listen(div, "keydown", ctx.keydown_handler)
     			];
@@ -623,12 +624,12 @@
 
       onMount(() => {
         navigator.permissions && navigator.permissions.query({name: 'geolocation'}).then(function(PermissionStatus) {
-        if (PermissionStatus.state == 'granted'){
-          geoPermissionGranted.set(true);
-          getLocation(true);
-          $$invalidate('style', style = "color: #319795");
-        }
-    });
+          if (PermissionStatus.state == 'granted'){
+            geoPermissionGranted.set(true);
+            getLocation(true);
+            $$invalidate('style', style = "color: #319795");
+          }
+        });
       });
 
       function getLocation() {
@@ -661,6 +662,10 @@
     	      showModal.set(false);
     	    }
 
+    	function focus_handler(focus) {
+    	      showModal.set(false);
+    	    }
+
     	function keydown_handler(e) {
     		return dispatchKey(e.key);
     	}
@@ -677,6 +682,7 @@
     		getLocation,
     		dispatchKey,
     		input_handler,
+    		focus_handler,
     		keydown_handler
     	};
     }
