@@ -13,7 +13,7 @@
   } from "../store/store.js";
 
   export let lat, long;
-  let innerWidth;
+  let innerWidth, innerHeight, topDisplacement, modalHeight;
   let pics = [];
   let placeObj = {};
   let showWebShare = false;
@@ -33,6 +33,8 @@
       pics = getPics(placeObj.gallery_link);
     }
   });
+
+  $: topDisplacement = (innerHeight - modalHeight) * 0.0625 - 0.5;
 
   function getPics(name) {
     let requiredPics = [];
@@ -83,10 +85,19 @@
   }
 </script>
 
-<svelte:window bind:innerWidth="{innerWidth}" />
+<svelte:window
+  bind:innerWidth="{innerWidth}"
+  bind:innerHeight="{innerHeight}"
+/>
 
-<div class="p-2 absolute bottom-0 lg:w-1/3 left-0 right-0" style="z-index:1000">
-  <div class="bg-gray-200 overflow-hidden rounded-lg shadow-lg">
+<div
+  class="mx-2 fixed lg:w-1/3 left-0 right-0"
+  style="z-index:1000; top: {topDisplacement}rem"
+>
+  <div
+    class="bg-gray-200 overflow-hidden rounded-lg shadow-lg"
+    bind:clientHeight="{modalHeight}"
+  >
     {#if innerWidth < 1024 && pics}
     <div class="flex flex-row w-full overflow-auto">
       {#each pics as pic} <img src="{pic}" class="h-24 w-24 mr-1" /> {/each}

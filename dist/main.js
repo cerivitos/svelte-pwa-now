@@ -165,6 +165,38 @@
     	node.style.setProperty(key, value);
     }
 
+    function add_resize_listener(element, fn) {
+    	if (getComputedStyle(element).position === 'static') {
+    		element.style.position = 'relative';
+    	}
+
+    	const object = document.createElement('object');
+    	object.setAttribute('style', 'display: block; position: absolute; top: 0; left: 0; height: 100%; width: 100%; overflow: hidden; pointer-events: none; z-index: -1;');
+    	object.type = 'text/html';
+
+    	let win;
+
+    	object.onload = () => {
+    		win = object.contentDocument.defaultView;
+    		win.addEventListener('resize', fn);
+    	};
+
+    	if (/Trident/.test(navigator.userAgent)) {
+    		element.appendChild(object);
+    		object.data = 'about:blank';
+    	} else {
+    		object.data = 'about:blank';
+    		element.appendChild(object);
+    	}
+
+    	return {
+    		cancel: () => {
+    			win && win.removeEventListener && win.removeEventListener('resize', fn);
+    			element.removeChild(object);
+    		}
+    	};
+    }
+
     function custom_event(type, detail) {
     	const e = document.createEvent('CustomEvent');
     	e.initCustomEvent(type, false, false, detail);
@@ -37074,7 +37106,7 @@
     	return child_ctx;
     }
 
-    // (94:12) {#if pics && pics.length > 0}
+    // (105:12) {#if pics && pics.length > 0}
     function create_if_block_1(ctx) {
     	var div1, img, img_src_value, t0, div0, p, t1_value = ctx.pics.length, t1, t2, svg, path0, path1;
 
@@ -37093,22 +37125,22 @@
     			img.src = img_src_value = ctx.pics[0];
     			img.className = "object-cover h-64 w-full";
     			set_style(img, "width", "" + ctx.innerWidth/3 + "px");
-    			add_location(img, file$5, 95, 6, 2456);
+    			add_location(img, file$5, 106, 6, 2681);
     			p.className = "text-white text-xs mr-1";
-    			add_location(p, file$5, 103, 8, 2743);
+    			add_location(p, file$5, 114, 8, 2968);
     			attr(path0, "d", "M0 0h24v24H0z");
     			attr(path0, "fill", "none");
-    			add_location(path0, file$5, 111, 10, 2982);
+    			add_location(path0, file$5, 122, 10, 3207);
     			attr(path1, "d", "M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z");
-    			add_location(path1, file$5, 112, 10, 3037);
+    			add_location(path1, file$5, 123, 10, 3262);
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "viewBox", "0 0 24 24");
     			attr(svg, "class", "h-4 w-4 fill-current text-white");
-    			add_location(svg, file$5, 106, 8, 2827);
+    			add_location(svg, file$5, 117, 8, 3052);
     			div0.className = "absolute rounded-full bg-gray-800 opacity-50 bottom-0 right-0 m-2 px-2 py-1 flex flex-row justify-end items-center";
-    			add_location(div0, file$5, 100, 6, 2588);
+    			add_location(div0, file$5, 111, 6, 2813);
     			div1.className = "w-full overflow-hidden relative";
-    			add_location(div1, file$5, 94, 4, 2403);
+    			add_location(div1, file$5, 105, 4, 2628);
     		},
 
     		m: function mount(target, anchor) {
@@ -37146,7 +37178,7 @@
     	};
     }
 
-    // (90:4) {#if innerWidth < 1024 && pics}
+    // (101:4) {#if innerWidth < 1024 && pics}
     function create_if_block$1(ctx) {
     	var div;
 
@@ -37166,7 +37198,7 @@
     				each_blocks[i].c();
     			}
     			div.className = "flex flex-row w-full overflow-auto";
-    			add_location(div, file$5, 90, 4, 2216);
+    			add_location(div, file$5, 101, 4, 2441);
     		},
 
     		m: function mount(target, anchor) {
@@ -37210,7 +37242,7 @@
     	};
     }
 
-    // (92:6) {#each pics as pic}
+    // (103:6) {#each pics as pic}
     function create_each_block$1(ctx) {
     	var img, img_src_value;
 
@@ -37219,7 +37251,7 @@
     			img = element("img");
     			img.src = img_src_value = ctx.pic;
     			img.className = "h-24 w-24 mr-1";
-    			add_location(img, file$5, 91, 26, 2292);
+    			add_location(img, file$5, 102, 26, 2517);
     		},
 
     		m: function mount(target, anchor) {
@@ -37241,7 +37273,7 @@
     }
 
     function create_fragment$5(ctx) {
-    	var div5, div4, t0, div3, p0, t1_value = ctx.placeObj.name, t1, t2, div1, p1, t3_value = createRating(ctx.placeObj.rating), t3, p1_class_value, t4, div0, p2, t5_value = ctx.placeObj.type, t5, t6, div2, t7, a, svg, path0, path1, t8, span, a_href_value, current, dispose;
+    	var div5, div4, t0, div3, p0, t1_value = ctx.placeObj.name, t1, t2, div1, p1, t3_value = createRating(ctx.placeObj.rating), t3, p1_class_value, t4, div0, p2, t5_value = ctx.placeObj.type, t5, t6, div2, t7, a, svg, path0, path1, t8, span, a_href_value, div4_resize_listener, current, dispose;
 
     	add_render_callback(ctx.onwindowresize);
 
@@ -37290,38 +37322,40 @@
     			span = element("span");
     			span.textContent = "Directions";
     			p0.className = "font-bold text-lg";
-    			add_location(p0, file$5, 120, 6, 3296);
+    			add_location(p0, file$5, 131, 6, 3521);
     			p1.className = p1_class_value = createRatingClass$1(ctx.placeObj.rating);
-    			add_location(p1, file$5, 122, 8, 3409);
+    			add_location(p1, file$5, 133, 8, 3634);
     			p2.className = "text-sm";
-    			add_location(p2, file$5, 126, 10, 3579);
+    			add_location(p2, file$5, 137, 10, 3804);
     			div0.className = "ml-1 font-light text-gray-600";
-    			add_location(div0, file$5, 125, 8, 3524);
+    			add_location(div0, file$5, 136, 8, 3749);
     			div1.className = "flex flex-row items-baseline mt-2";
-    			add_location(div1, file$5, 121, 6, 3352);
+    			add_location(div1, file$5, 132, 6, 3577);
     			attr(path0, "d", "M21.71 11.29l-9-9c-.39-.39-1.02-.39-1.41 0l-9 9c-.39.39-.39 1.02 0 1.41l9 9c.39.39 1.02.39 1.41 0l9-9c.39-.38.39-1.01 0-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z");
-    			add_location(path0, file$5, 144, 12, 4246);
+    			add_location(path0, file$5, 155, 12, 4471);
     			attr(path1, "d", "M0 0h24v24H0z");
     			attr(path1, "fill", "none");
-    			add_location(path1, file$5, 147, 12, 4485);
+    			add_location(path1, file$5, 158, 12, 4710);
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "class", "fill-current w-6 h-6 mr-2");
     			attr(svg, "viewBox", "0 0 24 24");
-    			add_location(svg, file$5, 139, 10, 4087);
-    			add_location(span, file$5, 149, 10, 4553);
+    			add_location(svg, file$5, 150, 10, 4312);
+    			add_location(span, file$5, 160, 10, 4778);
     			a.href = a_href_value = ctx.getDirections(ctx.placeObj.lat, ctx.placeObj.long);
     			a.target = "_blank";
     			a.className = "w-32 rounded bg-blue-600 hover:bg-blue-500 hover:shadow no-underline text-white font-medium px-3 py-2 inline-flex items-center";
-    			add_location(a, file$5, 134, 8, 3826);
+    			add_location(a, file$5, 145, 8, 4051);
     			div2.className = "flex h-full justify-end my-4";
-    			add_location(div2, file$5, 129, 6, 3655);
+    			add_location(div2, file$5, 140, 6, 3880);
     			div3.className = "px-4 py-2";
-    			add_location(div3, file$5, 119, 4, 3265);
+    			add_location(div3, file$5, 130, 4, 3490);
+    			add_render_callback(() => ctx.div4_resize_handler.call(div4));
     			div4.className = "bg-gray-200 overflow-hidden rounded-lg shadow-lg";
-    			add_location(div4, file$5, 88, 2, 2111);
-    			div5.className = "p-2 absolute bottom-0 lg:w-1/3 left-0 right-0";
+    			add_location(div4, file$5, 96, 2, 2288);
+    			div5.className = "mx-2 fixed lg:w-1/3 left-0 right-0";
     			set_style(div5, "z-index", "1000");
-    			add_location(div5, file$5, 87, 0, 2027);
+    			set_style(div5, "top", "" + ctx.topDisplacement + "rem");
+    			add_location(div5, file$5, 92, 0, 2180);
     			dispose = listen(window, "resize", ctx.onwindowresize);
     		},
 
@@ -37355,6 +37389,7 @@
     			append(svg, path1);
     			append(a, t8);
     			append(a, span);
+    			div4_resize_listener = add_resize_listener(div4, ctx.div4_resize_handler.bind(div4));
     			current = true;
     		},
 
@@ -37394,6 +37429,10 @@
     			if ((!current || changed.placeObj) && a_href_value !== (a_href_value = ctx.getDirections(ctx.placeObj.lat, ctx.placeObj.long))) {
     				a.href = a_href_value;
     			}
+
+    			if (!current || changed.topDisplacement) {
+    				set_style(div5, "top", "" + ctx.topDisplacement + "rem");
+    			}
     		},
 
     		i: function intro(local) {
@@ -37417,6 +37456,7 @@
 
     			sharebutton.$destroy();
 
+    			div4_resize_listener.cancel();
     			dispose();
     		}
     	};
@@ -37464,7 +37504,7 @@
     	
 
       let { lat, long } = $$props;
-      let innerWidth;
+      let innerWidth, innerHeight, topDisplacement, modalHeight;
       let pics = [];
       let placeObj = {};
 
@@ -37498,6 +37538,12 @@
 
     	function onwindowresize() {
     		innerWidth = window.innerWidth; $$invalidate('innerWidth', innerWidth);
+    		innerHeight = window.innerHeight; $$invalidate('innerHeight', innerHeight);
+    	}
+
+    	function div4_resize_handler() {
+    		modalHeight = this.clientHeight;
+    		$$invalidate('modalHeight', modalHeight);
     	}
 
     	$$self.$set = $$props => {
@@ -37505,23 +37551,28 @@
     		if ('long' in $$props) $$invalidate('long', long = $$props.long);
     	};
 
-    	$$self.$$.update = ($$dirty = { lat: 1, long: 1, placeObj: 1 }) => {
+    	$$self.$$.update = ($$dirty = { lat: 1, long: 1, placeObj: 1, innerHeight: 1, modalHeight: 1 }) => {
     		if ($$dirty.lat || $$dirty.long || $$dirty.placeObj) { toilets.forEach(toilet => {
             if (lat === toilet.lat && long === toilet.long) {
               $$invalidate('placeObj', placeObj = toilet);
               $$invalidate('pics', pics = getPics(placeObj.gallery_link));
             }
           }); }
+    		if ($$dirty.innerHeight || $$dirty.modalHeight) { $$invalidate('topDisplacement', topDisplacement = (innerHeight - modalHeight) * 0.0625 - 0.5); }
     	};
 
     	return {
     		lat,
     		long,
     		innerWidth,
+    		innerHeight,
+    		topDisplacement,
+    		modalHeight,
     		pics,
     		placeObj,
     		getDirections,
-    		onwindowresize
+    		onwindowresize,
+    		div4_resize_handler
     	};
     }
 
@@ -37901,7 +37952,7 @@
     			div = element("div");
     			map.$$.fragment.c();
     			attr(div, "slot", "background");
-    			add_location(div, file$7, 18, 4, 684);
+    			add_location(div, file$7, 18, 4, 681);
     		},
 
     		m: function mount(target, anchor) {
@@ -37946,7 +37997,7 @@
     			div = element("div");
     			infomodal.$$.fragment.c();
     			attr(div, "slot", "modal");
-    			add_location(div, file$7, 19, 4, 725);
+    			add_location(div, file$7, 19, 4, 722);
     		},
 
     		m: function mount(target, anchor) {
@@ -38034,7 +38085,7 @@
     			placelist.$$.fragment.c();
     			t = space();
     			modalwrapper.$$.fragment.c();
-    			div.className = "absolute px-2 py-4 w-full lg:w-1/3";
+    			div.className = "fixed px-2 py-4 w-full lg:w-1/3";
     			set_style(div, "z-index", "1000");
     			add_location(div, file$7, 14, 2, 531);
     			main.className = "overflow-hidden";
