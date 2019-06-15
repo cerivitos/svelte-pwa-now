@@ -751,31 +751,31 @@
     			input.className = "flex-grow bg-transparent p-4 outline-none";
     			attr(input, "type", "search");
     			input.id = "input";
-    			add_location(input, file, 63, 2, 2001);
+    			add_location(input, file, 58, 2, 1799);
     			attr(circle, "cx", "12");
     			attr(circle, "cy", "12");
     			attr(circle, "r", "10");
-    			add_location(circle, file, 90, 6, 2745);
+    			add_location(circle, file, 85, 6, 2543);
     			attr(line0, "x1", "22");
     			attr(line0, "y1", "12");
     			attr(line0, "x2", "18");
     			attr(line0, "y2", "12");
-    			add_location(line0, file, 91, 6, 2786);
+    			add_location(line0, file, 86, 6, 2584);
     			attr(line1, "x1", "6");
     			attr(line1, "y1", "12");
     			attr(line1, "x2", "2");
     			attr(line1, "y2", "12");
-    			add_location(line1, file, 92, 6, 2834);
+    			add_location(line1, file, 87, 6, 2632);
     			attr(line2, "x1", "12");
     			attr(line2, "y1", "6");
     			attr(line2, "x2", "12");
     			attr(line2, "y2", "2");
-    			add_location(line2, file, 93, 6, 2880);
+    			add_location(line2, file, 88, 6, 2678);
     			attr(line3, "x1", "12");
     			attr(line3, "y1", "22");
     			attr(line3, "x2", "12");
     			attr(line3, "y2", "18");
-    			add_location(line3, file, 94, 6, 2926);
+    			add_location(line3, file, 89, 6, 2724);
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "viewBox", "0 0 24 24");
     			attr(svg, "fill", "none");
@@ -783,12 +783,12 @@
     			attr(svg, "stroke-linecap", "round");
     			attr(svg, "stroke-linejoin", "round");
     			attr(svg, "class", "stroke-current inline-block w-8 h-8");
-    			add_location(svg, file, 81, 4, 2502);
+    			add_location(svg, file, 76, 4, 2300);
     			button.className = "my-2 mr-4 flex-grow-0 rounded-full items-center bg-transparent focus: outline-none hover:text-teal-600";
     			button.style.cssText = ctx.style;
-    			add_location(button, file, 76, 2, 2325);
+    			add_location(button, file, 71, 2, 2123);
     			div.className = "flex justify-end shadow bg-gray-200 appearance-none border mt-2 rounded-lg";
-    			add_location(div, file, 59, 0, 1864);
+    			add_location(div, file, 54, 0, 1662);
 
     			dispose = [
     				listen(input, "input", ctx.input_handler),
@@ -871,17 +871,12 @@
       });
 
       function getLocation() {
-        if (navigator.geolocation && !$geoPermissionGranted) {
+        if (navigator.geolocation && $geoPermissionGranted) {
           geoPermissionGranted.set(true);
           $$invalidate('style', style = "color: #319795");
           searchString.set("");
           showModal.set(false);
           navigator.geolocation.getCurrentPosition(handlePosition, handleError);
-        } else if (navigator.geolocation && $geoPermissionGranted) {
-          geoPermissionGranted.set(false);
-          $$invalidate('style', style = "color: #cbd5e0");
-          homeLat.set(1.29027);
-          homeLong.set(103.851959);
         } else {
           geoPermissionGranted.set(false);
           $$invalidate('style', style = "color: #cbd5e0");
@@ -17421,7 +17416,7 @@
     			div = element("div");
     			div.id = "map";
     			div.className = "w-screen h-screen";
-    			add_location(div, file$1, 79, 0, 1952);
+    			add_location(div, file$1, 80, 0, 2035);
     		},
 
     		l: function claim(nodes) {
@@ -17460,6 +17455,7 @@
 
       onMount(async () => {
         $$invalidate('map', map = leafletSrc.map("map", {
+          maxBounds: leafletSrc.latLngBounds([1.441954, 103.557297], [1.23743, 104.062741]),
           zoomControl: false,
           center: leafletSrc.latLng(1.2834, 103.8607),
           zoom: 12
@@ -17500,7 +17496,7 @@
 
     	$$self.$$.update = ($$dirty = { map: 1, $currentLat: 1, $currentLong: 1, markers: 1, toiletMarker: 1 }) => {
     		if ($$dirty.map || $$dirty.$currentLat || $$dirty.$currentLong || $$dirty.markers || $$dirty.toiletMarker) { if (map !== undefined) {
-            map.flyTo(leafletSrc.latLng($currentLat, $currentLong), 15);
+            map.setView(leafletSrc.latLng($currentLat, $currentLong), 15);
         
             const newMarker = leafletSrc.icon({
               iconUrl: "../assets/toilet_marker.png",

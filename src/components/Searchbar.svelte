@@ -16,17 +16,12 @@
   })
 
   function getLocation() {
-    if (navigator.geolocation && !$geoPermissionGranted) {
+    if (navigator.geolocation && $geoPermissionGranted) {
       geoPermissionGranted.set(true);
       style = "color: #319795";
       searchString.set("");
       showModal.set(false);
       navigator.geolocation.getCurrentPosition(handlePosition, handleError);
-    } else if (navigator.geolocation && $geoPermissionGranted) {
-      geoPermissionGranted.set(false);
-      style = "color: #cbd5e0";
-      homeLat.set(1.29027);
-      homeLong.set(103.851959);
     } else {
       geoPermissionGranted.set(false);
       style = "color: #cbd5e0";
