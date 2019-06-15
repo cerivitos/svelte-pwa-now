@@ -69,7 +69,7 @@
 
 {#if !showWebShare}
 <button
-  class="w-32 rounded border border-blue-600 bg-gray-200 hover:bg-gray-300 hover:shadow text-blue-600 font-medium px-5 py-2 mr-2 inline-flex items-center"
+  class="w-32 rounded bg-gray-200 hover:bg-gray-300 hover:shadow text-blue-600 font-medium px-5 py-2 mr-2 inline-flex items-center"
   on:click="{handleShare}"
 >
   <svg
