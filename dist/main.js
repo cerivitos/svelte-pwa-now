@@ -36995,9 +36995,11 @@
 
     const file$4 = "src\\components\\ShareButton.svelte";
 
-    // (87:0) {:else}
+    // (90:0) {:else}
     function create_else_block(ctx) {
-    	var div, a0, svg0, path0, path1, a0_href_value, a0_transition, t0, a1, svg1, path2, a1_href_value, a1_transition, t1, a2, svg2, path3, a2_href_value, a2_transition, t2, button, svg3, path4, button_transition, current, dispose;
+    	var div, a0, svg0, path0, path1, a0_href_value, a0_transition, t0, a1, svg1, path2, a1_href_value, a1_transition, t1, a2, svg2, path3, a2_href_value, a2_transition, t2, button, svg3, path4, t3, button_transition, current, dispose;
+
+    	var if_block = (ctx.copySuccessful) && create_if_block_1(ctx);
 
     	return {
     		c: function create() {
@@ -37018,57 +37020,59 @@
     			button = element("button");
     			svg3 = svg_element("svg");
     			path4 = svg_element("path");
+    			t3 = space();
+    			if (if_block) if_block.c();
     			set_style(path0, "fill", "#2CB742");
     			attr(path0, "d", "M0,58l4.988-14.963C2.457,38.78,1,33.812,1,28.5C1,12.76,13.76,0,29.5,0S58,12.76,58,28.5   S45.24,57,29.5,57c-4.789,0-9.299-1.187-13.26-3.273L0,58z");
-    			add_location(path0, file$4, 101, 6, 2829);
+    			add_location(path0, file$4, 104, 6, 2883);
     			set_style(path1, "fill", "#FFFFFF");
     			attr(path1, "d", "M47.683,37.985c-1.316-2.487-6.169-5.331-6.169-5.331c-1.098-0.626-2.423-0.696-3.049,0.42   c0,0-1.577,1.891-1.978,2.163c-1.832,1.241-3.529,1.193-5.242-0.52l-3.981-3.981l-3.981-3.981c-1.713-1.713-1.761-3.41-0.52-5.242   c0.272-0.401,2.163-1.978,2.163-1.978c1.116-0.627,1.046-1.951,0.42-3.049c0,0-2.844-4.853-5.331-6.169   c-1.058-0.56-2.357-0.364-3.203,0.482l-1.758,1.758c-5.577,5.577-2.831,11.873,2.746,17.45l5.097,5.097l5.097,5.097   c5.577,5.577,11.873,8.323,17.45,2.746l1.758-1.758C48.048,40.341,48.243,39.042,47.683,37.985z");
-    			add_location(path1, file$4, 105, 6, 3042);
+    			add_location(path1, file$4, 108, 6, 3096);
     			attr(svg0, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg0, "xmlns:xlink", "http://www.w3.org/1999/xlink");
     			attr(svg0, "version", "1.1");
     			attr(svg0, "viewBox", "0 0 58 58");
     			attr(svg0, "class", "w-6 h-6");
-    			add_location(svg0, file$4, 94, 4, 2647);
+    			add_location(svg0, file$4, 97, 4, 2701);
     			a0.className = "flex bg-gray-200 hover:bg-gray-300 px-2 rounded-full items-center";
     			a0.href = a0_href_value = createShareText(ctx.name, ctx.rating, 0);
     			a0.target = "_blank";
-    			add_location(a0, file$4, 88, 2, 2446);
+    			add_location(a0, file$4, 91, 2, 2500);
     			set_style(path2, "fill", "#475993");
     			attr(path2, "d", "M353.701,0H55.087C24.665,0,0.002,24.662,0.002,55.085v298.616c0,30.423,24.662,55.085,55.085,55.085  h147.275l0.251-146.078h-37.951c-4.932,0-8.935-3.988-8.954-8.92l-0.182-47.087c-0.019-4.959,3.996-8.989,8.955-8.989h37.882  v-45.498c0-52.8,32.247-81.55,79.348-81.55h38.65c4.945,0,8.955,4.009,8.955,8.955v39.704c0,4.944-4.007,8.952-8.95,8.955  l-23.719,0.011c-25.615,0-30.575,12.172-30.575,30.035v39.389h56.285c5.363,0,9.524,4.683,8.892,10.009l-5.581,47.087  c-0.534,4.506-4.355,7.901-8.892,7.901h-50.453l-0.251,146.078h87.631c30.422,0,55.084-24.662,55.084-55.084V55.085  C408.786,24.662,384.124,0,353.701,0z");
-    			add_location(path2, file$4, 122, 6, 3974);
+    			add_location(path2, file$4, 125, 6, 4028);
     			attr(svg1, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg1, "class", "h-6 w-6");
     			attr(svg1, "viewBox", "0 0 408.788 408.788");
-    			add_location(svg1, file$4, 117, 4, 3853);
+    			add_location(svg1, file$4, 120, 4, 3907);
     			a1.className = "flex bg-gray-200 hover:bg-gray-300 px-2 rounded-full items-center";
     			a1.href = a1_href_value = createShareText(ctx.name, ctx.rating, 1);
     			a1.target = "_blank";
-    			add_location(a1, file$4, 111, 2, 3652);
+    			add_location(a1, file$4, 114, 2, 3706);
     			attr(path3, "xmlns", "http://www.w3.org/2000/svg");
     			set_style(path3, "fill", "#55ACEE");
     			attr(path3, "d", "M612,116.258c-22.525,9.981-46.694,16.75-72.088,19.772c25.929-15.527,45.777-40.155,55.184-69.411    c-24.322,14.379-51.169,24.82-79.775,30.48c-22.907-24.437-55.49-39.658-91.63-39.658c-69.334,0-125.551,56.217-125.551,125.513    c0,9.828,1.109,19.427,3.251,28.606C197.065,206.32,104.556,156.337,42.641,80.386c-10.823,18.51-16.98,40.078-16.98,63.101    c0,43.559,22.181,81.993,55.835,104.479c-20.575-0.688-39.926-6.348-56.867-15.756v1.568c0,60.806,43.291,111.554,100.693,123.104    c-10.517,2.83-21.607,4.398-33.08,4.398c-8.107,0-15.947-0.803-23.634-2.333c15.985,49.907,62.336,86.199,117.253,87.194    c-42.947,33.654-97.099,53.655-155.916,53.655c-10.134,0-20.116-0.612-29.944-1.721c55.567,35.681,121.536,56.485,192.438,56.485    c230.948,0,357.188-191.291,357.188-357.188l-0.421-16.253C573.872,163.526,595.211,141.422,612,116.258z");
-    			add_location(path3, file$4, 139, 6, 4972);
+    			add_location(path3, file$4, 142, 6, 5026);
     			attr(svg2, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg2, "class", "w-6 h-6");
     			attr(svg2, "viewBox", "0 0 612 612");
-    			add_location(svg2, file$4, 134, 4, 4859);
+    			add_location(svg2, file$4, 137, 4, 4913);
     			a2.href = a2_href_value = createShareText(ctx.name, ctx.rating, 2);
     			a2.target = "_blank";
     			a2.className = "flex bg-gray-200 hover:bg-gray-300 px-2 rounded-full items-center";
-    			add_location(a2, file$4, 128, 2, 4662);
+    			add_location(a2, file$4, 131, 2, 4716);
     			attr(path4, "d", "M459,51H351.9c-10.2-30.6-38.25-51-71.4-51c-33.15,0-61.2,20.4-71.4,51H102c-28.05,0-51,22.95-51,51v408    c0,28.05,22.95,51,51,51h357c28.05,0,51-22.95,51-51V102C510,73.95,487.05,51,459,51z M280.5,51c15.3,0,25.5,10.2,25.5,25.5    S295.8,102,280.5,102S255,91.8,255,76.5S265.2,51,280.5,51z M459,510H102V102h51v76.5h255V102h51V510z");
-    			add_location(path4, file$4, 157, 6, 6203);
+    			add_location(path4, file$4, 160, 6, 6264);
     			attr(svg3, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg3, "class", "w-6 h-6");
     			set_style(svg3, "fill", "darkslategrey");
     			attr(svg3, "viewBox", "0 0 561 561");
-    			add_location(svg3, file$4, 151, 4, 6055);
-    			button.className = "bg-gray-200 hover:bg-gray-300 px-2 rounded-full";
-    			add_location(button, file$4, 146, 2, 5927);
+    			add_location(svg3, file$4, 154, 4, 6116);
+    			button.className = "relative bg-gray-200 hover:bg-gray-300 px-2 rounded-full";
+    			add_location(button, file$4, 149, 2, 5981);
     			div.className = "flex justify-around align-middle mr-2";
-    			add_location(div, file$4, 87, 0, 2391);
-    			dispose = listen(button, "click", copyUrl());
+    			add_location(div, file$4, 90, 0, 2445);
+    			dispose = listen(button, "click", ctx.copyUrl);
     		},
 
     		m: function mount(target, anchor) {
@@ -37089,6 +37093,8 @@
     			append(div, button);
     			append(button, svg3);
     			append(svg3, path4);
+    			append(button, t3);
+    			if (if_block) if_block.m(button, null);
     			current = true;
     		},
 
@@ -37103,6 +37109,26 @@
 
     			if ((!current || changed.name || changed.rating) && a2_href_value !== (a2_href_value = createShareText(ctx.name, ctx.rating, 2))) {
     				a2.href = a2_href_value;
+    			}
+
+    			if (ctx.copySuccessful) {
+    				if (!if_block) {
+    					if_block = create_if_block_1(ctx);
+    					if_block.c();
+    					if_block.i(1);
+    					if_block.m(button, null);
+    				} else {
+    									if_block.i(1);
+    				}
+    			} else if (if_block) {
+    				group_outros();
+    				on_outro(() => {
+    					if_block.d(1);
+    					if_block = null;
+    				});
+
+    				if_block.o(1);
+    				check_outros();
     			}
     		},
 
@@ -37123,6 +37149,8 @@
     				a2_transition.run(1);
     			});
 
+    			if (if_block) if_block.i();
+
     			add_render_callback(() => {
     				if (!button_transition) button_transition = create_bidirectional_transition(button, fade, {}, true);
     				button_transition.run(1);
@@ -37141,6 +37169,8 @@
     			if (!a2_transition) a2_transition = create_bidirectional_transition(a2, fade, {delay: 50}, false);
     			a2_transition.run(0);
 
+    			if (if_block) if_block.o();
+
     			if (!button_transition) button_transition = create_bidirectional_transition(button, fade, {}, false);
     			button_transition.run(0);
 
@@ -37153,6 +37183,11 @@
     				if (a0_transition) a0_transition.end();
     				if (a1_transition) a1_transition.end();
     				if (a2_transition) a2_transition.end();
+    			}
+
+    			if (if_block) if_block.d();
+
+    			if (detaching) {
     				if (button_transition) button_transition.end();
     			}
 
@@ -37161,7 +37196,7 @@
     	};
     }
 
-    // (70:0) {#if !showWebShare}
+    // (73:0) {#if !showWebShare}
     function create_if_block(ctx) {
     	var button, svg, path0, path1, t, span, dispose;
 
@@ -37176,16 +37211,16 @@
     			span.textContent = "Share";
     			attr(path0, "d", "M0 0h24v24H0z");
     			attr(path0, "fill", "none");
-    			add_location(path0, file$4, 79, 4, 1909);
+    			add_location(path0, file$4, 82, 4, 1963);
     			attr(path1, "d", "M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z");
-    			add_location(path1, file$4, 80, 4, 1953);
+    			add_location(path1, file$4, 83, 4, 2007);
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "class", "fill-current w-6 h6 mr-2");
     			attr(svg, "viewBox", "0 0 24 24");
-    			add_location(svg, file$4, 74, 2, 1791);
-    			add_location(span, file$4, 84, 2, 2351);
-    			button.className = "w-32 rounded bg-gray-200 hover:bg-gray-300 hover:shadow text-blue-600 font-medium px-5 py-2 mr-2 inline-flex items-center";
-    			add_location(button, file$4, 70, 0, 1616);
+    			add_location(svg, file$4, 77, 2, 1845);
+    			add_location(span, file$4, 87, 2, 2405);
+    			button.className = "w-32 rounded bg-gray-200 hover:bg-gray-300 text-blue-600 font-medium px-5 py-2 mr-2 inline-flex items-center";
+    			add_location(button, file$4, 73, 0, 1683);
     			dispose = listen(button, "click", ctx.handleShare);
     		},
 
@@ -37205,6 +37240,59 @@
     		d: function destroy(detaching) {
     			if (detaching) {
     				detach(button);
+    			}
+
+    			dispose();
+    		}
+    	};
+    }
+
+    // (165:4) {#if copySuccessful}
+    function create_if_block_1(ctx) {
+    	var svg, path, svg_transition, current, dispose;
+
+    	return {
+    		c: function create() {
+    			svg = svg_element("svg");
+    			path = svg_element("path");
+    			set_style(path, "fill", "#6AC259");
+    			attr(path, "d", "M213.333,0C95.518,0,0,95.514,0,213.333s95.518,213.333,213.333,213.333  c117.828,0,213.333-95.514,213.333-213.333S331.157,0,213.333,0z M174.199,322.918l-93.935-93.931l31.309-31.309l62.626,62.622  l140.894-140.898l31.309,31.309L174.199,322.918z");
+    			add_location(path, file$4, 173, 6, 6934);
+    			attr(svg, "class", "absolute w-6 h-6");
+    			set_style(svg, "transform", "translate(0%, -100%)");
+    			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
+    			attr(svg, "viewBox", "0 0 426.667 426.667");
+    			add_location(svg, file$4, 165, 4, 6662);
+    			dispose = listen(svg, "introend", ctx.introend_handler);
+    		},
+
+    		m: function mount(target, anchor) {
+    			insert(target, svg, anchor);
+    			append(svg, path);
+    			current = true;
+    		},
+
+    		i: function intro(local) {
+    			if (current) return;
+    			add_render_callback(() => {
+    				if (!svg_transition) svg_transition = create_bidirectional_transition(svg, fade, {duration:150}, true);
+    				svg_transition.run(1);
+    			});
+
+    			current = true;
+    		},
+
+    		o: function outro(local) {
+    			if (!svg_transition) svg_transition = create_bidirectional_transition(svg, fade, {duration:150}, false);
+    			svg_transition.run(0);
+
+    			current = false;
+    		},
+
+    		d: function destroy(detaching) {
+    			if (detaching) {
+    				detach(svg);
+    				if (svg_transition) svg_transition.end();
     			}
 
     			dispose();
@@ -37321,23 +37409,10 @@
       return encodeURI(variables[type] + shareText);
     }
 
-    function copyUrl() {
-      const url = getUrl();
-
-      const el = document.createElement("textarea");
-      el.value = url;
-      el.setAttribute("readonly", "");
-      el.style.position = "absolute";
-      el.style.left = "-9999px";
-      document.body.appendChild(el);
-      el.select();
-      document.execCommand("copy");
-      document.body.removeChild(el);
-    }
-
     function instance$4($$self, $$props, $$invalidate) {
     	let { name, rating } = $$props;
 
+      let copySuccessful = false;
       let showWebShare = false;
 
       function handleShare(name, rating) {
@@ -37356,12 +37431,42 @@
         }
       }
 
+      function copyUrl() {
+        const url = getUrl();
+
+        const el = document.createElement("textarea");
+        el.value = url;
+        el.setAttribute("readonly", "");
+        el.style.position = "absolute";
+        el.style.left = "-9999px";
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand("copy");
+        document.body.removeChild(el);
+
+        $$invalidate('copySuccessful', copySuccessful = true);
+      }
+
+    	function introend_handler() {
+    		const $$result = copySuccessful = false;
+    		$$invalidate('copySuccessful', copySuccessful);
+    		return $$result;
+    	}
+
     	$$self.$set = $$props => {
     		if ('name' in $$props) $$invalidate('name', name = $$props.name);
     		if ('rating' in $$props) $$invalidate('rating', rating = $$props.rating);
     	};
 
-    	return { name, rating, showWebShare, handleShare };
+    	return {
+    		name,
+    		rating,
+    		copySuccessful,
+    		showWebShare,
+    		handleShare,
+    		copyUrl,
+    		introend_handler
+    	};
     }
 
     class ShareButton extends SvelteComponentDev {
@@ -37407,7 +37512,7 @@
     }
 
     // (106:12) {#if pics && pics.length > 0}
-    function create_if_block_1(ctx) {
+    function create_if_block_1$1(ctx) {
     	var div1, img, img_src_value, t0, div0, p, t1_value = ctx.pics.length, t1, t2, svg, path0, path1;
 
     	return {
@@ -37579,7 +37684,7 @@
 
     	function select_block_type(ctx) {
     		if (ctx.innerWidth < 1024 && ctx.pics) return create_if_block$1;
-    		if (ctx.pics && ctx.pics.length > 0) return create_if_block_1;
+    		if (ctx.pics && ctx.pics.length > 0) return create_if_block_1$1;
     	}
 
     	var current_block_type = select_block_type(ctx);
