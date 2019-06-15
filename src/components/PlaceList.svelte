@@ -83,7 +83,7 @@
   }
 </style>
 
-<div class="h-full">
+<div class="fixed px-2 py-4 w-full lg:w-1/3 z-10">
   <Searchbar on:keyboard={e => receiveKeyPress(e)}/>
   <div
     class="searchList w-full overflow-auto mt-1 rounded-lg bg-gray-200 shadow"

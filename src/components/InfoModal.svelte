@@ -5,12 +5,13 @@
   import { toilets } from "../data/toilets.js";
   import ShareButton from "./ShareButton.svelte";
   import FadeInImage from "./FadeInImage.svelte";
+  import Carousel from "./Carousel.svelte";
   import {
     currentLat,
     currentLong,
     homeLat,
     homeLong,
-    geoPermissionGranted
+    geoPermissionGranted, showModal
   } from "../store/store.js";
 
   export let lat, long;
@@ -18,6 +19,7 @@
   let pics = [];
   let placeObj = {};
   let showWebShare = false;
+  let showCarousel = false;
 
   onMount(() => {
     pics = toilets.forEach(toilet => {
@@ -85,6 +87,15 @@
       return link + "daddr=" + lat + "," + long;
     }
   }
+
+  function triggerCarousel(visible) {
+    showCarousel = visible;
+  }
+
+  //Handle case where user focuses on SearchBar
+  $: if(!$showModal) {
+    showCarousel = false;
+  };
 </script>
 
 <svelte:window
@@ -94,7 +105,7 @@
 
 <div
   class="mx-2 fixed lg:w-1/3 left-0 right-0"
-  style="z-index:1000; top: {topDisplacement}rem"
+  style="top: {topDisplacement}rem"
 >
   <div
     class="bg-gray-200 overflow-hidden rounded-lg shadow-lg"
@@ -103,12 +114,12 @@
     {#if innerWidth < 1024 && pics}
     <div class="flex flex-row w-full overflow-auto">
       {#each pics as pic, i}
-      <FadeInImage src="{pic}" alt="{placeObj.name + ' ' + (i + 1)}" tailwindClass="h-24 w-24 mr-1"/>
+      <FadeInImage src="{pic}" alt="{placeObj.name + ' ' + (i + 1)}" index="i" tailwindClass="h-24 w-24 mr-1" on:clicked="{(e) => triggerCarousel(true)}"/>
       {/each}
     </div>
     {:else} {#if pics && pics.length > 0}
     <div class="w-full overflow-hidden relative">
-      <FadeInImage src="{pics[0]}" alt="{placeObj.name}" style="width: { innerWidth/3 }px" tailwindClass="object-cover h-64 w-full"/>
+      <FadeInImage src="{pics[0]}" alt="{placeObj.name}" style="width: { innerWidth/3 }px" tailwindClass="object-cover h-64 w-full" on:clicked="{(e) => triggerCarousel(true)}"/>
       <div
         class="absolute rounded-full bg-gray-800 opacity-50 bottom-0 right-0 m-2 px-2 py-1 flex flex-row justify-end items-center"
       >
@@ -164,3 +175,6 @@
     </div>
   </div>
 </div>
+{#if showCarousel && $showModal}
+<Carousel pics="{pics}" name="{placeObj.name}" on:clicked="{(e) => triggerCarousel(false)}"/>
+{/if}
