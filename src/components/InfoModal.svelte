@@ -4,6 +4,7 @@
   import { ratingColors } from "../util.js";
   import { toilets } from "../data/toilets.js";
   import ShareButton from "./ShareButton.svelte";
+  import FadeInImage from "./FadeInImage.svelte";
   import {
     currentLat,
     currentLong,
@@ -101,15 +102,13 @@
   >
     {#if innerWidth < 1024 && pics}
     <div class="flex flex-row w-full overflow-auto">
-      {#each pics as pic} <img src="{pic}" class="h-24 w-24 mr-1" /> {/each}
+      {#each pics as pic, i}
+      <FadeInImage src="{pic}" alt="{placeObj.name + ' ' + (i + 1)}" tailwindClass="h-24 w-24 mr-1"/>
+      {/each}
     </div>
     {:else} {#if pics && pics.length > 0}
     <div class="w-full overflow-hidden relative">
-      <img
-        src="{pics[0]}"
-        class="object-cover h-64 w-full"
-        style="width: { innerWidth/3 }px"
-      />
+      <FadeInImage src="{pics[0]}" alt="{placeObj.name}" style="width: { innerWidth/3 }px" tailwindClass="object-cover h-64 w-full"/>
       <div
         class="absolute rounded-full bg-gray-800 opacity-50 bottom-0 right-0 m-2 px-2 py-1 flex flex-row justify-end items-center"
       >
