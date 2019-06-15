@@ -34,6 +34,7 @@
     }
   });
 
+  //In mobile, scrolling up hides the address bar causing viewport height to change. Dynamically calculate the bottom offset including margin to ensure modal is always at the bottom without overflow
   $: topDisplacement = (innerHeight - modalHeight) * 0.0625 - 0.5;
 
   function getPics(name) {
