@@ -203,6 +203,70 @@
     	return e;
     }
 
+    let stylesheet;
+    let active = 0;
+    let current_rules = {};
+
+    // https://github.com/darkskyapp/string-hash/blob/master/index.js
+    function hash(str) {
+    	let hash = 5381;
+    	let i = str.length;
+
+    	while (i--) hash = ((hash << 5) - hash) ^ str.charCodeAt(i);
+    	return hash >>> 0;
+    }
+
+    function create_rule(node, a, b, duration, delay, ease, fn, uid = 0) {
+    	const step = 16.666 / duration;
+    	let keyframes = '{\n';
+
+    	for (let p = 0; p <= 1; p += step) {
+    		const t = a + (b - a) * ease(p);
+    		keyframes += p * 100 + `%{${fn(t, 1 - t)}}\n`;
+    	}
+
+    	const rule = keyframes + `100% {${fn(b, 1 - b)}}\n}`;
+    	const name = `__svelte_${hash(rule)}_${uid}`;
+
+    	if (!current_rules[name]) {
+    		if (!stylesheet) {
+    			const style = element('style');
+    			document.head.appendChild(style);
+    			stylesheet = style.sheet;
+    		}
+
+    		current_rules[name] = true;
+    		stylesheet.insertRule(`@keyframes ${name} ${rule}`, stylesheet.cssRules.length);
+    	}
+
+    	const animation = node.style.animation || '';
+    	node.style.animation = `${animation ? `${animation}, ` : ``}${name} ${duration}ms linear ${delay}ms 1 both`;
+
+    	active += 1;
+    	return name;
+    }
+
+    function delete_rule(node, name) {
+    	node.style.animation = (node.style.animation || '')
+    		.split(', ')
+    		.filter(name
+    			? anim => anim.indexOf(name) < 0 // remove specific animation
+    			: anim => anim.indexOf('__svelte') === -1 // remove all Svelte animations
+    		)
+    		.join(', ');
+
+    	if (name && !--active) clear_rules();
+    }
+
+    function clear_rules() {
+    	requestAnimationFrame(() => {
+    		if (active) return;
+    		let i = stylesheet.cssRules.length;
+    		while (i--) stylesheet.deleteRule(i);
+    		current_rules = {};
+    	});
+    }
+
     let current_component;
 
     function set_current_component(component) {
@@ -312,6 +376,23 @@
     	}
     }
 
+    let promise;
+
+    function wait() {
+    	if (!promise) {
+    		promise = Promise.resolve();
+    		promise.then(() => {
+    			promise = null;
+    		});
+    	}
+
+    	return promise;
+    }
+
+    function dispatch(node, direction, kind) {
+    	node.dispatchEvent(custom_event(`${direction ? 'intro' : 'outro'}${kind}`));
+    }
+
     let outros;
 
     function group_outros() {
@@ -329,6 +410,131 @@
 
     function on_outro(callback) {
     	outros.callbacks.push(callback);
+    }
+
+    function create_bidirectional_transition(node, fn, params, intro) {
+    	let config = fn(node, params);
+
+    	let t = intro ? 0 : 1;
+
+    	let running_program = null;
+    	let pending_program = null;
+    	let animation_name = null;
+
+    	function clear_animation() {
+    		if (animation_name) delete_rule(node, animation_name);
+    	}
+
+    	function init(program, duration) {
+    		const d = program.b - t;
+    		duration *= Math.abs(d);
+
+    		return {
+    			a: t,
+    			b: program.b,
+    			d,
+    			duration,
+    			start: program.start,
+    			end: program.start + duration,
+    			group: program.group
+    		};
+    	}
+
+    	function go(b) {
+    		const {
+    			delay = 0,
+    			duration = 300,
+    			easing = identity,
+    			tick: tick$$1 = noop,
+    			css
+    		} = config;
+
+    		const program = {
+    			start: window.performance.now() + delay,
+    			b
+    		};
+
+    		if (!b) {
+    			program.group = outros;
+    			outros.remaining += 1;
+    		}
+
+    		if (running_program) {
+    			pending_program = program;
+    		} else {
+    			// if this is an intro, and there's a delay, we need to do
+    			// an initial tick and/or apply CSS animation immediately
+    			if (css) {
+    				clear_animation();
+    				animation_name = create_rule(node, t, b, duration, delay, easing, css);
+    			}
+
+    			if (b) tick$$1(0, 1);
+
+    			running_program = init(program, duration);
+    			add_render_callback(() => dispatch(node, b, 'start'));
+
+    			loop(now => {
+    				if (pending_program && now > pending_program.start) {
+    					running_program = init(pending_program, duration);
+    					pending_program = null;
+
+    					dispatch(node, running_program.b, 'start');
+
+    					if (css) {
+    						clear_animation();
+    						animation_name = create_rule(node, t, running_program.b, running_program.duration, 0, easing, config.css);
+    					}
+    				}
+
+    				if (running_program) {
+    					if (now >= running_program.end) {
+    						tick$$1(t = running_program.b, 1 - t);
+    						dispatch(node, running_program.b, 'end');
+
+    						if (!pending_program) {
+    							// we're done
+    							if (running_program.b) {
+    								// intro — we can tidy up immediately
+    								clear_animation();
+    							} else {
+    								// outro — needs to be coordinated
+    								if (!--running_program.group.remaining) run_all(running_program.group.callbacks);
+    							}
+    						}
+
+    						running_program = null;
+    					}
+
+    					else if (now >= running_program.start) {
+    						const p = now - running_program.start;
+    						t = running_program.a + running_program.d * easing(p / running_program.duration);
+    						tick$$1(t, 1 - t);
+    					}
+    				}
+
+    				return !!(running_program || pending_program);
+    			});
+    		}
+    	}
+
+    	return {
+    		run(b) {
+    			if (typeof config === 'function') {
+    				wait().then(() => {
+    					config = config();
+    					go(b);
+    				});
+    			} else {
+    				go(b);
+    			}
+    		},
+
+    		end() {
+    			clear_animation();
+    			running_program = pending_program = null;
+    		}
+    	};
     }
 
     function mount_component(component, target, anchor) {
@@ -36766,13 +36972,36 @@
       }
      ];
 
+    /*
+    Adapted from https://github.com/mattdesl
+    Distributed under MIT License https://github.com/mattdesl/eases/blob/master/LICENSE.md
+    */
+
+    function cubicOut(t) {
+    	const f = t - 1.0;
+    	return f * f * f + 1.0;
+    }
+
+    function fade(node, {
+    	delay = 0,
+    	duration = 400
+    }) {
+    	const o = +getComputedStyle(node).opacity;
+
+    	return {
+    		delay,
+    		duration,
+    		css: t => `opacity: ${t * o}`
+    	};
+    }
+
     /* src\components\ShareButton.svelte generated by Svelte v3.4.0 */
 
     const file$4 = "src\\components\\ShareButton.svelte";
 
-    // (85:0) {:else}
+    // (87:0) {:else}
     function create_else_block(ctx) {
-    	var div, a0, svg0, path0, path1, a0_href_value, t0, a1, svg1, path2, a1_href_value, t1, a2, svg2, path3, a2_href_value, t2, button, svg3, path4, dispose;
+    	var div, a0, svg0, path0, path1, a0_href_value, a0_transition, t0, a1, svg1, path2, a1_href_value, a1_transition, t1, a2, svg2, path3, a2_href_value, a2_transition, t2, button, svg3, path4, button_transition, current, dispose;
 
     	return {
     		c: function create() {
@@ -36795,54 +37024,54 @@
     			path4 = svg_element("path");
     			set_style(path0, "fill", "#2CB742");
     			attr(path0, "d", "M0,58l4.988-14.963C2.457,38.78,1,33.812,1,28.5C1,12.76,13.76,0,29.5,0S58,12.76,58,28.5   S45.24,57,29.5,57c-4.789,0-9.299-1.187-13.26-3.273L0,58z");
-    			add_location(path0, file$4, 98, 6, 2766);
+    			add_location(path0, file$4, 101, 6, 2852);
     			set_style(path1, "fill", "#FFFFFF");
     			attr(path1, "d", "M47.683,37.985c-1.316-2.487-6.169-5.331-6.169-5.331c-1.098-0.626-2.423-0.696-3.049,0.42   c0,0-1.577,1.891-1.978,2.163c-1.832,1.241-3.529,1.193-5.242-0.52l-3.981-3.981l-3.981-3.981c-1.713-1.713-1.761-3.41-0.52-5.242   c0.272-0.401,2.163-1.978,2.163-1.978c1.116-0.627,1.046-1.951,0.42-3.049c0,0-2.844-4.853-5.331-6.169   c-1.058-0.56-2.357-0.364-3.203,0.482l-1.758,1.758c-5.577,5.577-2.831,11.873,2.746,17.45l5.097,5.097l5.097,5.097   c5.577,5.577,11.873,8.323,17.45,2.746l1.758-1.758C48.048,40.341,48.243,39.042,47.683,37.985z");
-    			add_location(path1, file$4, 102, 6, 2979);
+    			add_location(path1, file$4, 105, 6, 3065);
     			attr(svg0, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg0, "xmlns:xlink", "http://www.w3.org/1999/xlink");
     			attr(svg0, "version", "1.1");
     			attr(svg0, "viewBox", "0 0 58 58");
     			attr(svg0, "class", "w-6 h-6");
-    			add_location(svg0, file$4, 91, 4, 2584);
+    			add_location(svg0, file$4, 94, 4, 2670);
     			a0.className = "flex bg-gray-200 hover:bg-gray-300 px-2 rounded-full items-center";
     			a0.href = a0_href_value = createShareText(ctx.name, ctx.rating, 0);
     			a0.target = "_blank";
-    			add_location(a0, file$4, 86, 2, 2424);
+    			add_location(a0, file$4, 88, 2, 2469);
     			set_style(path2, "fill", "#475993");
     			attr(path2, "d", "M353.701,0H55.087C24.665,0,0.002,24.662,0.002,55.085v298.616c0,30.423,24.662,55.085,55.085,55.085  h147.275l0.251-146.078h-37.951c-4.932,0-8.935-3.988-8.954-8.92l-0.182-47.087c-0.019-4.959,3.996-8.989,8.955-8.989h37.882  v-45.498c0-52.8,32.247-81.55,79.348-81.55h38.65c4.945,0,8.955,4.009,8.955,8.955v39.704c0,4.944-4.007,8.952-8.95,8.955  l-23.719,0.011c-25.615,0-30.575,12.172-30.575,30.035v39.389h56.285c5.363,0,9.524,4.683,8.892,10.009l-5.581,47.087  c-0.534,4.506-4.355,7.901-8.892,7.901h-50.453l-0.251,146.078h87.631c30.422,0,55.084-24.662,55.084-55.084V55.085  C408.786,24.662,384.124,0,353.701,0z");
-    			add_location(path2, file$4, 118, 6, 3870);
+    			add_location(path2, file$4, 122, 6, 3997);
     			attr(svg1, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg1, "class", "h-6 w-6");
     			attr(svg1, "viewBox", "0 0 408.788 408.788");
-    			add_location(svg1, file$4, 113, 4, 3749);
+    			add_location(svg1, file$4, 117, 4, 3876);
     			a1.className = "flex bg-gray-200 hover:bg-gray-300 px-2 rounded-full items-center";
     			a1.href = a1_href_value = createShareText(ctx.name, ctx.rating, 1);
     			a1.target = "_blank";
-    			add_location(a1, file$4, 108, 2, 3589);
+    			add_location(a1, file$4, 111, 2, 3675);
     			attr(path3, "xmlns", "http://www.w3.org/2000/svg");
     			set_style(path3, "fill", "#55ACEE");
     			attr(path3, "d", "M612,116.258c-22.525,9.981-46.694,16.75-72.088,19.772c25.929-15.527,45.777-40.155,55.184-69.411    c-24.322,14.379-51.169,24.82-79.775,30.48c-22.907-24.437-55.49-39.658-91.63-39.658c-69.334,0-125.551,56.217-125.551,125.513    c0,9.828,1.109,19.427,3.251,28.606C197.065,206.32,104.556,156.337,42.641,80.386c-10.823,18.51-16.98,40.078-16.98,63.101    c0,43.559,22.181,81.993,55.835,104.479c-20.575-0.688-39.926-6.348-56.867-15.756v1.568c0,60.806,43.291,111.554,100.693,123.104    c-10.517,2.83-21.607,4.398-33.08,4.398c-8.107,0-15.947-0.803-23.634-2.333c15.985,49.907,62.336,86.199,117.253,87.194    c-42.947,33.654-97.099,53.655-155.916,53.655c-10.134,0-20.116-0.612-29.944-1.721c55.567,35.681,121.536,56.485,192.438,56.485    c230.948,0,357.188-191.291,357.188-357.188l-0.421-16.253C573.872,163.526,595.211,141.422,612,116.258z");
-    			add_location(path3, file$4, 134, 6, 4831);
+    			add_location(path3, file$4, 139, 6, 4995);
     			attr(svg2, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg2, "class", "w-6 h-6");
     			attr(svg2, "viewBox", "0 0 612 612");
-    			add_location(svg2, file$4, 129, 4, 4718);
+    			add_location(svg2, file$4, 134, 4, 4882);
     			a2.href = a2_href_value = createShareText(ctx.name, ctx.rating, 2);
     			a2.target = "_blank";
     			a2.className = "flex bg-gray-200 hover:bg-gray-300 px-2 rounded-full items-center";
-    			add_location(a2, file$4, 124, 2, 4558);
+    			add_location(a2, file$4, 128, 2, 4685);
     			attr(path4, "d", "M459,51H351.9c-10.2-30.6-38.25-51-71.4-51c-33.15,0-61.2,20.4-71.4,51H102c-28.05,0-51,22.95-51,51v408    c0,28.05,22.95,51,51,51h357c28.05,0,51-22.95,51-51V102C510,73.95,487.05,51,459,51z M280.5,51c15.3,0,25.5,10.2,25.5,25.5    S295.8,102,280.5,102S255,91.8,255,76.5S265.2,51,280.5,51z M459,510H102V102h51v76.5h255V102h51V510z");
-    			add_location(path4, file$4, 151, 6, 6041);
+    			add_location(path4, file$4, 157, 6, 6226);
     			attr(svg3, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg3, "class", "w-6 h-6");
     			set_style(svg3, "fill", "darkslategrey");
     			attr(svg3, "viewBox", "0 0 561 561");
-    			add_location(svg3, file$4, 145, 4, 5893);
+    			add_location(svg3, file$4, 151, 4, 6078);
     			button.className = "bg-gray-200 hover:bg-gray-300 px-2 rounded-full";
-    			add_location(button, file$4, 141, 2, 5786);
+    			add_location(button, file$4, 146, 2, 5950);
     			div.className = "flex justify-around align-middle mr-2";
-    			add_location(div, file$4, 85, 0, 2369);
+    			add_location(div, file$4, 87, 0, 2414);
     			dispose = listen(button, "click", copyUrl());
     		},
 
@@ -36864,25 +37093,71 @@
     			append(div, button);
     			append(button, svg3);
     			append(svg3, path4);
+    			current = true;
     		},
 
     		p: function update(changed, ctx) {
-    			if ((changed.name || changed.rating) && a0_href_value !== (a0_href_value = createShareText(ctx.name, ctx.rating, 0))) {
+    			if ((!current || changed.name || changed.rating) && a0_href_value !== (a0_href_value = createShareText(ctx.name, ctx.rating, 0))) {
     				a0.href = a0_href_value;
     			}
 
-    			if ((changed.name || changed.rating) && a1_href_value !== (a1_href_value = createShareText(ctx.name, ctx.rating, 1))) {
+    			if ((!current || changed.name || changed.rating) && a1_href_value !== (a1_href_value = createShareText(ctx.name, ctx.rating, 1))) {
     				a1.href = a1_href_value;
     			}
 
-    			if ((changed.name || changed.rating) && a2_href_value !== (a2_href_value = createShareText(ctx.name, ctx.rating, 2))) {
+    			if ((!current || changed.name || changed.rating) && a2_href_value !== (a2_href_value = createShareText(ctx.name, ctx.rating, 2))) {
     				a2.href = a2_href_value;
     			}
+    		},
+
+    		i: function intro(local) {
+    			if (current) return;
+    			add_render_callback(() => {
+    				if (!a0_transition) a0_transition = create_bidirectional_transition(a0, fade, {delay: 50 * 3}, true);
+    				a0_transition.run(1);
+    			});
+
+    			add_render_callback(() => {
+    				if (!a1_transition) a1_transition = create_bidirectional_transition(a1, fade, {delay: 50 * 2}, true);
+    				a1_transition.run(1);
+    			});
+
+    			add_render_callback(() => {
+    				if (!a2_transition) a2_transition = create_bidirectional_transition(a2, fade, {delay: 50}, true);
+    				a2_transition.run(1);
+    			});
+
+    			add_render_callback(() => {
+    				if (!button_transition) button_transition = create_bidirectional_transition(button, fade, {}, true);
+    				button_transition.run(1);
+    			});
+
+    			current = true;
+    		},
+
+    		o: function outro(local) {
+    			if (!a0_transition) a0_transition = create_bidirectional_transition(a0, fade, {delay: 50 * 3}, false);
+    			a0_transition.run(0);
+
+    			if (!a1_transition) a1_transition = create_bidirectional_transition(a1, fade, {delay: 50 * 2}, false);
+    			a1_transition.run(0);
+
+    			if (!a2_transition) a2_transition = create_bidirectional_transition(a2, fade, {delay: 50}, false);
+    			a2_transition.run(0);
+
+    			if (!button_transition) button_transition = create_bidirectional_transition(button, fade, {}, false);
+    			button_transition.run(0);
+
+    			current = false;
     		},
 
     		d: function destroy(detaching) {
     			if (detaching) {
     				detach(div);
+    				if (a0_transition) a0_transition.end();
+    				if (a1_transition) a1_transition.end();
+    				if (a2_transition) a2_transition.end();
+    				if (button_transition) button_transition.end();
     			}
 
     			dispose();
@@ -36890,7 +37165,7 @@
     	};
     }
 
-    // (68:0) {#if !showWebShare}
+    // (70:0) {#if !showWebShare}
     function create_if_block(ctx) {
     	var button, svg, path0, path1, t, span, dispose;
 
@@ -36905,17 +37180,17 @@
     			span.textContent = "Share";
     			attr(path0, "d", "M0 0h24v24H0z");
     			attr(path0, "fill", "none");
-    			add_location(path0, file$4, 77, 4, 1887);
+    			add_location(path0, file$4, 79, 4, 1932);
     			attr(path1, "d", "M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z");
-    			add_location(path1, file$4, 78, 4, 1931);
+    			add_location(path1, file$4, 80, 4, 1976);
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "class", "fill-current w-6 h6 mr-2");
     			attr(svg, "viewBox", "0 0 24 24");
-    			add_location(svg, file$4, 72, 2, 1769);
-    			add_location(span, file$4, 82, 2, 2329);
+    			add_location(svg, file$4, 74, 2, 1814);
+    			add_location(span, file$4, 84, 2, 2374);
     			button.className = "w-32 rounded border border-blue-600 bg-gray-200 hover:bg-gray-300 hover:shadow text-blue-600 font-medium px-5 py-2 mr-2 inline-flex items-center";
-    			add_location(button, file$4, 68, 0, 1569);
-    			dispose = listen(button, "click", ctx.handleShare());
+    			add_location(button, file$4, 70, 0, 1616);
+    			dispose = listen(button, "click", ctx.handleShare);
     		},
 
     		m: function mount(target, anchor) {
@@ -36928,6 +37203,8 @@
     		},
 
     		p: noop,
+    		i: noop,
+    		o: noop,
 
     		d: function destroy(detaching) {
     			if (detaching) {
@@ -36940,15 +37217,22 @@
     }
 
     function create_fragment$4(ctx) {
-    	var if_block_anchor;
+    	var current_block_type_index, if_block, if_block_anchor, current;
+
+    	var if_block_creators = [
+    		create_if_block,
+    		create_else_block
+    	];
+
+    	var if_blocks = [];
 
     	function select_block_type(ctx) {
-    		if (!ctx.showWebShare) return create_if_block;
-    		return create_else_block;
+    		if (!ctx.showWebShare) return 0;
+    		return 1;
     	}
 
-    	var current_block_type = select_block_type(ctx);
-    	var if_block = current_block_type(ctx);
+    	current_block_type_index = select_block_type(ctx);
+    	if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
 
     	return {
     		c: function create() {
@@ -36961,28 +37245,48 @@
     		},
 
     		m: function mount(target, anchor) {
-    			if_block.m(target, anchor);
+    			if_blocks[current_block_type_index].m(target, anchor);
     			insert(target, if_block_anchor, anchor);
+    			current = true;
     		},
 
     		p: function update(changed, ctx) {
-    			if (current_block_type === (current_block_type = select_block_type(ctx)) && if_block) {
-    				if_block.p(changed, ctx);
+    			var previous_block_index = current_block_type_index;
+    			current_block_type_index = select_block_type(ctx);
+    			if (current_block_type_index === previous_block_index) {
+    				if_blocks[current_block_type_index].p(changed, ctx);
     			} else {
-    				if_block.d(1);
-    				if_block = current_block_type(ctx);
-    				if (if_block) {
+    				group_outros();
+    				on_outro(() => {
+    					if_blocks[previous_block_index].d(1);
+    					if_blocks[previous_block_index] = null;
+    				});
+    				if_block.o(1);
+    				check_outros();
+
+    				if_block = if_blocks[current_block_type_index];
+    				if (!if_block) {
+    					if_block = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
     					if_block.c();
-    					if_block.m(if_block_anchor.parentNode, if_block_anchor);
     				}
+    				if_block.i(1);
+    				if_block.m(if_block_anchor.parentNode, if_block_anchor);
     			}
     		},
 
-    		i: noop,
-    		o: noop,
+    		i: function intro(local) {
+    			if (current) return;
+    			if (if_block) if_block.i();
+    			current = true;
+    		},
+
+    		o: function outro(local) {
+    			if (if_block) if_block.o();
+    			current = false;
+    		},
 
     		d: function destroy(detaching) {
-    			if_block.d(detaching);
+    			if_blocks[current_block_type_index].d(detaching);
 
     			if (detaching) {
     				detach(if_block_anchor);
@@ -37609,16 +37913,6 @@
     }
 
     /* src\components\Carousel.svelte generated by Svelte v3.4.0 */
-
-    /*
-    Adapted from https://github.com/mattdesl
-    Distributed under MIT License https://github.com/mattdesl/eases/blob/master/LICENSE.md
-    */
-
-    function cubicOut(t) {
-    	const f = t - 1.0;
-    	return f * f * f + 1.0;
-    }
 
     function is_date(obj) {
     	return Object.prototype.toString.call(obj) === '[object Date]';

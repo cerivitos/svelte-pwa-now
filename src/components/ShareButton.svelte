@@ -1,4 +1,6 @@
 <script>
+  import { fade } from "svelte/transition";
+
   export let name;
   export let rating;
 
@@ -68,7 +70,7 @@
 {#if !showWebShare}
 <button
   class="w-32 rounded border border-blue-600 bg-gray-200 hover:bg-gray-300 hover:shadow text-blue-600 font-medium px-5 py-2 mr-2 inline-flex items-center"
-  on:click="{handleShare()}"
+  on:click="{handleShare}"
 >
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -85,6 +87,7 @@
 {:else}
 <div class="flex justify-around align-middle mr-2">
   <a
+    transition:fade="{{delay: 50 * 3}}"
     class="flex bg-gray-200 hover:bg-gray-300 px-2 rounded-full items-center"
     href="{createShareText(name, rating, 0)}"
     target="_blank"
@@ -107,6 +110,7 @@
     </svg>
   </a>
   <a
+    transition:fade="{{delay: 50 * 2}}"
     class="flex bg-gray-200 hover:bg-gray-300 px-2 rounded-full items-center"
     href="{createShareText(name, rating, 1)}"
     target="_blank"
@@ -123,6 +127,7 @@
     </svg>
   </a>
   <a
+    transition:fade="{{delay: 50}}"
     href="{createShareText(name, rating, 2)}"
     target="_blank"
     class="flex bg-gray-200 hover:bg-gray-300 px-2 rounded-full items-center"
@@ -140,6 +145,7 @@
     </svg>
   </a>
   <button
+    transition:fade
     class="bg-gray-200 hover:bg-gray-300 px-2 rounded-full"
     on:click="{copyUrl()}"
   >
