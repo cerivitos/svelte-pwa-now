@@ -130,7 +130,7 @@
     </div>
     {/if} {/if}
     <div class="px-4 py-2">
-      <p class="font-bold text-lg">{placeObj.name}</p>
+      <p class="font-semibold text-lg">{placeObj.name}</p>
       <div class="flex flex-row items-baseline mt-2">
         <p class="{createRatingClass(placeObj.rating)}">
           {createRating(placeObj.rating)}
