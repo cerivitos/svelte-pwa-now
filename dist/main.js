@@ -38859,7 +38859,7 @@
 
     const file$9 = "src\\App.svelte";
 
-    // (27:6) <div slot="background">
+    // (23:6) <div slot="background">
     function create_background_slot(ctx) {
     	var div, current;
 
@@ -38870,7 +38870,7 @@
     			div = element("div");
     			map.$$.fragment.c();
     			attr(div, "slot", "background");
-    			add_location(div, file$9, 26, 6, 760);
+    			add_location(div, file$9, 22, 6, 748);
     		},
 
     		m: function mount(target, anchor) {
@@ -38901,7 +38901,7 @@
     	};
     }
 
-    // (28:6) <div slot="modal"          >
+    // (24:6) <div slot="modal"          >
     function create_modal_slot(ctx) {
     	var div, current;
 
@@ -38915,7 +38915,7 @@
     			div = element("div");
     			infomodal.$$.fragment.c();
     			attr(div, "slot", "modal");
-    			add_location(div, file$9, 27, 6, 804);
+    			add_location(div, file$9, 23, 6, 792);
     		},
 
     		m: function mount(target, anchor) {
@@ -38953,7 +38953,7 @@
     	};
     }
 
-    // (26:4) <ModalWrapper transitionTrigger="{$showModal}">
+    // (22:4) <ModalWrapper transitionTrigger="{$showModal}">
     function create_default_slot(ctx) {
     	var t;
 
@@ -38978,7 +38978,7 @@
     	};
     }
 
-    // (32:4) {#if $showCarousel}
+    // (28:4) {#if $showCarousel}
     function create_if_block$2(ctx) {
     	var current;
 
@@ -39042,11 +39042,11 @@
     			modalwrapper.$$.fragment.c();
     			t2 = space();
     			if (if_block) if_block.c();
-    			link.href = "https://fonts.googleapis.com/css?family=Oswald&display=swap";
+    			link.href = "https://fonts.googleapis.com/css?family=Oswald|Roboto&display=swap";
     			link.rel = "stylesheet";
-    			add_location(link, file$9, 18, 3, 525);
+    			add_location(link, file$9, 17, 13, 521);
     			main.className = "overflow-hidden";
-    			add_location(main, file$9, 23, 2, 650);
+    			add_location(main, file$9, 19, 2, 638);
     		},
 
     		l: function claim(nodes) {

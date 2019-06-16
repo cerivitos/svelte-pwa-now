@@ -15,11 +15,7 @@
 
 <style lang="postcss"></style>
 
-<svelte:head
-  ><link
-    href="https://fonts.googleapis.com/css?family=Oswald&display=swap"
-    rel="stylesheet"
-  /></svelte:head>
+<svelte:head><link href="https://fonts.googleapis.com/css?family=Oswald|Roboto&display=swap" rel="stylesheet"></svelte:head>
 
   <main class="overflow-hidden">
     <PlaceList />
