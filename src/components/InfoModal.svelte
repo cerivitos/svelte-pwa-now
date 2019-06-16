@@ -142,7 +142,7 @@
     </div>
     {/if} {/if}
     <div class="px-4 pb-2">
-      <h1 class="font-medium text-xl">{placeObj.name}</h1>
+      <h1 class="font-medium text-xl py-2">{placeObj.name}</h1>
       <div class="flex flex-row items-baseline mt-2">
         <div class="{createRatingClass(placeObj.rating)}" style="background: {ratingBackgroundRgba[placeObj.rating - 1]}">
           {createRating(placeObj.rating)}
