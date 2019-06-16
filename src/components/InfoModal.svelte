@@ -11,7 +11,7 @@
     currentLong,
     homeLat,
     homeLong,
-    geoPermissionGranted, showModal
+    geoPermissionGranted, showModal, showCarousel, carouselName, carouselPics
   } from "../store/store.js";
 
   export let lat, long;
@@ -19,7 +19,6 @@
   let pics = [];
   let placeObj = {};
   let showWebShare = false;
-  let showCarousel = false;
 
   onMount(() => {
     pics = toilets.forEach(toilet => {
@@ -88,14 +87,17 @@
     }
   }
 
-  function triggerCarousel(visible) {
-    showCarousel = visible;
+  function triggerCarousel(visible, name, pics) {
+    if (visible) {
+      showCarousel.set(true);
+      carouselName.set(name);
+      carouselPics.set(pics);
+    } else {
+      showCarousel.set(false);
+      carouselName.set('');
+      carouselPics.set([]);
+    }
   }
-
-  //Handle case where user focuses on SearchBar
-  $: if(!$showModal) {
-    showCarousel = false;
-  };
 </script>
 
 <svelte:window
@@ -114,12 +116,12 @@
     {#if innerWidth < 1024 && pics}
     <div class="flex flex-row w-full overflow-auto">
       {#each pics as pic, i}
-      <FadeInImage src="{pic}" alt="{placeObj.name + ' ' + (i + 1)}" index="i" tailwindClass="h-24 w-24 mr-1" on:clicked="{(e) => triggerCarousel(true)}"/>
+      <FadeInImage src="{pic}" alt="{placeObj.name + ' ' + (i + 1)}" index="i" tailwindClass="h-24 w-24 mr-1" on:clicked="{(e) => triggerCarousel(true, placeObj.name, pics)}"/>
       {/each}
     </div>
     {:else} {#if pics && pics.length > 0}
     <div class="w-full overflow-hidden relative">
-      <FadeInImage src="{pics[0]}" alt="{placeObj.name}" style="width: { innerWidth/3 }px" tailwindClass="object-cover h-64 w-full" on:clicked="{(e) => triggerCarousel(true)}"/>
+      <FadeInImage src="{pics[0]}" alt="{placeObj.name}" style="width: { innerWidth/3 }px" tailwindClass="object-cover h-64 w-full" on:clicked="{(e) => triggerCarousel(true, placeObj.name, pics)}"/>
       <div
         class="absolute rounded-full bg-gray-800 opacity-50 bottom-0 right-0 m-2 px-2 py-1 flex flex-row justify-end items-center"
       >
@@ -175,6 +177,3 @@
     </div>
   </div>
 </div>
-{#if showCarousel && $showModal}
-<Carousel pics="{pics}" name="{placeObj.name}" on:clicked="{(e) => triggerCarousel(false)}"/>
-{/if}

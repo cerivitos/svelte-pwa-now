@@ -4,7 +4,8 @@
   import PlaceList from './components/PlaceList.svelte';
   import InfoModal from './components/InfoModal.svelte';
   import ModalWrapper from './components/ModalWrapper.svelte';
-  import {currentLat, currentLong, showModal} from './store/store.js';
+  import Carousel from './components/Carousel.svelte';
+  import {currentLat, currentLong, showModal, showCarousel} from './store/store.js';
 </script>
 
 <style lang="postcss">
@@ -17,4 +18,7 @@
     <div slot="background"><Map/></div>
     <div slot="modal"><InfoModal lat={$currentLat} long={$currentLong}/></div>
   </ModalWrapper>
+  {#if $showCarousel}
+  <Carousel/>
+  {/if}
 </main>
