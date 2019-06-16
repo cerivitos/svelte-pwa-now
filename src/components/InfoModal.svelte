@@ -1,7 +1,7 @@
 <script>
   import { toiletPics } from "../data/toilet_pics.js";
   import { onMount } from "svelte";
-  import { ratingColors } from "../util.js";
+  import { ratingColors, ratingBackgroundRgba } from "../util.js";
   import { toilets } from "../data/toilets.js";
   import ShareButton from "./ShareButton.svelte";
   import FadeInImage from "./FadeInImage.svelte";
@@ -64,7 +64,7 @@
   }
 
   function createRatingClass(rating) {
-    const baseClass = "mb-2 mr-1 font-semibold text-lg";
+    const baseClass = "mb-2 -ml-4 mr-2 pl-4 pr-2 rounded-r-full font-semibold text-lg";
     return baseClass + " text" + ratingColors[rating - 1];
   }
 
@@ -141,14 +141,14 @@
       </div>
     </div>
     {/if} {/if}
-    <div class="px-4 py-2">
-      <p class="font-semibold text-lg">{placeObj.name}</p>
+    <div class="px-4 pb-2">
+      <h1 class="font-medium text-xl">{placeObj.name}</h1>
       <div class="flex flex-row items-baseline mt-2">
-        <p class="{createRatingClass(placeObj.rating)}">
+        <div class="{createRatingClass(placeObj.rating)}" style="background: {ratingBackgroundRgba[placeObj.rating - 1]}">
           {createRating(placeObj.rating)}
-        </p>
-        <div class="ml-1 font-light text-gray-600">
-          <p class="text-sm">{placeObj.type}</p>
+        </div>
+        <div class="flex-grow-0 text-sm font-light text-gray-600 truncate">
+          📍 {placeObj.address}
         </div>
       </div>
       <div class="flex h-full justify-end my-4">
