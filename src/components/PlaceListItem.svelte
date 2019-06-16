@@ -70,10 +70,10 @@
   bind:this="{listItem}"
 >
   <div class="w-11/12 text-gray-800 pr-1">
-    <p class="font-medium text-lg truncate">
+    <h1 class="font-medium text-lg truncate">
       {@html highlightSearchString($searchString, placeObj.name)}
-    </p>
-    <p class="font-light leading-tight truncate">
+    </h1>
+    <p class="font-light text-sm text-gray-600 leading-tight truncate">
       {@html highlightSearchString($searchString, placeObj.address)}
     </p>
   </div>

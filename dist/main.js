@@ -17557,16 +17557,16 @@
     const file$2 = "src\\components\\PlaceListItem.svelte";
 
     function create_fragment$2(ctx) {
-    	var button, div0, p0, raw0_value = highlightSearchString(ctx.$searchString, ctx.placeObj.name), t0, p1, raw1_value = highlightSearchString(ctx.$searchString, ctx.placeObj.address), t1, div1, span0, t2_value = ctx.placeObj.rating, t2, t3, span0_class_value, t4, span1, t5_value = ctx.placeObj.distance > 1000 ? Math.round(ctx.placeObj.distance/1000) :
+    	var button, div0, h1, raw0_value = highlightSearchString(ctx.$searchString, ctx.placeObj.name), t0, p, raw1_value = highlightSearchString(ctx.$searchString, ctx.placeObj.address), t1, div1, span0, t2_value = ctx.placeObj.rating, t2, t3, span0_class_value, t4, span1, t5_value = ctx.placeObj.distance > 1000 ? Math.round(ctx.placeObj.distance/1000) :
           (ctx.placeObj.distance/1000).toFixed(1), t5, t6, button_class_value, dispose;
 
     	return {
     		c: function create() {
     			button = element("button");
     			div0 = element("div");
-    			p0 = element("p");
+    			h1 = element("h1");
     			t0 = space();
-    			p1 = element("p");
+    			p = element("p");
     			t1 = space();
     			div1 = element("div");
     			span0 = element("span");
@@ -17576,18 +17576,18 @@
     			span1 = element("span");
     			t5 = text(t5_value);
     			t6 = text("km");
-    			p0.className = "font-medium text-lg truncate";
-    			add_location(p0, file$2, 72, 4, 1852);
-    			p1.className = "font-light leading-tight truncate";
-    			add_location(p1, file$2, 75, 4, 1975);
+    			h1.className = "font-medium text-lg truncate";
+    			add_location(h1, file$2, 72, 4, 1852);
+    			p.className = "font-light text-sm text-gray-600 leading-tight truncate";
+    			add_location(p, file$2, 75, 4, 1977);
     			div0.className = "w-11/12 text-gray-800 pr-1";
     			add_location(div0, file$2, 71, 2, 1806);
     			span0.className = span0_class_value = createRatingClass(ctx.placeObj.rating);
-    			add_location(span0, file$2, 80, 4, 2152);
+    			add_location(span0, file$2, 80, 4, 2176);
     			span1.className = "text-xs";
-    			add_location(span1, file$2, 81, 4, 2234);
+    			add_location(span1, file$2, 81, 4, 2258);
     			div1.className = "w-1/12 text-center";
-    			add_location(div1, file$2, 79, 2, 2114);
+    			add_location(div1, file$2, 79, 2, 2138);
     			button.className = button_class_value = ctx.selected ? 'flex p-4 text-left start w-full bg-gray-400 text-gray-800' : 'flex p-4 text-left start w-full bg-transparent text-gray-800';
     			add_location(button, file$2, 65, 0, 1558);
 
@@ -17604,11 +17604,11 @@
     		m: function mount(target, anchor) {
     			insert(target, button, anchor);
     			append(button, div0);
-    			append(div0, p0);
-    			p0.innerHTML = raw0_value;
+    			append(div0, h1);
+    			h1.innerHTML = raw0_value;
     			append(div0, t0);
-    			append(div0, p1);
-    			p1.innerHTML = raw1_value;
+    			append(div0, p);
+    			p.innerHTML = raw1_value;
     			append(button, t1);
     			append(button, div1);
     			append(div1, span0);
@@ -17623,11 +17623,11 @@
 
     		p: function update(changed, ctx) {
     			if ((changed.$searchString || changed.placeObj) && raw0_value !== (raw0_value = highlightSearchString(ctx.$searchString, ctx.placeObj.name))) {
-    				p0.innerHTML = raw0_value;
+    				h1.innerHTML = raw0_value;
     			}
 
     			if ((changed.$searchString || changed.placeObj) && raw1_value !== (raw1_value = highlightSearchString(ctx.$searchString, ctx.placeObj.address))) {
-    				p1.innerHTML = raw1_value;
+    				p.innerHTML = raw1_value;
     			}
 
     			if ((changed.placeObj) && t2_value !== (t2_value = ctx.placeObj.rating)) {
