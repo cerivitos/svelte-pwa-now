@@ -81,7 +81,7 @@
     <span class="{createRatingClass(placeObj.rating)}">{placeObj.rating}★</span>
     <span class="text-xs"
       >{placeObj.distance > 1000 ? Math.round(placeObj.distance/1000) :
-      (placeObj.distance/1000).toFixed(1)}km</span
+      (placeObj.distance).toFixed(1)}km</span
     >
   </div>
 </button>

@@ -54,6 +54,8 @@
   "dependencies": {
     "leaflet": "^1.5.1",
     "leaflet-gesture-handling": "^1.1.8",
+    "mapbox-gl": "^1.0.0",
+    "mapbox-gl-leaflet": "0.0.6",
     "overmind": "^17.1.0",
     "papaparse": "^5.0.0"
   }

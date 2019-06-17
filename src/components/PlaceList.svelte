@@ -10,10 +10,10 @@
   import { toilets } from "../data/toilets.js";
   import PlaceListItem from "./PlaceListItem.svelte";
   import Searchbar from "./Searchbar.svelte";
-  import L from "leaflet";
+  import { calculateDistance } from "../util.js";
   import { onMount, getContext } from "svelte";
 
-  onMount(async () => {
+  onMount(() => {
     const { getMap } = getContext("mapContextKey");
     const map = getMap();
     currentMapCenter = map.getCenter();
@@ -52,14 +52,18 @@
     let referenceCenter;
     let distance;
     if ($geoPermissionGranted) {
-      referenceCenter = L.latLng($currentLat, $currentLong);
+      referenceCenter = { lat: $currentLat, lng: $currentLong };
     } else {
       referenceCenter = currentMapCenter;
     }
 
     filtered.forEach(filteredItem => {
-      distance = referenceCenter.distanceTo(
-        L.latLng(filteredItem.lat, filteredItem.long)
+      distance = calculateDistance(
+        referenceCenter.lat,
+        referenceCenter.lng,
+        filteredItem.lat,
+        filteredItem.long, //Json data uses 'long' instead of 'lng'
+        "K"
       );
       filteredItem.distance = distance;
     });
