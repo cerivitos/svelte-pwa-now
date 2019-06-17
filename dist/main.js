@@ -779,46 +779,46 @@
     			line2 = svg_element("line");
     			line3 = svg_element("line");
     			attr(path0, "d", "M491.318,235.318H20.682C9.26,235.318,0,244.577,0,256s9.26,20.682,20.682,20.682h470.636 c11.423,0,20.682-9.259,20.682-20.682C512,244.578,502.741,235.318,491.318,235.318z");
-    			add_location(path0, file, 60, 6, 2085);
+    			add_location(path0, file, 60, 6, 2060);
     			attr(path1, "d", "M491.318,78.439H20.682C9.26,78.439,0,87.699,0,99.121c0,11.422,9.26,20.682,20.682,20.682h470.636    c11.423,0,20.682-9.26,20.682-20.682C512,87.699,502.741,78.439,491.318,78.439z");
-    			add_location(path1, file, 61, 6, 2273);
+    			add_location(path1, file, 61, 6, 2248);
     			attr(path2, "d", "M491.318,392.197H20.682C9.26,392.197,0,401.456,0,412.879s9.26,20.682,20.682,20.682h470.636    c11.423,0,20.682-9.259,20.682-20.682S502.741,392.197,491.318,392.197z");
-    			add_location(path2, file, 62, 6, 2469);
+    			add_location(path2, file, 62, 6, 2444);
     			attr(svg0, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg0, "class", "w-6 h-6 fill-current text-gray-500 hover:text-gray-600");
     			attr(svg0, "viewBox", "0 0 512 512");
-    			add_location(svg0, file, 59, 4, 1952);
+    			add_location(svg0, file, 59, 4, 1927);
     			button0.className = "my-2 ml-4 flex-grow-0 rounded-full items-center bg-transparent focus: outline-none";
-    			add_location(button0, file, 58, 2, 1809);
+    			add_location(button0, file, 58, 2, 1784);
     			input.placeholder = "Where are you?";
     			input.className = "flex-grow bg-transparent p-4 outline-none";
     			attr(input, "type", "search");
     			input.id = "input";
-    			add_location(input, file, 65, 2, 2673);
+    			add_location(input, file, 65, 2, 2648);
     			attr(circle, "cx", "12");
     			attr(circle, "cy", "12");
     			attr(circle, "r", "10");
-    			add_location(circle, file, 92, 6, 3417);
+    			add_location(circle, file, 92, 6, 3392);
     			attr(line0, "x1", "22");
     			attr(line0, "y1", "12");
     			attr(line0, "x2", "18");
     			attr(line0, "y2", "12");
-    			add_location(line0, file, 93, 6, 3458);
+    			add_location(line0, file, 93, 6, 3433);
     			attr(line1, "x1", "6");
     			attr(line1, "y1", "12");
     			attr(line1, "x2", "2");
     			attr(line1, "y2", "12");
-    			add_location(line1, file, 94, 6, 3506);
+    			add_location(line1, file, 94, 6, 3481);
     			attr(line2, "x1", "12");
     			attr(line2, "y1", "6");
     			attr(line2, "x2", "12");
     			attr(line2, "y2", "2");
-    			add_location(line2, file, 95, 6, 3552);
+    			add_location(line2, file, 95, 6, 3527);
     			attr(line3, "x1", "12");
     			attr(line3, "y1", "22");
     			attr(line3, "x2", "12");
     			attr(line3, "y2", "18");
-    			add_location(line3, file, 96, 6, 3598);
+    			add_location(line3, file, 96, 6, 3573);
     			attr(svg1, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg1, "viewBox", "0 0 24 24");
     			attr(svg1, "fill", "none");
@@ -826,12 +826,12 @@
     			attr(svg1, "stroke-linecap", "round");
     			attr(svg1, "stroke-linejoin", "round");
     			attr(svg1, "class", "stroke-current inline-block w-8 h-8");
-    			add_location(svg1, file, 83, 4, 3174);
+    			add_location(svg1, file, 83, 4, 3149);
     			button1.className = "my-2 mr-4 flex-grow-0 rounded-full items-center bg-transparent focus: outline-none hover:text-teal-600";
     			button1.style.cssText = ctx.style;
-    			add_location(button1, file, 78, 2, 2997);
+    			add_location(button1, file, 78, 2, 2972);
     			div.className = "flex justify-end shadow bg-gray-200 appearance-none border mt-2 rounded-lg";
-    			add_location(div, file, 54, 0, 1672);
+    			add_location(div, file, 54, 0, 1647);
 
     			dispose = [
     				listen(button0, "click", ctx.click_handler),
@@ -896,10 +896,8 @@
     }
 
     function instance($$self, $$props, $$invalidate) {
-    	let $geoPermissionGranted, $currentLat, $currentLong;
+    	let $currentLat, $currentLong;
 
-    	validate_store(geoPermissionGranted, 'geoPermissionGranted');
-    	subscribe($$self, geoPermissionGranted, $$value => { $geoPermissionGranted = $$value; $$invalidate('$geoPermissionGranted', $geoPermissionGranted); });
     	validate_store(currentLat, 'currentLat');
     	subscribe($$self, currentLat, $$value => { $currentLat = $$value; $$invalidate('$currentLat', $currentLat); });
     	validate_store(currentLong, 'currentLong');
@@ -921,7 +919,7 @@
       });
 
       function getLocation() {
-        if (navigator.geolocation && $geoPermissionGranted) {
+        if (navigator.geolocation) {
           geoPermissionGranted.set(true);
           $$invalidate('style', style = "color: #319795");
           searchString.set("");

@@ -16,7 +16,7 @@
   })
 
   function getLocation() {
-    if (navigator.geolocation && $geoPermissionGranted) {
+    if (navigator.geolocation) {
       geoPermissionGranted.set(true);
       style = "color: #319795";
       searchString.set("");
