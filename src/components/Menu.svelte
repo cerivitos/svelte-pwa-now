@@ -20,7 +20,9 @@
     class="bg-gray-200 shadow-lg h-full fixed left-0 top-0"
     style="width: {innerWidth * 0.7}px"
     on:click|stopPropagation=""
-  ></div>
+  >
+    <slot></slot>
+  </div>
   {:else}
   <!-- Limit transition fly amount to better see animation on large screen -->
   <div
@@ -28,6 +30,8 @@
     class="bg-gray-200 shadow-lg h-full fixed left-0 top-0 z-20"
     style="width: {innerWidth * 0.4}px"
     on:click|stopPropagation=""
-  ></div>
+  >
+    <slot></slot>
+  </div>
   {/if}
 </div>

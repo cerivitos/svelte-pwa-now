@@ -39007,25 +39007,44 @@
 
     const file$9 = "src\\components\\Menu.svelte";
 
-    // (24:2) {:else}
+    // (26:2) {:else}
     function create_else_block$1(ctx) {
     	var div, div_transition, current, dispose;
+
+    	const default_slot_1 = ctx.$$slots.default;
+    	const default_slot = create_slot(default_slot_1, ctx, null);
 
     	return {
     		c: function create() {
     			div = element("div");
+
+    			if (default_slot) default_slot.c();
+
     			div.className = "bg-gray-200 shadow-lg h-full fixed left-0 top-0 z-20";
     			set_style(div, "width", "" + ctx.innerWidth * 0.4 + "px");
-    			add_location(div, file$9, 25, 2, 753);
+    			add_location(div, file$9, 27, 2, 776);
     			dispose = listen(div, "click", stop_propagation(ctx.click_handler_1));
+    		},
+
+    		l: function claim(nodes) {
+    			if (default_slot) default_slot.l(div_nodes);
     		},
 
     		m: function mount(target, anchor) {
     			insert(target, div, anchor);
+
+    			if (default_slot) {
+    				default_slot.m(div, null);
+    			}
+
     			current = true;
     		},
 
     		p: function update(changed, ctx) {
+    			if (default_slot && default_slot.p && changed.$$scope) {
+    				default_slot.p(get_slot_changes(default_slot_1, ctx, changed, null), get_slot_context(default_slot_1, ctx, null));
+    			}
+
     			if (!current || changed.innerWidth) {
     				set_style(div, "width", "" + ctx.innerWidth * 0.4 + "px");
     			}
@@ -39033,6 +39052,8 @@
 
     		i: function intro(local) {
     			if (current) return;
+    			if (default_slot && default_slot.i) default_slot.i(local);
+
     			add_render_callback(() => {
     				if (!div_transition) div_transition = create_bidirectional_transition(div, fly, {x: -300}, true);
     				div_transition.run(1);
@@ -39042,6 +39063,8 @@
     		},
 
     		o: function outro(local) {
+    			if (default_slot && default_slot.o) default_slot.o(local);
+
     			if (!div_transition) div_transition = create_bidirectional_transition(div, fly, {x: -300}, false);
     			div_transition.run(0);
 
@@ -39051,6 +39074,11 @@
     		d: function destroy(detaching) {
     			if (detaching) {
     				detach(div);
+    			}
+
+    			if (default_slot) default_slot.d(detaching);
+
+    			if (detaching) {
     				if (div_transition) div_transition.end();
     			}
 
@@ -39063,21 +39091,40 @@
     function create_if_block$2(ctx) {
     	var div, div_transition, current, dispose;
 
+    	const default_slot_1 = ctx.$$slots.default;
+    	const default_slot = create_slot(default_slot_1, ctx, null);
+
     	return {
     		c: function create() {
     			div = element("div");
+
+    			if (default_slot) default_slot.c();
+
     			div.className = "bg-gray-200 shadow-lg h-full fixed left-0 top-0";
     			set_style(div, "width", "" + ctx.innerWidth * 0.7 + "px");
     			add_location(div, file$9, 17, 2, 461);
     			dispose = listen(div, "click", stop_propagation(ctx.click_handler));
     		},
 
+    		l: function claim(nodes) {
+    			if (default_slot) default_slot.l(div_nodes);
+    		},
+
     		m: function mount(target, anchor) {
     			insert(target, div, anchor);
+
+    			if (default_slot) {
+    				default_slot.m(div, null);
+    			}
+
     			current = true;
     		},
 
     		p: function update(changed, ctx) {
+    			if (default_slot && default_slot.p && changed.$$scope) {
+    				default_slot.p(get_slot_changes(default_slot_1, ctx, changed, null), get_slot_context(default_slot_1, ctx, null));
+    			}
+
     			if (!current || changed.innerWidth) {
     				set_style(div, "width", "" + ctx.innerWidth * 0.7 + "px");
     			}
@@ -39085,6 +39132,8 @@
 
     		i: function intro(local) {
     			if (current) return;
+    			if (default_slot && default_slot.i) default_slot.i(local);
+
     			add_render_callback(() => {
     				if (!div_transition) div_transition = create_bidirectional_transition(div, fly, {x: -ctx.innerWidth * 0.7}, true);
     				div_transition.run(1);
@@ -39094,6 +39143,8 @@
     		},
 
     		o: function outro(local) {
+    			if (default_slot && default_slot.o) default_slot.o(local);
+
     			if (!div_transition) div_transition = create_bidirectional_transition(div, fly, {x: -ctx.innerWidth * 0.7}, false);
     			div_transition.run(0);
 
@@ -39103,6 +39154,11 @@
     		d: function destroy(detaching) {
     			if (detaching) {
     				detach(div);
+    			}
+
+    			if (default_slot) default_slot.d(detaching);
+
+    			if (detaching) {
     				if (div_transition) div_transition.end();
     			}
 
@@ -39221,6 +39277,8 @@
 
       let innerWidth;
 
+    	let { $$slots = {}, $$scope } = $$props;
+
     	function click_handler(event) {
     		bubble($$self, event);
     	}
@@ -39237,12 +39295,18 @@
     		return showMenu.set(false);
     	}
 
+    	$$self.$set = $$props => {
+    		if ('$$scope' in $$props) $$invalidate('$$scope', $$scope = $$props.$$scope);
+    	};
+
     	return {
     		innerWidth,
     		click_handler,
     		click_handler_1,
     		onwindowresize,
-    		click_handler_2
+    		click_handler_2,
+    		$$slots,
+    		$$scope
     	};
     }
 
