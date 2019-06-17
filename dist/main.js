@@ -15245,8 +15245,8 @@
         "type": "MRT Station",
         "name": "Bedok Reservoir MRT Station (DT30)",
         "address": "371 Bedok North Avenue 3, S(469724)",
-        "lat": 1.320353,
-        "long": 103.768268,
+        "lat": 1.3365472,
+        "long": 103.9309029,
         "rating": 4,
         "gallery_link": "https://www.toilet.org.sg/gallery/251/4-stars-bedok-reservoir-mrt-station-dt30"
       },
