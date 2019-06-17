@@ -14,3 +14,4 @@ export const showModal = writable(false);
 export const showCarousel = writable(false);
 export const carouselPics = writable([]);
 export const carouselName = writable("");
+export const showMenu = writable(false);

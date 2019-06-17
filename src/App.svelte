@@ -5,11 +5,12 @@
   import InfoModal from "./components/InfoModal.svelte";
   import ModalWrapper from "./components/ModalWrapper.svelte";
   import Carousel from "./components/Carousel.svelte";
+  import Menu from "./components/Menu.svelte";
   import {
     currentLat,
     currentLong,
     showModal,
-    showCarousel
+    showCarousel, showMenu
   } from "./store/store.js";
 </script>
 
@@ -27,5 +28,8 @@
     </ModalWrapper>
     {#if $showCarousel}
     <Carousel />
+    {/if}
+    {#if $showMenu} 
+    <Menu/>
     {/if}
   </main>
