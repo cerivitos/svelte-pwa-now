@@ -37966,7 +37966,7 @@
     				each_blocks[i].c();
     			}
     			div.className = "fixed top-0 w-full h-full overflow-auto flex lg:flex-col items-center z-20";
-    			set_style(div, "background", "rgba(0, 0, 0, 0.9)");
+    			set_style(div, "background", "rgba(0, 0, 0, 0.7)");
     			add_location(div, file$6, 10, 0, 269);
 
     			dispose = [
