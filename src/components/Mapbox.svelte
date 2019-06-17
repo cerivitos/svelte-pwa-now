@@ -14,6 +14,7 @@
   let markers = [];
 
   onMount(() => {
+    //TO-DO: Set domain for access token
     mapboxgl.accessToken =
       "pk.eyJ1IjoiY2VyaXZpdG9zIiwiYSI6ImNqeDBpZG9iajAwNmU0NXJ0eTN2dTQwdzkifQ.8jRT1m32i4Du88MTmgBWAQ";
     map = new mapboxgl.Map({
@@ -53,13 +54,6 @@
       center: [$currentLong, $currentLat],
       zoom: 15
     });
-
-    // const newMarker = L.icon({
-    //   iconUrl: "../assets/toilet_marker.png",
-    //   iconSize: [48, 48],
-    //   iconAnchor: [24, 48],
-    //   popupAnchor: [0, -12]
-    // });
 
     markers.forEach(marker => {
       if (

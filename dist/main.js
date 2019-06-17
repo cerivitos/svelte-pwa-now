@@ -17513,10 +17513,10 @@
     			div = element("div");
     			link.href = "https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css";
     			link.rel = "stylesheet";
-    			add_location(link, file$1, 82, 2, 2229);
+    			add_location(link, file$1, 76, 2, 2078);
     			div.id = "map";
     			div.className = "w-screen h-screen";
-    			add_location(div, file$1, 88, 0, 2351);
+    			add_location(div, file$1, 82, 0, 2200);
     		},
 
     		l: function claim(nodes) {
@@ -17558,6 +17558,7 @@
       let markers = [];
 
       onMount(() => {
+        //TO-DO: Set domain for access token
         mapboxGl.accessToken =
           "pk.eyJ1IjoiY2VyaXZpdG9zIiwiYSI6ImNqeDBpZG9iajAwNmU0NXJ0eTN2dTQwdzkifQ.8jRT1m32i4Du88MTmgBWAQ";
         $$invalidate('map', map = new mapboxGl.Map({
@@ -17598,13 +17599,6 @@
               center: [$currentLong, $currentLat],
               zoom: 15
             });
-        
-            // const newMarker = L.icon({
-            //   iconUrl: "../assets/toilet_marker.png",
-            //   iconSize: [48, 48],
-            //   iconAnchor: [24, 48],
-            //   popupAnchor: [0, -12]
-            // });
         
             markers.forEach(marker => {
               if (
