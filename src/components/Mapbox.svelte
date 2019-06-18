@@ -4,7 +4,8 @@
     currentLat,
     currentLong,
     searchString,
-    showModal
+    showModal,
+    darkMode
   } from "../store/store.js";
   import { onMount, setContext } from "svelte";
   import { toilets } from "../data/toilets.js";
@@ -19,8 +20,9 @@
       "pk.eyJ1IjoiY2VyaXZpdG9zIiwiYSI6ImNqeDBpZG9iajAwNmU0NXJ0eTN2dTQwdzkifQ.8jRT1m32i4Du88MTmgBWAQ";
     map = new mapboxgl.Map({
       container: "map",
-      style:
-        "https://api.maptiler.com/maps/59b64a7f-b9dc-45e1-b342-ac323f3c54eb/style.json?key=A7rAp9M6drW14qgIcf7Y",
+      style: $darkMode
+        ? "mapbox://styles/mapbox/dark-v10"
+        : "mapbox://styles/mapbox/light-v10",
       zoom: 12,
       center: [103.817467, 1.354498],
       maxBounds: new mapboxgl.LngLatBounds(
@@ -70,6 +72,12 @@
           .firstChild.firstChild.children[1].setAttribute("fill", "#3FB1CE");
       }
     });
+  }
+
+  $: if (map !== undefined) {
+    $darkMode
+      ? map.setStyle("mapbox://styles/mapbox/dark-v10")
+      : map.setStyle("mapbox://styles/mapbox/light-v10");
   }
 </script>
 
