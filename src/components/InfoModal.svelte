@@ -110,7 +110,7 @@
   style="top: {topDisplacement}rem"
 >
   <div
-    class="bg-gray-200 overflow-hidden rounded-lg shadow-lg"
+    class="bg-backgroundColor overflow-hidden rounded-lg shadow-lg"
     bind:clientHeight="{modalHeight}"
   >
     {#if innerWidth < 1024 && pics}
@@ -156,7 +156,7 @@
         ></ShareButton>
         <button
           on:click="{() => window.open(getDirections(placeObj.lat, placeObj.long), '_blank')}"
-          class="w-32 rounded bg-blue-600 hover:bg-blue-500 hover:shadow no-underline text-white font-medium px-3 py-2 inline-flex items-center"
+          class="w-32 rounded bg-accentColor hover:bg-blue-500 hover:shadow no-underline text-white font-medium px-3 py-2 inline-flex items-center"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

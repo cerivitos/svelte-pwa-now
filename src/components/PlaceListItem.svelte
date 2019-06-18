@@ -52,7 +52,7 @@
 
       return (
         preString +
-        "<span class='text-teal-600 font-bold'>" +
+        "<span class='text-secondaryColor font-bold'>" +
         highlightedString +
         "</span>" +
         postString

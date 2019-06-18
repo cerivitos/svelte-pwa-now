@@ -7,6 +7,12 @@ module.exports = {
         "104": "26rem",
         "112": "28rem",
         "128": "32rem"
+      },
+      colors: {
+        backgroundColor: "#f6f5f5",
+        primaryColor: "#5bd1d7",
+        secondaryColor: "#248ea9",
+        accentColor: "#556fb5"
       }
     }
   },

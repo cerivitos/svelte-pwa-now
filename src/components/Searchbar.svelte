@@ -10,7 +10,7 @@
       if (PermissionStatus.state == 'granted'){
         geoPermissionGranted.set(true);
         getLocation(true);
-        style = "color: #319795";
+        style = "color: #248ea9";
       }
     })
   })
@@ -18,7 +18,7 @@
   function getLocation() {
     if (navigator.geolocation) {
       geoPermissionGranted.set(true);
-      style = "color: #319795";
+      style = "color: #248ea9";
       searchString.set("");
       showModal.set(false);
       navigator.geolocation.getCurrentPosition(handlePosition, handleError);
@@ -53,7 +53,7 @@
 </script>
 
 <div
-  class="flex justify-end shadow bg-gray-200 appearance-none border mt-2 rounded-lg"
+  class="flex justify-end shadow bg-backgroundColor appearance-none border mt-2 rounded-lg"
   on:keydown={e => dispatchKey(e.key)}
 >
   <button class="my-2 ml-4 flex-grow-0 rounded-full items-center bg-transparent focus: outline-none" on:click="{() => showMenu.set(true)}">

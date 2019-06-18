@@ -780,46 +780,46 @@
     			line2 = svg_element("line");
     			line3 = svg_element("line");
     			attr(path0, "d", "M491.318,235.318H20.682C9.26,235.318,0,244.577,0,256s9.26,20.682,20.682,20.682h470.636 c11.423,0,20.682-9.259,20.682-20.682C512,244.578,502.741,235.318,491.318,235.318z");
-    			add_location(path0, file, 60, 6, 2060);
+    			add_location(path0, file, 60, 6, 2067);
     			attr(path1, "d", "M491.318,78.439H20.682C9.26,78.439,0,87.699,0,99.121c0,11.422,9.26,20.682,20.682,20.682h470.636    c11.423,0,20.682-9.26,20.682-20.682C512,87.699,502.741,78.439,491.318,78.439z");
-    			add_location(path1, file, 61, 6, 2248);
+    			add_location(path1, file, 61, 6, 2255);
     			attr(path2, "d", "M491.318,392.197H20.682C9.26,392.197,0,401.456,0,412.879s9.26,20.682,20.682,20.682h470.636    c11.423,0,20.682-9.259,20.682-20.682S502.741,392.197,491.318,392.197z");
-    			add_location(path2, file, 62, 6, 2444);
+    			add_location(path2, file, 62, 6, 2451);
     			attr(svg0, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg0, "class", "w-6 h-6 fill-current text-gray-500 hover:text-gray-600");
     			attr(svg0, "viewBox", "0 0 512 512");
-    			add_location(svg0, file, 59, 4, 1927);
+    			add_location(svg0, file, 59, 4, 1934);
     			button0.className = "my-2 ml-4 flex-grow-0 rounded-full items-center bg-transparent focus: outline-none";
-    			add_location(button0, file, 58, 2, 1784);
+    			add_location(button0, file, 58, 2, 1791);
     			input.placeholder = "Where are you?";
     			input.className = "flex-grow bg-transparent p-4 outline-none";
     			attr(input, "type", "search");
     			input.id = "input";
-    			add_location(input, file, 65, 2, 2648);
+    			add_location(input, file, 65, 2, 2655);
     			attr(circle, "cx", "12");
     			attr(circle, "cy", "12");
     			attr(circle, "r", "10");
-    			add_location(circle, file, 92, 6, 3392);
+    			add_location(circle, file, 92, 6, 3399);
     			attr(line0, "x1", "22");
     			attr(line0, "y1", "12");
     			attr(line0, "x2", "18");
     			attr(line0, "y2", "12");
-    			add_location(line0, file, 93, 6, 3433);
+    			add_location(line0, file, 93, 6, 3440);
     			attr(line1, "x1", "6");
     			attr(line1, "y1", "12");
     			attr(line1, "x2", "2");
     			attr(line1, "y2", "12");
-    			add_location(line1, file, 94, 6, 3481);
+    			add_location(line1, file, 94, 6, 3488);
     			attr(line2, "x1", "12");
     			attr(line2, "y1", "6");
     			attr(line2, "x2", "12");
     			attr(line2, "y2", "2");
-    			add_location(line2, file, 95, 6, 3527);
+    			add_location(line2, file, 95, 6, 3534);
     			attr(line3, "x1", "12");
     			attr(line3, "y1", "22");
     			attr(line3, "x2", "12");
     			attr(line3, "y2", "18");
-    			add_location(line3, file, 96, 6, 3573);
+    			add_location(line3, file, 96, 6, 3580);
     			attr(svg1, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg1, "viewBox", "0 0 24 24");
     			attr(svg1, "fill", "none");
@@ -827,11 +827,11 @@
     			attr(svg1, "stroke-linecap", "round");
     			attr(svg1, "stroke-linejoin", "round");
     			attr(svg1, "class", "stroke-current inline-block w-8 h-8");
-    			add_location(svg1, file, 83, 4, 3149);
+    			add_location(svg1, file, 83, 4, 3156);
     			button1.className = "my-2 mr-4 flex-grow-0 rounded-full items-center bg-transparent focus: outline-none hover:text-teal-600";
     			button1.style.cssText = ctx.style;
-    			add_location(button1, file, 78, 2, 2972);
-    			div.className = "flex justify-end shadow bg-gray-200 appearance-none border mt-2 rounded-lg";
+    			add_location(button1, file, 78, 2, 2979);
+    			div.className = "flex justify-end shadow bg-backgroundColor appearance-none border mt-2 rounded-lg";
     			add_location(div, file, 54, 0, 1647);
 
     			dispose = [
@@ -914,7 +914,7 @@
           if (PermissionStatus.state == 'granted'){
             geoPermissionGranted.set(true);
             getLocation(true);
-            $$invalidate('style', style = "color: #319795");
+            $$invalidate('style', style = "color: #248ea9");
           }
         });
       });
@@ -922,7 +922,7 @@
       function getLocation() {
         if (navigator.geolocation) {
           geoPermissionGranted.set(true);
-          $$invalidate('style', style = "color: #319795");
+          $$invalidate('style', style = "color: #248ea9");
           searchString.set("");
           showModal.set(false);
           navigator.geolocation.getCurrentPosition(handlePosition, handleError);
@@ -17708,19 +17708,19 @@
     			t5 = text(t5_value);
     			t6 = text("km");
     			h1.className = "font-medium text-lg truncate";
-    			add_location(h1, file$2, 72, 4, 1852);
+    			add_location(h1, file$2, 72, 4, 1858);
     			p.className = "font-light text-sm text-gray-600 leading-tight truncate";
-    			add_location(p, file$2, 75, 4, 1977);
+    			add_location(p, file$2, 75, 4, 1983);
     			div0.className = "w-11/12 text-gray-800 pr-1";
-    			add_location(div0, file$2, 71, 2, 1806);
+    			add_location(div0, file$2, 71, 2, 1812);
     			span0.className = span0_class_value = createRatingClass(ctx.placeObj.rating);
-    			add_location(span0, file$2, 80, 4, 2176);
+    			add_location(span0, file$2, 80, 4, 2182);
     			span1.className = "text-xs";
-    			add_location(span1, file$2, 81, 4, 2258);
+    			add_location(span1, file$2, 81, 4, 2264);
     			div1.className = "w-1/12 text-center";
-    			add_location(div1, file$2, 79, 2, 2138);
+    			add_location(div1, file$2, 79, 2, 2144);
     			button.className = button_class_value = ctx.selected ? 'flex p-4 text-left start w-full bg-gray-400 text-gray-800' : 'flex p-4 text-left start w-full bg-transparent text-gray-800';
-    			add_location(button, file$2, 65, 0, 1558);
+    			add_location(button, file$2, 65, 0, 1564);
 
     			dispose = [
     				listen(button, "click", ctx.selectToilet),
@@ -17820,7 +17820,7 @@
 
         return (
           preString +
-          "<span class='text-teal-600 font-bold'>" +
+          "<span class='text-secondaryColor font-bold'>" +
           highlightedString +
           "</span>" +
           postString
@@ -18015,7 +18015,7 @@
     			for (var i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
-    			div0.className = "searchList w-full overflow-auto mt-1 rounded-lg bg-gray-200 shadow svelte-125p4xn";
+    			div0.className = "searchList w-full overflow-auto mt-1 rounded-lg bg-backgroundColor shadow svelte-125p4xn";
     			add_location(div0, file$3, 81, 2, 2437);
     			div1.className = "fixed px-2 py-4 w-full lg:w-1/3 z-10";
     			add_location(div1, file$3, 79, 0, 2329);
@@ -37198,54 +37198,54 @@
     			if (if_block) if_block.c();
     			set_style(path0, "fill", "#2CB742");
     			attr(path0, "d", "M0,58l4.988-14.963C2.457,38.78,1,33.812,1,28.5C1,12.76,13.76,0,29.5,0S58,12.76,58,28.5   S45.24,57,29.5,57c-4.789,0-9.299-1.187-13.26-3.273L0,58z");
-    			add_location(path0, file$4, 104, 6, 2883);
+    			add_location(path0, file$4, 104, 6, 2893);
     			set_style(path1, "fill", "#FFFFFF");
     			attr(path1, "d", "M47.683,37.985c-1.316-2.487-6.169-5.331-6.169-5.331c-1.098-0.626-2.423-0.696-3.049,0.42   c0,0-1.577,1.891-1.978,2.163c-1.832,1.241-3.529,1.193-5.242-0.52l-3.981-3.981l-3.981-3.981c-1.713-1.713-1.761-3.41-0.52-5.242   c0.272-0.401,2.163-1.978,2.163-1.978c1.116-0.627,1.046-1.951,0.42-3.049c0,0-2.844-4.853-5.331-6.169   c-1.058-0.56-2.357-0.364-3.203,0.482l-1.758,1.758c-5.577,5.577-2.831,11.873,2.746,17.45l5.097,5.097l5.097,5.097   c5.577,5.577,11.873,8.323,17.45,2.746l1.758-1.758C48.048,40.341,48.243,39.042,47.683,37.985z");
-    			add_location(path1, file$4, 108, 6, 3096);
+    			add_location(path1, file$4, 108, 6, 3106);
     			attr(svg0, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg0, "xmlns:xlink", "http://www.w3.org/1999/xlink");
     			attr(svg0, "version", "1.1");
     			attr(svg0, "viewBox", "0 0 58 58");
     			attr(svg0, "class", "w-6 h-6");
-    			add_location(svg0, file$4, 97, 4, 2701);
+    			add_location(svg0, file$4, 97, 4, 2711);
     			a0.className = "flex bg-gray-200 hover:bg-gray-300 px-2 rounded-full items-center";
     			a0.href = a0_href_value = createShareText(ctx.name, ctx.rating, 0);
     			a0.target = "_blank";
-    			add_location(a0, file$4, 91, 2, 2500);
+    			add_location(a0, file$4, 91, 2, 2510);
     			set_style(path2, "fill", "#475993");
     			attr(path2, "d", "M353.701,0H55.087C24.665,0,0.002,24.662,0.002,55.085v298.616c0,30.423,24.662,55.085,55.085,55.085  h147.275l0.251-146.078h-37.951c-4.932,0-8.935-3.988-8.954-8.92l-0.182-47.087c-0.019-4.959,3.996-8.989,8.955-8.989h37.882  v-45.498c0-52.8,32.247-81.55,79.348-81.55h38.65c4.945,0,8.955,4.009,8.955,8.955v39.704c0,4.944-4.007,8.952-8.95,8.955  l-23.719,0.011c-25.615,0-30.575,12.172-30.575,30.035v39.389h56.285c5.363,0,9.524,4.683,8.892,10.009l-5.581,47.087  c-0.534,4.506-4.355,7.901-8.892,7.901h-50.453l-0.251,146.078h87.631c30.422,0,55.084-24.662,55.084-55.084V55.085  C408.786,24.662,384.124,0,353.701,0z");
-    			add_location(path2, file$4, 125, 6, 4028);
+    			add_location(path2, file$4, 125, 6, 4038);
     			attr(svg1, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg1, "class", "h-6 w-6");
     			attr(svg1, "viewBox", "0 0 408.788 408.788");
-    			add_location(svg1, file$4, 120, 4, 3907);
+    			add_location(svg1, file$4, 120, 4, 3917);
     			a1.className = "flex bg-gray-200 hover:bg-gray-300 px-2 rounded-full items-center";
     			a1.href = a1_href_value = createShareText(ctx.name, ctx.rating, 1);
     			a1.target = "_blank";
-    			add_location(a1, file$4, 114, 2, 3706);
+    			add_location(a1, file$4, 114, 2, 3716);
     			attr(path3, "xmlns", "http://www.w3.org/2000/svg");
     			set_style(path3, "fill", "#55ACEE");
     			attr(path3, "d", "M612,116.258c-22.525,9.981-46.694,16.75-72.088,19.772c25.929-15.527,45.777-40.155,55.184-69.411    c-24.322,14.379-51.169,24.82-79.775,30.48c-22.907-24.437-55.49-39.658-91.63-39.658c-69.334,0-125.551,56.217-125.551,125.513    c0,9.828,1.109,19.427,3.251,28.606C197.065,206.32,104.556,156.337,42.641,80.386c-10.823,18.51-16.98,40.078-16.98,63.101    c0,43.559,22.181,81.993,55.835,104.479c-20.575-0.688-39.926-6.348-56.867-15.756v1.568c0,60.806,43.291,111.554,100.693,123.104    c-10.517,2.83-21.607,4.398-33.08,4.398c-8.107,0-15.947-0.803-23.634-2.333c15.985,49.907,62.336,86.199,117.253,87.194    c-42.947,33.654-97.099,53.655-155.916,53.655c-10.134,0-20.116-0.612-29.944-1.721c55.567,35.681,121.536,56.485,192.438,56.485    c230.948,0,357.188-191.291,357.188-357.188l-0.421-16.253C573.872,163.526,595.211,141.422,612,116.258z");
-    			add_location(path3, file$4, 142, 6, 5026);
+    			add_location(path3, file$4, 142, 6, 5036);
     			attr(svg2, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg2, "class", "w-6 h-6");
     			attr(svg2, "viewBox", "0 0 612 612");
-    			add_location(svg2, file$4, 137, 4, 4913);
+    			add_location(svg2, file$4, 137, 4, 4923);
     			a2.href = a2_href_value = createShareText(ctx.name, ctx.rating, 2);
     			a2.target = "_blank";
     			a2.className = "flex bg-gray-200 hover:bg-gray-300 px-2 rounded-full items-center";
-    			add_location(a2, file$4, 131, 2, 4716);
+    			add_location(a2, file$4, 131, 2, 4726);
     			attr(path4, "d", "M459,51H351.9c-10.2-30.6-38.25-51-71.4-51c-33.15,0-61.2,20.4-71.4,51H102c-28.05,0-51,22.95-51,51v408    c0,28.05,22.95,51,51,51h357c28.05,0,51-22.95,51-51V102C510,73.95,487.05,51,459,51z M280.5,51c15.3,0,25.5,10.2,25.5,25.5    S295.8,102,280.5,102S255,91.8,255,76.5S265.2,51,280.5,51z M459,510H102V102h51v76.5h255V102h51V510z");
-    			add_location(path4, file$4, 160, 6, 6264);
+    			add_location(path4, file$4, 160, 6, 6274);
     			attr(svg3, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg3, "class", "w-6 h-6");
     			set_style(svg3, "fill", "darkslategrey");
     			attr(svg3, "viewBox", "0 0 561 561");
-    			add_location(svg3, file$4, 154, 4, 6116);
+    			add_location(svg3, file$4, 154, 4, 6126);
     			button.className = "relative bg-gray-200 hover:bg-gray-300 px-2 rounded-full";
-    			add_location(button, file$4, 149, 2, 5981);
+    			add_location(button, file$4, 149, 2, 5991);
     			div.className = "flex justify-around align-middle mr-2";
-    			add_location(div, file$4, 90, 0, 2445);
+    			add_location(div, file$4, 90, 0, 2455);
     			dispose = listen(button, "click", ctx.copyUrl);
     		},
 
@@ -37385,15 +37385,15 @@
     			span.textContent = "Share";
     			attr(path0, "d", "M0 0h24v24H0z");
     			attr(path0, "fill", "none");
-    			add_location(path0, file$4, 82, 4, 1963);
+    			add_location(path0, file$4, 82, 4, 1973);
     			attr(path1, "d", "M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z");
-    			add_location(path1, file$4, 83, 4, 2007);
+    			add_location(path1, file$4, 83, 4, 2017);
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "class", "fill-current w-6 h6 mr-2");
     			attr(svg, "viewBox", "0 0 24 24");
-    			add_location(svg, file$4, 77, 2, 1845);
-    			add_location(span, file$4, 87, 2, 2405);
-    			button.className = "w-32 rounded bg-gray-200 hover:bg-gray-300 text-blue-600 font-medium px-5 py-2 mr-2 inline-flex items-center";
+    			add_location(svg, file$4, 77, 2, 1855);
+    			add_location(span, file$4, 87, 2, 2415);
+    			button.className = "w-32 rounded bg-backgroundColor hover:bg-gray-300 text-accentColor font-medium px-5 py-2 mr-2 inline-flex items-center";
     			add_location(button, file$4, 73, 0, 1683);
     			dispose = listen(button, "click", ctx.handleShare);
     		},
@@ -37431,12 +37431,12 @@
     			path = svg_element("path");
     			set_style(path, "fill", "#6AC259");
     			attr(path, "d", "M213.333,0C95.518,0,0,95.514,0,213.333s95.518,213.333,213.333,213.333  c117.828,0,213.333-95.514,213.333-213.333S331.157,0,213.333,0z M174.199,322.918l-93.935-93.931l31.309-31.309l62.626,62.622  l140.894-140.898l31.309,31.309L174.199,322.918z");
-    			add_location(path, file$4, 173, 6, 6934);
+    			add_location(path, file$4, 173, 6, 6944);
     			attr(svg, "class", "absolute w-6 h-6");
     			set_style(svg, "transform", "translate(0%, -100%)");
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "viewBox", "0 0 426.667 426.667");
-    			add_location(svg, file$4, 165, 4, 6662);
+    			add_location(svg, file$4, 165, 4, 6672);
     			dispose = listen(svg, "introend", ctx.introend_handler);
     		},
 
@@ -38212,20 +38212,20 @@
     			path0 = svg_element("path");
     			path1 = svg_element("path");
     			p.className = "text-white text-xs mr-1";
-    			add_location(p, file$7, 127, 8, 3851);
+    			add_location(p, file$7, 127, 8, 3858);
     			attr(path0, "d", "M0 0h24v24H0z");
     			attr(path0, "fill", "none");
-    			add_location(path0, file$7, 135, 10, 4090);
+    			add_location(path0, file$7, 135, 10, 4097);
     			attr(path1, "d", "M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z");
-    			add_location(path1, file$7, 136, 10, 4145);
+    			add_location(path1, file$7, 136, 10, 4152);
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "viewBox", "0 0 24 24");
     			attr(svg, "class", "h-4 w-4 fill-current text-white");
-    			add_location(svg, file$7, 130, 8, 3935);
+    			add_location(svg, file$7, 130, 8, 3942);
     			div0.className = "absolute rounded-full bg-gray-800 opacity-50 bottom-0 right-0 m-2 px-2 py-1 flex flex-row justify-end items-center";
-    			add_location(div0, file$7, 124, 6, 3696);
+    			add_location(div0, file$7, 124, 6, 3703);
     			div1.className = "w-full overflow-hidden relative";
-    			add_location(div1, file$7, 122, 4, 3443);
+    			add_location(div1, file$7, 122, 4, 3450);
     		},
 
     		m: function mount(target, anchor) {
@@ -38309,7 +38309,7 @@
     				each_blocks[i].c();
     			}
     			div.className = "flex flex-row w-full overflow-auto";
-    			add_location(div, file$7, 116, 4, 3111);
+    			add_location(div, file$7, 116, 4, 3118);
     		},
 
     		m: function mount(target, anchor) {
@@ -38478,32 +38478,32 @@
     			span = element("span");
     			span.textContent = "Directions";
     			h1.className = "font-medium text-xl py-2";
-    			add_location(h1, file$7, 144, 6, 4404);
+    			add_location(h1, file$7, 144, 6, 4411);
     			div0.className = div0_class_value = createRatingClass$1(ctx.placeObj.rating);
     			set_style(div0, "background", ratingBackgroundRgba[ctx.placeObj.rating - 1]);
-    			add_location(div0, file$7, 146, 8, 4526);
+    			add_location(div0, file$7, 146, 8, 4533);
     			div1.className = "flex-grow-0 text-sm font-light text-gray-600 truncate";
-    			add_location(div1, file$7, 149, 8, 4709);
+    			add_location(div1, file$7, 149, 8, 4716);
     			div2.className = "flex flex-row items-baseline mt-2";
-    			add_location(div2, file$7, 145, 6, 4469);
+    			add_location(div2, file$7, 145, 6, 4476);
     			attr(path0, "d", "M21.71 11.29l-9-9c-.39-.39-1.02-.39-1.41 0l-9 9c-.39.39-.39 1.02 0 1.41l9 9c.39.39 1.02.39 1.41 0l9-9c.39-.38.39-1.01 0-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z");
-    			add_location(path0, file$7, 165, 12, 5424);
+    			add_location(path0, file$7, 165, 12, 5434);
     			attr(path1, "d", "M0 0h24v24H0z");
     			attr(path1, "fill", "none");
-    			add_location(path1, file$7, 168, 12, 5663);
+    			add_location(path1, file$7, 168, 12, 5673);
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "class", "fill-current w-6 h-6 mr-2");
     			attr(svg, "viewBox", "0 0 24 24");
-    			add_location(svg, file$7, 160, 10, 5265);
-    			add_location(span, file$7, 170, 10, 5731);
-    			button.className = "w-32 rounded bg-blue-600 hover:bg-blue-500 hover:shadow no-underline text-white font-medium px-3 py-2 inline-flex items-center";
-    			add_location(button, file$7, 156, 8, 4993);
+    			add_location(svg, file$7, 160, 10, 5275);
+    			add_location(span, file$7, 170, 10, 5741);
+    			button.className = "w-32 rounded bg-accentColor hover:bg-blue-500 hover:shadow no-underline text-white font-medium px-3 py-2 inline-flex items-center";
+    			add_location(button, file$7, 156, 8, 5000);
     			div3.className = "flex h-full justify-end my-4";
-    			add_location(div3, file$7, 151, 6, 4822);
+    			add_location(div3, file$7, 151, 6, 4829);
     			div4.className = "px-4 pb-2";
-    			add_location(div4, file$7, 143, 4, 4373);
+    			add_location(div4, file$7, 143, 4, 4380);
     			add_render_callback(() => ctx.div5_resize_handler.call(div5));
-    			div5.className = "bg-gray-200 overflow-hidden rounded-lg shadow-lg";
+    			div5.className = "bg-backgroundColor overflow-hidden rounded-lg shadow-lg";
     			add_location(div5, file$7, 111, 2, 2958);
     			div6.className = "mx-2 fixed lg:w-1/3 left-0 right-0";
     			set_style(div6, "top", "" + ctx.topDisplacement + "rem");
