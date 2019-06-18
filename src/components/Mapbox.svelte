@@ -10,6 +10,9 @@
   import { onMount, setContext } from "svelte";
   import { toilets } from "../data/toilets.js";
 
+  const darkStyle = "mapbox://styles/cerivitos/cjx20hhye07f41cpgk28g563z";
+  const lightStyle = "mapbox://styles/mapbox/streets-v9";
+
   let map;
   let toiletMarker;
   let markers = [];
@@ -20,9 +23,7 @@
       "pk.eyJ1IjoiY2VyaXZpdG9zIiwiYSI6ImNqeDBpZG9iajAwNmU0NXJ0eTN2dTQwdzkifQ.8jRT1m32i4Du88MTmgBWAQ";
     map = new mapboxgl.Map({
       container: "map",
-      style: $darkMode
-        ? "mapbox://styles/mapbox/dark-v10"
-        : "mapbox://styles/mapbox/light-v10",
+      style: $darkMode ? darkStyle : lightStyle,
       zoom: 12,
       center: [103.817467, 1.354498],
       maxBounds: new mapboxgl.LngLatBounds(
@@ -75,9 +76,7 @@
   }
 
   $: if (map !== undefined) {
-    $darkMode
-      ? map.setStyle("mapbox://styles/mapbox/dark-v10")
-      : map.setStyle("mapbox://styles/mapbox/light-v10");
+    $darkMode ? map.setStyle(darkStyle) : map.setStyle(lightStyle);
   }
 </script>
 
