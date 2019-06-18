@@ -38412,7 +38412,7 @@
     }
 
     function create_fragment$7(ctx) {
-    	var div6, div5, current_block_type_index, if_block, t0, div4, h1, t1_value = ctx.placeObj.name, t1, t2, div2, div0, t3_value = createRating(ctx.placeObj.rating), t3, div0_class_value, t4, div1, t5_value = ctx.placeObj.address, t5, t6, div3, t7, a, svg, path0, path1, t8, span, a_href_value, div5_resize_listener, current, dispose;
+    	var div6, div5, current_block_type_index, if_block, t0, div4, h1, t1_value = ctx.placeObj.name, t1, t2, div2, div0, t3_value = createRating(ctx.placeObj.rating), t3, div0_class_value, t4, div1, t5_value = ctx.placeObj.address, t5, t6, div3, t7, button, svg, path0, path1, t8, span, div5_resize_listener, current, dispose;
 
     	add_render_callback(ctx.onwindowresize);
 
@@ -38461,7 +38461,7 @@
     			div3 = element("div");
     			sharebutton.$$.fragment.c();
     			t7 = space();
-    			a = element("a");
+    			button = element("button");
     			svg = svg_element("svg");
     			path0 = svg_element("path");
     			path1 = svg_element("path");
@@ -38478,19 +38478,17 @@
     			div2.className = "flex flex-row items-baseline mt-2";
     			add_location(div2, file$7, 145, 6, 4469);
     			attr(path0, "d", "M21.71 11.29l-9-9c-.39-.39-1.02-.39-1.41 0l-9 9c-.39.39-.39 1.02 0 1.41l9 9c.39.39 1.02.39 1.41 0l9-9c.39-.38.39-1.01 0-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z");
-    			add_location(path0, file$7, 166, 12, 5413);
+    			add_location(path0, file$7, 165, 12, 5424);
     			attr(path1, "d", "M0 0h24v24H0z");
     			attr(path1, "fill", "none");
-    			add_location(path1, file$7, 169, 12, 5652);
+    			add_location(path1, file$7, 168, 12, 5663);
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "class", "fill-current w-6 h-6 mr-2");
     			attr(svg, "viewBox", "0 0 24 24");
-    			add_location(svg, file$7, 161, 10, 5254);
-    			add_location(span, file$7, 171, 10, 5720);
-    			a.href = a_href_value = ctx.getDirections(ctx.placeObj.lat, ctx.placeObj.long);
-    			a.target = "_blank";
-    			a.className = "w-32 rounded bg-blue-600 hover:bg-blue-500 hover:shadow no-underline text-white font-medium px-3 py-2 inline-flex items-center";
-    			add_location(a, file$7, 156, 8, 4993);
+    			add_location(svg, file$7, 160, 10, 5265);
+    			add_location(span, file$7, 170, 10, 5731);
+    			button.className = "w-32 rounded bg-blue-600 hover:bg-blue-500 hover:shadow no-underline text-white font-medium px-3 py-2 inline-flex items-center";
+    			add_location(button, file$7, 156, 8, 4993);
     			div3.className = "flex h-full justify-end my-4";
     			add_location(div3, file$7, 151, 6, 4822);
     			div4.className = "px-4 pb-2";
@@ -38501,7 +38499,11 @@
     			div6.className = "mx-2 fixed lg:w-1/3 left-0 right-0";
     			set_style(div6, "top", "" + ctx.topDisplacement + "rem");
     			add_location(div6, file$7, 107, 0, 2864);
-    			dispose = listen(window, "resize", ctx.onwindowresize);
+
+    			dispose = [
+    				listen(window, "resize", ctx.onwindowresize),
+    				listen(button, "click", ctx.click_handler)
+    			];
     		},
 
     		l: function claim(nodes) {
@@ -38527,12 +38529,12 @@
     			append(div4, div3);
     			mount_component(sharebutton, div3, null);
     			append(div3, t7);
-    			append(div3, a);
-    			append(a, svg);
+    			append(div3, button);
+    			append(button, svg);
     			append(svg, path0);
     			append(svg, path1);
-    			append(a, t8);
-    			append(a, span);
+    			append(button, t8);
+    			append(button, span);
     			div5_resize_listener = add_resize_listener(div5, ctx.div5_resize_handler.bind(div5));
     			current = true;
     		},
@@ -38591,10 +38593,6 @@
     			if (changed.placeObj) sharebutton_changes.rating = ctx.placeObj.rating;
     			sharebutton.$set(sharebutton_changes);
 
-    			if ((!current || changed.placeObj) && a_href_value !== (a_href_value = ctx.getDirections(ctx.placeObj.lat, ctx.placeObj.long))) {
-    				a.href = a_href_value;
-    			}
-
     			if (!current || changed.topDisplacement) {
     				set_style(div6, "top", "" + ctx.topDisplacement + "rem");
     			}
@@ -38625,7 +38623,7 @@
     			sharebutton.$destroy();
 
     			div5_resize_listener.cancel();
-    			dispose();
+    			run_all(dispose);
     		}
     	};
     }
@@ -38729,6 +38727,10 @@
     		return triggerCarousel(true, placeObj.name, pics);
     	}
 
+    	function click_handler() {
+    		return window.open(getDirections(placeObj.lat, placeObj.long), '_blank');
+    	}
+
     	function div5_resize_handler() {
     		modalHeight = this.clientHeight;
     		$$invalidate('modalHeight', modalHeight);
@@ -38762,6 +38764,7 @@
     		onwindowresize,
     		clicked_handler,
     		clicked_handler_1,
+    		click_handler,
     		div5_resize_handler
     	};
     }
@@ -39007,7 +39010,7 @@
 
     const file$9 = "src\\components\\Menu.svelte";
 
-    // (26:2) {:else}
+    // (25:2) {:else}
     function create_else_block$1(ctx) {
     	var div, div_transition, current, dispose;
 
@@ -39022,7 +39025,7 @@
 
     			div.className = "bg-gray-200 shadow-lg h-full fixed left-0 top-0 z-20";
     			set_style(div, "width", "" + ctx.innerWidth * 0.4 + "px");
-    			add_location(div, file$9, 27, 2, 776);
+    			add_location(div, file$9, 26, 2, 739);
     			dispose = listen(div, "click", stop_propagation(ctx.click_handler_1));
     		},
 
@@ -39087,7 +39090,7 @@
     	};
     }
 
-    // (17:2) {#if innerWidth < 1024}
+    // (16:2) {#if innerWidth < 1024}
     function create_if_block$2(ctx) {
     	var div, div_transition, current, dispose;
 
@@ -39102,7 +39105,7 @@
 
     			div.className = "bg-gray-200 shadow-lg h-full fixed left-0 top-0";
     			set_style(div, "width", "" + ctx.innerWidth * 0.7 + "px");
-    			add_location(div, file$9, 17, 2, 461);
+    			add_location(div, file$9, 16, 2, 424);
     			dispose = listen(div, "click", stop_propagation(ctx.click_handler));
     		},
 
@@ -39193,7 +39196,7 @@
     			if_block.c();
     			div.className = "fixed top-0 w-full h-full overflow-auto flex lg:flex-col items-center z-20";
     			set_style(div, "background", "rgba(0, 0, 0, 0.7)");
-    			add_location(div, file$9, 10, 0, 232);
+    			add_location(div, file$9, 9, 0, 195);
 
     			dispose = [
     				listen(window, "resize", ctx.onwindowresize),
@@ -39317,11 +39320,158 @@
     	}
     }
 
+    /* src\components\MenuContent.svelte generated by Svelte v3.4.0 */
+
+    const file$a = "src\\components\\MenuContent.svelte";
+
+    function create_fragment$a(ctx) {
+    	var div, h1, t1, p0, t3, button0, svg0, path0, path1, t4, span0, t6, button1, svg1, path2, t7, span1, t9, p1, t10, a0, t12, a1, t14, a2, t16, a3, dispose;
+
+    	return {
+    		c: function create() {
+    			div = element("div");
+    			h1 = element("h1");
+    			h1.textContent = "sgtoilet";
+    			t1 = space();
+    			p0 = element("p");
+    			p0.textContent = "A collection of toilets in Singapore rated by the Restroom Association\r\n    (Singapore).";
+    			t3 = space();
+    			button0 = element("button");
+    			svg0 = svg_element("svg");
+    			path0 = svg_element("path");
+    			path1 = svg_element("path");
+    			t4 = space();
+    			span0 = element("span");
+    			span0.textContent = "Find out more";
+    			t6 = space();
+    			button1 = element("button");
+    			svg1 = svg_element("svg");
+    			path2 = svg_element("path");
+    			t7 = space();
+    			span1 = element("span");
+    			span1.textContent = "Night mode";
+    			t9 = space();
+    			p1 = element("p");
+    			t10 = text("Built with ");
+    			a0 = element("a");
+    			a0.textContent = "Svelte";
+    			t12 = text(" ·\r\n    ");
+    			a1 = element("a");
+    			a1.textContent = "Mapbox";
+    			t14 = text(" ·\r\n    ");
+    			a2 = element("a");
+    			a2.textContent = "Tailwind";
+    			t16 = text(" · Source code\r\n    on ");
+    			a3 = element("a");
+    			a3.textContent = "Github";
+    			h1.className = "text-6xl mb-2";
+    			add_location(h1, file$a, 7, 2, 159);
+    			p0.className = "mb-6";
+    			add_location(p0, file$a, 8, 2, 202);
+    			attr(path0, "d", "M0 0h24v24H0z");
+    			attr(path0, "fill", "none");
+    			add_location(path0, file$a, 18, 6, 514);
+    			attr(path1, "d", "M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z");
+    			add_location(path1, file$a, 19, 6, 560);
+    			attr(svg0, "xmlns", "http://www.w3.org/2000/svg");
+    			attr(svg0, "class", "w-6 h-6 mr-2 fill-current");
+    			attr(svg0, "viewBox", "0 0 24 24");
+    			add_location(svg0, file$a, 13, 4, 385);
+    			add_location(span0, file$a, 23, 4, 737);
+    			button0.className = "py-4 inline-flex";
+    			add_location(button0, file$a, 12, 2, 324);
+    			attr(path2, "d", "M506.51,347.083c-7.057-7.037-15.245-8.531-24.571-4.424c-25.031,11.597-50.968,17.398-77.81,17.398    c-33.673,0-64.726-8.292-93.165-24.914c-28.439-16.598-50.961-39.125-67.571-67.559c-16.609-28.434-24.915-59.493-24.915-93.166    c0-26.169,5.171-51.016,15.527-74.572c10.349-23.543,25.306-44.192,44.878-61.935c7.509-7.05,9.217-15.238,5.116-24.565    c-3.874-9.333-10.808-13.758-20.82-13.317c-34.811,1.371-67.797,9.156-98.966,23.379c-31.175,14.223-57.963,32.925-80.368,56.132    c-22.411,23.207-40.159,50.68-53.238,82.412c-13.072,31.732-19.608,65.006-19.608,99.811c0,35.502,6.94,69.401,20.82,101.697    c13.874,32.313,32.534,60.189,55.967,83.611c23.434,23.445,51.304,42.087,83.611,55.974    c32.301,13.861,66.206,20.808,101.696,20.808c50.962,0,98-13.825,141.115-41.457c43.109-27.65,75.361-64.56,96.751-110.735    c1.817-4.106,2.326-8.427,1.536-12.968C511.682,354.146,509.692,350.278,506.51,347.083z");
+    			add_location(path2, file$a, 31, 6, 958);
+    			attr(svg1, "xmlns", "http://www.w3.org/2000/svg");
+    			attr(svg1, "class", "w-6 h-6 fill-current mr-2");
+    			attr(svg1, "viewBox", "0 0 523.854 523.854");
+    			add_location(svg1, file$a, 26, 4, 819);
+    			add_location(span1, file$a, 35, 4, 1898);
+    			button1.className = "py-4 inline-flex";
+    			add_location(button1, file$a, 25, 2, 780);
+    			a0.href = "https://svelte.dev";
+    			a0.target = "_blank";
+    			add_location(a0, file$a, 38, 15, 1986);
+    			a1.href = "https://mapbox.com";
+    			a1.target = "_blank";
+    			add_location(a1, file$a, 39, 4, 2049);
+    			a2.href = "https://tailwindcss.com";
+    			a2.target = "_blank";
+    			add_location(a2, file$a, 40, 4, 2112);
+    			a3.href = "https://github.com/INeedToilet";
+    			a3.target = "_blank";
+    			add_location(a3, file$a, 41, 7, 2197);
+    			p1.className = "fixed bottom-0 pb-4";
+    			add_location(p1, file$a, 37, 2, 1938);
+    			div.className = "flex flex-col p-4 text-gray-800";
+    			add_location(div, file$a, 6, 0, 110);
+    			dispose = listen(button0, "click", moreInfo);
+    		},
+
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+
+    		m: function mount(target, anchor) {
+    			insert(target, div, anchor);
+    			append(div, h1);
+    			append(div, t1);
+    			append(div, p0);
+    			append(div, t3);
+    			append(div, button0);
+    			append(button0, svg0);
+    			append(svg0, path0);
+    			append(svg0, path1);
+    			append(button0, t4);
+    			append(button0, span0);
+    			append(div, t6);
+    			append(div, button1);
+    			append(button1, svg1);
+    			append(svg1, path2);
+    			append(button1, t7);
+    			append(button1, span1);
+    			append(div, t9);
+    			append(div, p1);
+    			append(p1, t10);
+    			append(p1, a0);
+    			append(p1, t12);
+    			append(p1, a1);
+    			append(p1, t14);
+    			append(p1, a2);
+    			append(p1, t16);
+    			append(p1, a3);
+    		},
+
+    		p: noop,
+    		i: noop,
+    		o: noop,
+
+    		d: function destroy(detaching) {
+    			if (detaching) {
+    				detach(div);
+    			}
+
+    			dispose();
+    		}
+    	};
+    }
+
+    function moreInfo() {
+      window.open("https://www.toilet.org.sg", "_blank");
+    }
+
+    class MenuContent extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, null, create_fragment$a, safe_not_equal, []);
+    	}
+    }
+
     /* src\App.svelte generated by Svelte v3.4.0 */
 
-    const file$a = "src\\App.svelte";
+    const file$b = "src\\App.svelte";
 
-    // (26:6) <div slot="background">
+    // (27:6) <div slot="background">
     function create_background_slot(ctx) {
     	var div, current;
 
@@ -39332,7 +39482,7 @@
     			div = element("div");
     			mapbox.$$.fragment.c();
     			attr(div, "slot", "background");
-    			add_location(div, file$a, 25, 6, 860);
+    			add_location(div, file$b, 26, 6, 921);
     		},
 
     		m: function mount(target, anchor) {
@@ -39363,7 +39513,7 @@
     	};
     }
 
-    // (27:6) <div slot="modal"          >
+    // (28:6) <div slot="modal"          >
     function create_modal_slot(ctx) {
     	var div, current;
 
@@ -39377,7 +39527,7 @@
     			div = element("div");
     			infomodal.$$.fragment.c();
     			attr(div, "slot", "modal");
-    			add_location(div, file$a, 26, 6, 907);
+    			add_location(div, file$b, 27, 6, 968);
     		},
 
     		m: function mount(target, anchor) {
@@ -39415,8 +39565,8 @@
     	};
     }
 
-    // (25:4) <ModalWrapper transitionTrigger="{$showModal}">
-    function create_default_slot(ctx) {
+    // (26:4) <ModalWrapper transitionTrigger="{$showModal}">
+    function create_default_slot_1(ctx) {
     	var t;
 
     	return {
@@ -39440,7 +39590,7 @@
     	};
     }
 
-    // (31:4) {#if $showCarousel}
+    // (32:4) {#if $showCarousel}
     function create_if_block_1$2(ctx) {
     	var current;
 
@@ -39474,11 +39624,17 @@
     	};
     }
 
-    // (34:4) {#if $showMenu}
+    // (35:4) {#if $showMenu}
     function create_if_block$3(ctx) {
     	var current;
 
-    	var menu = new Menu({ $$inline: true });
+    	var menu = new Menu({
+    		props: {
+    		$$slots: { default: [create_default_slot] },
+    		$$scope: { ctx }
+    	},
+    		$$inline: true
+    	});
 
     	return {
     		c: function create() {
@@ -39508,7 +39664,41 @@
     	};
     }
 
-    function create_fragment$a(ctx) {
+    // (36:4) <Menu>
+    function create_default_slot(ctx) {
+    	var current;
+
+    	var menucontent = new MenuContent({ $$inline: true });
+
+    	return {
+    		c: function create() {
+    			menucontent.$$.fragment.c();
+    		},
+
+    		m: function mount(target, anchor) {
+    			mount_component(menucontent, target, anchor);
+    			current = true;
+    		},
+
+    		i: function intro(local) {
+    			if (current) return;
+    			menucontent.$$.fragment.i(local);
+
+    			current = true;
+    		},
+
+    		o: function outro(local) {
+    			menucontent.$$.fragment.o(local);
+    			current = false;
+    		},
+
+    		d: function destroy(detaching) {
+    			menucontent.$destroy(detaching);
+    		}
+    	};
+    }
+
+    function create_fragment$b(ctx) {
     	var link, t0, main, t1, t2, t3, current;
 
     	var placelist = new PlaceList({ $$inline: true });
@@ -39517,7 +39707,7 @@
     		props: {
     		transitionTrigger: ctx.$showModal,
     		$$slots: {
-    		default: [create_default_slot],
+    		default: [create_default_slot_1],
     		modal: [create_modal_slot],
     		background: [create_background_slot]
     	},
@@ -39544,9 +39734,9 @@
     			if (if_block1) if_block1.c();
     			link.href = "https://fonts.googleapis.com/css?family=Oswald|Roboto&display=swap";
     			link.rel = "stylesheet";
-    			add_location(link, file$a, 19, 13, 631);
+    			add_location(link, file$b, 20, 13, 692);
     			main.className = "overflow-hidden";
-    			add_location(main, file$a, 22, 2, 750);
+    			add_location(main, file$b, 23, 2, 811);
     		},
 
     		l: function claim(nodes) {
@@ -39677,7 +39867,7 @@
     class App extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$a, create_fragment$a, safe_not_equal, []);
+    		init(this, options, instance$a, create_fragment$b, safe_not_equal, []);
     	}
     }
 

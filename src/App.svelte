@@ -7,6 +7,7 @@
   import ModalWrapper from "./components/ModalWrapper.svelte";
   import Carousel from "./components/Carousel.svelte";
   import Menu from "./components/Menu.svelte";
+  import MenuContent from "./components/MenuContent.svelte"
   import {
     currentLat,
     currentLong,
@@ -32,6 +33,6 @@
     <Carousel />
     {/if}
     {#if $showMenu} 
-    <Menu/>
+    <Menu><MenuContent/></Menu>
     {/if}
   </main>

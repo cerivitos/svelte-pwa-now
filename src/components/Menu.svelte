@@ -1,7 +1,6 @@
 <script>
   import { showMenu } from "../store/store.js";
   import { fade, fly } from "svelte/transition";
-  import { onMount } from "svelte";
 
   let innerWidth;
 </script>
