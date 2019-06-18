@@ -108,6 +108,9 @@
     Built with <a href="https://svelte.dev" target="_blank">Svelte</a> ·
     <a href="https://mapbox.com" target="_blank">Mapbox</a> ·
     <a href="https://tailwindcss.com" target="_blank">Tailwind</a><br />Source
-    code on <a href="https://github.com/INeedToilet" target="_blank">Github</a>
+    code on
+    <a href="https://github.com/cerivitos/INeedToilet" target="_blank"
+      >Github</a
+    >
   </p>
 </div>

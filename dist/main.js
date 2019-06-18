@@ -39526,7 +39526,7 @@
     			a2 = element("a");
     			a2.textContent = "Tailwind";
     			br = element("br");
-    			t14 = text("Source\r\n    code on ");
+    			t14 = text("Source\r\n    code on\r\n    ");
     			a3 = element("a");
     			a3.textContent = "Github";
     			h1.className = "text-6xl mb-2";
@@ -39555,9 +39555,9 @@
     			a2.target = "_blank";
     			add_location(a2, file$a, 109, 4, 5060);
     			add_location(br, file$a, 109, 66, 5122);
-    			a3.href = "https://github.com/INeedToilet";
+    			a3.href = "https://github.com/cerivitos/INeedToilet";
     			a3.target = "_blank";
-    			add_location(a3, file$a, 110, 12, 5148);
+    			add_location(a3, file$a, 111, 4, 5153);
     			p1.className = "absolute bottom-0 pb-4";
     			add_location(p1, file$a, 106, 2, 4883);
     			div.className = "flex flex-col p-4 text-gray-800";
