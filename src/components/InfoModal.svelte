@@ -154,9 +154,8 @@
           name="{placeObj.name}"
           rating="{placeObj.rating}"
         ></ShareButton>
-        <a
-          href="{getDirections(placeObj.lat, placeObj.long)}"
-          target="_blank"
+        <button
+          on:click="{() => window.open(getDirections(placeObj.lat, placeObj.long), '_blank')}"
           class="w-32 rounded bg-blue-600 hover:bg-blue-500 hover:shadow no-underline text-white font-medium px-3 py-2 inline-flex items-center"
         >
           <svg
@@ -170,7 +169,7 @@
             <path d="M0 0h24v24H0z" fill="none" />
           </svg>
           <span>Directions</span>
-        </a>
+        </button>
       </div>
     </div>
   </div>
