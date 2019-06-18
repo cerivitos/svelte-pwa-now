@@ -9,6 +9,7 @@
   } from "../store/store.js";
   import { onMount, setContext } from "svelte";
   import { toilets } from "../data/toilets.js";
+  import { mapBoxKey } from "../keys.js";
 
   const darkStyle = "mapbox://styles/cerivitos/cjx20hhye07f41cpgk28g563z";
   const lightStyle = "mapbox://styles/mapbox/streets-v9";
@@ -19,8 +20,7 @@
 
   onMount(() => {
     //TO-DO: Set domain for access token
-    mapboxgl.accessToken =
-      "pk.eyJ1IjoiY2VyaXZpdG9zIiwiYSI6ImNqeDBpZG9iajAwNmU0NXJ0eTN2dTQwdzkifQ.8jRT1m32i4Du88MTmgBWAQ";
+    mapboxgl.accessToken = mapBoxKey;
     map = new mapboxgl.Map({
       container: "map",
       style: $darkMode ? darkStyle : lightStyle,
