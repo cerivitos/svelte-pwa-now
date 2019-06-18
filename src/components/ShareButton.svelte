@@ -91,7 +91,7 @@
 <div class="flex justify-around align-middle mr-2">
   <a
     transition:fade="{{delay: 50 * 3}}"
-    class="flex bg-gray-200 hover:bg-gray-300 px-2 rounded-full items-center"
+    class="flex bg-backgroundColor hover:bg-gray-300 px-2 rounded-full items-center"
     href="{createShareText(name, rating, 0)}"
     target="_blank"
   >
@@ -114,7 +114,7 @@
   </a>
   <a
     transition:fade="{{delay: 50 * 2}}"
-    class="flex bg-gray-200 hover:bg-gray-300 px-2 rounded-full items-center"
+    class="flex bg-backgroundColor hover:bg-gray-300 px-2 rounded-full items-center"
     href="{createShareText(name, rating, 1)}"
     target="_blank"
   >
@@ -133,7 +133,7 @@
     transition:fade="{{delay: 50}}"
     href="{createShareText(name, rating, 2)}"
     target="_blank"
-    class="flex bg-gray-200 hover:bg-gray-300 px-2 rounded-full items-center"
+    class="flex bg-backgroundColor hover:bg-gray-300 px-2 rounded-full items-center"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -149,7 +149,7 @@
   </a>
   <button
     transition:fade
-    class="relative bg-gray-200 hover:bg-gray-300 px-2 rounded-full"
+    class="relative bg-backgroundColor hover:bg-gray-300 px-2 rounded-full"
     on:click="{copyUrl}"
   >
     <svg
@@ -166,13 +166,12 @@
     <svg
       transition:fade="{{duration:150}}"
       on:introend="{() => copySuccessful = false}"
-      class="absolute w-6 h-6"
+      class="absolute w-6 h-6 fill-current text-secondaryColor"
       style="transform: translate(0%, -100%);"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 426.667 426.667"
     >
       <path
-        style="fill:#6AC259;"
         d="M213.333,0C95.518,0,0,95.514,0,213.333s95.518,213.333,213.333,213.333  c117.828,0,213.333-95.514,213.333-213.333S331.157,0,213.333,0z M174.199,322.918l-93.935-93.931l31.309-31.309l62.626,62.622  l140.894-140.898l31.309,31.309L174.199,322.918z"
       />
     </svg>
