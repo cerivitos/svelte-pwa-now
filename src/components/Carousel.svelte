@@ -8,7 +8,7 @@
 
 <svelte:window bind:innerWidth="{innerWidth}" />
 
-<div transition:fade
+<div transition:fade="{{duration: 80}}"
   class="fixed top-0 w-full h-full overflow-auto flex lg:flex-col items-center z-20"
   style="background: rgba(0, 0, 0, 0.7)" on:click="{() => showCarousel.set(false) }"
 >

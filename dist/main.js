@@ -38104,7 +38104,7 @@
     			for (var i = 0; i < each_value.length; i += 1) each_blocks[i].i();
 
     			add_render_callback(() => {
-    				if (!div_transition) div_transition = create_bidirectional_transition(div, fade, {}, true);
+    				if (!div_transition) div_transition = create_bidirectional_transition(div, fade, {duration: 80}, true);
     				div_transition.run(1);
     			});
 
@@ -38115,7 +38115,7 @@
     			each_blocks = each_blocks.filter(Boolean);
     			for (let i = 0; i < each_blocks.length; i += 1) outro_block(i, 0);
 
-    			if (!div_transition) div_transition = create_bidirectional_transition(div, fade, {}, false);
+    			if (!div_transition) div_transition = create_bidirectional_transition(div, fade, {duration: 80}, false);
     			div_transition.run(0);
 
     			current = false;
