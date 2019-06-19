@@ -12,13 +12,16 @@
   }
 </script>
 
-<div class="flex flex-col p-4 text-gray-800">
-  <h1 class="text-6xl mb-2">sgtoilet</h1>
-  <p class="mb-6">
-    A collection of toilets in Singapore rated by the Restroom Association
+<div class="flex flex-col py-4 text-gray-800">
+  <h1 class="text-6xl mb-2 px-4">sgtoilet</h1>
+  <p class="mb-6 px-4 text-gray-600">
+    An unofficial listing of toilets rated by the Restroom Association
     (Singapore).
   </p>
-  <button class="py-4 inline-flex text-lg" on:click="{moreInfo}">
+  <button
+    class="p-4 inline-flex text-lg hover:bg-gray-400"
+    on:click="{moreInfo}"
+  >
     <svg
       xmlns="http://www.w3.org/2000/svg"
       class="w-6 h-6 mr-2 fill-current"
@@ -32,7 +35,10 @@
     <span>Find out more</span>
   </button>
   {#if $darkMode}
-  <button class="py-4 inline-flex text-lg" on:click="{toggleDarkMode}">
+  <button
+    class="p-4 inline-flex text-lg hover:bg-gray-400"
+    on:click="{toggleDarkMode}"
+  >
     <svg
       xmlns="http://www.w3.org/2000/svg"
       class="w-6 h-6 fill-current mr-2"
@@ -91,7 +97,10 @@
     <span>Day Mode</span>
   </button>
   {:else}
-  <button class="py-4 inline-flex text-lg" on:click="{toggleDarkMode}">
+  <button
+    class="p-4 inline-flex text-lg hover:bg-gray-400"
+    on:click="{toggleDarkMode}"
+  >
     <svg
       xmlns="http://www.w3.org/2000/svg"
       class="w-6 h-6 fill-current mr-2"
@@ -104,13 +113,15 @@
     <span>Night Mode</span>
   </button>
   {/if}
-  <p class="absolute bottom-0 pb-4">
-    Built with <a href="https://svelte.dev" target="_blank">Svelte</a> ·
-    <a href="https://mapbox.com" target="_blank">Mapbox</a> ·
-    <a href="https://tailwindcss.com" target="_blank">Tailwind</a><br />Source
-    code on
-    <a href="https://github.com/cerivitos/INeedToilet" target="_blank"
-      >Github</a
-    >
-  </p>
+  <div class="absolute bottom-0 p-4 bg-gray-300 w-full text-center">
+    <p>
+      Built with <a href="https://svelte.dev" target="_blank">Svelte</a> ·
+      <a href="https://mapbox.com" target="_blank">Mapbox</a> ·
+      <a href="https://tailwindcss.com" target="_blank">Tailwind</a><br />Source
+      code on
+      <a href="https://github.com/cerivitos/INeedToilet" target="_blank"
+        >Github</a
+      >
+    </p>
+  </div>
 </div>
