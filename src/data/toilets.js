@@ -444,8 +444,8 @@ export const toilets = [
     "type": "Coffeeshop",
     "name": "CCMW Tampines Ave 4",
     "address": "Blk 802 Tampines Ave 4, #01-77, S(520802)",
-    "lat": 1.440351,
-    "long": 103.78591,
+    "lat": 1.3460914,
+    "long": 103.9358213,
     "rating": 3,
     "gallery_link": ""
   },
@@ -462,8 +462,8 @@ export const toilets = [
     "type": "Coffeeshop",
     "name": "CCMW Tampines Street 41",
     "address": "Blk 406 Tampines Street 41, #01-07, S(520406)",
-    "lat": 1.365451,
-    "long": 103.746141,
+    "lat": 1.3581472,
+    "long": 103.9437303,
     "rating": 3,
     "gallery_link": ""
   },
@@ -2073,8 +2073,8 @@ export const toilets = [
     "type": "Shopping Centre",
     "name": "Tampines Central Community Complex",
     "address": "Blk 886A, Tampines Street 83, S(521866)",
-    "lat": 1.367239,
-    "long": 103.850609,
+    "lat": 1.3518804,
+    "long": 103.9301253,
     "rating": 4,
     "gallery_link": "https://www.toilet.org.sg/gallery/118/4-star-toilet-tampines-central-community-complex"
   },
