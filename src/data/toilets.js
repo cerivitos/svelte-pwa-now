@@ -876,8 +876,8 @@ export const toilets = [
     "type": "Market & Food Centre",
     "name": "Hawker Centre @ Our Tampines Hub",
     "address": "902 Tampines Avenue 4, S(520902)",
-    "lat": 1.366969,
-    "long": 103.926908,
+    "lat": 1.3512875,
+    "long": 103.9369091,
     "rating": 5,
     "gallery_link": "https://www.toilet.org.sg/gallery/102/5-star-toilet-hawker-centre-our-tampines-hub"
   },
@@ -2127,8 +2127,8 @@ export const toilets = [
     "type": "MRT Station",
     "name": "Tampines West MRT Station (DT31)",
     "address": "2 Tampines Avenue 4, S(529683)",
-    "lat": 1.366969,
-    "long": 103.926908,
+    "lat": 1.3520843,
+    "long": 103.9429434,
     "rating": 4,
     "gallery_link": "https://www.toilet.org.sg/gallery/250/4-stars-tampines-west-mrt-station-dt31"
   },
