@@ -25,7 +25,7 @@
       container: "map",
       style: $darkMode ? darkStyle : lightStyle,
       zoom: 12,
-      center: [103.817467, 1.354498],
+      center: [$currentLong, $currentLat],
       maxBounds: new mapboxgl.LngLatBounds(
         [103.552401, 1.166388],
         [104.031162, 1.50694]
@@ -42,6 +42,16 @@
         currentLong.set(marker.getLngLat().lng);
         searchString.set("");
         showModal.set(true);
+
+        window.history.pushState(
+          {
+            lat: $currentLat,
+            long: $currentLong,
+            modal: $showModal
+          },
+          null,
+          "?lat=" + $currentLat + "&long=" + $currentLong
+        );
       });
 
       markers.push(marker);

@@ -7,7 +7,8 @@
   import ModalWrapper from "./components/ModalWrapper.svelte";
   import Carousel from "./components/Carousel.svelte";
   import Menu from "./components/Menu.svelte";
-  import MenuContent from "./components/MenuContent.svelte"
+  import MenuContent from "./components/MenuContent.svelte";
+  import Router from "./components/Router.svelte";
   import {
     currentLat,
     currentLong,
@@ -22,6 +23,7 @@
 </svelte:head>
 
   <main class="overflow-hidden">
+    <Router/>
     <PlaceList />
     <ModalWrapper transitionTrigger="{$showModal}">
       <div slot="background"><Mapbox /></div>

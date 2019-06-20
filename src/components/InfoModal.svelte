@@ -92,6 +92,17 @@
       showCarousel.set(true);
       carouselName.set(name);
       carouselPics.set(pics);
+
+      window.history.pushState(
+        {
+          lat: $currentLat,
+          long: $currentLong,
+          modal: $showModal,
+          carousel: $showCarousel
+        },
+        null,
+        "?lat=" + $currentLat + "&long=" + $currentLong
+      );
     } else {
       showCarousel.set(false);
       carouselName.set('');

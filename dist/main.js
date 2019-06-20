@@ -780,46 +780,46 @@
     			line2 = svg_element("line");
     			line3 = svg_element("line");
     			attr(path0, "d", "M491.318,235.318H20.682C9.26,235.318,0,244.577,0,256s9.26,20.682,20.682,20.682h470.636 c11.423,0,20.682-9.259,20.682-20.682C512,244.578,502.741,235.318,491.318,235.318z");
-    			add_location(path0, file, 60, 6, 2067);
+    			add_location(path0, file, 85, 6, 2595);
     			attr(path1, "d", "M491.318,78.439H20.682C9.26,78.439,0,87.699,0,99.121c0,11.422,9.26,20.682,20.682,20.682h470.636    c11.423,0,20.682-9.26,20.682-20.682C512,87.699,502.741,78.439,491.318,78.439z");
-    			add_location(path1, file, 61, 6, 2255);
+    			add_location(path1, file, 86, 6, 2783);
     			attr(path2, "d", "M491.318,392.197H20.682C9.26,392.197,0,401.456,0,412.879s9.26,20.682,20.682,20.682h470.636    c11.423,0,20.682-9.259,20.682-20.682S502.741,392.197,491.318,392.197z");
-    			add_location(path2, file, 62, 6, 2451);
+    			add_location(path2, file, 87, 6, 2979);
     			attr(svg0, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg0, "class", "w-6 h-6 fill-current text-gray-500 hover:text-gray-600");
     			attr(svg0, "viewBox", "0 0 512 512");
-    			add_location(svg0, file, 59, 4, 1934);
+    			add_location(svg0, file, 84, 4, 2462);
     			button0.className = "my-2 ml-4 flex-grow-0 rounded-full items-center bg-transparent focus: outline-none";
-    			add_location(button0, file, 58, 2, 1791);
+    			add_location(button0, file, 83, 2, 2321);
     			input.placeholder = "Where are you?";
     			input.className = "flex-grow bg-transparent p-4 outline-none";
     			attr(input, "type", "search");
     			input.id = "input";
-    			add_location(input, file, 65, 2, 2655);
+    			add_location(input, file, 90, 2, 3183);
     			attr(circle, "cx", "12");
     			attr(circle, "cy", "12");
     			attr(circle, "r", "10");
-    			add_location(circle, file, 92, 6, 3399);
+    			add_location(circle, file, 117, 6, 3927);
     			attr(line0, "x1", "22");
     			attr(line0, "y1", "12");
     			attr(line0, "x2", "18");
     			attr(line0, "y2", "12");
-    			add_location(line0, file, 93, 6, 3440);
+    			add_location(line0, file, 118, 6, 3968);
     			attr(line1, "x1", "6");
     			attr(line1, "y1", "12");
     			attr(line1, "x2", "2");
     			attr(line1, "y2", "12");
-    			add_location(line1, file, 94, 6, 3488);
+    			add_location(line1, file, 119, 6, 4016);
     			attr(line2, "x1", "12");
     			attr(line2, "y1", "6");
     			attr(line2, "x2", "12");
     			attr(line2, "y2", "2");
-    			add_location(line2, file, 95, 6, 3534);
+    			add_location(line2, file, 120, 6, 4062);
     			attr(line3, "x1", "12");
     			attr(line3, "y1", "22");
     			attr(line3, "x2", "12");
     			attr(line3, "y2", "18");
-    			add_location(line3, file, 96, 6, 3580);
+    			add_location(line3, file, 121, 6, 4108);
     			attr(svg1, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg1, "viewBox", "0 0 24 24");
     			attr(svg1, "fill", "none");
@@ -827,12 +827,12 @@
     			attr(svg1, "stroke-linecap", "round");
     			attr(svg1, "stroke-linejoin", "round");
     			attr(svg1, "class", "stroke-current inline-block w-8 h-8");
-    			add_location(svg1, file, 83, 4, 3156);
+    			add_location(svg1, file, 108, 4, 3684);
     			button1.className = "my-2 mr-4 flex-grow-0 rounded-full items-center bg-transparent focus: outline-none hover:text-teal-600";
     			button1.style.cssText = ctx.style;
-    			add_location(button1, file, 78, 2, 2979);
+    			add_location(button1, file, 103, 2, 3507);
     			div.className = "flex justify-end shadow bg-backgroundColor appearance-none border mt-2 rounded-lg";
-    			add_location(div, file, 54, 0, 1647);
+    			add_location(div, file, 79, 0, 2177);
 
     			dispose = [
     				listen(button0, "click", ctx.click_handler),
@@ -885,24 +885,21 @@
     	};
     }
 
-    function handlePosition(currentPosition) {
-      currentLat.set(currentPosition.coords.latitude);
-      currentLong.set(currentPosition.coords.longitude);
-      homeLat.set(currentPosition.coords.latitude);
-      homeLong.set(currentPosition.coords.longitude);
-    }
-
     function handleError(error) {
       console.log(`Error: ${error.code}`);
     }
 
     function instance($$self, $$props, $$invalidate) {
-    	let $currentLat, $currentLong;
+    	let $currentLat, $currentLong, $showModal, $showMenu;
 
     	validate_store(currentLat, 'currentLat');
     	subscribe($$self, currentLat, $$value => { $currentLat = $$value; $$invalidate('$currentLat', $currentLat); });
     	validate_store(currentLong, 'currentLong');
     	subscribe($$self, currentLong, $$value => { $currentLong = $$value; $$invalidate('$currentLong', $currentLong); });
+    	validate_store(showModal, 'showModal');
+    	subscribe($$self, showModal, $$value => { $showModal = $$value; $$invalidate('$showModal', $showModal); });
+    	validate_store(showMenu, 'showMenu');
+    	subscribe($$self, showMenu, $$value => { $showMenu = $$value; $$invalidate('$showMenu', $showMenu); });
 
     	
 
@@ -933,14 +930,46 @@
         }
       }
 
+      function handlePosition(currentPosition) {
+        currentLat.set(currentPosition.coords.latitude);
+        currentLong.set(currentPosition.coords.longitude);
+        homeLat.set(currentPosition.coords.latitude);
+        homeLong.set(currentPosition.coords.longitude);
+
+        window.history.pushState(
+          {
+            lat: $currentLat,
+            long: $currentLong,
+            modal: $showModal,
+          },
+          null,
+          "?lat=" + $currentLat + "&long=" + $currentLong
+        );
+      }
+
       function dispatchKey(key) {
         dispatch('keyboard', {
           key: key
         });
       }
 
+      function handleMenu(show) {
+        showMenu.set(show);
+
+        window.history.pushState(
+            {
+              lat: $currentLat,
+              long: $currentLong,
+              modal: $showModal,
+              menu: $showMenu
+            },
+            null,
+            "?lat=" + $currentLat + "&long=" + $currentLong
+          );
+      }
+
     	function click_handler() {
-    		return showMenu.set(true);
+    		return handleMenu(true);
     	}
 
     	function input_handler(input) {
@@ -967,6 +996,7 @@
     		style,
     		getLocation,
     		dispatchKey,
+    		handleMenu,
     		click_handler,
     		input_handler,
     		focus_handler,
@@ -15453,8 +15483,8 @@
         "type": "Coffeeshop",
         "name": "CCMW Tampines Ave 4",
         "address": "Blk 802 Tampines Ave 4, #01-77, S(520802)",
-        "lat": 1.440351,
-        "long": 103.78591,
+        "lat": 1.3460914,
+        "long": 103.9358213,
         "rating": 3,
         "gallery_link": ""
       },
@@ -15471,8 +15501,8 @@
         "type": "Coffeeshop",
         "name": "CCMW Tampines Street 41",
         "address": "Blk 406 Tampines Street 41, #01-07, S(520406)",
-        "lat": 1.365451,
-        "long": 103.746141,
+        "lat": 1.3581472,
+        "long": 103.9437303,
         "rating": 3,
         "gallery_link": ""
       },
@@ -15885,8 +15915,8 @@
         "type": "Market & Food Centre",
         "name": "Hawker Centre @ Our Tampines Hub",
         "address": "902 Tampines Avenue 4, S(520902)",
-        "lat": 1.366969,
-        "long": 103.926908,
+        "lat": 1.3512875,
+        "long": 103.9369091,
         "rating": 5,
         "gallery_link": "https://www.toilet.org.sg/gallery/102/5-star-toilet-hawker-centre-our-tampines-hub"
       },
@@ -17082,8 +17112,8 @@
         "type": "Shopping Centre",
         "name": "Tampines Central Community Complex",
         "address": "Blk 886A, Tampines Street 83, S(521866)",
-        "lat": 1.367239,
-        "long": 103.850609,
+        "lat": 1.3518804,
+        "long": 103.9301253,
         "rating": 4,
         "gallery_link": "https://www.toilet.org.sg/gallery/118/4-star-toilet-tampines-central-community-complex"
       },
@@ -17136,8 +17166,8 @@
         "type": "MRT Station",
         "name": "Tampines West MRT Station (DT31)",
         "address": "2 Tampines Avenue 4, S(529683)",
-        "lat": 1.366969,
-        "long": 103.926908,
+        "lat": 1.3520843,
+        "long": 103.9429434,
         "rating": 4,
         "gallery_link": "https://www.toilet.org.sg/gallery/250/4-stars-tampines-west-mrt-station-dt31"
       },
@@ -17517,10 +17547,10 @@
     			div = element("div");
     			link.href = "https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css";
     			link.rel = "stylesheet";
-    			add_location(link, file$1, 83, 2, 2209);
+    			add_location(link, file$1, 93, 2, 2461);
     			div.id = "map";
     			div.className = "w-screen h-screen";
-    			add_location(div, file$1, 89, 0, 2331);
+    			add_location(div, file$1, 99, 0, 2583);
     		},
 
     		l: function claim(nodes) {
@@ -17553,7 +17583,7 @@
     const lightStyle = "mapbox://styles/mapbox/streets-v9";
 
     function instance$1($$self, $$props, $$invalidate) {
-    	let $darkMode, $currentLong, $currentLat;
+    	let $darkMode, $currentLong, $currentLat, $showModal;
 
     	validate_store(darkMode, 'darkMode');
     	subscribe($$self, darkMode, $$value => { $darkMode = $$value; $$invalidate('$darkMode', $darkMode); });
@@ -17561,6 +17591,8 @@
     	subscribe($$self, currentLong, $$value => { $currentLong = $$value; $$invalidate('$currentLong', $currentLong); });
     	validate_store(currentLat, 'currentLat');
     	subscribe($$self, currentLat, $$value => { $currentLat = $$value; $$invalidate('$currentLat', $currentLat); });
+    	validate_store(showModal, 'showModal');
+    	subscribe($$self, showModal, $$value => { $showModal = $$value; $$invalidate('$showModal', $showModal); });
 
     	
 
@@ -17574,7 +17606,7 @@
           container: "map",
           style: $darkMode ? darkStyle : lightStyle,
           zoom: 12,
-          center: [103.817467, 1.354498],
+          center: [$currentLong, $currentLat],
           maxBounds: new mapboxGl.LngLatBounds(
             [103.552401, 1.166388],
             [104.031162, 1.50694]
@@ -17591,6 +17623,16 @@
             currentLong.set(marker.getLngLat().lng);
             searchString.set("");
             showModal.set(true);
+
+            window.history.pushState(
+              {
+                lat: $currentLat,
+                long: $currentLong,
+                modal: $showModal
+              },
+              null,
+              "?lat=" + $currentLat + "&long=" + $currentLong
+            );
           });
 
           markers.push(marker);
@@ -17710,19 +17752,19 @@
     			t5 = text(t5_value);
     			t6 = text("km");
     			h1.className = "font-medium text-lg truncate";
-    			add_location(h1, file$2, 72, 4, 1858);
+    			add_location(h1, file$2, 82, 4, 2069);
     			p.className = "font-light text-sm text-gray-600 leading-tight truncate";
-    			add_location(p, file$2, 75, 4, 1983);
+    			add_location(p, file$2, 85, 4, 2194);
     			div0.className = "w-11/12 text-gray-800 pr-1";
-    			add_location(div0, file$2, 71, 2, 1812);
+    			add_location(div0, file$2, 81, 2, 2023);
     			span0.className = span0_class_value = createRatingClass(ctx.placeObj.rating);
-    			add_location(span0, file$2, 80, 4, 2182);
+    			add_location(span0, file$2, 90, 4, 2393);
     			span1.className = "text-xs";
-    			add_location(span1, file$2, 81, 4, 2264);
+    			add_location(span1, file$2, 91, 4, 2475);
     			div1.className = "w-1/12 text-center";
-    			add_location(div1, file$2, 79, 2, 2144);
+    			add_location(div1, file$2, 89, 2, 2355);
     			button.className = button_class_value = ctx.selected ? 'flex p-4 text-left start w-full bg-gray-400 text-gray-800' : 'flex p-4 text-left start w-full bg-transparent text-gray-800';
-    			add_location(button, file$2, 65, 0, 1564);
+    			add_location(button, file$2, 75, 0, 1775);
 
     			dispose = [
     				listen(button, "click", ctx.selectToilet),
@@ -17833,8 +17875,14 @@
     }
 
     function instance$2($$self, $$props, $$invalidate) {
-    	let $searchString;
+    	let $currentLat, $currentLong, $showModal, $searchString;
 
+    	validate_store(currentLat, 'currentLat');
+    	subscribe($$self, currentLat, $$value => { $currentLat = $$value; $$invalidate('$currentLat', $currentLat); });
+    	validate_store(currentLong, 'currentLong');
+    	subscribe($$self, currentLong, $$value => { $currentLong = $$value; $$invalidate('$currentLong', $currentLong); });
+    	validate_store(showModal, 'showModal');
+    	subscribe($$self, showModal, $$value => { $showModal = $$value; $$invalidate('$showModal', $showModal); });
     	validate_store(searchString, 'searchString');
     	subscribe($$self, searchString, $$value => { $searchString = $$value; $$invalidate('$searchString', $searchString); });
 
@@ -17849,6 +17897,16 @@
         currentLong.set(placeObj.long);
         searchString.set("");
         showModal.set(true);
+
+        window.history.pushState(
+          {
+            lat: $currentLat,
+            long: $currentLong,
+            modal: $showModal
+          },
+          null,
+          "?lat=" + $currentLat + "&long=" + $currentLong
+        );
       }
 
       function hovering() {
@@ -17932,7 +17990,7 @@
     	return child_ctx;
     }
 
-    // (85:4) {#each filtered as place, i}
+    // (95:4) {#each filtered as place, i}
     function create_each_block(ctx) {
     	var current;
 
@@ -18018,9 +18076,9 @@
     				each_blocks[i].c();
     			}
     			div0.className = "searchList w-full overflow-auto mt-1 rounded-lg bg-backgroundColor shadow svelte-125p4xn";
-    			add_location(div0, file$3, 81, 2, 2437);
+    			add_location(div0, file$3, 91, 2, 2666);
     			div1.className = "fixed px-2 py-4 w-full lg:w-1/3 z-10";
-    			add_location(div1, file$3, 79, 0, 2329);
+    			add_location(div1, file$3, 89, 0, 2558);
     		},
 
     		l: function claim(nodes) {
@@ -18095,18 +18153,20 @@
     }
 
     function instance$3($$self, $$props, $$invalidate) {
-    	let $selectedIndex, $searchString, $geoPermissionGranted, $currentLat, $currentLong;
+    	let $selectedIndex, $currentLat, $currentLong, $showModal, $searchString, $geoPermissionGranted;
 
     	validate_store(selectedIndex, 'selectedIndex');
     	subscribe($$self, selectedIndex, $$value => { $selectedIndex = $$value; $$invalidate('$selectedIndex', $selectedIndex); });
-    	validate_store(searchString, 'searchString');
-    	subscribe($$self, searchString, $$value => { $searchString = $$value; $$invalidate('$searchString', $searchString); });
-    	validate_store(geoPermissionGranted, 'geoPermissionGranted');
-    	subscribe($$self, geoPermissionGranted, $$value => { $geoPermissionGranted = $$value; $$invalidate('$geoPermissionGranted', $geoPermissionGranted); });
     	validate_store(currentLat, 'currentLat');
     	subscribe($$self, currentLat, $$value => { $currentLat = $$value; $$invalidate('$currentLat', $currentLat); });
     	validate_store(currentLong, 'currentLong');
     	subscribe($$self, currentLong, $$value => { $currentLong = $$value; $$invalidate('$currentLong', $currentLong); });
+    	validate_store(showModal, 'showModal');
+    	subscribe($$self, showModal, $$value => { $showModal = $$value; $$invalidate('$showModal', $showModal); });
+    	validate_store(searchString, 'searchString');
+    	subscribe($$self, searchString, $$value => { $searchString = $$value; $$invalidate('$searchString', $searchString); });
+    	validate_store(geoPermissionGranted, 'geoPermissionGranted');
+    	subscribe($$self, geoPermissionGranted, $$value => { $geoPermissionGranted = $$value; $$invalidate('$geoPermissionGranted', $geoPermissionGranted); });
 
     	
 
@@ -18134,6 +18194,16 @@
           currentLong.set(filtered[$selectedIndex].long);
           searchString.set("");
           showModal.set(true);
+
+          window.history.pushState(
+            {
+              lat: $currentLat,
+              long: $currentLong,
+              modal: $showModal
+            },
+            null,
+            "?lat=" + $currentLat + "&long=" + $currentLong
+          );
         }
       }
 
@@ -38185,7 +38255,7 @@
     	return child_ctx;
     }
 
-    // (122:12) {#if pics && pics.length > 0}
+    // (133:12) {#if pics && pics.length > 0}
     function create_if_block_1$1(ctx) {
     	var div1, t0, div0, p, t1_value = ctx.pics.length, t1, t2, svg, path0, path1, current;
 
@@ -38213,20 +38283,20 @@
     			path0 = svg_element("path");
     			path1 = svg_element("path");
     			p.className = "text-white text-xs mr-1";
-    			add_location(p, file$7, 127, 8, 3858);
+    			add_location(p, file$7, 138, 8, 4123);
     			attr(path0, "d", "M0 0h24v24H0z");
     			attr(path0, "fill", "none");
-    			add_location(path0, file$7, 135, 10, 4097);
+    			add_location(path0, file$7, 146, 10, 4362);
     			attr(path1, "d", "M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z");
-    			add_location(path1, file$7, 136, 10, 4152);
+    			add_location(path1, file$7, 147, 10, 4417);
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "viewBox", "0 0 24 24");
     			attr(svg, "class", "h-4 w-4 fill-current text-white");
-    			add_location(svg, file$7, 130, 8, 3942);
+    			add_location(svg, file$7, 141, 8, 4207);
     			div0.className = "absolute rounded-full bg-gray-800 opacity-50 bottom-0 right-0 m-2 px-2 py-1 flex flex-row justify-end items-center";
-    			add_location(div0, file$7, 124, 6, 3703);
+    			add_location(div0, file$7, 135, 6, 3968);
     			div1.className = "w-full overflow-hidden relative";
-    			add_location(div1, file$7, 122, 4, 3450);
+    			add_location(div1, file$7, 133, 4, 3715);
     		},
 
     		m: function mount(target, anchor) {
@@ -38277,7 +38347,7 @@
     	};
     }
 
-    // (116:4) {#if innerWidth < 1024 && pics}
+    // (127:4) {#if innerWidth < 1024 && pics}
     function create_if_block$1(ctx) {
     	var div, current;
 
@@ -38310,7 +38380,7 @@
     				each_blocks[i].c();
     			}
     			div.className = "flex flex-row w-full overflow-auto";
-    			add_location(div, file$7, 116, 4, 3118);
+    			add_location(div, file$7, 127, 4, 3383);
     		},
 
     		m: function mount(target, anchor) {
@@ -38371,7 +38441,7 @@
     	};
     }
 
-    // (118:6) {#each pics as pic, i}
+    // (129:6) {#each pics as pic, i}
     function create_each_block$2(ctx) {
     	var current;
 
@@ -38479,36 +38549,36 @@
     			span = element("span");
     			span.textContent = "Directions";
     			h1.className = "font-medium text-xl py-2";
-    			add_location(h1, file$7, 144, 6, 4411);
+    			add_location(h1, file$7, 155, 6, 4676);
     			div0.className = div0_class_value = createRatingClass$1(ctx.placeObj.rating);
     			set_style(div0, "background", ratingBackgroundRgba[ctx.placeObj.rating - 1]);
-    			add_location(div0, file$7, 146, 8, 4533);
+    			add_location(div0, file$7, 157, 8, 4798);
     			div1.className = "flex-grow-0 text-sm font-light text-gray-600 truncate";
-    			add_location(div1, file$7, 149, 8, 4716);
+    			add_location(div1, file$7, 160, 8, 4981);
     			div2.className = "flex flex-row items-baseline mt-2";
-    			add_location(div2, file$7, 145, 6, 4476);
+    			add_location(div2, file$7, 156, 6, 4741);
     			attr(path0, "d", "M21.71 11.29l-9-9c-.39-.39-1.02-.39-1.41 0l-9 9c-.39.39-.39 1.02 0 1.41l9 9c.39.39 1.02.39 1.41 0l9-9c.39-.38.39-1.01 0-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z");
-    			add_location(path0, file$7, 165, 12, 5434);
+    			add_location(path0, file$7, 176, 12, 5699);
     			attr(path1, "d", "M0 0h24v24H0z");
     			attr(path1, "fill", "none");
-    			add_location(path1, file$7, 168, 12, 5673);
+    			add_location(path1, file$7, 179, 12, 5938);
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "class", "fill-current w-6 h-6 mr-2");
     			attr(svg, "viewBox", "0 0 24 24");
-    			add_location(svg, file$7, 160, 10, 5275);
-    			add_location(span, file$7, 170, 10, 5741);
+    			add_location(svg, file$7, 171, 10, 5540);
+    			add_location(span, file$7, 181, 10, 6006);
     			button.className = "w-32 rounded bg-accentColor hover:bg-blue-500 hover:shadow no-underline text-white font-medium px-3 py-2 inline-flex items-center";
-    			add_location(button, file$7, 156, 8, 5000);
+    			add_location(button, file$7, 167, 8, 5265);
     			div3.className = "flex h-full justify-end my-4";
-    			add_location(div3, file$7, 151, 6, 4829);
+    			add_location(div3, file$7, 162, 6, 5094);
     			div4.className = "px-4 pb-2";
-    			add_location(div4, file$7, 143, 4, 4380);
+    			add_location(div4, file$7, 154, 4, 4645);
     			add_render_callback(() => ctx.div5_resize_handler.call(div5));
     			div5.className = "bg-backgroundColor overflow-hidden rounded-lg shadow-lg";
-    			add_location(div5, file$7, 111, 2, 2958);
+    			add_location(div5, file$7, 122, 2, 3223);
     			div6.className = "mx-2 fixed lg:w-1/3 left-0 right-0";
     			set_style(div6, "top", "" + ctx.topDisplacement + "rem");
-    			add_location(div6, file$7, 107, 0, 2864);
+    			add_location(div6, file$7, 118, 0, 3129);
 
     			dispose = [
     				listen(window, "resize", ctx.onwindowresize),
@@ -38667,20 +38737,8 @@
       return baseClass + " text" + ratingColors[rating - 1];
     }
 
-    function triggerCarousel(visible, name, pics) {
-      if (visible) {
-        showCarousel.set(true);
-        carouselName.set(name);
-        carouselPics.set(pics);
-      } else {
-        showCarousel.set(false);
-        carouselName.set('');
-        carouselPics.set([]);
-      }
-    }
-
     function instance$7($$self, $$props, $$invalidate) {
-    	let $geoPermissionGranted, $homeLat, $homeLong;
+    	let $geoPermissionGranted, $homeLat, $homeLong, $currentLat, $currentLong, $showModal, $showCarousel;
 
     	validate_store(geoPermissionGranted, 'geoPermissionGranted');
     	subscribe($$self, geoPermissionGranted, $$value => { $geoPermissionGranted = $$value; $$invalidate('$geoPermissionGranted', $geoPermissionGranted); });
@@ -38688,6 +38746,14 @@
     	subscribe($$self, homeLat, $$value => { $homeLat = $$value; $$invalidate('$homeLat', $homeLat); });
     	validate_store(homeLong, 'homeLong');
     	subscribe($$self, homeLong, $$value => { $homeLong = $$value; $$invalidate('$homeLong', $homeLong); });
+    	validate_store(currentLat, 'currentLat');
+    	subscribe($$self, currentLat, $$value => { $currentLat = $$value; $$invalidate('$currentLat', $currentLat); });
+    	validate_store(currentLong, 'currentLong');
+    	subscribe($$self, currentLong, $$value => { $currentLong = $$value; $$invalidate('$currentLong', $currentLong); });
+    	validate_store(showModal, 'showModal');
+    	subscribe($$self, showModal, $$value => { $showModal = $$value; $$invalidate('$showModal', $showModal); });
+    	validate_store(showCarousel, 'showCarousel');
+    	subscribe($$self, showCarousel, $$value => { $showCarousel = $$value; $$invalidate('$showCarousel', $showCarousel); });
 
     	
 
@@ -38721,6 +38787,29 @@
           );
         } else {
           return link + "daddr=" + lat + "," + long;
+        }
+      }
+
+      function triggerCarousel(visible, name, pics) {
+        if (visible) {
+          showCarousel.set(true);
+          carouselName.set(name);
+          carouselPics.set(pics);
+
+          window.history.pushState(
+            {
+              lat: $currentLat,
+              long: $currentLong,
+              modal: $showModal,
+              carousel: $showCarousel
+            },
+            null,
+            "?lat=" + $currentLat + "&long=" + $currentLong
+          );
+        } else {
+          showCarousel.set(false);
+          carouselName.set('');
+          carouselPics.set([]);
         }
       }
 
@@ -38771,6 +38860,8 @@
     		pics,
     		placeObj,
     		getDirections,
+    		triggerCarousel,
+    		window,
     		onwindowresize,
     		clicked_handler,
     		clicked_handler_1,
@@ -39656,11 +39747,71 @@
     	}
     }
 
+    /* src\components\Router.svelte generated by Svelte v3.4.0 */
+
+    function create_fragment$b(ctx) {
+    	return {
+    		c: noop,
+
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+
+    		m: noop,
+    		p: noop,
+    		i: noop,
+    		o: noop,
+    		d: noop
+    	};
+    }
+
+    function updateStore(state) {
+      currentLat.set(state.lat);
+      currentLong.set(state.long);
+      state.modal !== undefined
+        ? showModal.set(state.modal)
+        : showModal.set(false);
+      state.menu !== undefined ? showMenu.set(state.menu) : showMenu.set(false);
+      state.carousel !== undefined
+        ? showCarousel.set(state.carousel)
+        : showCarousel.set(false);
+    }
+
+    function instance$b($$self) {
+    	window.onload = function() {
+        let state = {};
+
+        const params = window.location.search.substr(1);
+        params.split("&").forEach(param => {
+          const key = param.split("=")[0];
+          const value = param.split("=")[1];
+          state[key] = value;
+        });
+
+        updateStore(state);
+      };
+
+      window.onpopstate = function(event) {
+        if (event.state) {
+          updateStore(event.state);
+        }
+      };
+
+    	return {};
+    }
+
+    class Router extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$b, create_fragment$b, safe_not_equal, []);
+    	}
+    }
+
     /* src\App.svelte generated by Svelte v3.4.0 */
 
     const file$b = "src\\App.svelte";
 
-    // (27:6) <div slot="background">
+    // (29:6) <div slot="background">
     function create_background_slot(ctx) {
     	var div, current;
 
@@ -39671,7 +39822,7 @@
     			div = element("div");
     			mapbox.$$.fragment.c();
     			attr(div, "slot", "background");
-    			add_location(div, file$b, 26, 6, 921);
+    			add_location(div, file$b, 28, 6, 989);
     		},
 
     		m: function mount(target, anchor) {
@@ -39702,7 +39853,7 @@
     	};
     }
 
-    // (28:6) <div slot="modal"          >
+    // (30:6) <div slot="modal"          >
     function create_modal_slot(ctx) {
     	var div, current;
 
@@ -39716,7 +39867,7 @@
     			div = element("div");
     			infomodal.$$.fragment.c();
     			attr(div, "slot", "modal");
-    			add_location(div, file$b, 27, 6, 968);
+    			add_location(div, file$b, 29, 6, 1036);
     		},
 
     		m: function mount(target, anchor) {
@@ -39754,7 +39905,7 @@
     	};
     }
 
-    // (26:4) <ModalWrapper transitionTrigger="{$showModal}">
+    // (28:4) <ModalWrapper transitionTrigger="{$showModal}">
     function create_default_slot_1(ctx) {
     	var t;
 
@@ -39779,7 +39930,7 @@
     	};
     }
 
-    // (32:4) {#if $showCarousel}
+    // (34:4) {#if $showCarousel}
     function create_if_block_1$2(ctx) {
     	var current;
 
@@ -39813,7 +39964,7 @@
     	};
     }
 
-    // (35:4) {#if $showMenu}
+    // (37:4) {#if $showMenu}
     function create_if_block$4(ctx) {
     	var current;
 
@@ -39853,7 +40004,7 @@
     	};
     }
 
-    // (36:4) <Menu>
+    // (38:4) <Menu>
     function create_default_slot(ctx) {
     	var current;
 
@@ -39887,8 +40038,10 @@
     	};
     }
 
-    function create_fragment$b(ctx) {
-    	var link, t0, main, t1, t2, t3, current;
+    function create_fragment$c(ctx) {
+    	var link, t0, main, t1, t2, t3, t4, current;
+
+    	var router = new Router({ $$inline: true });
 
     	var placelist = new PlaceList({ $$inline: true });
 
@@ -39914,18 +40067,20 @@
     			link = element("link");
     			t0 = space();
     			main = element("main");
-    			placelist.$$.fragment.c();
+    			router.$$.fragment.c();
     			t1 = space();
-    			modalwrapper.$$.fragment.c();
+    			placelist.$$.fragment.c();
     			t2 = space();
-    			if (if_block0) if_block0.c();
+    			modalwrapper.$$.fragment.c();
     			t3 = space();
+    			if (if_block0) if_block0.c();
+    			t4 = space();
     			if (if_block1) if_block1.c();
     			link.href = "https://fonts.googleapis.com/css?family=Oswald|Roboto&display=swap";
     			link.rel = "stylesheet";
-    			add_location(link, file$b, 20, 13, 692);
+    			add_location(link, file$b, 21, 13, 745);
     			main.className = "overflow-hidden";
-    			add_location(main, file$b, 23, 2, 811);
+    			add_location(main, file$b, 24, 2, 864);
     		},
 
     		l: function claim(nodes) {
@@ -39936,12 +40091,14 @@
     			append(document.head, link);
     			insert(target, t0, anchor);
     			insert(target, main, anchor);
-    			mount_component(placelist, main, null);
+    			mount_component(router, main, null);
     			append(main, t1);
-    			mount_component(modalwrapper, main, null);
+    			mount_component(placelist, main, null);
     			append(main, t2);
-    			if (if_block0) if_block0.m(main, null);
+    			mount_component(modalwrapper, main, null);
     			append(main, t3);
+    			if (if_block0) if_block0.m(main, null);
+    			append(main, t4);
     			if (if_block1) if_block1.m(main, null);
     			current = true;
     		},
@@ -39957,7 +40114,7 @@
     					if_block0 = create_if_block_1$2(ctx);
     					if_block0.c();
     					if_block0.i(1);
-    					if_block0.m(main, t3);
+    					if_block0.m(main, t4);
     				} else {
     									if_block0.i(1);
     				}
@@ -39995,6 +40152,8 @@
 
     		i: function intro(local) {
     			if (current) return;
+    			router.$$.fragment.i(local);
+
     			placelist.$$.fragment.i(local);
 
     			modalwrapper.$$.fragment.i(local);
@@ -40005,6 +40164,7 @@
     		},
 
     		o: function outro(local) {
+    			router.$$.fragment.o(local);
     			placelist.$$.fragment.o(local);
     			modalwrapper.$$.fragment.o(local);
     			if (if_block0) if_block0.o();
@@ -40020,6 +40180,8 @@
     				detach(main);
     			}
 
+    			router.$destroy();
+
     			placelist.$destroy();
 
     			modalwrapper.$destroy();
@@ -40030,7 +40192,7 @@
     	};
     }
 
-    function instance$b($$self, $$props, $$invalidate) {
+    function instance$c($$self, $$props, $$invalidate) {
     	let $showModal, $currentLat, $currentLong, $showCarousel, $showMenu;
 
     	validate_store(showModal, 'showModal');
@@ -40056,7 +40218,7 @@
     class App extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$b, create_fragment$b, safe_not_equal, []);
+    		init(this, options, instance$c, create_fragment$c, safe_not_equal, []);
     	}
     }
 

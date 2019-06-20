@@ -37,6 +37,16 @@
       currentLong.set(filtered[$selectedIndex].long);
       searchString.set("");
       showModal.set(true);
+
+      window.history.pushState(
+        {
+          lat: $currentLat,
+          long: $currentLong,
+          modal: $showModal
+        },
+        null,
+        "?lat=" + $currentLat + "&long=" + $currentLong
+      );
     }
   }
 
