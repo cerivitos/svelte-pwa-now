@@ -1,6 +1,5 @@
 <script>
   import { toiletPics } from "../data/toilet_pics.js";
-  import { onMount } from "svelte";
   import { ratingColors, ratingBackgroundRgba } from "../util.js";
   import { toilets } from "../data/toilets.js";
   import ShareButton from "./ShareButton.svelte";
@@ -14,23 +13,13 @@
     geoPermissionGranted, showModal, showCarousel, carouselName, carouselPics
   } from "../store/store.js";
 
-  export let lat, long;
   let innerWidth, innerHeight, topDisplacement, modalHeight;
   let pics = [];
   let placeObj = {};
   let showWebShare = false;
-
-  onMount(() => {
-    pics = toilets.forEach(toilet => {
-      if (lat === toilet.lat && long === toilet.long) {
-        placeObj = toilet;
-        return getPics(placeObj.name);
-      }
-    });
-  });
-
+  
   $: toilets.forEach(toilet => {
-    if (lat === toilet.lat && long === toilet.long) {
+    if ($currentLat === toilet.lat && $currentLong === toilet.long) {
       placeObj = toilet;
       pics = getPics(placeObj.gallery_link);
     }
@@ -116,6 +105,7 @@
   bind:innerHeight="{innerHeight}"
 />
 
+{#if Object.keys(placeObj).length > 0}
 <div
   class="mx-2 fixed lg:w-1/3 left-0 right-0"
   style="top: {topDisplacement}rem"
@@ -185,3 +175,4 @@
     </div>
   </div>
 </div>
+{/if}
