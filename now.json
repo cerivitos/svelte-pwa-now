@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "alias": "sgtoilet.app",
   "builds": [
     {
       "src": "./dist/**",
