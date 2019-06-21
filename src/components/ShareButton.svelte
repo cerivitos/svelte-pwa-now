@@ -34,12 +34,12 @@
   }
 
   function createShareText(name, rating, type) {
-    const url = getUrl();
+    const url = encodeURIComponent(document.location.href);
     let shareText;
 
     if (type === 0 || type === 2) {
       shareText =
-        "Check out this " + rating + " star toilet at " + name + "\n" + url;
+        "Check out this " + rating + " star toilet at " + name + " " + url;
     } else {
       shareText = url;
     }
@@ -50,7 +50,7 @@
       "https://twitter.com/intent/tweet?text="
     ];
 
-    return encodeURI(variables[type] + shareText);
+    return variables[type] + shareText;
   }
 
   function copyUrl() {
