@@ -14,7 +14,8 @@
       const params = window.location.search.substr(1);
       params.split("&").forEach(param => {
         const key = param.split("=")[0];
-        const value = param.split("=")[1];
+        //Param parsed from url must be coerced back into number for consistency with json data
+        const value = parseFloat(param.split("=")[1]);
         state[key] = value;
       });
 

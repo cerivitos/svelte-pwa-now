@@ -780,46 +780,46 @@
     			line2 = svg_element("line");
     			line3 = svg_element("line");
     			attr(path0, "d", "M491.318,235.318H20.682C9.26,235.318,0,244.577,0,256s9.26,20.682,20.682,20.682h470.636 c11.423,0,20.682-9.259,20.682-20.682C512,244.578,502.741,235.318,491.318,235.318z");
-    			add_location(path0, file, 85, 6, 2595);
+    			add_location(path0, file, 85, 6, 2630);
     			attr(path1, "d", "M491.318,78.439H20.682C9.26,78.439,0,87.699,0,99.121c0,11.422,9.26,20.682,20.682,20.682h470.636    c11.423,0,20.682-9.26,20.682-20.682C512,87.699,502.741,78.439,491.318,78.439z");
-    			add_location(path1, file, 86, 6, 2783);
+    			add_location(path1, file, 86, 6, 2818);
     			attr(path2, "d", "M491.318,392.197H20.682C9.26,392.197,0,401.456,0,412.879s9.26,20.682,20.682,20.682h470.636    c11.423,0,20.682-9.259,20.682-20.682S502.741,392.197,491.318,392.197z");
-    			add_location(path2, file, 87, 6, 2979);
+    			add_location(path2, file, 87, 6, 3014);
     			attr(svg0, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg0, "class", "w-6 h-6 fill-current text-gray-500 hover:text-gray-600");
     			attr(svg0, "viewBox", "0 0 512 512");
-    			add_location(svg0, file, 84, 4, 2462);
+    			add_location(svg0, file, 84, 4, 2497);
     			button0.className = "my-2 ml-4 flex-grow-0 rounded-full items-center bg-transparent focus: outline-none";
-    			add_location(button0, file, 83, 2, 2321);
+    			add_location(button0, file, 83, 2, 2356);
     			input.placeholder = "Where are you?";
     			input.className = "flex-grow bg-transparent p-4 outline-none";
     			attr(input, "type", "search");
     			input.id = "input";
-    			add_location(input, file, 90, 2, 3183);
+    			add_location(input, file, 90, 2, 3218);
     			attr(circle, "cx", "12");
     			attr(circle, "cy", "12");
     			attr(circle, "r", "10");
-    			add_location(circle, file, 117, 6, 3927);
+    			add_location(circle, file, 117, 6, 3962);
     			attr(line0, "x1", "22");
     			attr(line0, "y1", "12");
     			attr(line0, "x2", "18");
     			attr(line0, "y2", "12");
-    			add_location(line0, file, 118, 6, 3968);
+    			add_location(line0, file, 118, 6, 4003);
     			attr(line1, "x1", "6");
     			attr(line1, "y1", "12");
     			attr(line1, "x2", "2");
     			attr(line1, "y2", "12");
-    			add_location(line1, file, 119, 6, 4016);
+    			add_location(line1, file, 119, 6, 4051);
     			attr(line2, "x1", "12");
     			attr(line2, "y1", "6");
     			attr(line2, "x2", "12");
     			attr(line2, "y2", "2");
-    			add_location(line2, file, 120, 6, 4062);
+    			add_location(line2, file, 120, 6, 4097);
     			attr(line3, "x1", "12");
     			attr(line3, "y1", "22");
     			attr(line3, "x2", "12");
     			attr(line3, "y2", "18");
-    			add_location(line3, file, 121, 6, 4108);
+    			add_location(line3, file, 121, 6, 4143);
     			attr(svg1, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg1, "viewBox", "0 0 24 24");
     			attr(svg1, "fill", "none");
@@ -827,12 +827,12 @@
     			attr(svg1, "stroke-linecap", "round");
     			attr(svg1, "stroke-linejoin", "round");
     			attr(svg1, "class", "stroke-current inline-block w-8 h-8");
-    			add_location(svg1, file, 108, 4, 3684);
+    			add_location(svg1, file, 108, 4, 3719);
     			button1.className = "my-2 mr-4 flex-grow-0 rounded-full items-center bg-transparent focus: outline-none hover:text-teal-600";
     			button1.style.cssText = ctx.style;
-    			add_location(button1, file, 103, 2, 3507);
+    			add_location(button1, file, 103, 2, 3542);
     			div.className = "flex justify-end shadow bg-backgroundColor appearance-none border mt-2 rounded-lg";
-    			add_location(div, file, 79, 0, 2177);
+    			add_location(div, file, 79, 0, 2212);
 
     			dispose = [
     				listen(button0, "click", ctx.click_handler),
@@ -908,9 +908,9 @@
 
       onMount(() => {
         navigator.permissions && navigator.permissions.query({name: 'geolocation'}).then(function(PermissionStatus) {
-          if (PermissionStatus.state == 'granted'){
+          if (PermissionStatus.state == 'granted' && window.location.search.length === 0){
             geoPermissionGranted.set(true);
-            getLocation(true);
+            getLocation();
             $$invalidate('style', style = "color: #248ea9");
           }
         });
@@ -38255,250 +38255,13 @@
     	return child_ctx;
     }
 
-    // (133:12) {#if pics && pics.length > 0}
-    function create_if_block_1$1(ctx) {
-    	var div1, t0, div0, p, t1_value = ctx.pics.length, t1, t2, svg, path0, path1, current;
-
-    	var fadeinimage = new FadeInImage({
-    		props: {
-    		src: ctx.pics[0],
-    		alt: ctx.placeObj.name,
-    		style: "width: " + ctx.innerWidth/3 + "px",
-    		tailwindClass: "object-cover h-64 w-full"
-    	},
-    		$$inline: true
-    	});
-    	fadeinimage.$on("clicked", ctx.clicked_handler_1);
-
-    	return {
-    		c: function create() {
-    			div1 = element("div");
-    			fadeinimage.$$.fragment.c();
-    			t0 = space();
-    			div0 = element("div");
-    			p = element("p");
-    			t1 = text(t1_value);
-    			t2 = space();
-    			svg = svg_element("svg");
-    			path0 = svg_element("path");
-    			path1 = svg_element("path");
-    			p.className = "text-white text-xs mr-1";
-    			add_location(p, file$7, 138, 8, 4123);
-    			attr(path0, "d", "M0 0h24v24H0z");
-    			attr(path0, "fill", "none");
-    			add_location(path0, file$7, 146, 10, 4362);
-    			attr(path1, "d", "M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z");
-    			add_location(path1, file$7, 147, 10, 4417);
-    			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
-    			attr(svg, "viewBox", "0 0 24 24");
-    			attr(svg, "class", "h-4 w-4 fill-current text-white");
-    			add_location(svg, file$7, 141, 8, 4207);
-    			div0.className = "absolute rounded-full bg-gray-800 opacity-50 bottom-0 right-0 m-2 px-2 py-1 flex flex-row justify-end items-center";
-    			add_location(div0, file$7, 135, 6, 3968);
-    			div1.className = "w-full overflow-hidden relative";
-    			add_location(div1, file$7, 133, 4, 3715);
-    		},
-
-    		m: function mount(target, anchor) {
-    			insert(target, div1, anchor);
-    			mount_component(fadeinimage, div1, null);
-    			append(div1, t0);
-    			append(div1, div0);
-    			append(div0, p);
-    			append(p, t1);
-    			append(div0, t2);
-    			append(div0, svg);
-    			append(svg, path0);
-    			append(svg, path1);
-    			current = true;
-    		},
-
-    		p: function update(changed, ctx) {
-    			var fadeinimage_changes = {};
-    			if (changed.pics) fadeinimage_changes.src = ctx.pics[0];
-    			if (changed.placeObj) fadeinimage_changes.alt = ctx.placeObj.name;
-    			if (changed.innerWidth) fadeinimage_changes.style = "width: " + ctx.innerWidth/3 + "px";
-    			fadeinimage.$set(fadeinimage_changes);
-
-    			if ((!current || changed.pics) && t1_value !== (t1_value = ctx.pics.length)) {
-    				set_data(t1, t1_value);
-    			}
-    		},
-
-    		i: function intro(local) {
-    			if (current) return;
-    			fadeinimage.$$.fragment.i(local);
-
-    			current = true;
-    		},
-
-    		o: function outro(local) {
-    			fadeinimage.$$.fragment.o(local);
-    			current = false;
-    		},
-
-    		d: function destroy(detaching) {
-    			if (detaching) {
-    				detach(div1);
-    			}
-
-    			fadeinimage.$destroy();
-    		}
-    	};
-    }
-
-    // (127:4) {#if innerWidth < 1024 && pics}
+    // (108:0) {#if Object.keys(placeObj).length > 0}
     function create_if_block$1(ctx) {
-    	var div, current;
-
-    	var each_value = ctx.pics;
-
-    	var each_blocks = [];
-
-    	for (var i = 0; i < each_value.length; i += 1) {
-    		each_blocks[i] = create_each_block$2(get_each_context$2(ctx, each_value, i));
-    	}
-
-    	function outro_block(i, detaching, local) {
-    		if (each_blocks[i]) {
-    			if (detaching) {
-    				on_outro(() => {
-    					each_blocks[i].d(detaching);
-    					each_blocks[i] = null;
-    				});
-    			}
-
-    			each_blocks[i].o(local);
-    		}
-    	}
-
-    	return {
-    		c: function create() {
-    			div = element("div");
-
-    			for (var i = 0; i < each_blocks.length; i += 1) {
-    				each_blocks[i].c();
-    			}
-    			div.className = "flex flex-row w-full overflow-auto";
-    			add_location(div, file$7, 127, 4, 3383);
-    		},
-
-    		m: function mount(target, anchor) {
-    			insert(target, div, anchor);
-
-    			for (var i = 0; i < each_blocks.length; i += 1) {
-    				each_blocks[i].m(div, null);
-    			}
-
-    			current = true;
-    		},
-
-    		p: function update(changed, ctx) {
-    			if (changed.pics || changed.placeObj) {
-    				each_value = ctx.pics;
-
-    				for (var i = 0; i < each_value.length; i += 1) {
-    					const child_ctx = get_each_context$2(ctx, each_value, i);
-
-    					if (each_blocks[i]) {
-    						each_blocks[i].p(changed, child_ctx);
-    						each_blocks[i].i(1);
-    					} else {
-    						each_blocks[i] = create_each_block$2(child_ctx);
-    						each_blocks[i].c();
-    						each_blocks[i].i(1);
-    						each_blocks[i].m(div, null);
-    					}
-    				}
-
-    				group_outros();
-    				for (; i < each_blocks.length; i += 1) outro_block(i, 1, 1);
-    				check_outros();
-    			}
-    		},
-
-    		i: function intro(local) {
-    			if (current) return;
-    			for (var i = 0; i < each_value.length; i += 1) each_blocks[i].i();
-
-    			current = true;
-    		},
-
-    		o: function outro(local) {
-    			each_blocks = each_blocks.filter(Boolean);
-    			for (let i = 0; i < each_blocks.length; i += 1) outro_block(i, 0);
-
-    			current = false;
-    		},
-
-    		d: function destroy(detaching) {
-    			if (detaching) {
-    				detach(div);
-    			}
-
-    			destroy_each(each_blocks, detaching);
-    		}
-    	};
-    }
-
-    // (129:6) {#each pics as pic, i}
-    function create_each_block$2(ctx) {
-    	var current;
-
-    	var fadeinimage = new FadeInImage({
-    		props: {
-    		src: ctx.pic,
-    		alt: ctx.placeObj.name + ' ' + (ctx.i + 1),
-    		index: "i",
-    		tailwindClass: "h-24 w-24 mr-1"
-    	},
-    		$$inline: true
-    	});
-    	fadeinimage.$on("clicked", ctx.clicked_handler);
-
-    	return {
-    		c: function create() {
-    			fadeinimage.$$.fragment.c();
-    		},
-
-    		m: function mount(target, anchor) {
-    			mount_component(fadeinimage, target, anchor);
-    			current = true;
-    		},
-
-    		p: function update(changed, ctx) {
-    			var fadeinimage_changes = {};
-    			if (changed.pics) fadeinimage_changes.src = ctx.pic;
-    			if (changed.placeObj) fadeinimage_changes.alt = ctx.placeObj.name + ' ' + (ctx.i + 1);
-    			fadeinimage.$set(fadeinimage_changes);
-    		},
-
-    		i: function intro(local) {
-    			if (current) return;
-    			fadeinimage.$$.fragment.i(local);
-
-    			current = true;
-    		},
-
-    		o: function outro(local) {
-    			fadeinimage.$$.fragment.o(local);
-    			current = false;
-    		},
-
-    		d: function destroy(detaching) {
-    			fadeinimage.$destroy(detaching);
-    		}
-    	};
-    }
-
-    function create_fragment$7(ctx) {
     	var div6, div5, current_block_type_index, if_block, t0, div4, h1, t1_value = ctx.placeObj.name, t1, t2, div2, div0, t3_value = createRating(ctx.placeObj.rating), t3, div0_class_value, t4, div1, t5_value = ctx.placeObj.address, t5, t6, div3, t7, button, svg, path0, path1, t8, span, div5_resize_listener, current, dispose;
 
-    	add_render_callback(ctx.onwindowresize);
-
     	var if_block_creators = [
-    		create_if_block$1,
-    		create_if_block_1$1
+    		create_if_block_1$1,
+    		create_if_block_2
     	];
 
     	var if_blocks = [];
@@ -38549,45 +38312,37 @@
     			span = element("span");
     			span.textContent = "Directions";
     			h1.className = "font-medium text-xl py-2";
-    			add_location(h1, file$7, 155, 6, 4676);
+    			add_location(h1, file$7, 145, 6, 4461);
     			div0.className = div0_class_value = createRatingClass$1(ctx.placeObj.rating);
     			set_style(div0, "background", ratingBackgroundRgba[ctx.placeObj.rating - 1]);
-    			add_location(div0, file$7, 157, 8, 4798);
+    			add_location(div0, file$7, 147, 8, 4583);
     			div1.className = "flex-grow-0 text-sm font-light text-gray-600 truncate";
-    			add_location(div1, file$7, 160, 8, 4981);
+    			add_location(div1, file$7, 150, 8, 4766);
     			div2.className = "flex flex-row items-baseline mt-2";
-    			add_location(div2, file$7, 156, 6, 4741);
+    			add_location(div2, file$7, 146, 6, 4526);
     			attr(path0, "d", "M21.71 11.29l-9-9c-.39-.39-1.02-.39-1.41 0l-9 9c-.39.39-.39 1.02 0 1.41l9 9c.39.39 1.02.39 1.41 0l9-9c.39-.38.39-1.01 0-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z");
-    			add_location(path0, file$7, 176, 12, 5699);
+    			add_location(path0, file$7, 166, 12, 5484);
     			attr(path1, "d", "M0 0h24v24H0z");
     			attr(path1, "fill", "none");
-    			add_location(path1, file$7, 179, 12, 5938);
+    			add_location(path1, file$7, 169, 12, 5723);
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "class", "fill-current w-6 h-6 mr-2");
     			attr(svg, "viewBox", "0 0 24 24");
-    			add_location(svg, file$7, 171, 10, 5540);
-    			add_location(span, file$7, 181, 10, 6006);
+    			add_location(svg, file$7, 161, 10, 5325);
+    			add_location(span, file$7, 171, 10, 5791);
     			button.className = "w-32 rounded bg-accentColor hover:bg-blue-500 hover:shadow no-underline text-white font-medium px-3 py-2 inline-flex items-center";
-    			add_location(button, file$7, 167, 8, 5265);
+    			add_location(button, file$7, 157, 8, 5050);
     			div3.className = "flex h-full justify-end my-4";
-    			add_location(div3, file$7, 162, 6, 5094);
+    			add_location(div3, file$7, 152, 6, 4879);
     			div4.className = "px-4 pb-2";
-    			add_location(div4, file$7, 154, 4, 4645);
+    			add_location(div4, file$7, 144, 4, 4430);
     			add_render_callback(() => ctx.div5_resize_handler.call(div5));
     			div5.className = "bg-backgroundColor overflow-hidden rounded-lg shadow-lg";
-    			add_location(div5, file$7, 122, 2, 3223);
+    			add_location(div5, file$7, 112, 2, 3008);
     			div6.className = "mx-2 fixed lg:w-1/3 left-0 right-0";
     			set_style(div6, "top", "" + ctx.topDisplacement + "rem");
-    			add_location(div6, file$7, 118, 0, 3129);
-
-    			dispose = [
-    				listen(window, "resize", ctx.onwindowresize),
-    				listen(button, "click", ctx.click_handler)
-    			];
-    		},
-
-    		l: function claim(nodes) {
-    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    			add_location(div6, file$7, 108, 0, 2914);
+    			dispose = listen(button, "click", ctx.click_handler);
     		},
 
     		m: function mount(target, anchor) {
@@ -38703,7 +38458,313 @@
     			sharebutton.$destroy();
 
     			div5_resize_listener.cancel();
-    			run_all(dispose);
+    			dispose();
+    		}
+    	};
+    }
+
+    // (123:12) {#if pics && pics.length > 0}
+    function create_if_block_2(ctx) {
+    	var div1, t0, div0, p, t1_value = ctx.pics.length, t1, t2, svg, path0, path1, current;
+
+    	var fadeinimage = new FadeInImage({
+    		props: {
+    		src: ctx.pics[0],
+    		alt: ctx.placeObj.name,
+    		style: "width: " + ctx.innerWidth/3 + "px",
+    		tailwindClass: "object-cover h-64 w-full"
+    	},
+    		$$inline: true
+    	});
+    	fadeinimage.$on("clicked", ctx.clicked_handler_1);
+
+    	return {
+    		c: function create() {
+    			div1 = element("div");
+    			fadeinimage.$$.fragment.c();
+    			t0 = space();
+    			div0 = element("div");
+    			p = element("p");
+    			t1 = text(t1_value);
+    			t2 = space();
+    			svg = svg_element("svg");
+    			path0 = svg_element("path");
+    			path1 = svg_element("path");
+    			p.className = "text-white text-xs mr-1";
+    			add_location(p, file$7, 128, 8, 3908);
+    			attr(path0, "d", "M0 0h24v24H0z");
+    			attr(path0, "fill", "none");
+    			add_location(path0, file$7, 136, 10, 4147);
+    			attr(path1, "d", "M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z");
+    			add_location(path1, file$7, 137, 10, 4202);
+    			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
+    			attr(svg, "viewBox", "0 0 24 24");
+    			attr(svg, "class", "h-4 w-4 fill-current text-white");
+    			add_location(svg, file$7, 131, 8, 3992);
+    			div0.className = "absolute rounded-full bg-gray-800 opacity-50 bottom-0 right-0 m-2 px-2 py-1 flex flex-row justify-end items-center";
+    			add_location(div0, file$7, 125, 6, 3753);
+    			div1.className = "w-full overflow-hidden relative";
+    			add_location(div1, file$7, 123, 4, 3500);
+    		},
+
+    		m: function mount(target, anchor) {
+    			insert(target, div1, anchor);
+    			mount_component(fadeinimage, div1, null);
+    			append(div1, t0);
+    			append(div1, div0);
+    			append(div0, p);
+    			append(p, t1);
+    			append(div0, t2);
+    			append(div0, svg);
+    			append(svg, path0);
+    			append(svg, path1);
+    			current = true;
+    		},
+
+    		p: function update(changed, ctx) {
+    			var fadeinimage_changes = {};
+    			if (changed.pics) fadeinimage_changes.src = ctx.pics[0];
+    			if (changed.placeObj) fadeinimage_changes.alt = ctx.placeObj.name;
+    			if (changed.innerWidth) fadeinimage_changes.style = "width: " + ctx.innerWidth/3 + "px";
+    			fadeinimage.$set(fadeinimage_changes);
+
+    			if ((!current || changed.pics) && t1_value !== (t1_value = ctx.pics.length)) {
+    				set_data(t1, t1_value);
+    			}
+    		},
+
+    		i: function intro(local) {
+    			if (current) return;
+    			fadeinimage.$$.fragment.i(local);
+
+    			current = true;
+    		},
+
+    		o: function outro(local) {
+    			fadeinimage.$$.fragment.o(local);
+    			current = false;
+    		},
+
+    		d: function destroy(detaching) {
+    			if (detaching) {
+    				detach(div1);
+    			}
+
+    			fadeinimage.$destroy();
+    		}
+    	};
+    }
+
+    // (117:4) {#if innerWidth < 1024 && pics}
+    function create_if_block_1$1(ctx) {
+    	var div, current;
+
+    	var each_value = ctx.pics;
+
+    	var each_blocks = [];
+
+    	for (var i = 0; i < each_value.length; i += 1) {
+    		each_blocks[i] = create_each_block$2(get_each_context$2(ctx, each_value, i));
+    	}
+
+    	function outro_block(i, detaching, local) {
+    		if (each_blocks[i]) {
+    			if (detaching) {
+    				on_outro(() => {
+    					each_blocks[i].d(detaching);
+    					each_blocks[i] = null;
+    				});
+    			}
+
+    			each_blocks[i].o(local);
+    		}
+    	}
+
+    	return {
+    		c: function create() {
+    			div = element("div");
+
+    			for (var i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].c();
+    			}
+    			div.className = "flex flex-row w-full overflow-auto";
+    			add_location(div, file$7, 117, 4, 3168);
+    		},
+
+    		m: function mount(target, anchor) {
+    			insert(target, div, anchor);
+
+    			for (var i = 0; i < each_blocks.length; i += 1) {
+    				each_blocks[i].m(div, null);
+    			}
+
+    			current = true;
+    		},
+
+    		p: function update(changed, ctx) {
+    			if (changed.pics || changed.placeObj) {
+    				each_value = ctx.pics;
+
+    				for (var i = 0; i < each_value.length; i += 1) {
+    					const child_ctx = get_each_context$2(ctx, each_value, i);
+
+    					if (each_blocks[i]) {
+    						each_blocks[i].p(changed, child_ctx);
+    						each_blocks[i].i(1);
+    					} else {
+    						each_blocks[i] = create_each_block$2(child_ctx);
+    						each_blocks[i].c();
+    						each_blocks[i].i(1);
+    						each_blocks[i].m(div, null);
+    					}
+    				}
+
+    				group_outros();
+    				for (; i < each_blocks.length; i += 1) outro_block(i, 1, 1);
+    				check_outros();
+    			}
+    		},
+
+    		i: function intro(local) {
+    			if (current) return;
+    			for (var i = 0; i < each_value.length; i += 1) each_blocks[i].i();
+
+    			current = true;
+    		},
+
+    		o: function outro(local) {
+    			each_blocks = each_blocks.filter(Boolean);
+    			for (let i = 0; i < each_blocks.length; i += 1) outro_block(i, 0);
+
+    			current = false;
+    		},
+
+    		d: function destroy(detaching) {
+    			if (detaching) {
+    				detach(div);
+    			}
+
+    			destroy_each(each_blocks, detaching);
+    		}
+    	};
+    }
+
+    // (119:6) {#each pics as pic, i}
+    function create_each_block$2(ctx) {
+    	var current;
+
+    	var fadeinimage = new FadeInImage({
+    		props: {
+    		src: ctx.pic,
+    		alt: ctx.placeObj.name + ' ' + (ctx.i + 1),
+    		index: "i",
+    		tailwindClass: "h-24 w-24 mr-1"
+    	},
+    		$$inline: true
+    	});
+    	fadeinimage.$on("clicked", ctx.clicked_handler);
+
+    	return {
+    		c: function create() {
+    			fadeinimage.$$.fragment.c();
+    		},
+
+    		m: function mount(target, anchor) {
+    			mount_component(fadeinimage, target, anchor);
+    			current = true;
+    		},
+
+    		p: function update(changed, ctx) {
+    			var fadeinimage_changes = {};
+    			if (changed.pics) fadeinimage_changes.src = ctx.pic;
+    			if (changed.placeObj) fadeinimage_changes.alt = ctx.placeObj.name + ' ' + (ctx.i + 1);
+    			fadeinimage.$set(fadeinimage_changes);
+    		},
+
+    		i: function intro(local) {
+    			if (current) return;
+    			fadeinimage.$$.fragment.i(local);
+
+    			current = true;
+    		},
+
+    		o: function outro(local) {
+    			fadeinimage.$$.fragment.o(local);
+    			current = false;
+    		},
+
+    		d: function destroy(detaching) {
+    			fadeinimage.$destroy(detaching);
+    		}
+    	};
+    }
+
+    function create_fragment$7(ctx) {
+    	var if_block_anchor, current, dispose;
+
+    	add_render_callback(ctx.onwindowresize);
+
+    	var if_block = (Object.keys(ctx.placeObj).length > 0) && create_if_block$1(ctx);
+
+    	return {
+    		c: function create() {
+    			if (if_block) if_block.c();
+    			if_block_anchor = empty();
+    			dispose = listen(window, "resize", ctx.onwindowresize);
+    		},
+
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+
+    		m: function mount(target, anchor) {
+    			if (if_block) if_block.m(target, anchor);
+    			insert(target, if_block_anchor, anchor);
+    			current = true;
+    		},
+
+    		p: function update(changed, ctx) {
+    			if (Object.keys(ctx.placeObj).length > 0) {
+    				if (if_block) {
+    					if_block.p(changed, ctx);
+    					if_block.i(1);
+    				} else {
+    					if_block = create_if_block$1(ctx);
+    					if_block.c();
+    					if_block.i(1);
+    					if_block.m(if_block_anchor.parentNode, if_block_anchor);
+    				}
+    			} else if (if_block) {
+    				group_outros();
+    				on_outro(() => {
+    					if_block.d(1);
+    					if_block = null;
+    				});
+
+    				if_block.o(1);
+    				check_outros();
+    			}
+    		},
+
+    		i: function intro(local) {
+    			if (current) return;
+    			if (if_block) if_block.i();
+    			current = true;
+    		},
+
+    		o: function outro(local) {
+    			if (if_block) if_block.o();
+    			current = false;
+    		},
+
+    		d: function destroy(detaching) {
+    			if (if_block) if_block.d(detaching);
+
+    			if (detaching) {
+    				detach(if_block_anchor);
+    			}
+
+    			dispose();
     		}
     	};
     }
@@ -38738,18 +38799,18 @@
     }
 
     function instance$7($$self, $$props, $$invalidate) {
-    	let $geoPermissionGranted, $homeLat, $homeLong, $currentLat, $currentLong, $showModal, $showCarousel;
+    	let $currentLat, $currentLong, $geoPermissionGranted, $homeLat, $homeLong, $showModal, $showCarousel;
 
+    	validate_store(currentLat, 'currentLat');
+    	subscribe($$self, currentLat, $$value => { $currentLat = $$value; $$invalidate('$currentLat', $currentLat); });
+    	validate_store(currentLong, 'currentLong');
+    	subscribe($$self, currentLong, $$value => { $currentLong = $$value; $$invalidate('$currentLong', $currentLong); });
     	validate_store(geoPermissionGranted, 'geoPermissionGranted');
     	subscribe($$self, geoPermissionGranted, $$value => { $geoPermissionGranted = $$value; $$invalidate('$geoPermissionGranted', $geoPermissionGranted); });
     	validate_store(homeLat, 'homeLat');
     	subscribe($$self, homeLat, $$value => { $homeLat = $$value; $$invalidate('$homeLat', $homeLat); });
     	validate_store(homeLong, 'homeLong');
     	subscribe($$self, homeLong, $$value => { $homeLong = $$value; $$invalidate('$homeLong', $homeLong); });
-    	validate_store(currentLat, 'currentLat');
-    	subscribe($$self, currentLat, $$value => { $currentLat = $$value; $$invalidate('$currentLat', $currentLat); });
-    	validate_store(currentLong, 'currentLong');
-    	subscribe($$self, currentLong, $$value => { $currentLong = $$value; $$invalidate('$currentLong', $currentLong); });
     	validate_store(showModal, 'showModal');
     	subscribe($$self, showModal, $$value => { $showModal = $$value; $$invalidate('$showModal', $showModal); });
     	validate_store(showCarousel, 'showCarousel');
@@ -38757,19 +38818,9 @@
 
     	
 
-      let { lat, long } = $$props;
       let innerWidth, innerHeight, topDisplacement, modalHeight;
       let pics = [];
       let placeObj = {};
-
-      onMount(() => {
-        $$invalidate('pics', pics = toilets.forEach(toilet => {
-          if (lat === toilet.lat && long === toilet.long) {
-            $$invalidate('placeObj', placeObj = toilet);
-            return getPics(placeObj.name);
-          }
-        }));
-      });
 
       function getDirections(lat, long) {
         let link = "http://maps.google.com/maps?f=d&";
@@ -38835,14 +38886,9 @@
     		$$invalidate('modalHeight', modalHeight);
     	}
 
-    	$$self.$set = $$props => {
-    		if ('lat' in $$props) $$invalidate('lat', lat = $$props.lat);
-    		if ('long' in $$props) $$invalidate('long', long = $$props.long);
-    	};
-
-    	$$self.$$.update = ($$dirty = { lat: 1, long: 1, placeObj: 1, innerHeight: 1, modalHeight: 1 }) => {
-    		if ($$dirty.lat || $$dirty.long || $$dirty.placeObj) { toilets.forEach(toilet => {
-            if (lat === toilet.lat && long === toilet.long) {
+    	$$self.$$.update = ($$dirty = { $currentLat: 1, $currentLong: 1, placeObj: 1, innerHeight: 1, modalHeight: 1 }) => {
+    		if ($$dirty.$currentLat || $$dirty.$currentLong || $$dirty.placeObj) { toilets.forEach(toilet => {
+            if ($currentLat === toilet.lat && $currentLong === toilet.long) {
               $$invalidate('placeObj', placeObj = toilet);
               $$invalidate('pics', pics = getPics(placeObj.gallery_link));
             }
@@ -38851,8 +38897,6 @@
     	};
 
     	return {
-    		lat,
-    		long,
     		innerWidth,
     		innerHeight,
     		topDisplacement,
@@ -38873,32 +38917,7 @@
     class InfoModal extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$7, create_fragment$7, safe_not_equal, ["lat", "long"]);
-
-    		const { ctx } = this.$$;
-    		const props = options.props || {};
-    		if (ctx.lat === undefined && !('lat' in props)) {
-    			console.warn("<InfoModal> was created without expected prop 'lat'");
-    		}
-    		if (ctx.long === undefined && !('long' in props)) {
-    			console.warn("<InfoModal> was created without expected prop 'long'");
-    		}
-    	}
-
-    	get lat() {
-    		throw new Error("<InfoModal>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	set lat(value) {
-    		throw new Error("<InfoModal>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	get long() {
-    		throw new Error("<InfoModal>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
-    	}
-
-    	set long(value) {
-    		throw new Error("<InfoModal>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    		init(this, options, instance$7, create_fragment$7, safe_not_equal, []);
     	}
     }
 
@@ -39780,15 +39799,18 @@
     function instance$b($$self) {
     	window.onload = function() {
         let state = {};
+        if (window.location.search.length > 0) {
+          const params = window.location.search.substr(1);
+          params.split("&").forEach(param => {
+            const key = param.split("=")[0];
+            //Param parsed from url must be coerced back into number for consistency with json data
+            const value = parseFloat(param.split("=")[1]);
+            state[key] = value;
+          });
 
-        const params = window.location.search.substr(1);
-        params.split("&").forEach(param => {
-          const key = param.split("=")[0];
-          const value = param.split("=")[1];
-          state[key] = value;
-        });
-
-        updateStore(state);
+          state["modal"] = true;
+          updateStore(state);
+        }
       };
 
       window.onpopstate = function(event) {
@@ -39857,10 +39879,7 @@
     function create_modal_slot(ctx) {
     	var div, current;
 
-    	var infomodal = new InfoModal({
-    		props: { lat: ctx.$currentLat, long: ctx.$currentLong },
-    		$$inline: true
-    	});
+    	var infomodal = new InfoModal({ $$inline: true });
 
     	return {
     		c: function create() {
@@ -39874,13 +39893,6 @@
     			insert(target, div, anchor);
     			mount_component(infomodal, div, null);
     			current = true;
-    		},
-
-    		p: function update(changed, ctx) {
-    			var infomodal_changes = {};
-    			if (changed.$currentLat) infomodal_changes.lat = ctx.$currentLat;
-    			if (changed.$currentLong) infomodal_changes.long = ctx.$currentLong;
-    			infomodal.$set(infomodal_changes);
     		},
 
     		i: function intro(local) {
@@ -39930,7 +39942,7 @@
     	};
     }
 
-    // (34:4) {#if $showCarousel}
+    // (33:4) {#if $showCarousel}
     function create_if_block_1$2(ctx) {
     	var current;
 
@@ -39964,7 +39976,7 @@
     	};
     }
 
-    // (37:4) {#if $showMenu}
+    // (36:4) {#if $showMenu}
     function create_if_block$4(ctx) {
     	var current;
 
@@ -40004,7 +40016,7 @@
     	};
     }
 
-    // (38:4) <Menu>
+    // (37:4) <Menu>
     function create_default_slot(ctx) {
     	var current;
 
@@ -40106,7 +40118,7 @@
     		p: function update(changed, ctx) {
     			var modalwrapper_changes = {};
     			if (changed.$showModal) modalwrapper_changes.transitionTrigger = ctx.$showModal;
-    			if (changed.$$scope || changed.$currentLat || changed.$currentLong) modalwrapper_changes.$$scope = { changed, ctx };
+    			if (changed.$$scope) modalwrapper_changes.$$scope = { changed, ctx };
     			modalwrapper.$set(modalwrapper_changes);
 
     			if (ctx.$showCarousel) {
@@ -40193,26 +40205,16 @@
     }
 
     function instance$c($$self, $$props, $$invalidate) {
-    	let $showModal, $currentLat, $currentLong, $showCarousel, $showMenu;
+    	let $showModal, $showCarousel, $showMenu;
 
     	validate_store(showModal, 'showModal');
     	subscribe($$self, showModal, $$value => { $showModal = $$value; $$invalidate('$showModal', $showModal); });
-    	validate_store(currentLat, 'currentLat');
-    	subscribe($$self, currentLat, $$value => { $currentLat = $$value; $$invalidate('$currentLat', $currentLat); });
-    	validate_store(currentLong, 'currentLong');
-    	subscribe($$self, currentLong, $$value => { $currentLong = $$value; $$invalidate('$currentLong', $currentLong); });
     	validate_store(showCarousel, 'showCarousel');
     	subscribe($$self, showCarousel, $$value => { $showCarousel = $$value; $$invalidate('$showCarousel', $showCarousel); });
     	validate_store(showMenu, 'showMenu');
     	subscribe($$self, showMenu, $$value => { $showMenu = $$value; $$invalidate('$showMenu', $showMenu); });
 
-    	return {
-    		$showModal,
-    		$currentLat,
-    		$currentLong,
-    		$showCarousel,
-    		$showMenu
-    	};
+    	return { $showModal, $showCarousel, $showMenu };
     }
 
     class App extends SvelteComponentDev {
