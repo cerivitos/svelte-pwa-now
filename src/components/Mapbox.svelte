@@ -11,7 +11,7 @@
   import { toilets } from "../data/toilets.js";
   import { mapBoxKey } from "../keys.js";
 
-  const darkStyle = "mapbox://styles/cerivitos/cjx20hhye07f41cpgk28g563z";
+  const darkStyle = "mapbox://styles/mapbox/dark-v10";
   const lightStyle = "mapbox://styles/mapbox/streets-v9";
 
   let map;

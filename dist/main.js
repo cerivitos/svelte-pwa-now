@@ -17547,10 +17547,10 @@
     			div = element("div");
     			link.href = "https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css";
     			link.rel = "stylesheet";
-    			add_location(link, file$1, 93, 2, 2461);
+    			add_location(link, file$1, 93, 2, 2441);
     			div.id = "map";
     			div.className = "w-screen h-screen";
-    			add_location(div, file$1, 99, 0, 2583);
+    			add_location(div, file$1, 99, 0, 2563);
     		},
 
     		l: function claim(nodes) {
@@ -17578,7 +17578,7 @@
     	};
     }
 
-    const darkStyle = "mapbox://styles/cerivitos/cjx20hhye07f41cpgk28g563z";
+    const darkStyle = "mapbox://styles/mapbox/dark-v10";
 
     const lightStyle = "mapbox://styles/mapbox/streets-v9";
 
