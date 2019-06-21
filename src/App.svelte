@@ -28,8 +28,7 @@
     <ModalWrapper transitionTrigger="{$showModal}">
       <div slot="background"><Mapbox /></div>
       <div slot="modal"
-        ><InfoModal lat="{$currentLat}" long="{$currentLong}"
-      /></div>
+        ><InfoModal/></div>
     </ModalWrapper>
     {#if $showCarousel}
     <Carousel />
