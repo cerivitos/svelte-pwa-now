@@ -43,6 +43,7 @@
     "rollup-plugin-node-globals": "^1.4.0",
     "rollup-plugin-node-resolve": "^5.0.0",
     "rollup-plugin-postcss": "^2.0.3",
+    "rollup-plugin-replace": "^2.2.0",
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^4.0.4",
     "sirv-cli": "^0.4.2",
@@ -57,6 +58,7 @@
     "mapbox-gl": "^1.0.0",
     "mapbox-gl-leaflet": "0.0.6",
     "overmind": "^17.1.0",
-    "papaparse": "^5.0.0"
+    "papaparse": "^5.0.0",
+    "workbox-routing": "^4.3.1"
   }
 }

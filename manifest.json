@@ -1,0 +1,9 @@
+{
+  "name": "sgtoilet",
+  "short_name": "sgtoilet",
+  "icons": [],
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#f6f5f5",
+  "theme_color": "#5bd1d7"
+}

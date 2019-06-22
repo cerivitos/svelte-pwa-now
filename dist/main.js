@@ -39846,7 +39846,7 @@
 
     const file$b = "src\\App.svelte";
 
-    // (29:6) <div slot="background">
+    // (35:6) <div slot="background">
     function create_background_slot(ctx) {
     	var div, current;
 
@@ -39857,7 +39857,7 @@
     			div = element("div");
     			mapbox.$$.fragment.c();
     			attr(div, "slot", "background");
-    			add_location(div, file$b, 28, 6, 989);
+    			add_location(div, file$b, 34, 6, 1144);
     		},
 
     		m: function mount(target, anchor) {
@@ -39888,7 +39888,7 @@
     	};
     }
 
-    // (30:6) <div slot="modal"          >
+    // (36:6) <div slot="modal"          >
     function create_modal_slot(ctx) {
     	var div, current;
 
@@ -39899,7 +39899,7 @@
     			div = element("div");
     			infomodal.$$.fragment.c();
     			attr(div, "slot", "modal");
-    			add_location(div, file$b, 29, 6, 1036);
+    			add_location(div, file$b, 35, 6, 1191);
     		},
 
     		m: function mount(target, anchor) {
@@ -39930,7 +39930,7 @@
     	};
     }
 
-    // (28:4) <ModalWrapper transitionTrigger="{$showModal}">
+    // (34:4) <ModalWrapper transitionTrigger="{$showModal}">
     function create_default_slot_1(ctx) {
     	var t;
 
@@ -39955,7 +39955,7 @@
     	};
     }
 
-    // (33:4) {#if $showCarousel}
+    // (39:4) {#if $showCarousel}
     function create_if_block_1$2(ctx) {
     	var current;
 
@@ -39989,7 +39989,7 @@
     	};
     }
 
-    // (36:4) {#if $showMenu}
+    // (42:4) {#if $showMenu}
     function create_if_block$4(ctx) {
     	var current;
 
@@ -40029,7 +40029,7 @@
     	};
     }
 
-    // (37:4) <Menu>
+    // (43:4) <Menu>
     function create_default_slot(ctx) {
     	var current;
 
@@ -40103,9 +40103,9 @@
     			if (if_block1) if_block1.c();
     			link.href = "https://fonts.googleapis.com/css?family=Oswald|Roboto&display=swap";
     			link.rel = "stylesheet";
-    			add_location(link, file$b, 21, 13, 745);
+    			add_location(link, file$b, 27, 13, 900);
     			main.className = "overflow-hidden";
-    			add_location(main, file$b, 24, 2, 864);
+    			add_location(main, file$b, 30, 2, 1019);
     		},
 
     		l: function claim(nodes) {
@@ -40226,6 +40226,14 @@
     	subscribe($$self, showCarousel, $$value => { $showCarousel = $$value; $$invalidate('$showCarousel', $showCarousel); });
     	validate_store(showMenu, 'showMenu');
     	subscribe($$self, showMenu, $$value => { $showMenu = $$value; $$invalidate('$showMenu', $showMenu); });
+
+    	
+
+      if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js');
+      });
+    }
 
     	return { $showModal, $showCarousel, $showMenu };
     }
