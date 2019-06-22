@@ -1,5 +1,5 @@
 <script>
-  import { fade, draw } from "svelte/transition";
+  import { fade } from "svelte/transition";
 
   export let name;
   export let rating;
@@ -11,9 +11,9 @@
     if (navigator.share) {
       navigator
         .share({
-          url: shareUrl,
+          url: document.location.href,
           title: name,
-          text: rating
+          text: "Rated " + rating + "stars!"
         })
         .catch(error => {
           showWebShare = true;
