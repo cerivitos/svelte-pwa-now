@@ -13,7 +13,8 @@
         .share({
           url: document.location.href,
           title: name,
-          text: "Rated " + rating + " stars!"
+          text:
+            "Check out this toilet at " + name + " rated " + rating + " stars!"
         })
         .catch(error => {
           showWebShare = true;
