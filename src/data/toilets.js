@@ -641,9 +641,9 @@ export const toilets = [
   {
     "type": "MRT Station",
     "name": "Dakota MRT Station",
-    "address": "201 Airport Road, S(397973)",
-    "lat": 1.344768,
-    "long": 103.897611,
+    "address": "201 Old Airport Road, S(397973)",
+    "lat": 1.3079662,
+    "long": 103.8867006,
     "rating": 4,
     "gallery_link": "https://www.toilet.org.sg/gallery/143/4-star-toilet-dakota-mrt-station"
   },
@@ -1128,8 +1128,8 @@ export const toilets = [
     "type": "Foodcourt",
     "name": "Koufu Foodcourt",
     "address": "Blk 263 Compassvale Street, #01-09 S(540263)",
-    "lat": 1.34169,
-    "long": 103.697177,
+    "lat": 1.3952723,
+    "long": 103.8937685,
     "rating": 3,
     "gallery_link": "https://www.toilet.org.sg/gallery/107/3-star-toilet-263-compassvale-street-koufu-foodcourt"
   },
@@ -1137,8 +1137,8 @@ export const toilets = [
     "type": "Foodcourt",
     "name": "Koufu Foodcourt",
     "address": "Blk 118 Rivervale Drive, #02-15/16, S(540118)",
-    "lat": 1.350014,
-    "long": 103.749253,
+    "lat": 1.3855993,
+    "long": 103.8997947,
     "rating": 3,
     "gallery_link": ""
   },
@@ -1146,8 +1146,8 @@ export const toilets = [
     "type": "Foodcourt",
     "name": "Koufu Foodcourt",
     "address": "Blk 638A, Jurong West Street 61, #01-22, S(641638)",
-    "lat": 1.395028,
-    "long": 103.89597,
+    "lat": 1.3417169,
+    "long": 103.6953817,
     "rating": 3,
     "gallery_link": ""
   },
@@ -1155,8 +1155,8 @@ export const toilets = [
     "type": "Foodcourt",
     "name": "Koufu Foodcourt",
     "address": "1 Bukit Batok Central Link, #04-01, Westmall, S(658713)",
-    "lat": 1.33657,
-    "long": 103.734915,
+    "lat": 1.3500165,
+    "long": 103.7470965,
     "rating": 3,
     "gallery_link": "https://www.toilet.org.sg/gallery/178/4-star-toilet-koufu-foodcourt-westmall"
   },
@@ -1164,8 +1164,8 @@ export const toilets = [
     "type": "Foodcourt",
     "name": "Koufu Foodcourt@Fajar",
     "address": "445 Fajar Road, #01-548, S(670445)",
-    "lat": 1.383894,
-    "long": 103.770434,
+    "lat": 1.3835935,
+    "long": 103.7688195,
     "rating": 3,
     "gallery_link": "https://www.toilet.org.sg/gallery/275/3-Star-Toilet-Koufu-Blk-445-Fajar-Road"
   },
@@ -1182,8 +1182,8 @@ export const toilets = [
     "type": "Foodcourt",
     "name": "Kuofu Foodcourt",
     "address": "Blk 88 Tanglin Halt, S(141088)",
-    "lat": 1.301664,
-    "long": 103.798277,
+    "lat": 1.3010117,
+    "long": 103.7963899,
     "rating": 4,
     "gallery_link": "https://www.toilet.org.sg/gallery/55/4-star-toilet-kuofu-tanglin-halt-foodcourt"
   },
