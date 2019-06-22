@@ -1,6 +1,5 @@
 <script>
   import Searchbar from "./components/Searchbar.svelte";
-  import Map from "./components/Map.svelte";
   import Mapbox from "./components/Mapbox.svelte";
   import PlaceList from "./components/PlaceList.svelte";
   import InfoModal from "./components/InfoModal.svelte";
