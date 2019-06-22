@@ -17547,10 +17547,10 @@
     			div = element("div");
     			link.href = "https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css";
     			link.rel = "stylesheet";
-    			add_location(link, file$1, 92, 2, 2427);
+    			add_location(link, file$1, 96, 2, 2512);
     			div.id = "map";
     			div.className = "w-screen h-screen";
-    			add_location(div, file$1, 98, 0, 2549);
+    			add_location(div, file$1, 102, 0, 2634);
     		},
 
     		l: function claim(nodes) {
@@ -17611,6 +17611,10 @@
             [104.031162, 1.50694]
           )
         }));
+
+        map.on("click", () => {
+          if ($showModal) showModal.set(false);
+        });
 
         toilets.forEach(toilet => {
           const lat = toilet.lat;

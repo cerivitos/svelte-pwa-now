@@ -31,6 +31,10 @@
       )
     });
 
+    map.on("click", () => {
+      if ($showModal) showModal.set(false);
+    });
+
     toilets.forEach(toilet => {
       const lat = toilet.lat;
       const long = toilet.long;
