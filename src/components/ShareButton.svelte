@@ -7,7 +7,7 @@
   let copySuccessful = false;
   let showWebShare = false;
 
-  function handleShare(name, rating) {
+  function handleShare() {
     if (navigator.share) {
       navigator
         .share({
@@ -74,7 +74,7 @@
 {#if !showWebShare}
 <button
   class="w-32 rounded bg-backgroundColor hover:bg-gray-300 text-accentColor font-medium px-5 py-2 mr-2 inline-flex items-center"
-  on:click="{handleShare(name, rating)}"
+  on:click="{handleShare}"
 >
   <svg
     xmlns="http://www.w3.org/2000/svg"
