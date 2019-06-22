@@ -15034,7 +15034,7 @@
     window.L = exports;
 
     })));
-    //# sourceMappingURL=leaflet-src.js.map
+
     });
 
     const toilets = [
@@ -17527,7 +17527,7 @@
     return mapboxgl;
 
     }));
-    //# sourceMappingURL=mapbox-gl.js.map
+
     });
 
     const mapBoxKey =
@@ -17547,10 +17547,10 @@
     			div = element("div");
     			link.href = "https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css";
     			link.rel = "stylesheet";
-    			add_location(link, file$1, 93, 2, 2441);
+    			add_location(link, file$1, 92, 2, 2427);
     			div.id = "map";
     			div.className = "w-screen h-screen";
-    			add_location(div, file$1, 99, 0, 2563);
+    			add_location(div, file$1, 98, 0, 2549);
     		},
 
     		l: function claim(nodes) {
@@ -17578,9 +17578,9 @@
     	};
     }
 
-    const darkStyle = "mapbox://styles/mapbox/dark-v10";
+    const darkStyle = "mapbox://styles/mapbox/dark-v10?optimize=true";
 
-    const lightStyle = "mapbox://styles/mapbox/streets-v9";
+    const lightStyle = "mapbox://styles/mapbox/streets-v9?optimize=true";
 
     function instance$1($$self, $$props, $$invalidate) {
     	let $darkMode, $currentLong, $currentLat, $showModal;
@@ -17600,7 +17600,6 @@
       let markers = [];
 
       onMount(() => {
-        //TO-DO: Set domain for access token
         mapboxGl.accessToken = mapBoxKey;
         $$invalidate('map', map = new mapboxGl.Map({
           container: "map",

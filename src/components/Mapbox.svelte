@@ -11,15 +11,14 @@
   import { toilets } from "../data/toilets.js";
   import { mapBoxKey } from "../keys.js";
 
-  const darkStyle = "mapbox://styles/mapbox/dark-v10";
-  const lightStyle = "mapbox://styles/mapbox/streets-v9";
+  const darkStyle = "mapbox://styles/mapbox/dark-v10?optimize=true";
+  const lightStyle = "mapbox://styles/mapbox/streets-v9?optimize=true";
 
   let map;
   let toiletMarker;
   let markers = [];
 
   onMount(() => {
-    //TO-DO: Set domain for access token
     mapboxgl.accessToken = mapBoxKey;
     map = new mapboxgl.Map({
       container: "map",
