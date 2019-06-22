@@ -17547,10 +17547,10 @@
     			div = element("div");
     			link.href = "https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css";
     			link.rel = "stylesheet";
-    			add_location(link, file$1, 96, 2, 2512);
+    			add_location(link, file$1, 105, 2, 2802);
     			div.id = "map";
     			div.className = "w-screen h-screen";
-    			add_location(div, file$1, 102, 0, 2634);
+    			add_location(div, file$1, 111, 0, 2924);
     		},
 
     		l: function claim(nodes) {
@@ -17598,6 +17598,7 @@
 
       let map;
       let markers = [];
+      let markerClicked = false;
 
       onMount(() => {
         mapboxGl.accessToken = mapBoxKey;
@@ -17612,16 +17613,24 @@
           )
         }));
 
+        //Hide modal if clicking anywhere on map without a marker to help navigation on small screens
         map.on("click", () => {
-          if ($showModal) showModal.set(false);
+          if ($showModal && !markerClicked) {
+            showModal.set(false);
+          } else {
+            $$invalidate('markerClicked', markerClicked = false);
+          }
         });
 
+        //Add marker for each toilet in data
         toilets.forEach(toilet => {
           const lat = toilet.lat;
           const long = toilet.long;
 
           let marker = new mapboxGl.Marker().setLngLat([long, lat]).addTo(map);
           marker.getElement().addEventListener("click", () => {
+            $$invalidate('markerClicked', markerClicked = true);
+
             currentLat.set(marker.getLngLat().lat);
             currentLong.set(marker.getLngLat().lng);
             searchString.set("");

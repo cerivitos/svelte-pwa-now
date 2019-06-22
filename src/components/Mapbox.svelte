@@ -17,6 +17,7 @@
   let map;
   let toiletMarker;
   let markers = [];
+  let markerClicked = false;
 
   onMount(() => {
     mapboxgl.accessToken = mapBoxKey;
@@ -31,16 +32,24 @@
       )
     });
 
+    //Hide modal if clicking anywhere on map without a marker to help navigation on small screens
     map.on("click", () => {
-      if ($showModal) showModal.set(false);
+      if ($showModal && !markerClicked) {
+        showModal.set(false);
+      } else {
+        markerClicked = false;
+      }
     });
 
+    //Add marker for each toilet in data
     toilets.forEach(toilet => {
       const lat = toilet.lat;
       const long = toilet.long;
 
       let marker = new mapboxgl.Marker().setLngLat([long, lat]).addTo(map);
       marker.getElement().addEventListener("click", () => {
+        markerClicked = true;
+
         currentLat.set(marker.getLngLat().lat);
         currentLong.set(marker.getLngLat().lng);
         searchString.set("");
