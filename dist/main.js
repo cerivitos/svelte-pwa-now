@@ -39846,7 +39846,7 @@
 
     const file$b = "src\\App.svelte";
 
-    // (35:6) <div slot="background">
+    // (38:6) <div slot="background">
     function create_background_slot(ctx) {
     	var div, current;
 
@@ -39857,7 +39857,7 @@
     			div = element("div");
     			mapbox.$$.fragment.c();
     			attr(div, "slot", "background");
-    			add_location(div, file$b, 34, 6, 1144);
+    			add_location(div, file$b, 37, 6, 1492);
     		},
 
     		m: function mount(target, anchor) {
@@ -39888,7 +39888,7 @@
     	};
     }
 
-    // (36:6) <div slot="modal"          >
+    // (39:6) <div slot="modal"          >
     function create_modal_slot(ctx) {
     	var div, current;
 
@@ -39899,7 +39899,7 @@
     			div = element("div");
     			infomodal.$$.fragment.c();
     			attr(div, "slot", "modal");
-    			add_location(div, file$b, 35, 6, 1191);
+    			add_location(div, file$b, 38, 6, 1539);
     		},
 
     		m: function mount(target, anchor) {
@@ -39930,7 +39930,7 @@
     	};
     }
 
-    // (34:4) <ModalWrapper transitionTrigger="{$showModal}">
+    // (37:4) <ModalWrapper transitionTrigger="{$showModal}">
     function create_default_slot_1(ctx) {
     	var t;
 
@@ -39955,7 +39955,7 @@
     	};
     }
 
-    // (39:4) {#if $showCarousel}
+    // (42:4) {#if $showCarousel}
     function create_if_block_1$2(ctx) {
     	var current;
 
@@ -39989,7 +39989,7 @@
     	};
     }
 
-    // (42:4) {#if $showMenu}
+    // (45:4) {#if $showMenu}
     function create_if_block$4(ctx) {
     	var current;
 
@@ -40029,7 +40029,7 @@
     	};
     }
 
-    // (43:4) <Menu>
+    // (46:4) <Menu>
     function create_default_slot(ctx) {
     	var current;
 
@@ -40064,7 +40064,7 @@
     }
 
     function create_fragment$c(ctx) {
-    	var link, t0, main, t1, t2, t3, t4, current;
+    	var link0, meta0, meta1, meta2, link1, meta3, meta4, link2, t0, main, t1, t2, t3, t4, current;
 
     	var router = new Router({ $$inline: true });
 
@@ -40089,7 +40089,14 @@
 
     	return {
     		c: function create() {
-    			link = element("link");
+    			link0 = element("link");
+    			meta0 = element("meta");
+    			meta1 = element("meta");
+    			meta2 = element("meta");
+    			link1 = element("link");
+    			meta3 = element("meta");
+    			meta4 = element("meta");
+    			link2 = element("link");
     			t0 = space();
     			main = element("main");
     			router.$$.fragment.c();
@@ -40101,11 +40108,33 @@
     			if (if_block0) if_block0.c();
     			t4 = space();
     			if (if_block1) if_block1.c();
-    			link.href = "https://fonts.googleapis.com/css?family=Oswald|Roboto&display=swap";
-    			link.rel = "stylesheet";
-    			add_location(link, file$b, 27, 13, 900);
+    			link0.rel = "manifest";
+    			link0.href = "/manifest.json";
+    			add_location(link0, file$b, 22, 2, 749);
+    			meta0.name = "apple-mobile-web-app-capable";
+    			meta0.content = "yes";
+    			add_location(meta0, file$b, 23, 2, 796);
+    			meta1.name = "apple-mobile-web-app-status-bar-style";
+    			meta1.content = "black";
+    			add_location(meta1, file$b, 24, 2, 856);
+    			meta2.name = "apple-mobile-web-app-title";
+    			meta2.content = "sgtoilet";
+    			add_location(meta2, file$b, 25, 2, 927);
+    			link1.rel = "apple-touch-icon";
+    			link1.href = "";
+    			add_location(link1, file$b, 26, 2, 990);
+    			meta3.name = "description";
+    			meta3.content = "An unofficial listing of toilets rated by the Restroom Association (Singapore)";
+    			add_location(meta3, file$b, 27, 2, 1031);
+    			meta4.name = "theme-color";
+    			meta4.content = "#5bd1d7";
+    			add_location(meta4, file$b, 28, 2, 1149);
+    			link2.href = "https://fonts.googleapis.com/css?family=Oswald|Roboto&display=swap";
+    			link2.rel = "stylesheet";
+    			add_location(link2, file$b, 29, 2, 1198);
+    			document.title = "sgtoilet | Toilets in Singapore";
     			main.className = "overflow-hidden";
-    			add_location(main, file$b, 30, 2, 1019);
+    			add_location(main, file$b, 33, 2, 1367);
     		},
 
     		l: function claim(nodes) {
@@ -40113,7 +40142,14 @@
     		},
 
     		m: function mount(target, anchor) {
-    			append(document.head, link);
+    			append(document.head, link0);
+    			append(document.head, meta0);
+    			append(document.head, meta1);
+    			append(document.head, meta2);
+    			append(document.head, link1);
+    			append(document.head, meta3);
+    			append(document.head, meta4);
+    			append(document.head, link2);
     			insert(target, t0, anchor);
     			insert(target, main, anchor);
     			mount_component(router, main, null);
@@ -40198,7 +40234,14 @@
     		},
 
     		d: function destroy(detaching) {
-    			detach(link);
+    			detach(link0);
+    			detach(meta0);
+    			detach(meta1);
+    			detach(meta2);
+    			detach(link1);
+    			detach(meta3);
+    			detach(meta4);
+    			detach(link2);
 
     			if (detaching) {
     				detach(t0);
@@ -40226,14 +40269,6 @@
     	subscribe($$self, showCarousel, $$value => { $showCarousel = $$value; $$invalidate('$showCarousel', $showCarousel); });
     	validate_store(showMenu, 'showMenu');
     	subscribe($$self, showMenu, $$value => { $showMenu = $$value; $$invalidate('$showMenu', $showMenu); });
-
-    	
-
-      if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js');
-      });
-    }
 
     	return { $showModal, $showCarousel, $showMenu };
     }

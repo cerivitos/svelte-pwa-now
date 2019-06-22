@@ -28,6 +28,7 @@
   <meta name="description" content="An unofficial listing of toilets rated by the Restroom Association (Singapore)">
   <meta name="theme-color" content="#5bd1d7" />
   <link href="https://fonts.googleapis.com/css?family=Oswald|Roboto&display=swap" rel="stylesheet">
+  <title>sgtoilet | Toilets in Singapore</title>
 </svelte:head>
 
   <main class="overflow-hidden">
