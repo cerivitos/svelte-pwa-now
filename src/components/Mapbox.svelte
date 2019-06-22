@@ -64,7 +64,7 @@
   $: if (map !== undefined) {
     map.easeTo({
       center: [$currentLong, $currentLat],
-      zoom: 15
+      zoom: 12
     });
 
     markers.forEach(marker => {
