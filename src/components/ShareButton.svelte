@@ -13,7 +13,7 @@
         .share({
           url: document.location.href,
           title: name,
-          text: "Rated " + rating + "stars!"
+          text: "Rated " + rating + " stars!"
         })
         .catch(error => {
           showWebShare = true;
@@ -73,7 +73,7 @@
 {#if !showWebShare}
 <button
   class="w-32 rounded bg-backgroundColor hover:bg-gray-300 text-accentColor font-medium px-5 py-2 mr-2 inline-flex items-center"
-  on:click="{handleShare}"
+  on:click="{handleShare(name, rating)}"
 >
   <svg
     xmlns="http://www.w3.org/2000/svg"
