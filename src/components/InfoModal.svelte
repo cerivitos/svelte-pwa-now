@@ -118,7 +118,7 @@
     {#if innerWidth < 1024 && pics}
     <div class="flex flex-row w-full overflow-auto">
       {#each pics as pic, i}
-      <FadeInImage src="{pic}" alt="{placeObj.name + ' ' + (i + 1)}" index="i" tailwindClass="h-24 w-24 mr-1" on:clicked="{(e) => triggerCarousel(true, placeObj.name, pics)}"/>
+      <FadeInImage src="{pic}" alt="{placeObj.name + ' ' + (i + 1)}" index="i" tailwindClass="h-24 w-24 mr-1 object-cover" on:clicked="{(e) => triggerCarousel(true, placeObj.name, pics)}"/>
       {/each}
     </div>
     {:else} {#if pics && pics.length > 0}

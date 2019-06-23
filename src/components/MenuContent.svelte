@@ -115,11 +115,16 @@
   {/if}
   <div class="absolute bottom-0 p-4 bg-gray-300 w-full text-center">
     <p>
-      Built with <a href="https://svelte.dev" target="_blank">Svelte</a> ·
-      <a href="https://mapbox.com" target="_blank">Mapbox</a> ·
-      <a href="https://tailwindcss.com" target="_blank">Tailwind</a><br />Source
-      code on
-      <a href="https://github.com/cerivitos/INeedToilet" target="_blank"
+      Built with
+      <a href="https://svelte.dev" rel="noreferrer" target="_blank">Svelte</a> ·
+      <a href="https://mapbox.com" rel="noreferrer" target="_blank">Mapbox</a> ·
+      <a href="https://tailwindcss.com" rel="noreferrer" target="_blank"
+        >Tailwind</a
+      ><br />Source code on
+      <a
+        href="https://github.com/cerivitos/INeedToilet"
+        rel="noreferrer"
+        target="_blank"
         >Github</a
       >
     </p>
