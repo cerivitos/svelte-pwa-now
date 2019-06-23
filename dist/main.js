@@ -25438,7 +25438,7 @@
 
     const file$a = "src\\components\\MenuContent.svelte";
 
-    // (99:2) {:else}
+    // (109:2) {:else}
     function create_else_block$2(ctx) {
     	var button, svg, path, t, span, dispose;
 
@@ -25451,14 +25451,14 @@
     			span = element("span");
     			span.textContent = "Night Mode";
     			attr(path, "d", "M506.51,347.083c-7.057-7.037-15.245-8.531-24.571-4.424c-25.031,11.597-50.968,17.398-77.81,17.398    c-33.673,0-64.726-8.292-93.165-24.914c-28.439-16.598-50.961-39.125-67.571-67.559c-16.609-28.434-24.915-59.493-24.915-93.166    c0-26.169,5.171-51.016,15.527-74.572c10.349-23.543,25.306-44.192,44.878-61.935c7.509-7.05,9.217-15.238,5.116-24.565    c-3.874-9.333-10.808-13.758-20.82-13.317c-34.811,1.371-67.797,9.156-98.966,23.379c-31.175,14.223-57.963,32.925-80.368,56.132    c-22.411,23.207-40.159,50.68-53.238,82.412c-13.072,31.732-19.608,65.006-19.608,99.811c0,35.502,6.94,69.401,20.82,101.697    c13.874,32.313,32.534,60.189,55.967,83.611c23.434,23.445,51.304,42.087,83.611,55.974    c32.301,13.861,66.206,20.808,101.696,20.808c50.962,0,98-13.825,141.115-41.457c43.109-27.65,75.361-64.56,96.751-110.735    c1.817-4.106,2.326-8.427,1.536-12.968C511.682,354.146,509.692,350.278,506.51,347.083z");
-    			add_location(path, file$a, 108, 6, 4008);
+    			add_location(path, file$a, 118, 6, 4353);
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "class", "w-6 h-6 fill-current mr-2");
     			attr(svg, "viewBox", "0 0 523.854 523.854");
-    			add_location(svg, file$a, 103, 4, 3869);
-    			add_location(span, file$a, 112, 4, 4948);
+    			add_location(svg, file$a, 113, 4, 4214);
+    			add_location(span, file$a, 122, 4, 5293);
     			button.className = "p-4 inline-flex text-lg hover:bg-gray-400";
-    			add_location(button, file$a, 99, 2, 3763);
+    			add_location(button, file$a, 109, 2, 4108);
     			dispose = listen(button, "click", ctx.toggleDarkMode);
     		},
 
@@ -25482,7 +25482,7 @@
     	};
     }
 
-    // (37:2) {#if $darkMode}
+    // (47:2) {#if $darkMode}
     function create_if_block$3(ctx) {
     	var button, svg, g10, g9, path0, g8, g0, path1, g1, path2, g2, path3, g3, path4, g4, path5, g5, path6, g6, path7, g7, path8, t, span, dispose;
 
@@ -25514,41 +25514,41 @@
     			span = element("span");
     			span.textContent = "Day Mode";
     			attr(path0, "d", "M22.58,11.269c-6.237,0-11.311,5.075-11.311,11.312s5.074,11.312,11.311,11.312c6.236,0,11.311-5.074,11.311-11.312    S28.816,11.269,22.58,11.269z");
-    			add_location(path0, file$a, 48, 10, 1310);
+    			add_location(path0, file$a, 58, 10, 1655);
     			attr(path1, "d", "M22.58,7.944c-1.219,0-2.207-0.988-2.207-2.206V2.207C20.373,0.988,21.361,0,22.58,0c1.219,0,2.207,0.988,2.207,2.207      v3.531C24.787,6.956,23.798,7.944,22.58,7.944z");
-    			add_location(path1, file$a, 53, 14, 1538);
-    			add_location(g0, file$a, 52, 12, 1519);
+    			add_location(path1, file$a, 63, 14, 1883);
+    			add_location(g0, file$a, 62, 12, 1864);
     			attr(path2, "d", "M22.58,37.215c-1.219,0-2.207,0.988-2.207,2.207v3.53c0,1.22,0.988,2.208,2.207,2.208c1.219,0,2.207-0.988,2.207-2.208      v-3.53C24.787,38.203,23.798,37.215,22.58,37.215z");
-    			add_location(path2, file$a, 58, 14, 1798);
-    			add_location(g1, file$a, 57, 12, 1779);
+    			add_location(path2, file$a, 68, 14, 2143);
+    			add_location(g1, file$a, 67, 12, 2124);
     			attr(path3, "d", "M32.928,12.231c-0.861-0.862-0.861-2.259,0-3.121l2.497-2.497c0.861-0.861,2.259-0.861,3.121,0      c0.862,0.862,0.862,2.26,0,3.121l-2.497,2.497C35.188,13.093,33.791,13.093,32.928,12.231z");
-    			add_location(path3, file$a, 63, 14, 2062);
-    			add_location(g2, file$a, 62, 12, 2043);
+    			add_location(path3, file$a, 73, 14, 2407);
+    			add_location(g2, file$a, 72, 12, 2388);
     			attr(path4, "d", "M12.231,32.93c-0.862-0.863-2.259-0.863-3.121,0l-2.497,2.496c-0.861,0.861-0.862,2.26,0,3.121      c0.862,0.861,2.26,0.861,3.121,0l2.497-2.498C13.093,35.188,13.093,33.79,12.231,32.93z");
-    			add_location(path4, file$a, 68, 14, 2342);
-    			add_location(g3, file$a, 67, 12, 2323);
+    			add_location(path4, file$a, 78, 14, 2687);
+    			add_location(g3, file$a, 77, 12, 2668);
     			attr(path5, "d", "M37.215,22.58c0-1.219,0.988-2.207,2.207-2.207h3.531c1.219,0,2.207,0.988,2.207,2.207c0,1.219-0.988,2.206-2.207,2.206      h-3.531C38.203,24.786,37.215,23.799,37.215,22.58z");
-    			add_location(path5, file$a, 73, 14, 2619);
-    			add_location(g4, file$a, 72, 12, 2600);
+    			add_location(path5, file$a, 83, 14, 2964);
+    			add_location(g4, file$a, 82, 12, 2945);
     			attr(path6, "d", "M7.944,22.58c0-1.219-0.988-2.207-2.207-2.207h-3.53C0.988,20.373,0,21.361,0,22.58c0,1.219,0.988,2.206,2.207,2.206      h3.531C6.956,24.786,7.944,23.799,7.944,22.58z");
-    			add_location(path6, file$a, 78, 14, 2885);
-    			add_location(g5, file$a, 77, 12, 2866);
+    			add_location(path6, file$a, 88, 14, 3230);
+    			add_location(g5, file$a, 87, 12, 3211);
     			attr(path7, "d", "M32.928,32.93c0.862-0.861,2.26-0.861,3.121,0l2.497,2.497c0.862,0.86,0.862,2.259,0,3.12s-2.259,0.861-3.121,0      l-2.497-2.497C32.066,35.188,32.066,33.791,32.928,32.93z");
-    			add_location(path7, file$a, 83, 14, 3144);
-    			add_location(g6, file$a, 82, 12, 3125);
+    			add_location(path7, file$a, 93, 14, 3489);
+    			add_location(g6, file$a, 92, 12, 3470);
     			attr(path8, "d", "M12.231,12.231c0.862-0.862,0.862-2.259,0-3.121L9.734,6.614c-0.862-0.862-2.259-0.862-3.121,0      c-0.862,0.861-0.862,2.259,0,3.12l2.497,2.497C9.972,13.094,11.369,13.094,12.231,12.231z");
-    			add_location(path8, file$a, 88, 14, 3408);
-    			add_location(g7, file$a, 87, 12, 3389);
-    			add_location(g8, file$a, 51, 10, 1502);
-    			add_location(g9, file$a, 47, 8, 1295);
-    			add_location(g10, file$a, 46, 6, 1282);
+    			add_location(path8, file$a, 98, 14, 3753);
+    			add_location(g7, file$a, 97, 12, 3734);
+    			add_location(g8, file$a, 61, 10, 1847);
+    			add_location(g9, file$a, 57, 8, 1640);
+    			add_location(g10, file$a, 56, 6, 1627);
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "class", "w-6 h-6 fill-current mr-2");
     			attr(svg, "viewBox", "0 0 45.16 45.16");
-    			add_location(svg, file$a, 41, 4, 1147);
-    			add_location(span, file$a, 96, 4, 3714);
+    			add_location(svg, file$a, 51, 4, 1492);
+    			add_location(span, file$a, 106, 4, 4059);
     			button.className = "p-4 inline-flex text-lg hover:bg-gray-400";
-    			add_location(button, file$a, 37, 2, 1041);
+    			add_location(button, file$a, 47, 2, 1386);
     			dispose = listen(button, "click", ctx.toggleDarkMode);
     		},
 
@@ -25592,7 +25592,7 @@
     }
 
     function create_fragment$a(ctx) {
-    	var div1, h1, t1, p0, t3, button, svg, path0, path1, t4, span, t6, t7, div0, p1, t8, a0, t10, a1, t12, a2, br, t14, a3, dispose;
+    	var div3, div0, t0, div1, img, t1, span0, t3, p0, t5, p1, t7, button, svg, path0, path1, t8, span1, t10, t11, div2, p2, t12, a0, t14, a1, t16, a2, br, t18, a3, dispose;
 
     	function select_block_type(ctx) {
     		if (ctx.$darkMode) return create_if_block$3;
@@ -25604,76 +25604,93 @@
 
     	return {
     		c: function create() {
+    			div3 = element("div");
+    			div0 = element("div");
+    			t0 = space();
     			div1 = element("div");
-    			h1 = element("h1");
-    			h1.textContent = "sgtoilet";
+    			img = element("img");
     			t1 = space();
-    			p0 = element("p");
-    			p0.textContent = "An unofficial listing of toilets rated by the Restroom Association\r\n    (Singapore).";
+    			span0 = element("span");
+    			span0.textContent = "SG";
     			t3 = space();
+    			p0 = element("p");
+    			p0.textContent = "toilet";
+    			t5 = space();
+    			p1 = element("p");
+    			p1.textContent = "An unofficial listing of toilets rated by the Restroom Association\r\n    (Singapore)";
+    			t7 = space();
     			button = element("button");
     			svg = svg_element("svg");
     			path0 = svg_element("path");
     			path1 = svg_element("path");
-    			t4 = space();
-    			span = element("span");
-    			span.textContent = "Find out more";
-    			t6 = space();
+    			t8 = space();
+    			span1 = element("span");
+    			span1.textContent = "Find out more";
+    			t10 = space();
     			if_block.c();
-    			t7 = space();
-    			div0 = element("div");
-    			p1 = element("p");
-    			t8 = text("Built with\r\n      ");
+    			t11 = space();
+    			div2 = element("div");
+    			p2 = element("p");
+    			t12 = text("Built with\r\n      ");
     			a0 = element("a");
     			a0.textContent = "Svelte";
-    			t10 = text(" ·\r\n      ");
+    			t14 = text(" ·\r\n      ");
     			a1 = element("a");
     			a1.textContent = "Mapbox";
-    			t12 = text(" ·\r\n      ");
+    			t16 = text(" ·\r\n      ");
     			a2 = element("a");
     			a2.textContent = "Tailwind";
     			br = element("br");
-    			t14 = text("Source code on\r\n      ");
+    			t18 = text("Source on\r\n      ");
     			a3 = element("a");
     			a3.textContent = "Github";
-    			h1.className = "text-6xl mb-2 px-4";
-    			add_location(h1, file$a, 15, 2, 342);
-    			p0.className = "mb-6 px-4 text-gray-600";
-    			add_location(p0, file$a, 16, 2, 390);
+    			div0.className = "w-full h-1 bg-primaryColor";
+    			add_location(div0, file$a, 15, 2, 337);
+    			img.src = "assets/android-chrome-512x512.png";
+    			img.className = "w-12 h-12";
+    			add_location(img, file$a, 17, 4, 448);
+    			span0.className = "flex text-3xl text-white bg-red-700 w-12 h-12 rounded-full items-center ml-4 p-1";
+    			add_location(span0, file$a, 18, 4, 519);
+    			p0.className = "text-5xl pl-1 text-red-700 font-bold";
+    			add_location(p0, file$a, 22, 4, 650);
+    			div1.className = "flex flex-row items-center px-4 pt-8 pb-2";
+    			add_location(div1, file$a, 16, 2, 387);
+    			p1.className = "mb-6 px-4 text-gray-600";
+    			add_location(p1, file$a, 26, 2, 736);
     			attr(path0, "d", "M0 0h24v24H0z");
     			attr(path0, "fill", "none");
-    			add_location(path0, file$a, 29, 6, 756);
+    			add_location(path0, file$a, 39, 6, 1101);
     			attr(path1, "d", "M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z");
-    			add_location(path1, file$a, 30, 6, 802);
+    			add_location(path1, file$a, 40, 6, 1147);
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "class", "w-6 h-6 mr-2 fill-current");
     			attr(svg, "viewBox", "0 0 24 24");
-    			add_location(svg, file$a, 24, 4, 627);
-    			add_location(span, file$a, 34, 4, 979);
+    			add_location(svg, file$a, 34, 4, 972);
+    			add_location(span1, file$a, 44, 4, 1324);
     			button.className = "p-4 inline-flex text-lg hover:bg-gray-400";
-    			add_location(button, file$a, 20, 2, 527);
+    			add_location(button, file$a, 30, 2, 872);
     			a0.href = "https://svelte.dev";
     			a0.rel = "noreferrer";
     			a0.target = "_blank";
-    			add_location(a0, file$a, 118, 6, 5098);
+    			add_location(a0, file$a, 128, 6, 5443);
     			a1.href = "https://mapbox.com";
     			a1.rel = "noreferrer";
     			a1.target = "_blank";
-    			add_location(a1, file$a, 119, 6, 5180);
+    			add_location(a1, file$a, 129, 6, 5525);
     			a2.href = "https://tailwindcss.com";
     			a2.rel = "noreferrer";
     			a2.target = "_blank";
-    			add_location(a2, file$a, 120, 6, 5262);
-    			add_location(br, file$a, 122, 7, 5359);
+    			add_location(a2, file$a, 130, 6, 5607);
+    			add_location(br, file$a, 132, 7, 5704);
     			a3.href = "https://github.com/cerivitos/INeedToilet";
     			a3.rel = "noreferrer";
     			a3.target = "_blank";
-    			add_location(a3, file$a, 123, 6, 5387);
-    			add_location(p1, file$a, 116, 4, 5069);
-    			div0.className = "absolute bottom-0 p-4 bg-gray-300 w-full text-center";
-    			add_location(div0, file$a, 115, 2, 4997);
-    			div1.className = "flex flex-col py-4 text-gray-800";
-    			add_location(div1, file$a, 14, 0, 292);
+    			add_location(a3, file$a, 133, 6, 5727);
+    			add_location(p2, file$a, 126, 4, 5414);
+    			div2.className = "absolute bottom-0 p-4 bg-gray-300 w-full text-center";
+    			add_location(div2, file$a, 125, 2, 5342);
+    			div3.className = "flex flex-col text-gray-800";
+    			add_location(div3, file$a, 14, 0, 292);
     			dispose = listen(button, "click", moreInfo);
     		},
 
@@ -25682,31 +25699,38 @@
     		},
 
     		m: function mount(target, anchor) {
-    			insert(target, div1, anchor);
-    			append(div1, h1);
+    			insert(target, div3, anchor);
+    			append(div3, div0);
+    			append(div3, t0);
+    			append(div3, div1);
+    			append(div1, img);
     			append(div1, t1);
-    			append(div1, p0);
+    			append(div1, span0);
     			append(div1, t3);
-    			append(div1, button);
+    			append(div1, p0);
+    			append(div3, t5);
+    			append(div3, p1);
+    			append(div3, t7);
+    			append(div3, button);
     			append(button, svg);
     			append(svg, path0);
     			append(svg, path1);
-    			append(button, t4);
-    			append(button, span);
-    			append(div1, t6);
-    			if_block.m(div1, null);
-    			append(div1, t7);
-    			append(div1, div0);
-    			append(div0, p1);
-    			append(p1, t8);
-    			append(p1, a0);
-    			append(p1, t10);
-    			append(p1, a1);
-    			append(p1, t12);
-    			append(p1, a2);
-    			append(p1, br);
-    			append(p1, t14);
-    			append(p1, a3);
+    			append(button, t8);
+    			append(button, span1);
+    			append(div3, t10);
+    			if_block.m(div3, null);
+    			append(div3, t11);
+    			append(div3, div2);
+    			append(div2, p2);
+    			append(p2, t12);
+    			append(p2, a0);
+    			append(p2, t14);
+    			append(p2, a1);
+    			append(p2, t16);
+    			append(p2, a2);
+    			append(p2, br);
+    			append(p2, t18);
+    			append(p2, a3);
     		},
 
     		p: function update(changed, ctx) {
@@ -25717,7 +25741,7 @@
     				if_block = current_block_type(ctx);
     				if (if_block) {
     					if_block.c();
-    					if_block.m(div1, t7);
+    					if_block.m(div3, t11);
     				}
     			}
     		},
@@ -25727,7 +25751,7 @@
 
     		d: function destroy(detaching) {
     			if (detaching) {
-    				detach(div1);
+    				detach(div3);
     			}
 
     			if_block.d();

@@ -12,11 +12,21 @@
   }
 </script>
 
-<div class="flex flex-col py-4 text-gray-800">
-  <h1 class="text-6xl mb-2 px-4">sgtoilet</h1>
+<div class="flex flex-col text-gray-800">
+  <div class="w-full h-1 bg-primaryColor"></div>
+  <div class="flex flex-row items-center px-4 pt-8 pb-2">
+    <img src="assets/android-chrome-512x512.png" class="w-12 h-12" />
+    <span
+      class="flex text-3xl text-white bg-red-700 w-12 h-12 rounded-full items-center ml-4 p-1"
+      >SG</span
+    >
+    <p class="text-5xl pl-1 text-red-700 font-bold">
+      toilet
+    </p>
+  </div>
   <p class="mb-6 px-4 text-gray-600">
     An unofficial listing of toilets rated by the Restroom Association
-    (Singapore).
+    (Singapore)
   </p>
   <button
     class="p-4 inline-flex text-lg hover:bg-gray-400"
@@ -120,7 +130,7 @@
       <a href="https://mapbox.com" rel="noreferrer" target="_blank">Mapbox</a> ·
       <a href="https://tailwindcss.com" rel="noreferrer" target="_blank"
         >Tailwind</a
-      ><br />Source code on
+      ><br />Source on
       <a
         href="https://github.com/cerivitos/INeedToilet"
         rel="noreferrer"
