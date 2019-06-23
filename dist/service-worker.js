@@ -20,10 +20,6 @@ self.addEventListener("activate", e => {
       return Promise.all(
         cacheNames.map(function(thisCacheName) {
           if (thisCacheName !== cacheName) {
-            console.log(
-              "[ServiceWorker] Removing Cached Files from Cache - ",
-              thisCacheName
-            );
             return caches.delete(thisCacheName);
           }
         })
@@ -33,29 +29,9 @@ self.addEventListener("activate", e => {
 });
 self.addEventListener("fetch", e => {
   e.respondWith(
-    caches.match(e.request).then(function(response) {
-      if (response) {
-        console.log("[ServiceWorker] Found in Cache", e.request.url, response);
-        return response;
-      }
-      var requestClone = e.request.clone();
-      fetch(requestClone)
-        .then(function(response) {
-          if (!response) {
-            console.log("[ServiceWorker] No response from fetch ");
-            return response;
-          }
-
-          var responseClone = response.clone();
-          caches.open(cacheName).then(function(cache) {
-            cache.put(e.request, responseClone);
-            console.log("[ServiceWorker] New Data Cached", e.request.url);
-            return response;
-          });
-        })
-        .catch(function(err) {
-          console.log("[ServiceWorker] Error Fetching & Caching New Data", err);
-        });
-    })
+    (async function() {
+      const response = await caches.match(e.request);
+      return response || fetch(e.request);
+    })()
   );
 });
