@@ -1776,8 +1776,8 @@ export const toilets = [
     "type": "Bus Interchange",
     "name": "Queens Street Bus Terminal",
     "address": "Queens Street Bus Terminal, S(884001)",
-    "lat": 1.341552,
-    "long": 103.639327,
+    "lat": 1.3035363,
+    "long": 103.8567334,
     "rating": 4,
     "gallery_link": "https://www.toilet.org.sg/gallery/313/4-star-toilet-queens-street-bus-interchange"
   },
@@ -2262,8 +2262,8 @@ export const toilets = [
     "type": "Bus Interchange",
     "name": "Tuas Bus Terminal",
     "address": "1 Tuas West Drive, S(638410)",
-    "lat": 1.344752,
-    "long": 103.639606,
+    "lat": 1.345011,
+    "long": 103.639114,
     "rating": 4,
     "gallery_link": "https://www.toilet.org.sg/gallery/295/4-star-toilet-tuas-bus-terminal"
   },
