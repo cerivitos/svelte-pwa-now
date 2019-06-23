@@ -20,7 +20,7 @@
       class="flex text-3xl text-white bg-red-700 w-12 h-12 rounded-full items-center ml-4 p-1"
       >SG</span
     >
-    <p class="text-5xl pl-1 text-red-700 font-bold">
+    <p class="text-4xl pl-1 text-red-700 font-medium">
       toilet
     </p>
   </div>
