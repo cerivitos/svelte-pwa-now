@@ -23,7 +23,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="sgtoilet">
-  <link rel="apple-touch-icon" href="">
+  <link rel="apple-touch-icon" href="/assets/apple-icon-512x512.png">
   <meta name="description" content="An unofficial listing of toilets rated by the Restroom Association (Singapore)">
   <meta name="theme-color" content="#5bd1d7" />
   <link href="https://fonts.googleapis.com/css?family=Oswald|Roboto&display=swap" rel="stylesheet">
