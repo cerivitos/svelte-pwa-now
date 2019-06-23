@@ -149,7 +149,7 @@
         <div class="{createRatingClass(placeObj.rating)}" style="background: {ratingBackgroundRgba[placeObj.rating - 1]}">
           {createRating(placeObj.rating)}
         </div>
-        <div class="flex-grow-0 text-sm font-light text-gray-600 truncate">{placeObj.address}</div>
+        <div class="flex-grow-0 text-sm font-light text-gray-700 truncate">{placeObj.address}</div>
       </div>
       <div class="flex h-full justify-end my-4">
         <ShareButton

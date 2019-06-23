@@ -83,7 +83,7 @@
   class="flex justify-end shadow bg-backgroundColor appearance-none border mt-2 rounded-lg"
   on:keydown={e => dispatchKey(e.key)}
 >
-  <button class="my-2 ml-4 flex-grow-0 rounded-full items-center bg-transparent focus: outline-none" on:click="{() => handleMenu(true)}">
+  <button class="my-2 ml-4 flex-grow-0 rounded-full items-center bg-transparent focus: outline-none" on:click="{() => handleMenu(true)}" aria-label="Open side menu">
     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current text-gray-500 hover:text-gray-600" viewBox="0 0 512 512">
       <path d="M491.318,235.318H20.682C9.26,235.318,0,244.577,0,256s9.26,20.682,20.682,20.682h470.636 c11.423,0,20.682-9.259,20.682-20.682C512,244.578,502.741,235.318,491.318,235.318z"/>
       <path d="M491.318,78.439H20.682C9.26,78.439,0,87.699,0,99.121c0,11.422,9.26,20.682,20.682,20.682h470.636    c11.423,0,20.682-9.26,20.682-20.682C512,87.699,502.741,78.439,491.318,78.439z"/>
@@ -98,15 +98,16 @@
     on:focus="{(focus) => {
       showModal.set(false);
     }}"
-    placeholder="Where are you?"
+    placeholder="Search accredited toilets..."
     class="flex-grow bg-transparent p-4 outline-none"
     type="search"
     id="input"
+    aria-label="Search for toilets by name or address"
   />
   <button
     class="my-2 mr-4 flex-grow-0 rounded-full items-center bg-transparent focus: outline-none hover:text-teal-600"
     {style}
-    on:click="{getLocation}"
+    on:click="{getLocation}" aria-label="Get current location"
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
