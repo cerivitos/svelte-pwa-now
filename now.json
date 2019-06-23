@@ -3,8 +3,8 @@
   "alias": "sgtoilet.app",
   "builds": [
     {
-      "src": "./dist/**",
-      "use": "@now/static"
+      "src": "package.json",
+      "use": "@now/static-build"
     }
   ],
   "routes": [

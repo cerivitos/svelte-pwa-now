@@ -75,5 +75,3 @@ typings/
 # FuseBox cache
 .fusebox/
 .vscode/tasks.json
-
-keys.js

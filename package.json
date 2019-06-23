@@ -8,7 +8,8 @@
     "build:auto": "rollup -c -w",
     "serve": "sirv dist",
     "serve:dev": "sirv dist --dev",
-    "dev": "run-p build:auto serve:dev"
+    "dev": "run-p build:auto serve:dev",
+    "now-build": "rollup -c"
   },
   "repository": {
     "type": "git",
