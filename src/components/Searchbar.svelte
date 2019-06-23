@@ -35,6 +35,8 @@
     homeLat.set(currentPosition.coords.latitude);
     homeLong.set(currentPosition.coords.longitude);
 
+    document.title = "sgtoilet | Toilets in Singapore";
+
     window.history.pushState(
       {
         lat: $currentLat,

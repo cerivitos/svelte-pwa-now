@@ -36,6 +36,7 @@
     map.on("click", () => {
       if ($showModal && !markerClicked) {
         showModal.set(false);
+        document.title = "sgtoilet | Toilets in Singapore";
       } else {
         markerClicked = false;
       }
