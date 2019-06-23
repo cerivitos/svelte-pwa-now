@@ -15,12 +15,9 @@
     showCarousel, showMenu
   } from "./store/store.js";
 
-  if('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/service-worker.js')
-          .then(function() {
-                console.log('Service Worker Registered');
-          });
-      }
+  if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js');
+    }
 </script>
 
 <style lang="postcss"></style>

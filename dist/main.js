@@ -25828,7 +25828,7 @@
 
     const file$b = "src\\App.svelte";
 
-    // (32:6) <div slot="background">
+    // (29:6) <div slot="background">
     function create_background_slot(ctx) {
     	var div, current;
 
@@ -25839,7 +25839,7 @@
     			div = element("div");
     			mapbox.$$.fragment.c();
     			attr(div, "slot", "background");
-    			add_location(div, file$b, 31, 6, 1030);
+    			add_location(div, file$b, 28, 6, 924);
     		},
 
     		m: function mount(target, anchor) {
@@ -25870,7 +25870,7 @@
     	};
     }
 
-    // (33:6) <div slot="modal"          >
+    // (30:6) <div slot="modal"          >
     function create_modal_slot(ctx) {
     	var div, current;
 
@@ -25881,7 +25881,7 @@
     			div = element("div");
     			infomodal.$$.fragment.c();
     			attr(div, "slot", "modal");
-    			add_location(div, file$b, 32, 6, 1077);
+    			add_location(div, file$b, 29, 6, 971);
     		},
 
     		m: function mount(target, anchor) {
@@ -25912,7 +25912,7 @@
     	};
     }
 
-    // (31:4) <ModalWrapper transitionTrigger="{$showModal}">
+    // (28:4) <ModalWrapper transitionTrigger="{$showModal}">
     function create_default_slot_1(ctx) {
     	var t;
 
@@ -25937,7 +25937,7 @@
     	};
     }
 
-    // (36:4) {#if $showCarousel}
+    // (33:4) {#if $showCarousel}
     function create_if_block_1$2(ctx) {
     	var current;
 
@@ -25971,7 +25971,7 @@
     	};
     }
 
-    // (39:4) {#if $showMenu}
+    // (36:4) {#if $showMenu}
     function create_if_block$4(ctx) {
     	var current;
 
@@ -26011,7 +26011,7 @@
     	};
     }
 
-    // (40:4) <Menu>
+    // (37:4) <Menu>
     function create_default_slot(ctx) {
     	var current;
 
@@ -26082,7 +26082,7 @@
     			t3 = space();
     			if (if_block1) if_block1.c();
     			main.className = "overflow-hidden";
-    			add_location(main, file$b, 27, 2, 905);
+    			add_location(main, file$b, 24, 2, 799);
     		},
 
     		l: function claim(nodes) {
@@ -26201,12 +26201,9 @@
 
     	
 
-      if('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js')
-              .then(function() {
-                    console.log('Service Worker Registered');
-              });
-          }
+      if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/service-worker.js');
+        }
 
     	return { $showModal, $showCarousel, $showMenu };
     }
