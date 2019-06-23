@@ -9,7 +9,7 @@
     "serve": "sirv dist",
     "serve:dev": "sirv dist --dev",
     "dev": "run-p build:auto serve:dev",
-    "now-dev": "rollup -c"
+    "now-build": "rollup -c"
   },
   "repository": {
     "type": "git",
