@@ -25828,7 +25828,7 @@
 
     const file$b = "src\\App.svelte";
 
-    // (25:6) <div slot="background">
+    // (32:6) <div slot="background">
     function create_background_slot(ctx) {
     	var div, current;
 
@@ -25839,7 +25839,7 @@
     			div = element("div");
     			mapbox.$$.fragment.c();
     			attr(div, "slot", "background");
-    			add_location(div, file$b, 24, 6, 813);
+    			add_location(div, file$b, 31, 6, 1030);
     		},
 
     		m: function mount(target, anchor) {
@@ -25870,7 +25870,7 @@
     	};
     }
 
-    // (26:6) <div slot="modal"          >
+    // (33:6) <div slot="modal"          >
     function create_modal_slot(ctx) {
     	var div, current;
 
@@ -25881,7 +25881,7 @@
     			div = element("div");
     			infomodal.$$.fragment.c();
     			attr(div, "slot", "modal");
-    			add_location(div, file$b, 25, 6, 860);
+    			add_location(div, file$b, 32, 6, 1077);
     		},
 
     		m: function mount(target, anchor) {
@@ -25912,7 +25912,7 @@
     	};
     }
 
-    // (24:4) <ModalWrapper transitionTrigger="{$showModal}">
+    // (31:4) <ModalWrapper transitionTrigger="{$showModal}">
     function create_default_slot_1(ctx) {
     	var t;
 
@@ -25937,7 +25937,7 @@
     	};
     }
 
-    // (29:4) {#if $showCarousel}
+    // (36:4) {#if $showCarousel}
     function create_if_block_1$2(ctx) {
     	var current;
 
@@ -25971,7 +25971,7 @@
     	};
     }
 
-    // (32:4) {#if $showMenu}
+    // (39:4) {#if $showMenu}
     function create_if_block$4(ctx) {
     	var current;
 
@@ -26011,7 +26011,7 @@
     	};
     }
 
-    // (33:4) <Menu>
+    // (40:4) <Menu>
     function create_default_slot(ctx) {
     	var current;
 
@@ -26082,7 +26082,7 @@
     			t3 = space();
     			if (if_block1) if_block1.c();
     			main.className = "overflow-hidden";
-    			add_location(main, file$b, 20, 2, 688);
+    			add_location(main, file$b, 27, 2, 905);
     		},
 
     		l: function claim(nodes) {
@@ -26198,6 +26198,15 @@
     	subscribe($$self, showCarousel, $$value => { $showCarousel = $$value; $$invalidate('$showCarousel', $showCarousel); });
     	validate_store(showMenu, 'showMenu');
     	subscribe($$self, showMenu, $$value => { $showMenu = $$value; $$invalidate('$showMenu', $showMenu); });
+
+    	
+
+      if('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+              .then(function() {
+                    console.log('Service Worker Registered');
+              });
+          }
 
     	return { $showModal, $showCarousel, $showMenu };
     }
