@@ -3706,12 +3706,12 @@
     }
 
     const ratingColors = [
-      "-red-400",
-      "-orange-400",
-      "-orange-400",
-      "-green-400",
-      "-green-500",
-      "-teal-400"
+      "rgba(252, 129, 129, 1.0)",
+      "rgba(246, 173, 85, 1.0)",
+      "rgba(246, 173, 85, 1.0)",
+      "rgba(104, 211, 145, 1.0)",
+      "rgba(72, 187, 120, 1.0)",
+      "rgba(79, 209, 197, 1.0)"
     ];
 
     const ratingBackgroundRgba = [
@@ -24252,9 +24252,9 @@
     	return child_ctx;
     }
 
-    // (109:0) {#if Object.keys(placeObj).length > 0}
+    // (104:0) {#if Object.keys(placeObj).length > 0}
     function create_if_block$1(ctx) {
-    	var div6, div5, current_block_type_index, if_block, t0, div4, h1, t1_value = ctx.placeObj.name, t1, t2, div2, div0, t3_value = createRating(ctx.placeObj.rating), t3, div0_class_value, t4, div1, t5_value = ctx.placeObj.address, t5, t6, div3, t7, button, svg, path0, path1, t8, span, div5_resize_listener, current, dispose;
+    	var div6, div5, current_block_type_index, if_block, t0, div4, h1, t1_value = ctx.placeObj.name, t1, t2, div2, div0, t3_value = createRating(ctx.placeObj.rating), t3, t4, div1, t5_value = ctx.placeObj.address, t5, t6, div3, t7, button, svg, path0, path1, t8, span, div5_resize_listener, current, dispose;
 
     	var if_block_creators = [
     		create_if_block_1$1,
@@ -24309,36 +24309,37 @@
     			span = element("span");
     			span.textContent = "Directions";
     			h1.className = "font-medium text-xl py-2";
-    			add_location(h1, file$7, 146, 6, 4529);
-    			div0.className = div0_class_value = createRatingClass$1(ctx.placeObj.rating);
+    			add_location(h1, file$7, 141, 6, 4333);
+    			div0.className = "mb-2 -ml-4 mr-2 pl-4 pr-2 rounded-r-full font-semibold text-lg";
     			set_style(div0, "background", ratingBackgroundRgba[ctx.placeObj.rating - 1]);
-    			add_location(div0, file$7, 148, 8, 4651);
+    			set_style(div0, "color", ratingColors[ctx.placeObj.rating - 1]);
+    			add_location(div0, file$7, 143, 8, 4455);
     			div1.className = "flex-grow-0 text-sm font-light text-gray-700 truncate";
-    			add_location(div1, file$7, 151, 8, 4834);
+    			add_location(div1, file$7, 146, 8, 4708);
     			div2.className = "flex flex-row items-baseline mt-2";
-    			add_location(div2, file$7, 147, 6, 4594);
+    			add_location(div2, file$7, 142, 6, 4398);
     			attr(path0, "d", "M21.71 11.29l-9-9c-.39-.39-1.02-.39-1.41 0l-9 9c-.39.39-.39 1.02 0 1.41l9 9c.39.39 1.02.39 1.41 0l9-9c.39-.38.39-1.01 0-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z");
-    			add_location(path0, file$7, 167, 12, 5552);
+    			add_location(path0, file$7, 162, 12, 5426);
     			attr(path1, "d", "M0 0h24v24H0z");
     			attr(path1, "fill", "none");
-    			add_location(path1, file$7, 170, 12, 5791);
+    			add_location(path1, file$7, 165, 12, 5665);
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "class", "fill-current w-6 h-6 mr-2");
     			attr(svg, "viewBox", "0 0 24 24");
-    			add_location(svg, file$7, 162, 10, 5393);
-    			add_location(span, file$7, 172, 10, 5859);
+    			add_location(svg, file$7, 157, 10, 5267);
+    			add_location(span, file$7, 167, 10, 5733);
     			button.className = "w-32 rounded bg-accentColor hover:bg-blue-500 hover:shadow no-underline text-white font-medium px-3 py-2 inline-flex items-center";
-    			add_location(button, file$7, 158, 8, 5118);
+    			add_location(button, file$7, 153, 8, 4992);
     			div3.className = "flex h-full justify-end my-4";
-    			add_location(div3, file$7, 153, 6, 4947);
+    			add_location(div3, file$7, 148, 6, 4821);
     			div4.className = "px-4 pb-2";
-    			add_location(div4, file$7, 145, 4, 4498);
+    			add_location(div4, file$7, 140, 4, 4302);
     			add_render_callback(() => ctx.div5_resize_handler.call(div5));
     			div5.className = "bg-backgroundColor overflow-hidden rounded-lg shadow-lg";
-    			add_location(div5, file$7, 113, 2, 3063);
+    			add_location(div5, file$7, 108, 2, 2867);
     			div6.className = "mx-2 fixed lg:w-1/3 left-0 right-0";
     			set_style(div6, "top", "" + ctx.topDisplacement + "rem");
-    			add_location(div6, file$7, 109, 0, 2969);
+    			add_location(div6, file$7, 104, 0, 2773);
     			dispose = listen(button, "click", ctx.click_handler);
     		},
 
@@ -24408,12 +24409,12 @@
     				set_data(t3, t3_value);
     			}
 
-    			if ((!current || changed.placeObj) && div0_class_value !== (div0_class_value = createRatingClass$1(ctx.placeObj.rating))) {
-    				div0.className = div0_class_value;
-    			}
-
     			if (!current || changed.ratingBackgroundRgba || changed.placeObj) {
     				set_style(div0, "background", ratingBackgroundRgba[ctx.placeObj.rating - 1]);
+    			}
+
+    			if (!current || changed.ratingColors || changed.placeObj) {
+    				set_style(div0, "color", ratingColors[ctx.placeObj.rating - 1]);
     			}
 
     			if ((!current || changed.placeObj) && t5_value !== (t5_value = ctx.placeObj.address)) {
@@ -24460,7 +24461,7 @@
     	};
     }
 
-    // (124:12) {#if pics && pics.length > 0}
+    // (119:12) {#if pics && pics.length > 0}
     function create_if_block_2(ctx) {
     	var div1, t0, div0, p, t1_value = ctx.pics.length, t1, t2, svg, path0, path1, current;
 
@@ -24488,20 +24489,20 @@
     			path0 = svg_element("path");
     			path1 = svg_element("path");
     			p.className = "text-white text-xs mr-1";
-    			add_location(p, file$7, 129, 8, 3976);
+    			add_location(p, file$7, 124, 8, 3780);
     			attr(path0, "d", "M0 0h24v24H0z");
     			attr(path0, "fill", "none");
-    			add_location(path0, file$7, 137, 10, 4215);
+    			add_location(path0, file$7, 132, 10, 4019);
     			attr(path1, "d", "M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z");
-    			add_location(path1, file$7, 138, 10, 4270);
+    			add_location(path1, file$7, 133, 10, 4074);
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "viewBox", "0 0 24 24");
     			attr(svg, "class", "h-4 w-4 fill-current text-white");
-    			add_location(svg, file$7, 132, 8, 4060);
+    			add_location(svg, file$7, 127, 8, 3864);
     			div0.className = "absolute rounded-full bg-gray-800 opacity-50 bottom-0 right-0 m-2 px-2 py-1 flex flex-row justify-end items-center";
-    			add_location(div0, file$7, 126, 6, 3821);
+    			add_location(div0, file$7, 121, 6, 3625);
     			div1.className = "w-full overflow-hidden relative";
-    			add_location(div1, file$7, 124, 4, 3568);
+    			add_location(div1, file$7, 119, 4, 3372);
     		},
 
     		m: function mount(target, anchor) {
@@ -24552,7 +24553,7 @@
     	};
     }
 
-    // (118:4) {#if innerWidth < 1024 && pics}
+    // (113:4) {#if innerWidth < 1024 && pics}
     function create_if_block_1$1(ctx) {
     	var div, current;
 
@@ -24585,7 +24586,7 @@
     				each_blocks[i].c();
     			}
     			div.className = "flex flex-row w-full overflow-auto";
-    			add_location(div, file$7, 118, 4, 3223);
+    			add_location(div, file$7, 113, 4, 3027);
     		},
 
     		m: function mount(target, anchor) {
@@ -24646,7 +24647,7 @@
     	};
     }
 
-    // (120:6) {#each pics as pic, i}
+    // (115:6) {#each pics as pic, i}
     function create_each_block$2(ctx) {
     	var current;
 
@@ -24788,11 +24789,6 @@
         }
       }
       return ratingText;
-    }
-
-    function createRatingClass$1(rating) {
-      const baseClass = "mb-2 -ml-4 mr-2 pl-4 pr-2 rounded-r-full font-semibold text-lg";
-      return baseClass + " text" + ratingColors[rating - 1];
     }
 
     function instance$7($$self, $$props, $$invalidate) {
@@ -25835,7 +25831,7 @@
 
     const file$b = "src\\App.svelte";
 
-    // (29:6) <div slot="background">
+    // (29:4) <div slot="background">
     function create_background_slot(ctx) {
     	var div, current;
 
@@ -25846,7 +25842,7 @@
     			div = element("div");
     			mapbox.$$.fragment.c();
     			attr(div, "slot", "background");
-    			add_location(div, file$b, 28, 6, 924);
+    			add_location(div, file$b, 28, 4, 914);
     		},
 
     		m: function mount(target, anchor) {
@@ -25877,7 +25873,7 @@
     	};
     }
 
-    // (30:6) <div slot="modal"          >
+    // (30:4) <div slot="modal"        >
     function create_modal_slot(ctx) {
     	var div, current;
 
@@ -25888,7 +25884,7 @@
     			div = element("div");
     			infomodal.$$.fragment.c();
     			attr(div, "slot", "modal");
-    			add_location(div, file$b, 29, 6, 971);
+    			add_location(div, file$b, 29, 4, 959);
     		},
 
     		m: function mount(target, anchor) {
@@ -25919,7 +25915,7 @@
     	};
     }
 
-    // (28:4) <ModalWrapper transitionTrigger="{$showModal}">
+    // (28:2) <ModalWrapper transitionTrigger="{$showModal}">
     function create_default_slot_1(ctx) {
     	var t;
 
@@ -25944,7 +25940,7 @@
     	};
     }
 
-    // (33:4) {#if $showCarousel}
+    // (33:2) {#if $showCarousel}
     function create_if_block_1$2(ctx) {
     	var current;
 
@@ -25978,7 +25974,7 @@
     	};
     }
 
-    // (36:4) {#if $showMenu}
+    // (36:2) {#if $showMenu}
     function create_if_block$4(ctx) {
     	var current;
 
@@ -26018,7 +26014,7 @@
     	};
     }
 
-    // (37:4) <Menu>
+    // (37:2) <Menu>
     function create_default_slot(ctx) {
     	var current;
 
@@ -26089,7 +26085,7 @@
     			t3 = space();
     			if (if_block1) if_block1.c();
     			main.className = "overflow-hidden";
-    			add_location(main, file$b, 24, 2, 799);
+    			add_location(main, file$b, 24, 0, 797);
     		},
 
     		l: function claim(nodes) {

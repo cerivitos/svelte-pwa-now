@@ -53,11 +53,6 @@
     return ratingText;
   }
 
-  function createRatingClass(rating) {
-    const baseClass = "mb-2 -ml-4 mr-2 pl-4 pr-2 rounded-r-full font-semibold text-lg";
-    return baseClass + " text" + ratingColors[rating - 1];
-  }
-
   function getDirections(lat, long) {
     let link = "http://maps.google.com/maps?f=d&";
     if ($geoPermissionGranted) {
@@ -146,7 +141,7 @@
     <div class="px-4 pb-2">
       <h1 class="font-medium text-xl py-2">{placeObj.name}</h1>
       <div class="flex flex-row items-baseline mt-2">
-        <div class="{createRatingClass(placeObj.rating)}" style="background: {ratingBackgroundRgba[placeObj.rating - 1]}">
+        <div class="mb-2 -ml-4 mr-2 pl-4 pr-2 rounded-r-full font-semibold text-lg" style="background: {ratingBackgroundRgba[placeObj.rating - 1]}; color: {ratingColors[placeObj.rating - 1]}">
           {createRating(placeObj.rating)}
         </div>
         <div class="flex-grow-0 text-sm font-light text-gray-700 truncate">{placeObj.address}</div>

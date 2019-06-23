@@ -22,18 +22,18 @@
 
 <style lang="postcss"></style>
 
-  <main class="overflow-hidden">
-    <Router/>
-    <PlaceList />
-    <ModalWrapper transitionTrigger="{$showModal}">
-      <div slot="background"><Mapbox /></div>
-      <div slot="modal"
-        ><InfoModal/></div>
-    </ModalWrapper>
-    {#if $showCarousel}
-    <Carousel />
-    {/if}
-    {#if $showMenu} 
-    <Menu><MenuContent/></Menu>
-    {/if}
-  </main>
+<main class="overflow-hidden">
+  <Router/>
+  <PlaceList />
+  <ModalWrapper transitionTrigger="{$showModal}">
+    <div slot="background"><Mapbox /></div>
+    <div slot="modal"
+      ><InfoModal/></div>
+  </ModalWrapper>
+  {#if $showCarousel}
+  <Carousel />
+  {/if}
+  {#if $showMenu} 
+  <Menu><MenuContent/></Menu>
+  {/if}
+</main>

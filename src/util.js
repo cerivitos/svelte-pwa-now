@@ -40,12 +40,12 @@ export function calculateDistance(lat1, lon1, lat2, lon2, unit) {
 }
 
 export const ratingColors = [
-  "-red-400",
-  "-orange-400",
-  "-orange-400",
-  "-green-400",
-  "-green-500",
-  "-teal-400"
+  "rgba(252, 129, 129, 1.0)",
+  "rgba(246, 173, 85, 1.0)",
+  "rgba(246, 173, 85, 1.0)",
+  "rgba(104, 211, 145, 1.0)",
+  "rgba(72, 187, 120, 1.0)",
+  "rgba(79, 209, 197, 1.0)"
 ];
 
 export const ratingBackgroundRgba = [
