@@ -3,13 +3,14 @@
   "alias": "sgtoilet.app",
   "builds": [
     {
-      "src": "./dist/**",
-      "use": "@now/static"
+      "src": "package.json",
+      "use": "@now/static-build"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
+      "headers": { "cache-control": "max-age=0,must-revalidate" },
       "dest": "dist/$1"
     }
   ]
