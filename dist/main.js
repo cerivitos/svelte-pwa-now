@@ -3583,10 +3583,10 @@
     			div = element("div");
     			link.href = "https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css";
     			link.rel = "stylesheet";
-    			add_location(link, file$1, 197, 2, 5690);
+    			add_location(link, file$1, 199, 2, 5840);
     			div.id = "map";
     			div.className = "w-screen h-screen";
-    			add_location(div, file$1, 203, 0, 5812);
+    			add_location(div, file$1, 205, 0, 5962);
     		},
 
     		l: function claim(nodes) {
@@ -3753,6 +3753,7 @@
                     searchString.set("");
                     showModal.set(true);
 
+                    //Unable to use reactive function hence need to manually call on each marker click
                     map.easeTo({
                       center: [$currentLong, $currentLat],
                       zoom: detailZoomLevel + 1
@@ -3784,7 +3785,8 @@
         });
 
         setContext("mapContextKey", {
-          getMap: () => map
+          getMap: () => map,
+          getDetailZoomLevel: () => detailZoomLevel
         });
       });
 
@@ -4084,7 +4086,7 @@
     	return child_ctx;
     }
 
-    // (95:4) {#each filtered as place, i}
+    // (105:4) {#each filtered as place, i}
     function create_each_block(ctx) {
     	var current;
 
@@ -4170,9 +4172,9 @@
     				each_blocks[i].c();
     			}
     			div0.className = "searchList w-full overflow-auto mt-1 rounded-lg bg-backgroundColor shadow svelte-125p4xn";
-    			add_location(div0, file$3, 91, 2, 2666);
+    			add_location(div0, file$3, 101, 2, 2979);
     			div1.className = "fixed px-2 py-4 w-full lg:w-1/3 z-10";
-    			add_location(div1, file$3, 89, 0, 2558);
+    			add_location(div1, file$3, 99, 0, 2871);
     		},
 
     		l: function claim(nodes) {
@@ -4247,14 +4249,14 @@
     }
 
     function instance$3($$self, $$props, $$invalidate) {
-    	let $selectedIndex, $currentLat, $currentLong, $showModal, $searchString, $geoPermissionGranted;
+    	let $selectedIndex, $currentLong, $currentLat, $showModal, $searchString, $geoPermissionGranted;
 
     	validate_store(selectedIndex, 'selectedIndex');
     	subscribe($$self, selectedIndex, $$value => { $selectedIndex = $$value; $$invalidate('$selectedIndex', $selectedIndex); });
-    	validate_store(currentLat, 'currentLat');
-    	subscribe($$self, currentLat, $$value => { $currentLat = $$value; $$invalidate('$currentLat', $currentLat); });
     	validate_store(currentLong, 'currentLong');
     	subscribe($$self, currentLong, $$value => { $currentLong = $$value; $$invalidate('$currentLong', $currentLong); });
+    	validate_store(currentLat, 'currentLat');
+    	subscribe($$self, currentLat, $$value => { $currentLat = $$value; $$invalidate('$currentLat', $currentLat); });
     	validate_store(showModal, 'showModal');
     	subscribe($$self, showModal, $$value => { $showModal = $$value; $$invalidate('$showModal', $showModal); });
     	validate_store(searchString, 'searchString');
@@ -4264,9 +4266,13 @@
 
     	
 
+      let map, detailZoomLevel;
+
       onMount(() => {
-        const { getMap } = getContext("mapContextKey");
-        const map = getMap();
+        const { getMap, getDetailZoomLevel } = getContext("mapContextKey");
+        $$invalidate('map', map = getMap());
+        $$invalidate('detailZoomLevel', detailZoomLevel = getDetailZoomLevel());
+
         $$invalidate('currentMapCenter', currentMapCenter = map.getCenter());
         map.on("dragend", e => {
           $$invalidate('currentMapCenter', currentMapCenter = map.getCenter());
@@ -4288,6 +4294,12 @@
           currentLong.set(filtered[$selectedIndex].long);
           searchString.set("");
           showModal.set(true);
+
+          //Unable to use reactive function in Mapbox component hence need to manually call on Enter keypress
+          map.easeTo({
+            center: [$currentLong, $currentLat],
+            zoom: detailZoomLevel + 1
+          });
 
           window.history.pushState(
             {

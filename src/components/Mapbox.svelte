@@ -136,6 +136,7 @@
                 searchString.set("");
                 showModal.set(true);
 
+                //Unable to use reactive function hence need to manually call on each marker click
                 map.easeTo({
                   center: [$currentLong, $currentLat],
                   zoom: detailZoomLevel + 1
@@ -167,7 +168,8 @@
     });
 
     setContext("mapContextKey", {
-      getMap: () => map
+      getMap: () => map,
+      getDetailZoomLevel: () => detailZoomLevel
     });
   });
 
