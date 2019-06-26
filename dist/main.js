@@ -3544,13 +3544,6 @@
       }
     }
 
-    //From https://stackoverflow.com/questions/37269764/check-if-marker-is-in-view-map-mapbox
-    function inBounds(point, bounds) {
-      var lng = (point.lng - bounds._ne.lng) * (point.lng - bounds._sw.lng) < 0;
-      var lat = (point.lat - bounds._ne.lat) * (point.lat - bounds._sw.lat) < 0;
-      return lng && lat;
-    }
-
     const ratingColors = [
       "rgba(252, 129, 129, 1.0)",
       "rgba(246, 173, 85, 1.0)",
@@ -3583,10 +3576,10 @@
     			div = element("div");
     			link.href = "https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css";
     			link.rel = "stylesheet";
-    			add_location(link, file$1, 199, 2, 5840);
+    			add_location(link, file$1, 219, 2, 6093);
     			div.id = "map";
     			div.className = "w-screen h-screen";
-    			add_location(div, file$1, 205, 0, 5962);
+    			add_location(div, file$1, 225, 0, 6215);
     		},
 
     		l: function claim(nodes) {
@@ -3616,9 +3609,9 @@
 
     const darkStyle = "mapbox://styles/mapbox/dark-v10?optimize=true";
 
-    const lightStyle = "mapbox://styles/mapbox/streets-v9?optimize=true";
+    const lightStyle = "mapbox://styles/mapbox/light-v10?optimize=true";
 
-    const detailZoomLevel = 14;
+    const detailZoomLevel = 12;
 
     function instance$1($$self, $$props, $$invalidate) {
     	let $darkMode, $currentLong, $currentLat, $showModal;
@@ -3635,8 +3628,7 @@
     	
 
       let map;
-      let markers = [];
-      let markerClicked = false;
+      let currentMarker;
 
       onMount(() => {
         mapboxGl.accessToken = mapBoxKey;
@@ -3655,9 +3647,9 @@
           map.addSource("toilets", {
             type: "geojson",
             data: "/data/toilets.geojson",
-            cluster: true,
+            cluster: false,
             clusterMaxZoom: detailZoomLevel,
-            clusterRadius: 60
+            clusterRadius: 40
           });
 
           map.addLayer({
@@ -3666,14 +3658,15 @@
             source: "toilets",
             filter: ["has", "point_count"],
             paint: {
+              "circle-opacity": 0.8,
               "circle-color": [
                 "step",
                 ["get", "point_count"],
-                "#5bd1d7",
+                "#b1cbe2",
                 20,
-                "#248ea9",
+                "#8da5ba",
                 50,
-                "#556fb5"
+                "#567189"
               ],
               "circle-radius": ["step", ["get", "point_count"], 20, 20, 40, 50, 60]
             }
@@ -3694,10 +3687,86 @@
             }
           });
 
+          map.addLayer({
+            id: "unclustered-point",
+            type: "circle",
+            source: "toilets",
+            filter: ["!", ["has", "point_count"]],
+            paint: {
+              "circle-color": [
+                "step",
+                ["get", "rating"],
+                "#fc8181",
+                2,
+                "#f6ad55",
+                3,
+                "#f6ad55",
+                4,
+                "#68d391",
+                5,
+                "#48bb78",
+                6,
+                "#4fd1c5"
+              ],
+              "circle-opacity": 0.8,
+              "circle-radius": [
+                "interpolate",
+                ["linear"],
+                ["zoom"],
+                0,
+                15,
+                10,
+                10,
+                20,
+                8
+              ]
+            }
+          });
+
+          map.on("click", "unclustered-point", e => {
+            let clickedFeature = map.queryRenderedFeatures(e.point, {
+              layers: ["unclustered-point"]
+            })[0];
+
+            if (currentMarker !== undefined) currentMarker.remove();
+
+            const clickedAddress = clickedFeature.properties.address;
+            fetch("/data/toilets.geojson").then(response =>
+              response.json().then(geoJson => {
+                geoJson.features.forEach(feature => {
+                  if (feature.properties.address === clickedAddress) {
+                    currentLat.set(feature.geometry.coordinates[1]);
+                    currentLong.set(feature.geometry.coordinates[0]);
+                    searchString.set("");
+                    showModal.set(true);
+
+                    window.history.pushState(
+                      {
+                        lat: $currentLat,
+                        long: $currentLong,
+                        modal: $showModal
+                      },
+                      null,
+                      "?lat=" + $currentLat + "&long=" + $currentLong
+                    );
+                  }
+                });
+              })
+            );
+          });
+
+          map.on("mouseenter", "unclustered-point", () => {
+            map.getCanvas().style.cursor = "pointer";
+          });
+          map.on("mouseleave", "unclustered-point", () => {
+            map.getCanvas().style.cursor = "";
+          });
+
           map.on("click", "clusters", e => {
             let features = map.queryRenderedFeatures(e.point, {
               layers: ["clusters"]
             });
+            console.log(features);
             let clusterId = features[0].properties.cluster_id;
             map
               .getSource("toilets")
@@ -3720,92 +3789,35 @@
 
           //Hide modal if clicking anywhere on map without a marker to help navigation on small screens
           map.on("click", () => {
-            if ($showModal && !markerClicked) {
+            if ($showModal) {
               showModal.set(false);
               document.title = "sgtoilet | Toilets in Singapore";
-            } else {
-              $$invalidate('markerClicked', markerClicked = false);
             }
-          });
-
-          //Add marker for each toilet in data
-          function updateMarkers() {
-            markers.forEach(marker => marker.remove());
-            $$invalidate('markers', markers = []);
-
-            if (Math.floor(map.getZoom()) > detailZoomLevel) {
-              toilets.forEach(toilet => {
-                const mapBounds = map.getBounds();
-                const markerPoint = {
-                  lng: toilet.long,
-                  lat: toilet.lat
-                };
-
-                if (inBounds(markerPoint, mapBounds)) {
-                  let marker = new mapboxGl.Marker()
-                    .setLngLat([toilet.long, toilet.lat])
-                    .addTo(map);
-                  marker.getElement().addEventListener("click", () => {
-                    $$invalidate('markerClicked', markerClicked = true);
-
-                    currentLat.set(marker.getLngLat().lat);
-                    currentLong.set(marker.getLngLat().lng);
-                    searchString.set("");
-                    showModal.set(true);
-
-                    //Unable to use reactive function hence need to manually call on each marker click
-                    map.easeTo({
-                      center: [$currentLong, $currentLat],
-                      zoom: detailZoomLevel + 1
-                    });
-
-                    window.history.pushState(
-                      {
-                        lat: $currentLat,
-                        long: $currentLong,
-                        modal: $showModal
-                      },
-                      null,
-                      "?lat=" + $currentLat + "&long=" + $currentLong
-                    );
-                  });
-
-                  markers.push(marker);
-                }
-              });
-            }
-          }
-
-          map.on("data", e => {
-            if (e.sourceId !== "toilets" || !e.isSourceLoaded) return;
-            map.on("move", updateMarkers);
-            map.on("moveend", updateMarkers);
-            updateMarkers();
           });
         });
 
         setContext("mapContextKey", {
-          getMap: () => map,
-          getDetailZoomLevel: () => detailZoomLevel
+          getMap: () => map
         });
       });
 
-    	$$self.$$.update = ($$dirty = { map: 1, markers: 1, $currentLat: 1, $currentLong: 1, $darkMode: 1 }) => {
-    		if ($$dirty.map || $$dirty.markers || $$dirty.$currentLat || $$dirty.$currentLong) { if (map !== undefined) {
-            markers.forEach(marker => {
-              if (
-                marker.getLngLat().lat === $currentLat &&
-                marker.getLngLat().lng === $currentLong
-              ) {
-                //Disgusting hack because Mapbox doesn't expose function to set color of marker
-                marker
-                  .getElement()
-                  .firstChild.firstChild.children[1].setAttribute("fill", "#ff4d4d");
-              } else {
-                marker
-                  .getElement()
-                  .firstChild.firstChild.children[1].setAttribute("fill", "#3FB1CE");
-              }
+    	$$self.$$.update = ($$dirty = { map: 1, $currentLat: 1, $currentLong: 1, mapboxgl: 1, currentMarker: 1, $darkMode: 1 }) => {
+    		if ($$dirty.map || $$dirty.$currentLat || $$dirty.$currentLong || $$dirty.mapboxgl || $$dirty.currentMarker) { if (map !== undefined) {
+            //Prevent drawing marker when at default map coordinates
+            if ($currentLat !== 1.29027 && $currentLong !== 103.851959) {
+              $$invalidate('currentMarker', currentMarker = new mapboxGl.Marker().setLngLat([
+                $currentLong,
+                $currentLat
+              ]));
+              currentMarker.addTo(map);
+              currentMarker
+                .getElement()
+                .firstChild.firstChild.children[1].setAttribute("fill", "#ff4d4d");
+            }
+        
+            map.easeTo({
+              center: [$currentLong, $currentLat],
+              zoom: detailZoomLevel + 1
             });
           } }
     		if ($$dirty.map || $$dirty.$darkMode) { if (map !== undefined) {
@@ -4086,7 +4098,7 @@
     	return child_ctx;
     }
 
-    // (105:4) {#each filtered as place, i}
+    // (88:4) {#each filtered as place, i}
     function create_each_block(ctx) {
     	var current;
 
@@ -4172,9 +4184,9 @@
     				each_blocks[i].c();
     			}
     			div0.className = "searchList w-full overflow-auto mt-1 rounded-lg bg-backgroundColor shadow svelte-125p4xn";
-    			add_location(div0, file$3, 101, 2, 2979);
+    			add_location(div0, file$3, 84, 2, 2447);
     			div1.className = "fixed px-2 py-4 w-full lg:w-1/3 z-10";
-    			add_location(div1, file$3, 99, 0, 2871);
+    			add_location(div1, file$3, 82, 0, 2339);
     		},
 
     		l: function claim(nodes) {
@@ -4249,29 +4261,26 @@
     }
 
     function instance$3($$self, $$props, $$invalidate) {
-    	let $selectedIndex, $currentLong, $currentLat, $showModal, $searchString, $geoPermissionGranted;
+    	let $selectedIndex, $searchString, $geoPermissionGranted, $currentLat, $currentLong;
 
     	validate_store(selectedIndex, 'selectedIndex');
     	subscribe($$self, selectedIndex, $$value => { $selectedIndex = $$value; $$invalidate('$selectedIndex', $selectedIndex); });
-    	validate_store(currentLong, 'currentLong');
-    	subscribe($$self, currentLong, $$value => { $currentLong = $$value; $$invalidate('$currentLong', $currentLong); });
-    	validate_store(currentLat, 'currentLat');
-    	subscribe($$self, currentLat, $$value => { $currentLat = $$value; $$invalidate('$currentLat', $currentLat); });
-    	validate_store(showModal, 'showModal');
-    	subscribe($$self, showModal, $$value => { $showModal = $$value; $$invalidate('$showModal', $showModal); });
     	validate_store(searchString, 'searchString');
     	subscribe($$self, searchString, $$value => { $searchString = $$value; $$invalidate('$searchString', $searchString); });
     	validate_store(geoPermissionGranted, 'geoPermissionGranted');
     	subscribe($$self, geoPermissionGranted, $$value => { $geoPermissionGranted = $$value; $$invalidate('$geoPermissionGranted', $geoPermissionGranted); });
+    	validate_store(currentLat, 'currentLat');
+    	subscribe($$self, currentLat, $$value => { $currentLat = $$value; $$invalidate('$currentLat', $currentLat); });
+    	validate_store(currentLong, 'currentLong');
+    	subscribe($$self, currentLong, $$value => { $currentLong = $$value; $$invalidate('$currentLong', $currentLong); });
 
     	
 
-      let map, detailZoomLevel;
+      let map;
 
       onMount(() => {
-        const { getMap, getDetailZoomLevel } = getContext("mapContextKey");
+        const { getMap } = getContext("mapContextKey");
         $$invalidate('map', map = getMap());
-        $$invalidate('detailZoomLevel', detailZoomLevel = getDetailZoomLevel());
 
         $$invalidate('currentMapCenter', currentMapCenter = map.getCenter());
         map.on("dragend", e => {
@@ -4294,22 +4303,6 @@
           currentLong.set(filtered[$selectedIndex].long);
           searchString.set("");
           showModal.set(true);
-
-          //Unable to use reactive function in Mapbox component hence need to manually call on Enter keypress
-          map.easeTo({
-            center: [$currentLong, $currentLat],
-            zoom: detailZoomLevel + 1
-          });
-
-          window.history.pushState(
-            {
-              lat: $currentLat,
-              long: $currentLong,
-              modal: $showModal
-            },
-            null,
-            "?lat=" + $currentLat + "&long=" + $currentLong
-          );
         }
       }
 

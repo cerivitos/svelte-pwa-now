@@ -13,13 +13,13 @@
   import { inBounds } from "../util.js";
 
   const darkStyle = "mapbox://styles/mapbox/dark-v10?optimize=true";
-  const lightStyle = "mapbox://styles/mapbox/streets-v9?optimize=true";
+  const lightStyle = "mapbox://styles/mapbox/light-v10?optimize=true";
 
   let map;
   let toiletMarker;
   let markers = [];
-  let markerClicked = false;
-  const detailZoomLevel = 14;
+  const detailZoomLevel = 12;
+  let currentMarker;
 
   onMount(() => {
     mapboxgl.accessToken = mapBoxKey;
@@ -38,9 +38,9 @@
       map.addSource("toilets", {
         type: "geojson",
         data: "/data/toilets.geojson",
-        cluster: true,
+        cluster: false,
         clusterMaxZoom: detailZoomLevel,
-        clusterRadius: 60
+        clusterRadius: 40
       });
 
       map.addLayer({
@@ -49,14 +49,15 @@
         source: "toilets",
         filter: ["has", "point_count"],
         paint: {
+          "circle-opacity": 0.8,
           "circle-color": [
             "step",
             ["get", "point_count"],
-            "#5bd1d7",
+            "#b1cbe2",
             20,
-            "#248ea9",
+            "#8da5ba",
             50,
-            "#556fb5"
+            "#567189"
           ],
           "circle-radius": ["step", ["get", "point_count"], 20, 20, 40, 50, 60]
         }
@@ -77,10 +78,86 @@
         }
       });
 
+      map.addLayer({
+        id: "unclustered-point",
+        type: "circle",
+        source: "toilets",
+        filter: ["!", ["has", "point_count"]],
+        paint: {
+          "circle-color": [
+            "step",
+            ["get", "rating"],
+            "#fc8181",
+            2,
+            "#f6ad55",
+            3,
+            "#f6ad55",
+            4,
+            "#68d391",
+            5,
+            "#48bb78",
+            6,
+            "#4fd1c5"
+          ],
+          "circle-opacity": 0.8,
+          "circle-radius": [
+            "interpolate",
+            ["linear"],
+            ["zoom"],
+            0,
+            15,
+            10,
+            10,
+            20,
+            8
+          ]
+        }
+      });
+
+      map.on("click", "unclustered-point", e => {
+        let clickedFeature = map.queryRenderedFeatures(e.point, {
+          layers: ["unclustered-point"]
+        })[0];
+
+        if (currentMarker !== undefined) currentMarker.remove();
+
+        const clickedAddress = clickedFeature.properties.address;
+        fetch("/data/toilets.geojson").then(response =>
+          response.json().then(geoJson => {
+            geoJson.features.forEach(feature => {
+              if (feature.properties.address === clickedAddress) {
+                currentLat.set(feature.geometry.coordinates[1]);
+                currentLong.set(feature.geometry.coordinates[0]);
+                searchString.set("");
+                showModal.set(true);
+
+                window.history.pushState(
+                  {
+                    lat: $currentLat,
+                    long: $currentLong,
+                    modal: $showModal
+                  },
+                  null,
+                  "?lat=" + $currentLat + "&long=" + $currentLong
+                );
+              }
+            });
+          })
+        );
+      });
+
+      map.on("mouseenter", "unclustered-point", () => {
+        map.getCanvas().style.cursor = "pointer";
+      });
+      map.on("mouseleave", "unclustered-point", () => {
+        map.getCanvas().style.cursor = "";
+      });
+
       map.on("click", "clusters", e => {
         let features = map.queryRenderedFeatures(e.point, {
           layers: ["clusters"]
         });
+        console.log(features);
         let clusterId = features[0].properties.cluster_id;
         map
           .getSource("toilets")
@@ -103,91 +180,34 @@
 
       //Hide modal if clicking anywhere on map without a marker to help navigation on small screens
       map.on("click", () => {
-        if ($showModal && !markerClicked) {
+        if ($showModal) {
           showModal.set(false);
           document.title = "sgtoilet | Toilets in Singapore";
-        } else {
-          markerClicked = false;
         }
-      });
-
-      //Add marker for each toilet in data
-      function updateMarkers() {
-        markers.forEach(marker => marker.remove());
-        markers = [];
-
-        if (Math.floor(map.getZoom()) > detailZoomLevel) {
-          toilets.forEach(toilet => {
-            const mapBounds = map.getBounds();
-            const markerPoint = {
-              lng: toilet.long,
-              lat: toilet.lat
-            };
-
-            if (inBounds(markerPoint, mapBounds)) {
-              let marker = new mapboxgl.Marker()
-                .setLngLat([toilet.long, toilet.lat])
-                .addTo(map);
-              marker.getElement().addEventListener("click", () => {
-                markerClicked = true;
-
-                currentLat.set(marker.getLngLat().lat);
-                currentLong.set(marker.getLngLat().lng);
-                searchString.set("");
-                showModal.set(true);
-
-                //Unable to use reactive function hence need to manually call on each marker click
-                map.easeTo({
-                  center: [$currentLong, $currentLat],
-                  zoom: detailZoomLevel + 1
-                });
-
-                window.history.pushState(
-                  {
-                    lat: $currentLat,
-                    long: $currentLong,
-                    modal: $showModal
-                  },
-                  null,
-                  "?lat=" + $currentLat + "&long=" + $currentLong
-                );
-              });
-
-              markers.push(marker);
-            }
-          });
-        }
-      }
-
-      map.on("data", e => {
-        if (e.sourceId !== "toilets" || !e.isSourceLoaded) return;
-        map.on("move", updateMarkers);
-        map.on("moveend", updateMarkers);
-        updateMarkers();
       });
     });
 
     setContext("mapContextKey", {
-      getMap: () => map,
-      getDetailZoomLevel: () => detailZoomLevel
+      getMap: () => map
     });
   });
 
   $: if (map !== undefined) {
-    markers.forEach(marker => {
-      if (
-        marker.getLngLat().lat === $currentLat &&
-        marker.getLngLat().lng === $currentLong
-      ) {
-        //Disgusting hack because Mapbox doesn't expose function to set color of marker
-        marker
-          .getElement()
-          .firstChild.firstChild.children[1].setAttribute("fill", "#ff4d4d");
-      } else {
-        marker
-          .getElement()
-          .firstChild.firstChild.children[1].setAttribute("fill", "#3FB1CE");
-      }
+    //Prevent drawing marker when at default map coordinates
+    if ($currentLat !== 1.29027 && $currentLong !== 103.851959) {
+      currentMarker = new mapboxgl.Marker().setLngLat([
+        $currentLong,
+        $currentLat
+      ]);
+      currentMarker.addTo(map);
+      currentMarker
+        .getElement()
+        .firstChild.firstChild.children[1].setAttribute("fill", "#ff4d4d");
+    }
+
+    map.easeTo({
+      center: [$currentLong, $currentLat],
+      zoom: detailZoomLevel + 1
     });
   }
 
