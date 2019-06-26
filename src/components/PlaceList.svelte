@@ -13,12 +13,11 @@
   import { calculateDistance } from "../util.js";
   import { onMount, getContext } from "svelte";
 
-  let map, detailZoomLevel;
+  let map;
 
   onMount(() => {
-    const { getMap, getDetailZoomLevel } = getContext("mapContextKey");
+    const { getMap } = getContext("mapContextKey");
     map = getMap();
-    detailZoomLevel = getDetailZoomLevel();
 
     currentMapCenter = map.getCenter();
     map.on("dragend", e => {
@@ -41,22 +40,6 @@
       currentLong.set(filtered[$selectedIndex].long);
       searchString.set("");
       showModal.set(true);
-
-      //Unable to use reactive function in Mapbox component hence need to manually call on Enter keypress
-      map.easeTo({
-        center: [$currentLong, $currentLat],
-        zoom: detailZoomLevel + 1
-      });
-
-      window.history.pushState(
-        {
-          lat: $currentLat,
-          long: $currentLong,
-          modal: $showModal
-        },
-        null,
-        "?lat=" + $currentLat + "&long=" + $currentLong
-      );
     }
   }
 
