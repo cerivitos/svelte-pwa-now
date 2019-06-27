@@ -13,11 +13,12 @@
   import { calculateDistance } from "../util.js";
   import { onMount, getContext } from "svelte";
 
-  let map;
+  let map, createMarker;
 
   onMount(() => {
-    const { getMap } = getContext("mapContextKey");
+    const { getMap, getCreateMarker } = getContext("mapContextKey");
     map = getMap();
+    createMarker = getCreateMarker();
 
     currentMapCenter = map.getCenter();
     map.on("dragend", e => {
@@ -40,6 +41,8 @@
       currentLong.set(filtered[$selectedIndex].long);
       searchString.set("");
       showModal.set(true);
+
+      createMarker();
     }
   }
 

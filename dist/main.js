@@ -3575,10 +3575,10 @@
     			div = element("div");
     			link.href = "https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css";
     			link.rel = "stylesheet";
-    			add_location(link, file$1, 230, 2, 6324);
+    			add_location(link, file$1, 231, 2, 6126);
     			div.id = "map";
     			div.className = "w-screen h-screen";
-    			add_location(div, file$1, 236, 0, 6446);
+    			add_location(div, file$1, 237, 0, 6248);
     		},
 
     		l: function claim(nodes) {
@@ -3749,29 +3749,7 @@
                     searchString.set("");
                     showModal.set(true);
 
-                    if (currentMarker !== undefined) currentMarker.remove();
-
-                    $$invalidate('currentMarker', currentMarker = new mapboxGl.Marker().setLngLat([
-                      $currentLong,
-                      $currentLat
-                    ]));
-                    currentMarker.addTo(map);
-                    currentMarker
-                      .getElement()
-                      .firstChild.firstChild.children[1].setAttribute(
-                        "fill",
-                        "#ff4d4d"
-                      );
-
-                    window.history.pushState(
-                      {
-                        lat: $currentLat,
-                        long: $currentLong,
-                        modal: $showModal
-                      },
-                      null,
-                      "?lat=" + $currentLat + "&long=" + $currentLong
-                    );
+                    createMarker();
                   }
                 });
               })
@@ -3789,7 +3767,6 @@
             let features = map.queryRenderedFeatures(e.point, {
               layers: ["clusters"]
             });
-            console.log(features);
             let clusterId = features[0].properties.cluster_id;
             map
               .getSource("toilets")
@@ -3820,9 +3797,33 @@
         });
 
         setContext("mapContextKey", {
-          getMap: () => map
+          getMap: () => map,
+          getCreateMarker: () => createMarker
         });
       });
+
+      function createMarker() {
+        if (currentMarker !== undefined) currentMarker.remove();
+
+        $$invalidate('currentMarker', currentMarker = new mapboxGl.Marker().setLngLat([
+          $currentLong,
+          $currentLat
+        ]));
+        currentMarker.addTo(map);
+        currentMarker
+          .getElement()
+          .firstChild.firstChild.children[1].setAttribute("fill", "#ff4d4d");
+
+        window.history.pushState(
+          {
+            lat: $currentLat,
+            long: $currentLong,
+            modal: $showModal
+          },
+          null,
+          "?lat=" + $currentLat + "&long=" + $currentLong
+        );
+      }
 
     	$$self.$$.update = ($$dirty = { map: 1, $currentLong: 1, $currentLat: 1 }) => {
     		if ($$dirty.map || $$dirty.$currentLong || $$dirty.$currentLat) { if (map !== undefined) {
@@ -4102,7 +4103,7 @@
     	return child_ctx;
     }
 
-    // (88:4) {#each filtered as place, i}
+    // (91:4) {#each filtered as place, i}
     function create_each_block(ctx) {
     	var current;
 
@@ -4188,9 +4189,9 @@
     				each_blocks[i].c();
     			}
     			div0.className = "searchList w-full overflow-auto mt-1 rounded-lg bg-backgroundColor shadow svelte-125p4xn";
-    			add_location(div0, file$3, 84, 2, 2447);
+    			add_location(div0, file$3, 87, 2, 2542);
     			div1.className = "fixed px-2 py-4 w-full lg:w-1/3 z-10";
-    			add_location(div1, file$3, 82, 0, 2339);
+    			add_location(div1, file$3, 85, 0, 2434);
     		},
 
     		l: function claim(nodes) {
@@ -4280,11 +4281,12 @@
 
     	
 
-      let map;
+      let map, createMarker;
 
       onMount(() => {
-        const { getMap } = getContext("mapContextKey");
+        const { getMap, getCreateMarker } = getContext("mapContextKey");
         $$invalidate('map', map = getMap());
+        $$invalidate('createMarker', createMarker = getCreateMarker());
 
         $$invalidate('currentMapCenter', currentMapCenter = map.getCenter());
         map.on("dragend", e => {
@@ -4307,6 +4309,8 @@
           currentLong.set(filtered[$selectedIndex].long);
           searchString.set("");
           showModal.set(true);
+
+          createMarker();
         }
       }
 

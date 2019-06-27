@@ -144,29 +144,7 @@
                 searchString.set("");
                 showModal.set(true);
 
-                if (currentMarker !== undefined) currentMarker.remove();
-
-                currentMarker = new mapboxgl.Marker().setLngLat([
-                  $currentLong,
-                  $currentLat
-                ]);
-                currentMarker.addTo(map);
-                currentMarker
-                  .getElement()
-                  .firstChild.firstChild.children[1].setAttribute(
-                    "fill",
-                    "#ff4d4d"
-                  );
-
-                window.history.pushState(
-                  {
-                    lat: $currentLat,
-                    long: $currentLong,
-                    modal: $showModal
-                  },
-                  null,
-                  "?lat=" + $currentLat + "&long=" + $currentLong
-                );
+                createMarker();
               }
             });
           })
@@ -184,7 +162,6 @@
         let features = map.queryRenderedFeatures(e.point, {
           layers: ["clusters"]
         });
-        console.log(features);
         let clusterId = features[0].properties.cluster_id;
         map
           .getSource("toilets")
@@ -215,9 +192,33 @@
     });
 
     setContext("mapContextKey", {
-      getMap: () => map
+      getMap: () => map,
+      getCreateMarker: () => createMarker
     });
   });
+
+  function createMarker() {
+    if (currentMarker !== undefined) currentMarker.remove();
+
+    currentMarker = new mapboxgl.Marker().setLngLat([
+      $currentLong,
+      $currentLat
+    ]);
+    currentMarker.addTo(map);
+    currentMarker
+      .getElement()
+      .firstChild.firstChild.children[1].setAttribute("fill", "#ff4d4d");
+
+    window.history.pushState(
+      {
+        lat: $currentLat,
+        long: $currentLong,
+        modal: $showModal
+      },
+      null,
+      "?lat=" + $currentLat + "&long=" + $currentLong
+    );
+  }
 
   $: if (map !== undefined) {
     map.easeTo({
