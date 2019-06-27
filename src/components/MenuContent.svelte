@@ -8,11 +8,10 @@
 </script>
 
 <div class="flex flex-col text-gray-800">
-  <div class="w-full h-1 bg-primaryColor"></div>
+  <div class="w-full h-1 bg-accentColor"></div>
   <div class="flex flex-row items-center px-4 pt-8 pb-2">
-    <img src="assets/android-chrome-512x512.png" class="w-12 h-12" />
     <span
-      class="flex text-3xl text-white bg-red-700 w-12 h-12 rounded-full items-center ml-4 p-1"
+      class="flex text-3xl text-white bg-red-700 w-12 h-12 rounded-full items-center p-1"
       >SG</span
     >
     <p class="text-4xl pl-1 text-red-700 font-medium">
