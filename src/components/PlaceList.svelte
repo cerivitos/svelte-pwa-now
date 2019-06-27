@@ -16,6 +16,7 @@
   let map, createMarker;
 
   onMount(() => {
+    //Get references to the map and createMarker functions to enable control from this component
     const { getMap, getCreateMarker } = getContext("mapContextKey");
     map = getMap();
     createMarker = getCreateMarker();

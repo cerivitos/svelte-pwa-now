@@ -191,6 +191,7 @@
       });
     });
 
+    //Export the reference to the map and createMarker function for use in PlaceList component
     setContext("mapContextKey", {
       getMap: () => map,
       getCreateMarker: () => createMarker

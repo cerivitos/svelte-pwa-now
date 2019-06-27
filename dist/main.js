@@ -3575,10 +3575,10 @@
     			div = element("div");
     			link.href = "https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css";
     			link.rel = "stylesheet";
-    			add_location(link, file$1, 231, 2, 6126);
+    			add_location(link, file$1, 232, 2, 6222);
     			div.id = "map";
     			div.className = "w-screen h-screen";
-    			add_location(div, file$1, 237, 0, 6248);
+    			add_location(div, file$1, 238, 0, 6344);
     		},
 
     		l: function claim(nodes) {
@@ -3796,6 +3796,7 @@
           });
         });
 
+        //Export the reference to the map and createMarker function for use in PlaceList component
         setContext("mapContextKey", {
           getMap: () => map,
           getCreateMarker: () => createMarker
@@ -4103,7 +4104,7 @@
     	return child_ctx;
     }
 
-    // (91:4) {#each filtered as place, i}
+    // (92:4) {#each filtered as place, i}
     function create_each_block(ctx) {
     	var current;
 
@@ -4189,9 +4190,9 @@
     				each_blocks[i].c();
     			}
     			div0.className = "searchList w-full overflow-auto mt-1 rounded-lg bg-backgroundColor shadow svelte-125p4xn";
-    			add_location(div0, file$3, 87, 2, 2542);
+    			add_location(div0, file$3, 88, 2, 2640);
     			div1.className = "fixed px-2 py-4 w-full lg:w-1/3 z-10";
-    			add_location(div1, file$3, 85, 0, 2434);
+    			add_location(div1, file$3, 86, 0, 2532);
     		},
 
     		l: function claim(nodes) {
@@ -4284,6 +4285,7 @@
       let map, createMarker;
 
       onMount(() => {
+        //Get references to the map and createMarker functions to enable control from this component
         const { getMap, getCreateMarker } = getContext("mapContextKey");
         $$invalidate('map', map = getMap());
         $$invalidate('createMarker', createMarker = getCreateMarker());
