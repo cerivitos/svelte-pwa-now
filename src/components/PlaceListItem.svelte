@@ -40,11 +40,6 @@
     selectedIndex.set(key);
   }
 
-  function createRatingClass(rating) {
-    const baseClass = "rounded-full px-1 text-white text-xs";
-    return baseClass + " bg" + ratingColors[rating - 1];
-  }
-
   function highlightSearchString(searchString, textToHighlight) {
     const startIndex = textToHighlight
       .toLowerCase()
@@ -88,7 +83,11 @@
     </p>
   </div>
   <div class="w-1/12 text-center">
-    <span class="{createRatingClass(placeObj.rating)}">{placeObj.rating}★</span>
+    <span
+      class="rounded-full px-1 text-white text-xs"
+      style="background:{ratingColors[placeObj.rating - 1]}"
+      >{placeObj.rating}★</span
+    >
     <span class="text-xs"
       >{placeObj.distance > 1000 ? Math.round(placeObj.distance/1000) :
       (placeObj.distance).toFixed(1)}km</span

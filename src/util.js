@@ -39,6 +39,13 @@ export function calculateDistance(lat1, lon1, lat2, lon2, unit) {
   }
 }
 
+//From https://stackoverflow.com/questions/37269764/check-if-marker-is-in-view-map-mapbox
+export function inBounds(point, bounds) {
+  var lng = (point.lng - bounds._ne.lng) * (point.lng - bounds._sw.lng) < 0;
+  var lat = (point.lat - bounds._ne.lat) * (point.lat - bounds._sw.lat) < 0;
+  return lng && lat;
+}
+
 export const ratingColors = [
   "rgba(252, 129, 129, 1.0)",
   "rgba(246, 173, 85, 1.0)",

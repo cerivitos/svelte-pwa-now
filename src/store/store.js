@@ -15,4 +15,3 @@ export const showCarousel = writable(false);
 export const carouselPics = writable([]);
 export const carouselName = writable("");
 export const showMenu = writable(false);
-export const darkMode = writable(false);

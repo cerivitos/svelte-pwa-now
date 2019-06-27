@@ -13,9 +13,14 @@
   import { calculateDistance } from "../util.js";
   import { onMount, getContext } from "svelte";
 
+  let map, createMarker;
+
   onMount(() => {
-    const { getMap } = getContext("mapContextKey");
-    const map = getMap();
+    //Get references to the map and createMarker functions to enable control from this component
+    const { getMap, getCreateMarker } = getContext("mapContextKey");
+    map = getMap();
+    createMarker = getCreateMarker();
+
     currentMapCenter = map.getCenter();
     map.on("dragend", e => {
       currentMapCenter = map.getCenter();
@@ -38,15 +43,7 @@
       searchString.set("");
       showModal.set(true);
 
-      window.history.pushState(
-        {
-          lat: $currentLat,
-          long: $currentLong,
-          modal: $showModal
-        },
-        null,
-        "?lat=" + $currentLat + "&long=" + $currentLong
-      );
+      createMarker();
     }
   }
 

@@ -35,7 +35,7 @@ export default {
     globals(),
     builtins(),
     copy({
-      assets: ["src/assets"]
+      assets: ["src/assets", "src/data"]
     }),
     postcss({
       extract: true
