@@ -4,8 +4,7 @@
     currentLat,
     currentLong,
     searchString,
-    showModal,
-    darkMode
+    showModal
   } from "../store/store.js";
   import { onMount, setContext } from "svelte";
   import { toilets } from "../data/toilets.js";
@@ -25,7 +24,7 @@
     mapboxgl.accessToken = mapBoxKey;
     map = new mapboxgl.Map({
       container: "map",
-      style: $darkMode ? darkStyle : lightStyle,
+      style: lightStyle,
       zoom: 12,
       center: [$currentLong, $currentLat],
       maxBounds: new mapboxgl.LngLatBounds(
@@ -38,7 +37,7 @@
       map.addSource("toilets", {
         type: "geojson",
         data: "/data/toilets.geojson",
-        cluster: false,
+        cluster: true,
         clusterMaxZoom: detailZoomLevel,
         clusterRadius: 40
       });
@@ -110,6 +109,22 @@
             10,
             20,
             8
+          ],
+          "circle-stroke-width": 1,
+          "circle-stroke-color": [
+            "step",
+            ["get", "rating"],
+            "#f51414",
+            2,
+            "#eb8205",
+            3,
+            "#eb8205",
+            4,
+            "#09963f",
+            5,
+            "#089944",
+            6,
+            "#0db5a6"
           ]
         }
       });
@@ -118,8 +133,6 @@
         let clickedFeature = map.queryRenderedFeatures(e.point, {
           layers: ["unclustered-point"]
         })[0];
-
-        if (currentMarker !== undefined) currentMarker.remove();
 
         const clickedAddress = clickedFeature.properties.address;
         fetch("/data/toilets.geojson").then(response =>
@@ -130,6 +143,20 @@
                 currentLong.set(feature.geometry.coordinates[0]);
                 searchString.set("");
                 showModal.set(true);
+
+                if (currentMarker !== undefined) currentMarker.remove();
+
+                currentMarker = new mapboxgl.Marker().setLngLat([
+                  $currentLong,
+                  $currentLat
+                ]);
+                currentMarker.addTo(map);
+                currentMarker
+                  .getElement()
+                  .firstChild.firstChild.children[1].setAttribute(
+                    "fill",
+                    "#ff4d4d"
+                  );
 
                 window.history.pushState(
                   {
@@ -193,26 +220,10 @@
   });
 
   $: if (map !== undefined) {
-    //Prevent drawing marker when at default map coordinates
-    if ($currentLat !== 1.29027 && $currentLong !== 103.851959) {
-      currentMarker = new mapboxgl.Marker().setLngLat([
-        $currentLong,
-        $currentLat
-      ]);
-      currentMarker.addTo(map);
-      currentMarker
-        .getElement()
-        .firstChild.firstChild.children[1].setAttribute("fill", "#ff4d4d");
-    }
-
     map.easeTo({
       center: [$currentLong, $currentLat],
       zoom: detailZoomLevel + 1
     });
-  }
-
-  $: if (map !== undefined) {
-    $darkMode ? map.setStyle(darkStyle) : map.setStyle(lightStyle);
   }
 </script>
 
