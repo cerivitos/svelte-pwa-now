@@ -14,8 +14,10 @@ Tools used:
 
 Toilet information was scrapped from [here](https://www.toilet.org.sg/loomapdirectory) using [webscrapper.io](https://webscrapper.io). As only addresses were available, I used this [batch geocoder](https://geocode.localfocus.nl/) to get lat lng coordinates of each toilet. There are probably some errors :wink:
 
-## Build
-[Node.js](https://nodejs.org) is required. Clone the repo and
+## Try
+The site is hosted at [https://sgtoilet.app](https://sgtoilet.app)
+
+If you want to run it locally, [Node.js](https://nodejs.org) is required. Clone the repo and
 ```bash
 npm install
 ```
