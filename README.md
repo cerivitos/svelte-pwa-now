@@ -35,7 +35,6 @@ and go to [localhost:5000](http://localhost:5000).
 
 *This is my first Svelte app so expect a lot of bad practices!*
 
-## Final thoughts
-:+1: Thanks to the Restroom Association (Singapore) for the data
 
-Svelte felt minimalistic yet fluent, I was able to get the hang of it after a few days. I'm enthusiastic to see how it gets better over time... will be looking to try Typescript with Svelte next.
+
+:+1: Thanks to the Restroom Association (Singapore) for the data
