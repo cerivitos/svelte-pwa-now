@@ -3791,7 +3791,7 @@
           map.on("click", () => {
             if ($showModal) {
               showModal.set(false);
-              document.title = "sgtoilet | Toilets in Singapore";
+              document.title = "SGtoilet | Toilets in Singapore";
             }
           });
         });
@@ -24998,7 +24998,7 @@
     		if ($$dirty.$currentLat || $$dirty.$currentLong || $$dirty.placeObj) { toilets.forEach(toilet => {
             if ($currentLat === toilet.lat && $currentLong === toilet.long) {
               $$invalidate('placeObj', placeObj = toilet);
-              document.title = placeObj.name + " | sgtoilet";
+              document.title = placeObj.name + " | SGtoilet";
               $$invalidate('pics', pics = getPics(placeObj.gallery_link));
             }
           }); }

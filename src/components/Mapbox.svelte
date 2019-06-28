@@ -188,7 +188,7 @@
       map.on("click", () => {
         if ($showModal) {
           showModal.set(false);
-          document.title = "sgtoilet | Toilets in Singapore";
+          document.title = "SGtoilet | Toilets in Singapore";
         }
       });
     });

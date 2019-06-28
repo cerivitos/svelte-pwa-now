@@ -21,7 +21,7 @@
   $: toilets.forEach(toilet => {
     if ($currentLat === toilet.lat && $currentLong === toilet.long) {
       placeObj = toilet;
-      document.title = placeObj.name + " | sgtoilet";
+      document.title = placeObj.name + " | SGtoilet";
       pics = getPics(placeObj.gallery_link);
     }
   });
