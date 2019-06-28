@@ -938,7 +938,7 @@
         homeLat.set(currentPosition.coords.latitude);
         homeLong.set(currentPosition.coords.longitude);
 
-        document.title = "sgtoilet | Toilets in Singapore";
+        document.title = "SGtoilet | Toilets in Singapore";
 
         window.history.pushState(
           {
@@ -1058,7 +1058,7 @@
     return mapboxgl;
 
     }));
-
+    //# sourceMappingURL=mapbox-gl.js.map
     });
 
     const toilets = [
@@ -3575,10 +3575,10 @@
     			div = element("div");
     			link.href = "https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css";
     			link.rel = "stylesheet";
-    			add_location(link, file$1, 232, 2, 6222);
+    			add_location(link, file$1, 238, 2, 6416);
     			div.id = "map";
     			div.className = "w-screen h-screen";
-    			add_location(div, file$1, 238, 0, 6344);
+    			add_location(div, file$1, 244, 0, 6538);
     		},
 
     		l: function claim(nodes) {
@@ -3811,6 +3811,7 @@
           $currentLat
         ]));
         currentMarker.addTo(map);
+
         currentMarker
           .getElement()
           .firstChild.firstChild.children[1].setAttribute("fill", "#ff4d4d");
@@ -3832,6 +3833,9 @@
               center: [$currentLong, $currentLat],
               zoom: detailZoomLevel + 1
             });
+        
+            //Do not draw marker if lat lng at default coordinates or current position
+            if ($currentLat !== 1.29027 && $currentLong !== 103.851959) createMarker();
           } }
     	};
 
@@ -4104,7 +4108,7 @@
     	return child_ctx;
     }
 
-    // (92:4) {#each filtered as place, i}
+    // (90:4) {#each filtered as place, i}
     function create_each_block(ctx) {
     	var current;
 
@@ -4190,9 +4194,9 @@
     				each_blocks[i].c();
     			}
     			div0.className = "searchList w-full overflow-auto mt-1 rounded-lg bg-backgroundColor shadow svelte-125p4xn";
-    			add_location(div0, file$3, 88, 2, 2640);
+    			add_location(div0, file$3, 86, 2, 2615);
     			div1.className = "fixed px-2 py-4 w-full lg:w-1/3 z-10";
-    			add_location(div1, file$3, 86, 0, 2532);
+    			add_location(div1, file$3, 84, 0, 2507);
     		},
 
     		l: function claim(nodes) {
@@ -4311,8 +4315,6 @@
           currentLong.set(filtered[$selectedIndex].long);
           searchString.set("");
           showModal.set(true);
-
-          createMarker();
         }
       }
 

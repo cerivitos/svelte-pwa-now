@@ -42,8 +42,6 @@
       currentLong.set(filtered[$selectedIndex].long);
       searchString.set("");
       showModal.set(true);
-
-      createMarker();
     }
   }
 

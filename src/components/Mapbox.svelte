@@ -3,6 +3,8 @@
   import {
     currentLat,
     currentLong,
+    homeLat,
+    homeLong,
     searchString,
     showModal
   } from "../store/store.js";
@@ -206,6 +208,7 @@
       $currentLat
     ]);
     currentMarker.addTo(map);
+
     currentMarker
       .getElement()
       .firstChild.firstChild.children[1].setAttribute("fill", "#ff4d4d");
@@ -226,6 +229,9 @@
       center: [$currentLong, $currentLat],
       zoom: detailZoomLevel + 1
     });
+
+    //Do not draw marker if lat lng at default coordinates or current position
+    if ($currentLat !== 1.29027 && $currentLong !== 103.851959) createMarker();
   }
 </script>
 
