@@ -20,20 +20,10 @@
   }
 
   function selectToilet() {
-    currentLat.set(placeObj.lat);
-    currentLong.set(placeObj.long);
+    currentLat.set(placeObj.geometry.coordinates[1]);
+    currentLong.set(placeObj.geometry.coordinates[0]);
     searchString.set("");
     showModal.set(true);
-
-    window.history.pushState(
-      {
-        lat: $currentLat,
-        long: $currentLong,
-        modal: $showModal
-      },
-      null,
-      "?lat=" + $currentLat + "&long=" + $currentLong
-    );
   }
 
   function hovering() {
@@ -76,17 +66,17 @@
 >
   <div class="w-11/12 text-gray-800 pr-1">
     <h1 class="font-medium text-lg truncate">
-      {@html highlightSearchString($searchString, placeObj.name)}
+      {@html highlightSearchString($searchString, placeObj.properties.name)}
     </h1>
     <p class="font-light text-sm text-gray-600 leading-tight truncate">
-      {@html highlightSearchString($searchString, placeObj.address)}
+      {@html highlightSearchString($searchString, placeObj.properties.address)}
     </p>
   </div>
   <div class="w-1/12 text-center">
     <span
       class="rounded-full px-1 text-white text-xs"
-      style="background:{ratingColors[placeObj.rating - 1]}"
-      >{placeObj.rating}★</span
+      style="background:{ratingColors[placeObj.properties.rating - 1]}"
+      >{placeObj.properties.rating}★</span
     >
     <span class="text-xs"
       >{placeObj.distance > 1000 ? Math.round(placeObj.distance/1000) :

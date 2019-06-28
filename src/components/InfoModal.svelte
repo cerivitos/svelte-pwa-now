@@ -1,7 +1,7 @@
 <script>
   import { toiletPics } from "../data/toilet_pics.js";
   import { ratingColors, ratingBackgroundRgba } from "../util.js";
-  import { toilets } from "../data/toilets.js";
+  import {onMount} from "svelte";
   import ShareButton from "./ShareButton.svelte";
   import FadeInImage from "./FadeInImage.svelte";
   import Carousel from "./Carousel.svelte";
@@ -17,14 +17,25 @@
   let pics = [];
   let placeObj = {};
   let showWebShare = false;
+  let toilets;
+
+  onMount(() => {
+    fetch("data/toilets.geojson")
+      .then(response => response.json())
+      .then(json => {
+        toilets = json.features;
+      });
+  })
   
-  $: toilets.forEach(toilet => {
-    if ($currentLat === toilet.lat && $currentLong === toilet.long) {
+  $: if (toilets !== undefined) {
+    toilets.forEach(toilet => {
+    if ($currentLat === toilet.geometry.coordinates[1] && $currentLong === toilet.geometry.coordinates[0]) {
       placeObj = toilet;
-      document.title = placeObj.name + " | SGtoilet";
-      pics = getPics(placeObj.gallery_link);
+      document.title = placeObj.properties.name + " | SGtoilet";
+      pics = getPics(placeObj.properties.gallery_link);
     }
   });
+  }
 
   //In mobile, scrolling up hides the address bar causing viewport height to change. Dynamically calculate the bottom offset including margin to ensure modal is always at the bottom without overflow
   $: topDisplacement = (innerHeight - modalHeight) * 0.0625 - 0.5;
@@ -139,12 +150,12 @@
     </div>
     {/if} {/if}
     <div class="px-4 pb-2">
-      <h1 class="font-medium text-xl py-2">{placeObj.name}</h1>
+      <h1 class="font-medium text-xl py-2">{placeObj.properties.name}</h1>
       <div class="flex flex-row items-baseline mt-2">
-        <div class="mb-2 -ml-4 mr-2 pl-4 pr-2 rounded-r-full font-semibold text-lg" style="background: {ratingBackgroundRgba[placeObj.rating - 1]}; color: {ratingColors[placeObj.rating - 1]}">
-          {createRating(placeObj.rating)}
+        <div class="mb-2 -ml-4 mr-2 pl-4 pr-2 rounded-r-full font-semibold text-lg" style="background: {ratingBackgroundRgba[placeObj.properties.rating - 1]}; color: {ratingColors[placeObj.properties.rating - 1]}">
+          {createRating(placeObj.properties.rating)}
         </div>
-        <div class="flex-grow-0 text-sm font-light text-gray-700 truncate">{placeObj.address}</div>
+        <div class="flex-grow-0 text-sm font-light text-gray-700 truncate">{placeObj.properties.address}</div>
       </div>
       <div class="flex h-full justify-end my-4">
         <ShareButton

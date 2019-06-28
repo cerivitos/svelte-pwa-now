@@ -36,16 +36,6 @@
     homeLong.set(currentPosition.coords.longitude);
 
     document.title = "SGtoilet | Toilets in Singapore";
-
-    window.history.pushState(
-      {
-        lat: $currentLat,
-        long: $currentLong,
-        modal: $showModal,
-      },
-      null,
-      "?lat=" + $currentLat + "&long=" + $currentLong
-    );
   }
 
   function handleError(error) {

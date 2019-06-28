@@ -7,15 +7,21 @@
     geoPermissionGranted,
     showModal
   } from "../store/store.js";
-  import { toilets } from "../data/toilets.js";
   import PlaceListItem from "./PlaceListItem.svelte";
   import Searchbar from "./Searchbar.svelte";
   import { calculateDistance } from "../util.js";
   import { onMount, getContext } from "svelte";
 
   let map, createMarker;
+  let toilets;
 
   onMount(() => {
+    fetch("data/toilets.geojson")
+      .then(response => response.json())
+      .then(json => {
+        toilets = json.features;
+      });
+
     //Get references to the map and createMarker functions to enable control from this component
     const { getMap, getCreateMarker } = getContext("mapContextKey");
     map = getMap();
@@ -38,8 +44,8 @@
     } else if ($selectedIndex > 0 && key === "ArrowUp") {
       selectedIndex.update(selectedIndex => selectedIndex - 1);
     } else if (filtered.length > 0 && key === "Enter") {
-      currentLat.set(filtered[$selectedIndex].lat);
-      currentLong.set(filtered[$selectedIndex].long);
+      currentLat.set(filtered[$selectedIndex].geometry.coordinates[1]);
+      currentLong.set(filtered[$selectedIndex].geometry.coordinates[0]);
       searchString.set("");
       showModal.set(true);
     }
@@ -50,8 +56,12 @@
 
     filtered = toilets.filter(
       item =>
-        item.name.toLowerCase().includes($searchString.toLowerCase()) ||
-        item.address.toLowerCase().includes($searchString.toLowerCase())
+        item.properties.name
+          .toLowerCase()
+          .includes($searchString.toLowerCase()) ||
+        item.properties.address
+          .toLowerCase()
+          .includes($searchString.toLowerCase())
     );
 
     let referenceCenter;
@@ -66,8 +76,8 @@
       distance = calculateDistance(
         referenceCenter.lat,
         referenceCenter.lng,
-        filteredItem.lat,
-        filteredItem.long, //Json data uses 'long' instead of 'lng'
+        filteredItem.geometry.coordinates[1],
+        filteredItem.geometry.coordinates[0],
         "K"
       );
       filteredItem.distance = distance;

@@ -9,7 +9,6 @@
     showModal
   } from "../store/store.js";
   import { onMount, setContext } from "svelte";
-  import { toilets } from "../data/toilets.js";
   import { mapBoxKey } from "../keys.js";
   import { inBounds } from "../util.js";
 
@@ -145,8 +144,6 @@
                 currentLong.set(feature.geometry.coordinates[0]);
                 searchString.set("");
                 showModal.set(true);
-
-                createMarker();
               }
             });
           })
