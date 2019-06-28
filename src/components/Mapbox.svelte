@@ -3,11 +3,12 @@
   import {
     currentLat,
     currentLong,
+    homeLat,
+    homeLong,
     searchString,
     showModal
   } from "../store/store.js";
   import { onMount, setContext } from "svelte";
-  import { toilets } from "../data/toilets.js";
   import { mapBoxKey } from "../keys.js";
   import { inBounds } from "../util.js";
 
@@ -143,8 +144,6 @@
                 currentLong.set(feature.geometry.coordinates[0]);
                 searchString.set("");
                 showModal.set(true);
-
-                createMarker();
               }
             });
           })
@@ -186,7 +185,7 @@
       map.on("click", () => {
         if ($showModal) {
           showModal.set(false);
-          document.title = "sgtoilet | Toilets in Singapore";
+          document.title = "SGtoilet | Toilets in Singapore";
         }
       });
     });
@@ -206,6 +205,7 @@
       $currentLat
     ]);
     currentMarker.addTo(map);
+
     currentMarker
       .getElement()
       .firstChild.firstChild.children[1].setAttribute("fill", "#ff4d4d");
@@ -226,6 +226,9 @@
       center: [$currentLong, $currentLat],
       zoom: detailZoomLevel + 1
     });
+
+    //Do not draw marker if lat lng at default coordinates or current position
+    if ($currentLat !== 1.29027 && $currentLong !== 103.851959) createMarker();
   }
 </script>
 

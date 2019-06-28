@@ -1,4 +1,4 @@
-var cacheName = "sgtoilet";
+var cacheName = "sgtoilet-cache-" + Date.now();
 var filesToCache = [
   "/",
   "/index.html",
