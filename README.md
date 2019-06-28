@@ -3,7 +3,7 @@ I Need Toilet
 =============
 An unofficial listing of toilets rated by the Restroom Association (Singapore).
 
-<img src="https://github.com/cerivitos/INeedToilet/blob/master/sgtoilet.app_screenshot3.png"/> <img src="https://github.com/cerivitos/INeedToilet/blob/master/sgtoilet.app_screenshot4.png" height="400"/> <img src="https://github.com/cerivitos/INeedToilet/blob/master/sgtoilet.app_screenshot2.png" height="400"/>
+<img src="https://github.com/cerivitos/INeedToilet/blob/master/sgtoilet.app_screenshot3.png"/>
 
 ## Why?
 I wanted to learn Svelte by building something other than a to-do list or pomodoro timer. I came across the website of the [Restroom Association](https://www.toilet.org.sg) in Singapore and decided to build a nice listing for them. Obviously this app is only relevant to Singapore.
