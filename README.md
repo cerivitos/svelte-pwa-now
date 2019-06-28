@@ -1,10 +1,12 @@
-![alt text](https://github.com/cerivitos/INeedToilet/blob/master/src/assets/favicon-32x32.png "icon")
+![icon](https://github.com/cerivitos/INeedToilet/blob/master/src/assets/favicon-32x32.png)
 I Need Toilet
 =============
-An unofficial listing of toilets rated by the Restroom Association (Singapore)
+An unofficial listing of toilets rated by the Restroom Association (Singapore).
+
+<img src="https://github.com/cerivitos/INeedToilet/blob/master/sgtoilet.app_screenshot3.png"/> <img src="https://github.com/cerivitos/INeedToilet/blob/master/sgtoilet.app_screenshot4.png" height="400"/> <img src="https://github.com/cerivitos/INeedToilet/blob/master/sgtoilet.app_screenshot2.png" height="400"/>
 
 ## Why?
-I wanted to learn to use Svelte by building something other than a to-do list or pomodoro timer. I came across the website of the [Restroom Association](https://www.toilet.org.sg) in Singapore and decided to build a nice listing for them. Obviously this app is only relevant to Singapore.
+I wanted to learn Svelte by building something other than a to-do list or pomodoro timer. I came across the website of the [Restroom Association](https://www.toilet.org.sg) in Singapore and decided to build a nice listing for them. Obviously this app is only relevant to Singapore.
 
 ## How?
 Tools used:
@@ -42,9 +44,11 @@ npm run build
 and serve the `dist` folder.
 
 ## Contribute
-:raised_hand: Feel free to submit an issue or PR if you notice any wrongly geocoded entries!
+:raised_hand: Feel free to submit an issue or PR if you notice any wrongly geocoded entries!\
+:raised_hand: Mapbox has a comprehensive [styling API](https://docs.mapbox.com/mapbox-gl-js/api/) with many opportunities for customization
 
-*Disclaimer: This is my first Svelte app so expect a lot of bad practices!*
-\
-\
+*Disclaimer: This is my first Svelte app so there is certainly room for improvement!*
+
+## License
+MIT\
 :+1: Thanks to the Restroom Association (Singapore) for the data
