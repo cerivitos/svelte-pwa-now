@@ -21922,8 +21922,8 @@
 
     	var sharebutton = new ShareButton({
     		props: {
-    		name: ctx.placeObj.name,
-    		rating: ctx.placeObj.rating
+    		name: ctx.placeObj.properties.name,
+    		rating: ctx.placeObj.properties.rating
     	},
     		$$inline: true
     	});
@@ -21966,17 +21966,17 @@
     			div2.className = "flex flex-row items-baseline mt-2";
     			add_location(div2, file$7, 153, 6, 4683);
     			attr(path0, "d", "M21.71 11.29l-9-9c-.39-.39-1.02-.39-1.41 0l-9 9c-.39.39-.39 1.02 0 1.41l9 9c.39.39 1.02.39 1.41 0l9-9c.39-.38.39-1.01 0-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z");
-    			add_location(path0, file$7, 173, 12, 5755);
+    			add_location(path0, file$7, 173, 12, 5816);
     			attr(path1, "d", "M0 0h24v24H0z");
     			attr(path1, "fill", "none");
-    			add_location(path1, file$7, 176, 12, 5994);
+    			add_location(path1, file$7, 176, 12, 6055);
     			attr(svg, "xmlns", "http://www.w3.org/2000/svg");
     			attr(svg, "class", "fill-current w-6 h-6 mr-2");
     			attr(svg, "viewBox", "0 0 24 24");
-    			add_location(svg, file$7, 168, 10, 5596);
-    			add_location(span, file$7, 178, 10, 6062);
+    			add_location(svg, file$7, 168, 10, 5657);
+    			add_location(span, file$7, 178, 10, 6123);
     			button.className = "w-32 rounded bg-accentColor hover:bg-blue-500 hover:shadow no-underline text-white font-medium px-3 py-2 inline-flex items-center";
-    			add_location(button, file$7, 164, 8, 5321);
+    			add_location(button, file$7, 164, 8, 5343);
     			div3.className = "flex h-full justify-end my-4";
     			add_location(div3, file$7, 159, 6, 5150);
     			div4.className = "px-4 pb-2";
@@ -22069,8 +22069,8 @@
     			}
 
     			var sharebutton_changes = {};
-    			if (changed.placeObj) sharebutton_changes.name = ctx.placeObj.name;
-    			if (changed.placeObj) sharebutton_changes.rating = ctx.placeObj.rating;
+    			if (changed.placeObj) sharebutton_changes.name = ctx.placeObj.properties.name;
+    			if (changed.placeObj) sharebutton_changes.rating = ctx.placeObj.properties.rating;
     			sharebutton.$set(sharebutton_changes);
 
     			if (!current || changed.topDisplacement) {
@@ -22527,7 +22527,7 @@
     	}
 
     	function click_handler() {
-    		return window.open(getDirections(placeObj.lat, placeObj.long), '_blank');
+    		return window.open(getDirections(placeObj.geometry.coordinates[1], placeObj.geometry.coordinates[0]), '_blank');
     	}
 
     	function div5_resize_handler() {

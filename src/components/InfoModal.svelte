@@ -159,11 +159,11 @@
       </div>
       <div class="flex h-full justify-end my-4">
         <ShareButton
-          name="{placeObj.name}"
-          rating="{placeObj.rating}"
+          name="{placeObj.properties.name}"
+          rating="{placeObj.properties.rating}"
         ></ShareButton>
         <button
-          on:click="{() => window.open(getDirections(placeObj.lat, placeObj.long), '_blank')}"
+          on:click="{() => window.open(getDirections(placeObj.geometry.coordinates[1], placeObj.geometry.coordinates[0]), '_blank')}"
           class="w-32 rounded bg-accentColor hover:bg-blue-500 hover:shadow no-underline text-white font-medium px-3 py-2 inline-flex items-center"
         >
           <svg
