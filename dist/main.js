@@ -1058,7 +1058,7 @@
     return mapboxgl;
 
     }));
-    //# sourceMappingURL=mapbox-gl.js.map
+
     });
 
     const toilets = [
