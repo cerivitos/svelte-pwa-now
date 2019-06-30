@@ -1115,10 +1115,10 @@
     			div = element("div");
     			link.href = "https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css";
     			link.rel = "stylesheet";
-    			add_location(link, file$1, 256, 2, 6997);
+    			add_location(link, file$1, 263, 2, 7092);
     			div.id = "map";
     			div.className = "w-screen h-screen";
-    			add_location(div, file$1, 262, 0, 7119);
+    			add_location(div, file$1, 269, 0, 7214);
     		},
 
     		l: function claim(nodes) {
@@ -1151,7 +1151,7 @@
     const detailZoomLevel = 12;
 
     function instance$1($$self, $$props, $$invalidate) {
-    	let $currentLong, $currentLat, $showModal, $homeLat, $homeLong;
+    	let $currentLong, $currentLat, $showModal, $homeLat, $homeLong, $geoPermissionGranted;
 
     	validate_store(currentLong, 'currentLong');
     	subscribe($$self, currentLong, $$value => { $currentLong = $$value; $$invalidate('$currentLong', $currentLong); });
@@ -1163,6 +1163,8 @@
     	subscribe($$self, homeLat, $$value => { $homeLat = $$value; $$invalidate('$homeLat', $homeLat); });
     	validate_store(homeLong, 'homeLong');
     	subscribe($$self, homeLong, $$value => { $homeLong = $$value; $$invalidate('$homeLong', $homeLong); });
+    	validate_store(geoPermissionGranted, 'geoPermissionGranted');
+    	subscribe($$self, geoPermissionGranted, $$value => { $geoPermissionGranted = $$value; $$invalidate('$geoPermissionGranted', $geoPermissionGranted); });
 
     	
 
@@ -1349,37 +1351,15 @@
       function createMarker() {
         if (currentMarker !== undefined) currentMarker.remove();
 
-        if (
-          $currentLat !== 1.29027 &&
-          $currentLong !== 103.851959 &&
-          $currentLat !== $homeLat &&
-          $currentLong !== $homeLong
-        ) {
-          $$invalidate('currentMarker', currentMarker = new mapboxGl.Marker().setLngLat([
-            $currentLong,
-            $currentLat
-          ]));
-          currentMarker.addTo(map);
+        $$invalidate('currentMarker', currentMarker = new mapboxGl.Marker().setLngLat([
+          $currentLong,
+          $currentLat
+        ]));
+        currentMarker.addTo(map);
 
-          currentMarker
-            .getElement()
-            .firstChild.firstChild.children[1].setAttribute("fill", "#ff4d4d");
-        }
-
-        if ($currentLat === $homeLat && $currentLong === $homeLong) {
-          if (userLocationMarker !== undefined) userLocationMarker.remove();
-
-          let el = document.createElement("div");
-          //Use existing Mapbox css and style for pulsing blue location icon
-          el.className =
-            "mapboxgl-user-location-dot mapboxgl-marker mapboxgl-marker-anchor-center";
-          el.style = "transform: translate(-50%, -50%) translate(206px, 366px);";
-          $$invalidate('userLocationMarker', userLocationMarker = new mapboxGl.Marker(el).setLngLat([
-            $currentLong,
-            $currentLat
-          ]));
-          userLocationMarker.addTo(map);
-        }
+        currentMarker
+          .getElement()
+          .firstChild.firstChild.children[1].setAttribute("fill", "#ff4d4d");
 
         window.history.pushState(
           {
@@ -1392,14 +1372,42 @@
         );
       }
 
-    	$$self.$$.update = ($$dirty = { map: 1, $currentLong: 1, $currentLat: 1 }) => {
-    		if ($$dirty.map || $$dirty.$currentLong || $$dirty.$currentLat) { if (map !== undefined) {
+      function createLocationDot() {
+        if (userLocationMarker !== undefined) userLocationMarker.remove();
+
+        let el = document.createElement("div");
+        //Use existing Mapbox css and style for pulsing blue location icon
+        el.className =
+          "mapboxgl-user-location-dot mapboxgl-marker mapboxgl-marker-anchor-center";
+        el.style = "transform: translate(-50%, -50%) translate(206px, 366px);";
+        $$invalidate('userLocationMarker', userLocationMarker = new mapboxGl.Marker(el).setLngLat([
+          $currentLong,
+          $currentLat
+        ]));
+        userLocationMarker.addTo(map);
+      }
+
+    	$$self.$$.update = ($$dirty = { map: 1, $currentLong: 1, $currentLat: 1, $homeLat: 1, $homeLong: 1, $geoPermissionGranted: 1 }) => {
+    		if ($$dirty.map || $$dirty.$currentLong || $$dirty.$currentLat || $$dirty.$homeLat || $$dirty.$homeLong || $$dirty.$geoPermissionGranted) { if (map !== undefined) {
             map.easeTo({
               center: [$currentLong, $currentLat],
               zoom: detailZoomLevel + 1
             });
         
-            createMarker();
+            if (
+              $currentLat !== 1.29027 &&
+              $currentLong !== 103.851959 &&
+              $currentLat !== $homeLat &&
+              $currentLong !== $homeLong
+            )
+              createMarker();
+        
+            if (
+              $currentLat === $homeLat &&
+              $currentLong === $homeLong &&
+              $geoPermissionGranted
+            )
+              createLocationDot();
           } }
     	};
 

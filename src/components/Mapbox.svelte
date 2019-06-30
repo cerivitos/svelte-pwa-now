@@ -6,7 +6,8 @@
     homeLat,
     homeLong,
     searchString,
-    showModal
+    showModal,
+    geoPermissionGranted
   } from "../store/store.js";
   import { onMount, setContext } from "svelte";
   import { mapBoxKey } from "../keys.js";
@@ -200,37 +201,15 @@
   function createMarker() {
     if (currentMarker !== undefined) currentMarker.remove();
 
-    if (
-      $currentLat !== 1.29027 &&
-      $currentLong !== 103.851959 &&
-      $currentLat !== $homeLat &&
-      $currentLong !== $homeLong
-    ) {
-      currentMarker = new mapboxgl.Marker().setLngLat([
-        $currentLong,
-        $currentLat
-      ]);
-      currentMarker.addTo(map);
+    currentMarker = new mapboxgl.Marker().setLngLat([
+      $currentLong,
+      $currentLat
+    ]);
+    currentMarker.addTo(map);
 
-      currentMarker
-        .getElement()
-        .firstChild.firstChild.children[1].setAttribute("fill", "#ff4d4d");
-    }
-
-    if ($currentLat === $homeLat && $currentLong === $homeLong) {
-      if (userLocationMarker !== undefined) userLocationMarker.remove();
-
-      let el = document.createElement("div");
-      //Use existing Mapbox css and style for pulsing blue location icon
-      el.className =
-        "mapboxgl-user-location-dot mapboxgl-marker mapboxgl-marker-anchor-center";
-      el.style = "transform: translate(-50%, -50%) translate(206px, 366px);";
-      userLocationMarker = new mapboxgl.Marker(el).setLngLat([
-        $currentLong,
-        $currentLat
-      ]);
-      userLocationMarker.addTo(map);
-    }
+    currentMarker
+      .getElement()
+      .firstChild.firstChild.children[1].setAttribute("fill", "#ff4d4d");
 
     window.history.pushState(
       {
@@ -243,13 +222,41 @@
     );
   }
 
+  function createLocationDot() {
+    if (userLocationMarker !== undefined) userLocationMarker.remove();
+
+    let el = document.createElement("div");
+    //Use existing Mapbox css and style for pulsing blue location icon
+    el.className =
+      "mapboxgl-user-location-dot mapboxgl-marker mapboxgl-marker-anchor-center";
+    el.style = "transform: translate(-50%, -50%) translate(206px, 366px);";
+    userLocationMarker = new mapboxgl.Marker(el).setLngLat([
+      $currentLong,
+      $currentLat
+    ]);
+    userLocationMarker.addTo(map);
+  }
+
   $: if (map !== undefined) {
     map.easeTo({
       center: [$currentLong, $currentLat],
       zoom: detailZoomLevel + 1
     });
 
-    createMarker();
+    if (
+      $currentLat !== 1.29027 &&
+      $currentLong !== 103.851959 &&
+      $currentLat !== $homeLat &&
+      $currentLong !== $homeLong
+    )
+      createMarker();
+
+    if (
+      $currentLat === $homeLat &&
+      $currentLong === $homeLong &&
+      $geoPermissionGranted
+    )
+      createLocationDot();
   }
 </script>
 
