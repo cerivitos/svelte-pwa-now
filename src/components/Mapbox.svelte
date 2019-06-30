@@ -16,7 +16,7 @@
   const lightStyle = "mapbox://styles/mapbox/light-v10?optimize=true";
 
   let map;
-  let toiletMarker;
+  let userLocationMarker;
   let markers = [];
   const detailZoomLevel = 12;
   let currentMarker;
@@ -200,15 +200,37 @@
   function createMarker() {
     if (currentMarker !== undefined) currentMarker.remove();
 
-    currentMarker = new mapboxgl.Marker().setLngLat([
-      $currentLong,
-      $currentLat
-    ]);
-    currentMarker.addTo(map);
+    if (
+      $currentLat !== 1.29027 &&
+      $currentLong !== 103.851959 &&
+      $currentLat !== $homeLat &&
+      $currentLong !== $homeLong
+    ) {
+      currentMarker = new mapboxgl.Marker().setLngLat([
+        $currentLong,
+        $currentLat
+      ]);
+      currentMarker.addTo(map);
 
-    currentMarker
-      .getElement()
-      .firstChild.firstChild.children[1].setAttribute("fill", "#ff4d4d");
+      currentMarker
+        .getElement()
+        .firstChild.firstChild.children[1].setAttribute("fill", "#ff4d4d");
+    }
+
+    if ($currentLat === $homeLat && $currentLong === $homeLong) {
+      if (userLocationMarker !== undefined) userLocationMarker.remove();
+
+      let el = document.createElement("div");
+      //Use existing Mapbox css and style for pulsing blue location icon
+      el.className =
+        "mapboxgl-user-location-dot mapboxgl-marker mapboxgl-marker-anchor-center";
+      el.style = "transform: translate(-50%, -50%) translate(206px, 366px);";
+      userLocationMarker = new mapboxgl.Marker(el).setLngLat([
+        $currentLong,
+        $currentLat
+      ]);
+      userLocationMarker.addTo(map);
+    }
 
     window.history.pushState(
       {
@@ -227,8 +249,7 @@
       zoom: detailZoomLevel + 1
     });
 
-    //Do not draw marker if lat lng at default coordinates or current position
-    if ($currentLat !== 1.29027 && $currentLong !== 103.851959) createMarker();
+    createMarker();
   }
 </script>
 

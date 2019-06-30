@@ -1052,7 +1052,8 @@
     });
 
     const mapBoxKey =
-      "pk.eyJ1IjoiY2VyaXZpdG9zIiwiYSI6ImNqeGc2OG5hcTBtemIzb3BqM3AwZHR6N2IifQ.Fq_N-T_CxLtdw47NprlN_g";
+      // "pk.eyJ1IjoiY2VyaXZpdG9zIiwiYSI6ImNqeGc2OG5hcTBtemIzb3BqM3AwZHR6N2IifQ.Fq_N-T_CxLtdw47NprlN_g";
+      "pk.eyJ1IjoiY2VyaXZpdG9zIiwiYSI6ImNqeDIxa2pzYzAyOGg0NXIxeHJldmQxODcifQ.MGTWAtdpMBak95AV4gsY4w";
 
     //From https://www.geodatasource.com/developers/javascript
     function calculateDistance(lat1, lon1, lat2, lon2, unit) {
@@ -1114,10 +1115,10 @@
     			div = element("div");
     			link.href = "https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css";
     			link.rel = "stylesheet";
-    			add_location(link, file$1, 235, 2, 6332);
+    			add_location(link, file$1, 256, 2, 6997);
     			div.id = "map";
     			div.className = "w-screen h-screen";
-    			add_location(div, file$1, 241, 0, 6454);
+    			add_location(div, file$1, 262, 0, 7119);
     		},
 
     		l: function claim(nodes) {
@@ -1150,7 +1151,7 @@
     const detailZoomLevel = 12;
 
     function instance$1($$self, $$props, $$invalidate) {
-    	let $currentLong, $currentLat, $showModal;
+    	let $currentLong, $currentLat, $showModal, $homeLat, $homeLong;
 
     	validate_store(currentLong, 'currentLong');
     	subscribe($$self, currentLong, $$value => { $currentLong = $$value; $$invalidate('$currentLong', $currentLong); });
@@ -1158,10 +1159,15 @@
     	subscribe($$self, currentLat, $$value => { $currentLat = $$value; $$invalidate('$currentLat', $currentLat); });
     	validate_store(showModal, 'showModal');
     	subscribe($$self, showModal, $$value => { $showModal = $$value; $$invalidate('$showModal', $showModal); });
+    	validate_store(homeLat, 'homeLat');
+    	subscribe($$self, homeLat, $$value => { $homeLat = $$value; $$invalidate('$homeLat', $homeLat); });
+    	validate_store(homeLong, 'homeLong');
+    	subscribe($$self, homeLong, $$value => { $homeLong = $$value; $$invalidate('$homeLong', $homeLong); });
 
     	
 
       let map;
+      let userLocationMarker;
       let currentMarker;
 
       onMount(() => {
@@ -1343,15 +1349,37 @@
       function createMarker() {
         if (currentMarker !== undefined) currentMarker.remove();
 
-        $$invalidate('currentMarker', currentMarker = new mapboxGl.Marker().setLngLat([
-          $currentLong,
-          $currentLat
-        ]));
-        currentMarker.addTo(map);
+        if (
+          $currentLat !== 1.29027 &&
+          $currentLong !== 103.851959 &&
+          $currentLat !== $homeLat &&
+          $currentLong !== $homeLong
+        ) {
+          $$invalidate('currentMarker', currentMarker = new mapboxGl.Marker().setLngLat([
+            $currentLong,
+            $currentLat
+          ]));
+          currentMarker.addTo(map);
 
-        currentMarker
-          .getElement()
-          .firstChild.firstChild.children[1].setAttribute("fill", "#ff4d4d");
+          currentMarker
+            .getElement()
+            .firstChild.firstChild.children[1].setAttribute("fill", "#ff4d4d");
+        }
+
+        if ($currentLat === $homeLat && $currentLong === $homeLong) {
+          if (userLocationMarker !== undefined) userLocationMarker.remove();
+
+          let el = document.createElement("div");
+          //Use existing Mapbox css and style for pulsing blue location icon
+          el.className =
+            "mapboxgl-user-location-dot mapboxgl-marker mapboxgl-marker-anchor-center";
+          el.style = "transform: translate(-50%, -50%) translate(206px, 366px);";
+          $$invalidate('userLocationMarker', userLocationMarker = new mapboxGl.Marker(el).setLngLat([
+            $currentLong,
+            $currentLat
+          ]));
+          userLocationMarker.addTo(map);
+        }
 
         window.history.pushState(
           {
@@ -1371,8 +1399,7 @@
               zoom: detailZoomLevel + 1
             });
         
-            //Do not draw marker if lat lng at default coordinates or current position
-            if ($currentLat !== 1.29027 && $currentLong !== 103.851959) createMarker();
+            createMarker();
           } }
     	};
 
