@@ -1114,10 +1114,10 @@
     			div = element("div");
     			link.href = "https://api.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css";
     			link.rel = "stylesheet";
-    			add_location(link, file$1, 235, 2, 6332);
+    			add_location(link, file$1, 263, 2, 7092);
     			div.id = "map";
     			div.className = "w-screen h-screen";
-    			add_location(div, file$1, 241, 0, 6454);
+    			add_location(div, file$1, 269, 0, 7214);
     		},
 
     		l: function claim(nodes) {
@@ -1150,7 +1150,7 @@
     const detailZoomLevel = 12;
 
     function instance$1($$self, $$props, $$invalidate) {
-    	let $currentLong, $currentLat, $showModal;
+    	let $currentLong, $currentLat, $showModal, $homeLat, $homeLong, $geoPermissionGranted;
 
     	validate_store(currentLong, 'currentLong');
     	subscribe($$self, currentLong, $$value => { $currentLong = $$value; $$invalidate('$currentLong', $currentLong); });
@@ -1158,10 +1158,17 @@
     	subscribe($$self, currentLat, $$value => { $currentLat = $$value; $$invalidate('$currentLat', $currentLat); });
     	validate_store(showModal, 'showModal');
     	subscribe($$self, showModal, $$value => { $showModal = $$value; $$invalidate('$showModal', $showModal); });
+    	validate_store(homeLat, 'homeLat');
+    	subscribe($$self, homeLat, $$value => { $homeLat = $$value; $$invalidate('$homeLat', $homeLat); });
+    	validate_store(homeLong, 'homeLong');
+    	subscribe($$self, homeLong, $$value => { $homeLong = $$value; $$invalidate('$homeLong', $homeLong); });
+    	validate_store(geoPermissionGranted, 'geoPermissionGranted');
+    	subscribe($$self, geoPermissionGranted, $$value => { $geoPermissionGranted = $$value; $$invalidate('$geoPermissionGranted', $geoPermissionGranted); });
 
     	
 
       let map;
+      let userLocationMarker;
       let currentMarker;
 
       onMount(() => {
@@ -1364,15 +1371,42 @@
         );
       }
 
-    	$$self.$$.update = ($$dirty = { map: 1, $currentLong: 1, $currentLat: 1 }) => {
-    		if ($$dirty.map || $$dirty.$currentLong || $$dirty.$currentLat) { if (map !== undefined) {
+      function createLocationDot() {
+        if (userLocationMarker !== undefined) userLocationMarker.remove();
+
+        let el = document.createElement("div");
+        //Use existing Mapbox css and style for pulsing blue location icon
+        el.className =
+          "mapboxgl-user-location-dot mapboxgl-marker mapboxgl-marker-anchor-center";
+        el.style = "transform: translate(-50%, -50%) translate(206px, 366px);";
+        $$invalidate('userLocationMarker', userLocationMarker = new mapboxGl.Marker(el).setLngLat([
+          $currentLong,
+          $currentLat
+        ]));
+        userLocationMarker.addTo(map);
+      }
+
+    	$$self.$$.update = ($$dirty = { map: 1, $currentLong: 1, $currentLat: 1, $homeLat: 1, $homeLong: 1, $geoPermissionGranted: 1 }) => {
+    		if ($$dirty.map || $$dirty.$currentLong || $$dirty.$currentLat || $$dirty.$homeLat || $$dirty.$homeLong || $$dirty.$geoPermissionGranted) { if (map !== undefined) {
             map.easeTo({
               center: [$currentLong, $currentLat],
               zoom: detailZoomLevel + 1
             });
         
-            //Do not draw marker if lat lng at default coordinates or current position
-            if ($currentLat !== 1.29027 && $currentLong !== 103.851959) createMarker();
+            if (
+              $currentLat !== 1.29027 &&
+              $currentLong !== 103.851959 &&
+              $currentLat !== $homeLat &&
+              $currentLong !== $homeLong
+            )
+              createMarker();
+        
+            if (
+              $currentLat === $homeLat &&
+              $currentLong === $homeLong &&
+              $geoPermissionGranted
+            )
+              createLocationDot();
           } }
     	};
 

@@ -6,7 +6,8 @@
     homeLat,
     homeLong,
     searchString,
-    showModal
+    showModal,
+    geoPermissionGranted
   } from "../store/store.js";
   import { onMount, setContext } from "svelte";
   import { mapBoxKey } from "../keys.js";
@@ -16,7 +17,7 @@
   const lightStyle = "mapbox://styles/mapbox/light-v10?optimize=true";
 
   let map;
-  let toiletMarker;
+  let userLocationMarker;
   let markers = [];
   const detailZoomLevel = 12;
   let currentMarker;
@@ -221,14 +222,41 @@
     );
   }
 
+  function createLocationDot() {
+    if (userLocationMarker !== undefined) userLocationMarker.remove();
+
+    let el = document.createElement("div");
+    //Use existing Mapbox css and style for pulsing blue location icon
+    el.className =
+      "mapboxgl-user-location-dot mapboxgl-marker mapboxgl-marker-anchor-center";
+    el.style = "transform: translate(-50%, -50%) translate(206px, 366px);";
+    userLocationMarker = new mapboxgl.Marker(el).setLngLat([
+      $currentLong,
+      $currentLat
+    ]);
+    userLocationMarker.addTo(map);
+  }
+
   $: if (map !== undefined) {
     map.easeTo({
       center: [$currentLong, $currentLat],
       zoom: detailZoomLevel + 1
     });
 
-    //Do not draw marker if lat lng at default coordinates or current position
-    if ($currentLat !== 1.29027 && $currentLong !== 103.851959) createMarker();
+    if (
+      $currentLat !== 1.29027 &&
+      $currentLong !== 103.851959 &&
+      $currentLat !== $homeLat &&
+      $currentLong !== $homeLong
+    )
+      createMarker();
+
+    if (
+      $currentLat === $homeLat &&
+      $currentLong === $homeLong &&
+      $geoPermissionGranted
+    )
+      createLocationDot();
   }
 </script>
 
