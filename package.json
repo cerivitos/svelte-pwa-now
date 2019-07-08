@@ -53,8 +53,6 @@
     "tailwindcss": "^1.0.1"
   },
   "dependencies": {
-    "mapbox-gl": "^1.0.0",
-    "overmind": "^17.1.0",
-    "papaparse": "^5.0.0"
+    "mapbox-gl": "^1.0.0"
   }
 }
