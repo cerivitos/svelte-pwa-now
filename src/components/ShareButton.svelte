@@ -35,7 +35,7 @@
   }
 
   function createShareText(name, rating, type) {
-    const url = encodeURIComponent(document.location.href);
+    const url = encodeURIComponent(getUrl());
     let shareText;
 
     if (type === 0 || type === 2) {
