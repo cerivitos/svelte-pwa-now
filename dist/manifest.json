@@ -1,6 +1,6 @@
 {
-  "name": "SGtoilet | Toilets in Singapore",
-  "short_name": "SGtoilet",
+  "name": "Svelte PWA Tailwind starter",
+  "short_name": "SveltePWAStarter",
   "theme_color": "#5bd1d7",
   "background_color": "#f6f5f5",
   "display": "standalone",
