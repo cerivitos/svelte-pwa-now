@@ -9,9 +9,9 @@
   }
 </script>
 
-<div class="flex items-center justify-center h-screen">
+<div class="flex items-center justify-center h-screen bg-gray-200">
   <button
-    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+    class="bg-blue-700 hover:bg-blue-900 hover:shadow-lg text-white font-bold py-2 px-4 rounded"
     on:click="{() => incrementCount()}"
   >
     Count is {$count}

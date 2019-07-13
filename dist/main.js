@@ -352,9 +352,9 @@
     			button = element("button");
     			t0 = text("Count is ");
     			t1 = text(ctx.$count);
-    			button.className = "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded";
-    			add_location(button, file, 12, 2, 263);
-    			div.className = "flex items-center justify-center h-screen";
+    			button.className = "bg-blue-700 hover:bg-blue-900 hover:shadow-lg text-white font-bold py-2 px-4 rounded";
+    			add_location(button, file, 12, 2, 275);
+    			div.className = "flex items-center justify-center h-screen bg-gray-200";
     			add_location(div, file, 11, 0, 204);
     			dispose = listen(button, "click", ctx.click_handler);
     		},
