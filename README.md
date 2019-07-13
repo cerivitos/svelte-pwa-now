@@ -76,6 +76,8 @@ If applicable, be sure to include your custom web domain under ```alias``` to te
 
 There is also a ```.nowignore``` file which tells Now to ignore specified files, similar to ```.gitignore```.
 
+More info on Now integration with Github can be found [here](https://zeit.co/docs/v2/integrations/now-for-github#staging-aliases-for-each-pull-request).
+
 If you do not need Now integration, feel free to remove ```now.json``` and ```.nowignore```.
 
 ### Rollup copy assets plugin
