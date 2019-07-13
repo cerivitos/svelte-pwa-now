@@ -1,36 +1,18 @@
-![icon](https://github.com/cerivitos/INeedToilet/blob/master/src/assets/favicon-32x32.png)
-I Need Toilet
+![icon](https://github.com/cerivitos/svelte-pwa-now/blob/master/src/assets/favicon-32x32.png)
+Svelte PWA Now starter
 =============
-An unofficial listing of toilets rated by the Restroom Association (Singapore).
+A simple Svelte starter template with:
+* Tailwind CSS (from [https://github.com/marcograhl/tailwindcss-svelte-starter](https://github.com/marcograhl/tailwindcss-svelte-starter))
+* Rollup copy assets plugin to serve static folders (eg. data or images)
+* Now integration
+* PWA ready, including basic service worker and social sharing meta data boilerplate
 
-<img src="https://github.com/cerivitos/INeedToilet/blob/master/sgtoilet.app_screenshot3.png"/>
-
-## Why?
-I wanted to learn Svelte by building something other than a to-do list or pomodoro timer. I came across the website of the [Restroom Association](https://www.toilet.org.sg) in Singapore and decided to build a nice listing for them. Obviously this app is only relevant to Singapore.
-
-## How?
-Tools used:
-* [Svelte](https://svelte.dev) with [Rollup](https://rollupjs.org)
-* [Mapbox](https://mapbox.com)
-* [Tailwind](https://tailwindcss.com)
-
-1) Toilet information was scrapped from [here](https://www.toilet.org.sg/loomapdirectory) using [webscraper.io](https://webscraper.io). 
-
-2) As only addresses were available, I used this [batch geocoder](https://geocode.localfocus.nl/) to get lat lng coordinates of each toilet. There are probably some errors :wink:
-
-3) The resulting csv data file needs to be converted to geojson format to be consumed by Mapbox. I used [geojson.io](https://geojson.io).
-
-## Try
-The site is hosted at [https://sgtoilet.app](https://sgtoilet.app)
-
-If you want to run it locally, [Node.js](https://nodejs.org) is required. Clone the repo and
+## Getting started
+Make sure [Node.js](https://nodejs.org) is installed. Clone the repo and
 ```bash
 npm install
 ```
-Get a free Mapbox public key by creating an account. Put your key in the `src/keys.js` file like this
-```javascript
-export const mapBoxKey = YOUR_OWN_KEY;
-```
+
 Start by
 ```bash
 npm run dev
@@ -43,12 +25,94 @@ npm run build
 ```
 and serve the `dist` folder.
 
-## Contribute
-:raised_hand: Feel free to submit an issue or PR if you notice any wrongly geocoded entries!\
-:raised_hand: Mapbox has a comprehensive [styling API](https://docs.mapbox.com/mapbox-gl-js/api/) with many opportunities for customization
+## Details
+### Tailwind
+Find out more about Tailwind CSS [here](https://tailwindcss.com). To extend Tailwind classes, go to ```tailwind.config.js``` and put in your customizations as an object under ```extend ```.
 
-*Disclaimer: This is my first Svelte app so there is certainly room for improvement!*
+```bash
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        backgroundColor: "#f6f5f5",
+        primaryColor: "#5bd1d7",
+        secondaryColor: "#248ea9",
+        accentColor: "#556fb5"
+      }
+    }
+  },
+  variants: {},
+  plugins: []
+};
+```
+For example, the template comes with custom colors which can then be used in html like ```<div class="backgroundColor"></div>```.
+
+More details can be found [here](https://tailwindcss.com/docs/configuration).
+
+### Now integration
+The template includes optional integration with the [Now hosting service](https://zeit.co/now). The easiest way to get started is to link your Github repo to Now, which allows all pushes to be built and served automatically. The included ```now.json``` tells Now to automatically run the rollup build command (via ```package.json```) and serve the ```dist``` folder. 
+
+If applicable, be sure to include your custom web domain under ```alias``` to tell Now to automatically alias your output to your domain.
+
+```bash
+{
+  "version": 2,
+  "alias": "https://ADD-DOMAIN-NAME-HERE",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@now/static-build"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "headers": { "cache-control": "max-age=0,must-revalidate" },
+      "dest": "dist/$1"
+    }
+  ]
+}
+```
+
+There is also a ```.nowignore``` file which tells Now to ignore specified files, similar to ```.gitignore```.
+
+More info on Now integration with Github can be found [here](https://zeit.co/docs/v2/integrations/now-for-github#staging-aliases-for-each-pull-request).
+
+If you do not need Now integration, feel free to remove ```now.json``` and ```.nowignore```.
+
+### Rollup copy assets plugin
+By default, Rollup does not copy static folders to ```dist``` when building. If you have folders with static assets like data files or images, put the folder path in ```rollup.config.js``` like so.
+
+```bash
+...
+import copy from "rollup-plugin-copy-assets";
+
+const production = !process.env.ROLLUP_WATCH;
+export default {
+  ...
+  plugins: [
+    ...
+    copy({
+      assets: ["src/assets", "src/MORE-STATIC-FOLDERS"]
+    }),
+    ...
+  ]
+  ...
+};
+```
+
+### PWA boilerplate
+#### Icons
+The commonly required icons are at ```src/assets```. Be sure to use the same filenames as they are referred to in the metadata at ```dist/index.html```. Tip: Use [Real Favicon Generator](https://realfavicongenerator.net/) which automatically creates all the required icon sizes, and simply unzip the generated asset bundle into ```src/assets```.
+
+#### index.html metadata
+The icons are all utilized in the ```<meta></meta>``` tags for Facebook, Twitter and Google indexing among others. Be sure to customize your app title and descriptions in all the tags.
+
+#### Service worker
+This template includes a basic service worker at ```dist/service-worker.js``` which simply checks against the currently held cache and loads from network if required. Feel free to further customize it for your needs.
+
+#### Manifest
+Customize ```dist/manifest.json``` with your PWA's info for installation. Note that the manifest requires a 512x512 icon which is not generated by [Real Favicon Generator](https://realfavicongenerator.net/). You have to manually create that one on your own.
 
 ## License
-MIT\
-:+1: Thanks to the Restroom Association (Singapore) for the data
+MIT
