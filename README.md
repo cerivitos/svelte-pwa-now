@@ -45,7 +45,7 @@ module.exports = {
   plugins: []
 };
 ```
-For example, the template comes with custom colors which can then be used in html like ```<div class="backgroundColor"></div>```.
+For example, the template comes with custom colors which can then be used in html like ```<div class="bg-backgroundColor"></div>```.
 
 More details can be found [here](https://tailwindcss.com/docs/configuration).
 
