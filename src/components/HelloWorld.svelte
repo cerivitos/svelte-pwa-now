@@ -11,7 +11,7 @@
 
 <style type="text/postcss">
   .button {
-    @apply bg-blue-700 hover:bg-blue-900 hover:shadow-lg text-white font-bold py-2 px-4 rounded;
+    @apply bg-blue-700 text-white font-bold py-2 px-4 rounded;
   }
 </style>
 
