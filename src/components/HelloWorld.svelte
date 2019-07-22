@@ -9,11 +9,14 @@
   }
 </script>
 
+<style type="text/postcss">
+  .button {
+    @apply bg-blue-700 hover:bg-blue-900 hover:shadow-lg text-white font-bold py-2 px-4 rounded;
+  }
+</style>
+
 <div class="flex items-center justify-center h-screen bg-gray-200">
-  <button
-    class="bg-blue-700 hover:bg-blue-900 hover:shadow-lg text-white font-bold py-2 px-4 rounded"
-    on:click="{() => incrementCount()}"
-  >
+  <button class="button" on:click={() => incrementCount()}>
     Count is {$count}
   </button>
 </div>
