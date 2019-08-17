@@ -1,2 +1,422 @@
-!function(){"use strict";function t(){}function n(t){return t()}function e(){return Object.create(null)}function r(t){t.forEach(n)}function o(t){return"function"==typeof t}function c(t,n){return t!=t?n==n:t!==n||t&&"object"==typeof t||"function"==typeof t}function s(t,n){t.appendChild(n)}function i(t,n,e){t.insertBefore(n,e||null)}function u(t){t.parentNode.removeChild(t)}function a(t){return document.createElement(t)}function f(t){return document.createTextNode(t)}let l;function d(t){l=t}const $=[],h=Promise.resolve();let p=!1;const m=[],g=[],y=[];function b(t){g.push(t)}function v(){const t=new Set;do{for(;$.length;){const t=$.shift();d(t),x(t.$$)}for(;m.length;)m.shift()();for(;g.length;){const n=g.pop();t.has(n)||(n(),t.add(n))}}while($.length);for(;y.length;)y.pop()();p=!1}function x(t){t.fragment&&(t.update(t.dirty),r(t.before_render),t.fragment.p(t.dirty,t.ctx),t.dirty=null,t.after_render.forEach(b))}function _(t,e,c){const{fragment:s,on_mount:i,on_destroy:u,after_render:a}=t.$$;s.m(e,c),b(()=>{const e=i.map(n).filter(o);u?u.push(...e):r(e),t.$$.on_mount=[]}),a.forEach(b)}function w(t,n){t.$$.dirty||($.push(t),p||(p=!0,h.then(v)),t.$$.dirty=e()),t.$$.dirty[n]=!0}function k(n,o,c,s,i,u){const a=l;d(n);const f=o.props||{},$=n.$$={fragment:null,ctx:null,props:u,update:t,not_equal:i,bound:e(),on_mount:[],on_destroy:[],before_render:[],after_render:[],context:new Map(a?a.$$.context:[]),callbacks:e(),dirty:null};let h=!1;var p;$.ctx=c?c(n,f,(t,e)=>{$.ctx&&i($.ctx[t],$.ctx[t]=e)&&($.bound[t]&&$.bound[t](e),h&&w(n,t))}):f,$.update(),h=!0,r($.before_render),$.fragment=s($.ctx),o.target&&(o.hydrate?$.fragment.l((p=o.target,Array.from(p.childNodes))):$.fragment.c(),o.intro&&n.$$.fragment.i&&n.$$.fragment.i(),_(n,o.target,o.anchor),v()),d(a)}class E{$destroy(){var n,e;e=!0,(n=this).$$&&(r(n.$$.on_destroy),n.$$.fragment.d(e),n.$$.on_destroy=n.$$.fragment=null,n.$$.ctx={}),this.$destroy=t}$on(t,n){const e=this.$$.callbacks[t]||(this.$$.callbacks[t]=[]);return e.push(n),()=>{const t=e.indexOf(n);-1!==t&&e.splice(t,1)}}$set(){}}function N(){}const j=function(t,n=N){let e;const r=[];function o(n){if(c=n,(o=t)!=o?c==c:o!==c||o&&"object"==typeof o||"function"==typeof o){if(t=n,!e)return;r.forEach(t=>t[1]()),r.forEach(n=>n[0](t))}var o,c}return{set:o,update:function(n){o(n(t))},subscribe:function(c,s=N){const i=[c,s];return r.push(i),1===r.length&&(e=n(o)||N),c(t),()=>{const t=r.indexOf(i);-1!==t&&r.splice(t,1),0===r.length&&e()}}}}(0);function C(n){var e,r,o,c,l;return{c(){var t,s,i,u;e=a("div"),r=a("button"),o=f("Count is "),c=f(n.$count),r.className="button svelte-o5s95t",e.className="flex items-center justify-center h-screen bg-gray-200",t=r,s="click",i=n.click_handler,t.addEventListener(s,i,u),l=(()=>t.removeEventListener(s,i,u))},m(t,n){i(t,e,n),s(e,r),s(r,o),s(r,c)},p(t,n){var e,r;t.$count&&(e=c,r=""+(r=n.$count),e.data!==r&&(e.data=r))},i:t,o:t,d(t){t&&u(e),l()}}}function O(t,n,e){let r;function o(){j.set(r+1)}return function(t,n,e){const r=n.subscribe(e);t.$$.on_destroy.push(r.unsubscribe?()=>r.unsubscribe():r)}(t,j,t=>{e("$count",r=t)}),{incrementCount:o,$count:r,click_handler:function(){return o()}}}class L extends E{constructor(t){super(),k(this,t,O,C,c,[])}}function P(n){return{c:t,m:t,p:t,i:t,o:t,d:t}}function W(t){return window.onload=function(){if(window.location.search.length>0){window.location.search.substr(1).split("&").forEach(t=>{const n=t.split("=")[0],e=parseFloat(t.split("=")[1]);console.log(`Parameter of ${n} is ${e}`)})}},window.onpopstate=function(t){t.state},{}}class q extends E{constructor(t){super(),k(this,t,W,P,c,[])}}function A(n){var e,r,o,c=new q({}),l=new L({});return{c(){e=a("main"),c.$$.fragment.c(),r=f(" "),l.$$.fragment.c(),e.className="overflow-hidden"},m(t,n){i(t,e,n),_(c,e,null),s(e,r),_(l,e,null),o=!0},p:t,i(t){o||(c.$$.fragment.i(t),l.$$.fragment.i(t),o=!0)},o(t){c.$$.fragment.o(t),l.$$.fragment.o(t),o=!1},d(t){t&&u(e),c.$destroy(),l.$destroy()}}}function B(t){return"serviceWorker"in navigator&&navigator.serviceWorker.register("/service-worker.js"),{}}new class extends E{constructor(t){super(),k(this,t,B,A,c,[])}}({target:document.body})}();
+
+(function(l, i, v, e) { v = l.createElement(i); v.async = 1; v.src = '//' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; e = l.getElementsByTagName(i)[0]; e.parentNode.insertBefore(v, e)})(document, 'script');
+(function () {
+  'use strict';
+
+  function noop() {}
+
+  function add_location(element, file, line, column, char) {
+  	element.__svelte_meta = {
+  		loc: { file, line, column, char }
+  	};
+  }
+
+  function run(fn) {
+  	return fn();
+  }
+
+  function blank_object() {
+  	return Object.create(null);
+  }
+
+  function run_all(fns) {
+  	fns.forEach(run);
+  }
+
+  function is_function(thing) {
+  	return typeof thing === 'function';
+  }
+
+  function safe_not_equal(a, b) {
+  	return a != a ? b == b : a !== b || ((a && typeof a === 'object') || typeof a === 'function');
+  }
+
+  function append(target, node) {
+  	target.appendChild(node);
+  }
+
+  function insert(target, node, anchor) {
+  	target.insertBefore(node, anchor || null);
+  }
+
+  function detach(node) {
+  	node.parentNode.removeChild(node);
+  }
+
+  function element(name) {
+  	return document.createElement(name);
+  }
+
+  function text(data) {
+  	return document.createTextNode(data);
+  }
+
+  function listen(node, event, handler, options) {
+  	node.addEventListener(event, handler, options);
+  	return () => node.removeEventListener(event, handler, options);
+  }
+
+  function children(element) {
+  	return Array.from(element.childNodes);
+  }
+
+  function set_data(text, data) {
+  	data = '' + data;
+  	if (text.data !== data) text.data = data;
+  }
+
+  let current_component;
+
+  function set_current_component(component) {
+  	current_component = component;
+  }
+
+  const dirty_components = [];
+
+  const resolved_promise = Promise.resolve();
+  let update_scheduled = false;
+  const binding_callbacks = [];
+  const render_callbacks = [];
+  const flush_callbacks = [];
+
+  function schedule_update() {
+  	if (!update_scheduled) {
+  		update_scheduled = true;
+  		resolved_promise.then(flush);
+  	}
+  }
+
+  function add_render_callback(fn) {
+  	render_callbacks.push(fn);
+  }
+
+  function flush() {
+  	const seen_callbacks = new Set();
+
+  	do {
+  		// first, call beforeUpdate functions
+  		// and update components
+  		while (dirty_components.length) {
+  			const component = dirty_components.shift();
+  			set_current_component(component);
+  			update(component.$$);
+  		}
+
+  		while (binding_callbacks.length) binding_callbacks.shift()();
+
+  		// then, once components are updated, call
+  		// afterUpdate functions. This may cause
+  		// subsequent updates...
+  		while (render_callbacks.length) {
+  			const callback = render_callbacks.pop();
+  			if (!seen_callbacks.has(callback)) {
+  				callback();
+
+  				// ...so guard against infinite loops
+  				seen_callbacks.add(callback);
+  			}
+  		}
+  	} while (dirty_components.length);
+
+  	while (flush_callbacks.length) {
+  		flush_callbacks.pop()();
+  	}
+
+  	update_scheduled = false;
+  }
+
+  function update($$) {
+  	if ($$.fragment) {
+  		$$.update($$.dirty);
+  		run_all($$.before_render);
+  		$$.fragment.p($$.dirty, $$.ctx);
+  		$$.dirty = null;
+
+  		$$.after_render.forEach(add_render_callback);
+  	}
+  }
+
+  function mount_component(component, target, anchor) {
+  	const { fragment, on_mount, on_destroy, after_render } = component.$$;
+
+  	fragment.m(target, anchor);
+
+  	// onMount happens after the initial afterUpdate. Because
+  	// afterUpdate callbacks happen in reverse order (inner first)
+  	// we schedule onMount callbacks before afterUpdate callbacks
+  	add_render_callback(() => {
+  		const new_on_destroy = on_mount.map(run).filter(is_function);
+  		if (on_destroy) {
+  			on_destroy.push(...new_on_destroy);
+  		} else {
+  			// Edge case - component was destroyed immediately,
+  			// most likely as a result of a binding initialising
+  			run_all(new_on_destroy);
+  		}
+  		component.$$.on_mount = [];
+  	});
+
+  	after_render.forEach(add_render_callback);
+  }
+
+  function destroy(component, detaching) {
+  	if (component.$$) {
+  		run_all(component.$$.on_destroy);
+  		component.$$.fragment.d(detaching);
+
+  		// TODO null out other refs, including component.$$ (but need to
+  		// preserve final state?)
+  		component.$$.on_destroy = component.$$.fragment = null;
+  		component.$$.ctx = {};
+  	}
+  }
+
+  function make_dirty(component, key) {
+  	if (!component.$$.dirty) {
+  		dirty_components.push(component);
+  		schedule_update();
+  		component.$$.dirty = blank_object();
+  	}
+  	component.$$.dirty[key] = true;
+  }
+
+  function init(component, options, instance, create_fragment, not_equal$$1, prop_names) {
+  	const parent_component = current_component;
+  	set_current_component(component);
+
+  	const props = options.props || {};
+
+  	const $$ = component.$$ = {
+  		fragment: null,
+  		ctx: null,
+
+  		// state
+  		props: prop_names,
+  		update: noop,
+  		not_equal: not_equal$$1,
+  		bound: blank_object(),
+
+  		// lifecycle
+  		on_mount: [],
+  		on_destroy: [],
+  		before_render: [],
+  		after_render: [],
+  		context: new Map(parent_component ? parent_component.$$.context : []),
+
+  		// everything else
+  		callbacks: blank_object(),
+  		dirty: null
+  	};
+
+  	let ready = false;
+
+  	$$.ctx = instance
+  		? instance(component, props, (key, value) => {
+  			if ($$.ctx && not_equal$$1($$.ctx[key], $$.ctx[key] = value)) {
+  				if ($$.bound[key]) $$.bound[key](value);
+  				if (ready) make_dirty(component, key);
+  			}
+  		})
+  		: props;
+
+  	$$.update();
+  	ready = true;
+  	run_all($$.before_render);
+  	$$.fragment = create_fragment($$.ctx);
+
+  	if (options.target) {
+  		if (options.hydrate) {
+  			$$.fragment.l(children(options.target));
+  		} else {
+  			$$.fragment.c();
+  		}
+
+  		if (options.intro && component.$$.fragment.i) component.$$.fragment.i();
+  		mount_component(component, options.target, options.anchor);
+  		flush();
+  	}
+
+  	set_current_component(parent_component);
+  }
+
+  class SvelteComponent {
+  	$destroy() {
+  		destroy(this, true);
+  		this.$destroy = noop;
+  	}
+
+  	$on(type, callback) {
+  		const callbacks = (this.$$.callbacks[type] || (this.$$.callbacks[type] = []));
+  		callbacks.push(callback);
+
+  		return () => {
+  			const index = callbacks.indexOf(callback);
+  			if (index !== -1) callbacks.splice(index, 1);
+  		};
+  	}
+
+  	$set() {
+  		// overridden by instance, if it has props
+  	}
+  }
+
+  class SvelteComponentDev extends SvelteComponent {
+  	constructor(options) {
+  		if (!options || (!options.target && !options.$$inline)) {
+  			throw new Error(`'target' is a required option`);
+  		}
+
+  		super();
+  	}
+
+  	$destroy() {
+  		super.$destroy();
+  		this.$destroy = () => {
+  			console.warn(`Component was already destroyed`); // eslint-disable-line no-console
+  		};
+  	}
+  }
+
+  /* src\components\HelloWorld.svelte generated by Svelte v3.4.0 */
+
+  const file = "src\\components\\HelloWorld.svelte";
+
+  function create_fragment(ctx) {
+  	var div, button, t, dispose;
+
+  	return {
+  		c: function create() {
+  			div = element("div");
+  			button = element("button");
+  			t = text(ctx.count);
+  			button.className = "button svelte-1jrsd7o";
+  			add_location(button, file, 14, 2, 325);
+  			div.className = "flex items-center justify-center h-screen bg-gray-300 w-full";
+  			add_location(div, file, 13, 0, 247);
+  			dispose = listen(button, "click", ctx.click_handler);
+  		},
+
+  		l: function claim(nodes) {
+  			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+  		},
+
+  		m: function mount(target, anchor) {
+  			insert(target, div, anchor);
+  			append(div, button);
+  			append(button, t);
+  		},
+
+  		p: function update(changed, ctx) {
+  			if (changed.count) {
+  				set_data(t, ctx.count);
+  			}
+  		},
+
+  		i: noop,
+  		o: noop,
+
+  		d: function destroy(detaching) {
+  			if (detaching) {
+  				detach(div);
+  			}
+
+  			dispose();
+  		}
+  	};
+  }
+
+  function instance($$self, $$props, $$invalidate) {
+  let count = 0;
+  function incrementCount() {
+      $$invalidate('count', count = count + 1);
+  }
+
+  	function click_handler() {
+  		return incrementCount();
+  	}
+
+  	return { count, incrementCount, click_handler };
+  }
+
+  class HelloWorld extends SvelteComponentDev {
+  	constructor(options) {
+  		super(options);
+  		init(this, options, instance, create_fragment, safe_not_equal, []);
+  	}
+  }
+
+  /* src\components\Router.svelte generated by Svelte v3.4.0 */
+
+  /* src\App.svelte generated by Svelte v3.4.0 */
+
+  const file$1 = "src\\App.svelte";
+
+  function create_fragment$1(ctx) {
+  	var main, current;
+
+  	var helloworld = new HelloWorld({ $$inline: true });
+
+  	return {
+  		c: function create() {
+  			main = element("main");
+  			helloworld.$$.fragment.c();
+  			main.className = "overflow-hidden";
+  			add_location(main, file$1, 7, 0, 240);
+  		},
+
+  		l: function claim(nodes) {
+  			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+  		},
+
+  		m: function mount(target, anchor) {
+  			insert(target, main, anchor);
+  			mount_component(helloworld, main, null);
+  			current = true;
+  		},
+
+  		p: noop,
+
+  		i: function intro(local) {
+  			if (current) return;
+  			helloworld.$$.fragment.i(local);
+
+  			current = true;
+  		},
+
+  		o: function outro(local) {
+  			helloworld.$$.fragment.o(local);
+  			current = false;
+  		},
+
+  		d: function destroy(detaching) {
+  			if (detaching) {
+  				detach(main);
+  			}
+
+  			helloworld.$destroy();
+  		}
+  	};
+  }
+
+  function instance$1($$self) {
+  	
+  if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/service-worker.js");
+  }
+
+  	return {};
+  }
+
+  class App extends SvelteComponentDev {
+  	constructor(options) {
+  		super(options);
+  		init(this, options, instance$1, create_fragment$1, safe_not_equal, []);
+  	}
+  }
+
+  const app = new App({
+      target: document.body
+  });
+
+}());
 //# sourceMappingURL=main.js.map

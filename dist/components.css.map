@@ -5,8 +5,8 @@
     "..\\src\\components\\HelloWorld.svelte"
   ],
   "sourcesContent": [
-    "<script>\r\n  import { count } from \"../store/store.js\";\r\n\r\n  /**\r\n   * Increases the count variable from the store by 1\r\n   */\r\n  function incrementCount() {\r\n    count.set($count + 1);\r\n  }\r\n</script>\r\n\r\n<style type=\"text/postcss\">.button{background-color:#2b6cb0;color:#fff;font-weight:700;padding:.5rem 1rem;border-radius:.25rem}</style>\r\n\r\n<div class=\"flex items-center justify-center h-screen bg-gray-200\">\r\n  <button class=\"button\" on:click={() => incrementCount()}>\r\n    Count is {$count}\r\n  </button>\r\n</div>\r\n"
+    "<script lang=\"ts\">\"use strict\";\r\nlet count = 0;\r\nfunction incrementCount() {\r\n    count = count + 1;\r\n}\r\n</script>\r\n\r\n<style type=\"text/postcss\">\r\n  .button {\r\n    @apply bg-blue-700 text-white font-bold py-2 px-4 rounded w-1/2;\r\n  }\r\n</style>\r\n\r\n<div class=\"flex items-center justify-center h-screen bg-gray-300 w-full\">\r\n  <button class=\"button\" on:click={() => incrementCount()}>{count}</button>\r\n</div>\r\n"
   ],
   "names": [],
-  "mappings": "AAW2B,qBAAO,CAAC,iBAAiB,OAAO,CAAC,MAAM,IAAI,CAAC,YAAY,GAAG,CAAC,QAAQ,KAAK,CAAC,IAAI,CAAC,cAAc,MAAM,CAAC"
+  "mappings": "AAQE,OAAO,eAAC,CAAC,AACP,OAAO,WAAW,CAAC,UAAU,CAAC,SAAS,CAAC,IAAI,CAAC,IAAI,CAAC,OAAO,CAAC,GAAG,CAAC,CAAC,CAAC,AAClE,CAAC"
 }

@@ -1,22 +1,17 @@
-<script>
-  import { count } from "../store/store.js";
+<script lang="ts">
+  let count: number = 0;
 
-  /**
-   * Increases the count variable from the store by 1
-   */
   function incrementCount() {
-    count.set($count + 1);
+    count = count + 1;
   }
 </script>
 
 <style type="text/postcss">
   .button {
-    @apply bg-blue-700 text-white font-bold py-2 px-4 rounded;
+    @apply bg-blue-700 text-white font-bold py-2 px-4 rounded w-1/2;
   }
 </style>
 
-<div class="flex items-center justify-center h-screen bg-gray-200">
-  <button class="button" on:click={() => incrementCount()}>
-    Count is {$count}
-  </button>
+<div class="flex items-center justify-center h-screen bg-gray-300 w-full">
+  <button class="button" on:click={() => incrementCount()}>{count}</button>
 </div>
