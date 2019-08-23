@@ -1,17 +1,13 @@
 <script lang="ts">
-  let count: number = 0;
+  import { count } from "../store/store";
 
-  function incrementCount() {
-    count = count + 1;
+  let startNumber: number = 0;
+
+  function incrementCount(incrementBy: number) {
+    count.update(n => n + incrementBy);
   }
 </script>
 
-<style type="text/postcss">
-  .button {
-    @apply bg-blue-700 text-white font-bold py-2 px-4 rounded w-1/2;
-  }
-</style>
-
 <div class="flex items-center justify-center h-screen bg-gray-300 w-full">
-  <button class="button" on:click={() => incrementCount()}>{count}</button>
+  <button class="button" on:click={() => incrementCount(1)}>{$count}</button>
 </div>
