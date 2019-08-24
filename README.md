@@ -99,6 +99,10 @@ More info on Now integration with Github can be found [here](https://zeit.co/doc
 
 If you do not need Now integration, feel free to remove `now.json` and `.nowignore`.
 
+### Cypress testing
+
+Cypress is included in the template. Simply use `npm run test` to start cypress integration testing. More info about writing cypress tests can be found at [cypress.io](https://cypress.io).
+
 ### Rollup copy assets plugin
 
 By default, Rollup does not copy static folders to `dist` when building. If you have folders with static assets like data files or images, put the folder path in `rollup.config.js` like so.
