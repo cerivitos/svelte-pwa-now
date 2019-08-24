@@ -6,6 +6,7 @@ A simple Svelte starter template with:
 - Tailwind CSS (from [https://github.com/marcograhl/tailwindcss-svelte-starter](https://github.com/marcograhl/tailwindcss-svelte-starter))
 - Rollup copy assets plugin to serve static folders (eg. data or images)
 - Now integration
+- Cypress for testing
 - PWA ready, including basic service worker and social sharing meta data boilerplate
 
 ## Getting started
