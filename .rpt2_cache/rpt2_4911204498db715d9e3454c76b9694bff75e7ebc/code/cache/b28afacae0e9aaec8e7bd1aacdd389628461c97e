@@ -1,0 +1,1 @@
+{"code":"import { writable } from \"svelte/store\";\r\n//Insert store variables here\r\nexport const count = writable(0);\r\n","references":["C:/Users/ceriv/Svelte projects/svelte-tailwind-now-starter/node_modules/svelte/store.d.ts"]}

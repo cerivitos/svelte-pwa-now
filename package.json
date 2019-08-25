@@ -9,7 +9,8 @@
     "serve": "sirv dist",
     "serve:dev": "sirv dist --dev",
     "dev": "run-p build:auto serve:dev",
-    "now-build": "rollup -c"
+    "now-build": "rollup -c",
+    "test": "cypress open"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,7 @@
     "@pyoner/svelte-types": "^3.4.4-2",
     "chokidar": "^3.0.0",
     "cssnano": "^4.1.10",
+    "cypress": "^3.4.1",
     "npm-run-all": "^4.1.5",
     "postcss": "^7.0.16",
     "postcss-color-mod-function": "^3.0.3",
