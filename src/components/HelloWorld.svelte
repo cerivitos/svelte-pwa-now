@@ -2,7 +2,7 @@
   import { count } from "../store/store";
 
   let startNumber: number = 0;
-
+  
   function incrementCount(incrementBy: number) {
     count.update(n => n + incrementBy);
   }
