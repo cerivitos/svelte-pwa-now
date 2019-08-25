@@ -2,5 +2,6 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "eslint.enable": false,
-  "postcss.validate": false
+  "postcss.validate": false,
+  "javascript.implicitProjectConfig.checkJs": true
 }

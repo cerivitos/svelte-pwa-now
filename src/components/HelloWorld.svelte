@@ -1,8 +1,8 @@
-<script lang="ts">
+<script lang="typescript">
   import { count } from "../store/store";
 
-  let startNumber: number = 0;
-  
+  let startNumber: number = 1;
+
   function incrementCount(incrementBy: number) {
     count.update(n => n + incrementBy);
   }

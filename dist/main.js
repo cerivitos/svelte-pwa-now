@@ -348,9 +348,9 @@
   			button = element("button");
   			t = text(ctx.$count);
   			button.className = "button";
-  			add_location(button, file, 8, 2, 256);
+  			add_location(button, file, 8, 2, 264);
   			div.className = "flex items-center justify-center h-screen bg-gray-300 w-full";
-  			add_location(div, file, 7, 0, 178);
+  			add_location(div, file, 7, 0, 186);
   			dispose = listen(button, "click", ctx.click_handler);
   		},
 
