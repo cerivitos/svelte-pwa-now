@@ -8,6 +8,7 @@ A simple Svelte starter template with:
 - Now integration
 - Cypress for testing
 - PWA ready, including basic service worker and social sharing meta data boilerplate
+- Typescript support (switch to the `implement-ts` branch)
 
 ## Getting started
 
