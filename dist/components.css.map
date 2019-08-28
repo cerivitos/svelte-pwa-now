@@ -1,8 +1,12 @@
 {
   "version": 3,
   "file": "components.css",
-  "sources": [],
-  "sourcesContent": [],
+  "sources": [
+    "..\\src\\components\\HelloWorld.svelte"
+  ],
+  "sourcesContent": [
+    "<script lang=\"typescript\">import { count } from \"../store/store\";\r\nlet startNumber = 1;\r\nfunction incrementCount(incrementBy) {\r\n    count.update(n => n + incrementBy);\r\n}\r\n</script>\r\n\r\n<style>\r\n  h1 {\r\n    color: var(--accent-color);\r\n  }\r\n</style>\r\n\r\n<div class=\"flex items-center justify-center h-screen bg-gray-300 w-full\">\r\n  <button class=\"button\" on:click={() => incrementCount(1)}>{$count}</button>\r\n  <h1>TEST</h1>\r\n</div>\r\n"
+  ],
   "names": [],
-  "mappings": ""
+  "mappings": "AAQE,EAAE,cAAC,CAAC,AACF,KAAK,CAAE,IAAI,cAAc,CAAC,AAC5B,CAAC"
 }
